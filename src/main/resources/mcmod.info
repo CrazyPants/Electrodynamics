@@ -1,0 +1,14 @@
+[
+{
+        "modid": "EDX",
+        "name": "Electrodynamics",
+        "version": "@VERSION@",
+        "description": "[description pending]",
+        "credits": "",
+        "url": "http://www.edx-mod.com",
+        "authors": [ "CyanideX", "Royalixor", "dmillerw", "Mrabow", "Thlaylii", "pixlepix" ],
+        "dependencies": [
+                "mod_MinecraftForge"
+        ]
+}
+]
