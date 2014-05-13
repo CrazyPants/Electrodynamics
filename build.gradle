@@ -17,10 +17,6 @@ buildscript {
 
 apply plugin: 'forge'
 
-task createWrapper(type: Wrapper) {
-    gradleVersion: '1.4'
-}
-
 ext.configFile = file "build.properties"
 
 configFile.withReader {
@@ -49,7 +45,6 @@ processResources {
             'mod_version': project.config.mod_version,
             'minecraft_version': project.config.minecraft_version,
             'build_number': project.config.build_number,
-            'worldcore_version': project.config.worldcore_version
         ])
     }
 
@@ -68,14 +63,6 @@ task sourceZip(type: Zip) {
     classifier = 'src'
 }
 
-task apiZip(type: Zip) {
-    from(sourceSets.main.java)
-    {
-        include "biomesoplenty/api/*"
-    }
-    classifier = 'api'
-}
-
 task deobfJar(type: Jar) {
     from sourceSets.main.output
     classifier = 'deobf'
@@ -84,5 +71,4 @@ task deobfJar(type: Jar) {
 artifacts {
     archives sourceZip
     archives deobfJar
-    archives apiZip
 }
