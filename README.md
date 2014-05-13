@@ -15,7 +15,7 @@ Electrodynamics is a diverse mod covering all the basics: power, processing, cra
 | Dmillerw        | Developer      | @dmillerw       |
 | Thlaylii        | Developer      | N/A             |
 | M3gaFr3ak       | Developer      | N/A             |
-| Mrabow          | 3D Modeller    | N/A             |
+| Mrabow          | 3D Modeller    | @M3gaFr3ak      |
 
 
 ###Contributing to Electrodyanmics
