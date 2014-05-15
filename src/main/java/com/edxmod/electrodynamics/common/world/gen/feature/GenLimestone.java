@@ -1,5 +1,9 @@
 package com.edxmod.electrodynamics.common.world.gen.feature;
 
+<<<<<<< HEAD
+import com.edxmod.electrodynamics.api.EDXBlockHelper;
+=======
+>>>>>>> a17a342d73235ba4bd462674aa0ae64526be6708
 import cpw.mods.fml.common.IWorldGenerator;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
@@ -8,12 +12,16 @@ import net.minecraft.world.WorldType;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraftforge.common.util.ForgeDirection;
 
+<<<<<<< HEAD
+import java.util.*;
+=======
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
+>>>>>>> a17a342d73235ba4bd462674aa0ae64526be6708
 
 /**
  * @author Royalixor.
@@ -45,7 +53,11 @@ public class GenLimestone implements IWorldGenerator {
     }
 
     public void generate(World world, int chunkX, int chunkZ, Random random) {
+<<<<<<< HEAD
+        if (random.nextInt(frequency) != 1) {
+=======
         if (random.nextInt(this.frequency) != 1) {
+>>>>>>> a17a342d73235ba4bd462674aa0ae64526be6708
             return;
         }
 
@@ -60,6 +72,28 @@ public class GenLimestone implements IWorldGenerator {
         if (y == 39) {
             return;
         }
+<<<<<<< HEAD
+        int initialMapSize = (int) Math.floor(maxSize * 1.4D);
+
+        HashMap<List<Integer>, Integer> depthMap = new HashMap<>(initialMapSize);
+        LinkedList<List<Integer>> toPlace = new LinkedList<>();
+        HashMap<List<Integer>, Boolean> placed = new HashMap<>(initialMapSize);
+
+        List<Integer> currentPos = Arrays.asList(x, y, z);
+        toPlace.add(currentPos);
+        depthMap.put(currentPos, 0);
+        while (toPlace.size() > 0 && placed.size() < maxSize && toPlace.size() < maxSize) {
+            currentPos = toPlace.remove();
+            int currentDepth = depthMap.get(currentPos);
+
+            if (currentDepth <= maxDepth) {
+                int x1 = currentPos.get(0);
+                int y1 = currentPos.get(1);
+                int z1 = currentPos.get(2);
+                if ((currentDepth > 0) && (exposed(world, x1, y1, z1))) {
+                    currentDepth = 0;
+                    depthMap.put(currentPos, 0);
+=======
         int initialMapSize = (int) Math.floor(this.maxSize * 1.4D);
 
         HashMap depthMap = new HashMap(initialMapSize);
@@ -80,12 +114,50 @@ public class GenLimestone implements IWorldGenerator {
                 if ((d.intValue() > 0) && (exposed(world, x1, y1, z1))) {
                     d = Integer.valueOf(0);
                     depthMap.put(t, new Integer(0));
+>>>>>>> a17a342d73235ba4bd462674aa0ae64526be6708
                 }
 
                 Block block = world.getBlock(x1, y1, z1);
 
                 if (block != null) {
                     if (block.isReplaceableOreGen(world, x1, y1, z1, Blocks.stone)) {
+<<<<<<< HEAD
+                        placed.put(currentPos, true);
+
+                        Integer x2 = currentPos.get(0);
+                        Integer y2 = currentPos.get(1);
+                        Integer z2 = currentPos.get(2);
+                        List<Integer> u = Arrays.asList(x2 + 1, y2, z2);
+                        if (!placed.containsKey(u))
+                            toPlace.add(u);
+                        if ((depthMap.get(u) == null) || (depthMap.get(u) > currentDepth))
+                            depthMap.put(u, currentDepth);
+                        u = Arrays.asList(x2 - 1, y2, z2);
+                        if (!placed.containsKey(u))
+                            toPlace.add(u);
+                        if ((depthMap.get(u) == null) || (depthMap.get(u) > currentDepth))
+                            depthMap.put(u, currentDepth);
+                        u = Arrays.asList(x2, y2 + 1, z2);
+                        if (!placed.containsKey(u))
+                            toPlace.add(u);
+                        if ((depthMap.get(u) == null) || (depthMap.get(u) > currentDepth))
+                            depthMap.put(u, currentDepth);
+                        u = Arrays.asList(x2, y2 - 1, z2);
+                        if (!placed.containsKey(u))
+                            toPlace.add(u);
+                        if ((depthMap.get(u) == null) || (depthMap.get(u) > currentDepth))
+                            depthMap.put(u, currentDepth);
+                        u = Arrays.asList(x2, y2, z2 + 1);
+                        if (!placed.containsKey(u))
+                            toPlace.add(u);
+                        if ((depthMap.get(u) == null) || (depthMap.get(u) > currentDepth))
+                            depthMap.put(u, currentDepth);
+                        u = Arrays.asList(x2, y2, z2 - 1);
+                        if (!placed.containsKey(u))
+                            toPlace.add(u);
+                        if ((depthMap.get(u) == null) || (depthMap.get(u) > currentDepth))
+                            depthMap.put(u, currentDepth);
+=======
                         placed.put(t, Boolean.valueOf(true));
 
                         Integer localInteger1 = d;
@@ -124,9 +196,16 @@ public class GenLimestone implements IWorldGenerator {
                             work.add(u);
                         if ((depthMap.get(u) == null) || (((Integer) depthMap.get(u)).intValue() > d.intValue()))
                             depthMap.put(u, d);
+>>>>>>> a17a342d73235ba4bd462674aa0ae64526be6708
                     }
                 }
             }
         }
+<<<<<<< HEAD
+        for (List<Integer> coords : placed.keySet()) {
+            world.setBlock(coords.get(0), coords.get(1), coords.get(2), EDXBlockHelper.get("limestone"));
+        }
+=======
+>>>>>>> a17a342d73235ba4bd462674aa0ae64526be6708
     }
 }
