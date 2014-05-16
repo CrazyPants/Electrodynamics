@@ -33,7 +33,7 @@ minecraft {
     version = config.minecraft_version + "-" + config.forge_version
 }
 
-version = "${config.minecraft_version}-${config.mod_version}-B${bambooBuildNumber}"
+version = "${config.minecraft_version}-${config.mod_version}"
 
 processResources {
     from(sourceSets.main.resources.srcDirs) {
