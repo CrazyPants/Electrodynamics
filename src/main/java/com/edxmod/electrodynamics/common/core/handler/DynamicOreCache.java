@@ -7,6 +7,7 @@ import cpw.mods.fml.common.gameevent.TickEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.multiplayer.WorldClient;
 import net.minecraft.util.IIcon;
 
 import java.util.HashMap;
@@ -24,6 +25,7 @@ public class DynamicOreCache {
     private Map<WorldPoint, IIcon> iconCache = new HashMap<WorldPoint, IIcon>();
 
     public static class WorldPoint {
+
         public final int x;
         public final int y;
         public final int z;
@@ -36,14 +38,19 @@ public class DynamicOreCache {
 
         @Override
         public boolean equals(Object o) {
-            if (this == o) return true;
-            if (o == null || getClass() != o.getClass()) return false;
+            if (this == o)
+                return true;
+            if (o == null || getClass() != o.getClass())
+                return false;
 
             WorldPoint that = (WorldPoint) o;
 
-            if (x != that.x) return false;
-            if (y != that.y) return false;
-            if (z != that.z) return false;
+            if (x != that.x)
+                return false;
+            if (y != that.y)
+                return false;
+            if (z != that.z)
+                return false;
 
             return true;
         }
@@ -110,7 +117,14 @@ public class DynamicOreCache {
             while (iterator.hasNext()) {
                 WorldPoint point = iterator.next();
 
-                if (!(Minecraft.getMinecraft().theWorld.getBlock(point.x, point.y, point.z) instanceof BlockOre)) {
+                Minecraft minecraft = Minecraft.getMinecraft();
+                if (minecraft == null)
+                    continue;
+                WorldClient world = minecraft.theWorld;
+                if (world == null)
+                    continue;
+
+                if (!(world.getBlock(point.x, point.y, point.z) instanceof BlockOre)) {
                     iterator.remove();
                 }
             }
