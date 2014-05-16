@@ -10,9 +10,8 @@
 !/README
 !/LICENSE
 !/build.properties
-<<<<<<< HEAD
 !/build.gradle
 !/.travis.yml
+!/build.sh
 =======
 !/build.gradle
->>>>>>> a9d0bd466e3884b642dd6ac1cfb647030e2d04e9
