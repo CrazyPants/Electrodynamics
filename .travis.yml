@@ -1,7 +1,9 @@
 language: java
 jdk:
   - openjdk7
-script: ./build.sh
+script:
+  - chmod +x gradlew
+  - ./gradlew build -S
 
 env:
   global:
