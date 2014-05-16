@@ -2,6 +2,7 @@ package com.edxmod.electrodynamics;
 
 import com.edxmod.electrodynamics.client.render.block.RenderBlockOre;
 import com.edxmod.electrodynamics.client.render.block.RenderEmptyBlock;
+import com.edxmod.electrodynamics.client.render.handler.RenderEventHandler;
 import com.edxmod.electrodynamics.client.render.item.*;
 import com.edxmod.electrodynamics.client.render.tile.*;
 import com.edxmod.electrodynamics.common.core.handler.DynamicOreCache;
@@ -12,6 +13,7 @@ import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraftforge.client.MinecraftForgeClient;
+import net.minecraftforge.common.MinecraftForge;
 
 /**
  * @author Royalixor.
@@ -23,6 +25,7 @@ public class ClientProxy extends CommonProxy {
     @Override
     public ClientProxy preInit() {
         FMLCommonHandler.instance().bus().register(DynamicOreCache.INSTANCE);
+		MinecraftForge.EVENT_BUS.register(new RenderEventHandler());
         return this;
     }
 
