@@ -1,11 +1,13 @@
 package com.edxmod.electrodynamics.client.render.block;
 
+import com.edxmod.electrodynamics.ClientProxy;
 import com.edxmod.electrodynamics.client.render.BetterRenderer;
 import com.edxmod.electrodynamics.common.block.world.BlockOre;
 import com.edxmod.electrodynamics.common.util.UtilRender;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
+import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.IBlockAccess;
 import org.lwjgl.opengl.GL11;
@@ -41,7 +43,11 @@ public class RenderBlockOre extends BetterRenderer {
         UtilRender.forceGraphics(true);
         UtilRender.forceLighting(0);
 
-        renderer.renderStandardBlock(block, x, y, z);
+		Tessellator tessellator = Tessellator.instance;
+
+		renderer.renderStandardBlock(block, x, y, z);
+		UtilRender.setBrightness(world, x, y, z, block);
+		UtilRender.renderAllSides(x, y, z, block, renderer, ((BlockOre)block).iconOverlays[world.getBlockMetadata(x, y, z)]);
 
         UtilRender.resetLighting();
         UtilRender.resetGraphics();

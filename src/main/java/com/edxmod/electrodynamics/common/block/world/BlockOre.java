@@ -57,7 +57,7 @@ public class BlockOre extends EDXMultiBlock {
 
     @Override
     public boolean useCustomRender() {
-        return false;
+        return true;
     }
 
     @Override
@@ -111,14 +111,4 @@ public class BlockOre extends EDXMultiBlock {
         this.iconOverlays[6] = iconRegister.registerIcon(EDXProps.RESOURCE_PREFIX + "ore/wolframiteOre");
     }
 
-    @Override
-    public boolean canRenderInPass(int pass) {
-        ClientProxy.renderPass = pass;
-        return true;
-    }
-
-    @Override
-    public int getRenderBlockPass() {
-        return 1;
-    }
 }

@@ -2,12 +2,14 @@ package com.edxmod.electrodynamics.common.util;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.EntityRenderer;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
+import net.minecraft.world.IBlockAccess;
 import org.lwjgl.opengl.GL11;
 
 /**
@@ -106,11 +108,19 @@ public class UtilRender {
     }
 
     public static void renderAllSides(int x, int y, int z, Block block, RenderBlocks renderer, IIcon tex) {
+		Tessellator tessellator = Tessellator.instance;
+
+		tessellator.setNormal(-1, 0, 0);
         renderer.renderFaceXNeg(block, x, y, z, tex);
+		tessellator.setNormal(1, 0, 0);
         renderer.renderFaceXPos(block, x, y, z, tex);
+		tessellator.setNormal(0, 0, -1);
         renderer.renderFaceZNeg(block, x, y, z, tex);
+		tessellator.setNormal(0, 0, 1);
         renderer.renderFaceZPos(block, x, y, z, tex);
+		tessellator.setNormal(0, -1, 0);
         renderer.renderFaceYNeg(block, x, y, z, tex);
+		tessellator.setNormal(0, 1, 0);
         renderer.renderFaceYPos(block, x, y, z, tex);
     }
 
@@ -122,5 +132,27 @@ public class UtilRender {
         renderer.renderFaceYNeg(block, x, y + 1, z, tex);
         renderer.renderFaceYPos(block, x, y - 1, z, tex);
     }
+
+	public static void setBrightness(IBlockAccess blockAccess, int i, int j, int k, Block block) {
+		Tessellator tessellator = Tessellator.instance;
+		int mb = block.getMixedBrightnessForBlock(blockAccess, i, j, k);
+		tessellator.setBrightness(mb);
+
+		float f = 1.0F;
+
+		int l = block.colorMultiplier(blockAccess, i, j, k);
+		float f1 = (l >> 16 & 0xFF) / 255.0F;
+		float f2 = (l >> 8 & 0xFF) / 255.0F;
+		float f3 = (l & 0xFF) / 255.0F;
+		if (EntityRenderer.anaglyphEnable) {
+			float f6 = (f1 * 30.0F + f2 * 59.0F + f3 * 11.0F) / 100.0F;
+			float f4 = (f1 * 30.0F + f2 * 70.0F) / 100.0F;
+			float f7 = (f1 * 30.0F + f3 * 70.0F) / 100.0F;
+			f1 = f6;
+			f2 = f4;
+			f3 = f7;
+		}
+		tessellator.setColorOpaque_F(f * f1, f * f2, f * f3);
+	}
 
 }
