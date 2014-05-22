@@ -24,26 +24,20 @@ public class EDXBlocks {
 
     private static void registerBlocks() {
         registerBlock(new BlockTable().setBlockName("table"), EDXItemMultiBlock.class);
-        registerBlock(new BlockLimestone().setBlockName("limestone"), EDXItemMultiBlock.class);
-        registerBlock(new BlockOre().setBlockName("ore"), EDXItemMultiBlock.class);
-        registerBlock(new BlockStorage().setBlockName("storage"), EDXItemMultiBlock.class);
-        registerBlock(new BlockLog().setBlockName("log"), EDXItemBlock.class);
-        registerBlock(new BlockHammerMill().setBlockName("hammerMill"), EDXItemBlock.class);
-        registerBlock(new BlockBasicKiln().setBlockName("basicKiln"), EDXItemBlock.class);
-        registerBlock(new BlockDustMixer().setBlockName("dustMixer"), EDXItemBlock.class);
-        registerBlock(new BlockMetalPress().setBlockName("metalPress"), EDXItemBlock.class);
-        registerBlock(new BlockSinteringOven().setBlockName("sinteringOven"), EDXItemBlock.class);
+//        registerBlock(new BlockLimestone().setBlockName("limestone"), EDXItemMultiBlock.class);
+//        registerBlock(new BlockOre().setBlockName("ore"), EDXItemMultiBlock.class);
+//        registerBlock(new BlockStorage().setBlockName("storage"), EDXItemMultiBlock.class);
+//        registerBlock(new BlockLog().setBlockName("log"), EDXItemBlock.class);
+//        registerBlock(new BlockBasicKiln().setBlockName("basicKiln"), EDXItemBlock.class);
+//        registerBlock(new BlockSinteringOven().setBlockName("sinteringOven"), EDXItemBlock.class);
         registerBlock(new BlockSieveTable().setBlockName("sieveTable"), EDXItemBlock.class);
-        registerBlock(new EmptyBlock().setBlockName("empty"));
+//        registerBlock(new EmptyBlock().setBlockName("empty"));
     }
 
     private static void registerTileEntities() {
         GameRegistry.registerTileEntity(TileTable.class, "table");
-        GameRegistry.registerTileEntity(TileHammerMill.class, "hammerMill");
-        GameRegistry.registerTileEntity(TileBasicKiln.class, "basicKiln");
-        GameRegistry.registerTileEntity(TileDustMixer.class, "dustMaker");
-        GameRegistry.registerTileEntity(TileMetalPress.class, "metalPress");
-        GameRegistry.registerTileEntity(TileSinteringOven.class, "sinteringOven");
+//        GameRegistry.registerTileEntity(TileBasicKiln.class, "basicKiln");
+//        GameRegistry.registerTileEntity(TileSinteringOven.class, "sinteringOven");
         GameRegistry.registerTileEntity(TileSieveTable.class, "sieveTable");
     }
 

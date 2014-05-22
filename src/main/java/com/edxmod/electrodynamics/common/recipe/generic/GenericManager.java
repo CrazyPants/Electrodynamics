@@ -13,12 +13,12 @@ public class GenericManager {
 
     private Set<GenericRecipe> recipes = new HashSet<GenericRecipe>();
 
-    public void register(Object input, Object output) {
+    public void register(Object input, Object output, Object ... data) {
         if (input == null || output == null) {
             return;
         }
 
-        register(new GenericRecipe(UtilItem.convertToItemStack(input), UtilItem.convertToItemStack(output), true));
+        register(new GenericRecipe(UtilItem.convertToItemStack(input), UtilItem.convertToItemStack(output), data, true));
     }
 
     public void register(GenericRecipe recipe) {

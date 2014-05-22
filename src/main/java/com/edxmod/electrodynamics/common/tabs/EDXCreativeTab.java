@@ -2,7 +2,9 @@ package com.edxmod.electrodynamics.common.tabs;
 
 import com.edxmod.electrodynamics.api.EDXBlockHelper;
 import com.edxmod.electrodynamics.api.EDXItemHelper;
+import com.edxmod.electrodynamics.common.item.EDXItems;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
@@ -34,11 +36,11 @@ public enum EDXCreativeTab {
     private ItemStack getItem() {
         switch (this) {
             case BLOCKS:
-                return new ItemStack(EDXBlockHelper.get("table"), 1, 1);
+                return new ItemStack(Blocks.stone, 1, 0);
             case ITEMS:
-                return new ItemStack(EDXItemHelper.get("hammer"), 1, 1);
+                return new ItemStack(EDXItems.hammerWood, 1, 0);
             case TOOLS:
-                return new ItemStack(EDXItemHelper.get("hammer"), 1, 1);
+                return new ItemStack(EDXItems.hammerWood, 1, 0);
             default:
                 return null;
         }

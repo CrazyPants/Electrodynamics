@@ -14,47 +14,34 @@ import java.util.List;
 /**
  * @author Royalixor
  */
-public class ItemHammer extends EDXMultiItem {
+public class ItemHammer extends Item {
 
-    private static String[] hammer = {"stone", "steel"};
-    private IIcon[] textures;
+	public static final float[] STRENGTH = new float[] {1F, 2F, 2.5F, 5F, 10F};
 
-    public ItemHammer() {
+    private IIcon icon;
+
+	private final String type;
+
+	private final Object component;
+
+    public ItemHammer(int damage, String type, Object component) {
+		setMaxStackSize(1);
+		setMaxDamage(damage);
+		setUnlocalizedName("hammer_" + type);
         setCreativeTab(EDXCreativeTab.TOOLS.get());
-        setHasSubtypes(true);
+
+		this.type = type;
+		this.component = component;
     }
 
     @Override
     public void registerIcons(IIconRegister iconRegister) {
-        textures = new IIcon[hammer.length];
-
-        for (int i = 0; i < hammer.length; ++i) {
-            textures[i] = iconRegister.registerIcon(EDXProps.RESOURCE_PREFIX + "tools/" + hammer[i] + "Hammer");
-        }
-    }
-
-    @Override
-    public String getUnlocalizedName(ItemStack itemStack) {
-        int meta = itemStack.getItemDamage();
-
-        if (meta < 0 || meta >= hammer.length) {
-            meta = 0;
-        }
-        return super.getUnlocalizedName() + "." + hammer[meta];
+		icon = iconRegister.registerIcon(EDXProps.RESOURCE_PREFIX + "tools/" + type + "Hammer");
     }
 
     @Override
     public IIcon getIconFromDamage(int meta) {
-        if (meta < 0 || meta >= textures.length) {
-            meta = 0;
-        }
-        return textures[meta];
+        return icon;
     }
 
-    @Override
-    public void getSubItems(Item item, CreativeTabs creativeTabs, List list) {
-        for (int meta = 0; meta < hammer.length; ++meta) {
-            list.add(new ItemStack(item, 1, meta));
-        }
-    }
 }

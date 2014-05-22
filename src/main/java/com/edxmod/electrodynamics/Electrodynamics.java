@@ -8,7 +8,6 @@ import com.edxmod.electrodynamics.common.events.EDXEvents;
 import com.edxmod.electrodynamics.common.item.EDXItems;
 import com.edxmod.electrodynamics.common.network.PacketPipeline;
 import com.edxmod.electrodynamics.common.lib.EDXProps;
-import com.edxmod.electrodynamics.common.world.EDXWorldGenerator;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
@@ -41,7 +40,6 @@ public class Electrodynamics {
         EDXItems.init();
         EDXEvents.init();
         EDXRecipes.init();
-        EDXWorldGenerator.init();
 
         NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiHandler());
 

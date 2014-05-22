@@ -44,14 +44,14 @@ public class BlockTable extends EDXTileMultiBlock implements IRaytracable {
                 if (!player.isSneaking() && side == 1 && tile.stack == null && player.getHeldItem() != null) {
                     ItemStack stack = player.getHeldItem().copy();
                     stack.stackSize = 1;
-                    tile.stack = stack;
+
+					tile.setStack(stack);
 
                     player.getHeldItem().stackSize--;
                     if (player.getHeldItem().stackSize <= 0) {
                         player.setCurrentItemOrArmor(0, null);
                     }
 
-                    world.markBlockForUpdate(x, y, z);
                     return true;
                 } else {
                     RayTracer.RaytraceResult result = RayTracer.doRaytrace(world, x, y, z, player);

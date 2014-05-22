@@ -1,6 +1,7 @@
 package com.edxmod.electrodynamics.common.tile;
 
 import com.edxmod.electrodynamics.api.EDXBlockHelper;
+import com.edxmod.electrodynamics.common.item.ItemHammer;
 import com.edxmod.electrodynamics.common.network.PacketFX;
 import com.edxmod.electrodynamics.common.recipe.generic.GenericRecipe;
 import com.edxmod.electrodynamics.common.recipe.RecipeManager;
@@ -20,6 +21,8 @@ public class TileTable extends TileCore {
 
     public ItemStack stack;
 
+	public float durability;
+
     public byte stackRotation = 0;
 
     @Override
@@ -30,6 +33,7 @@ public class TileTable extends TileCore {
             stack = null;
         }
 
+		durability = nbt.getFloat("durability");
         stackRotation = nbt.getByte("rotation");
     }
 
@@ -41,6 +45,7 @@ public class TileTable extends TileCore {
             nbt.setTag("stack", stackNBT);
         }
 
+		nbt.setFloat("durability", durability);
         nbt.setByte("rotation", stackRotation);
     }
 
@@ -53,8 +58,24 @@ public class TileTable extends TileCore {
         worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
     }
 
+	public void setStack(ItemStack stack) {
+		this.stack = stack;
+
+		GenericRecipe output = RecipeManager.INSTANCE.table.get(stack);
+
+		if (output != null) {
+			Object[] data = output.getData();
+			if (data.length == 1) { // Eww, more sanity checking here plz
+				durability = ((Float)data[0]).floatValue();
+			}
+		}
+
+		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+	}
+
     public void smash(EntityPlayer player) {
         int meta = worldObj.getBlockMetadata(xCoord, yCoord, zCoord);
+		ItemStack hammer = player.getCurrentEquippedItem();
         Random random = new Random();
 
         if (meta == 0) {
@@ -70,13 +91,17 @@ public class TileTable extends TileCore {
                 GenericRecipe output = RecipeManager.INSTANCE.table.get(stack);
 
                 if (output != null) {
-                    if (stack.getItem() instanceof ItemBlock) {
-                        PacketFX.breakFX(worldObj, xCoord, yCoord, zCoord, stack);
-                        getWorldObj().playSoundEffect(xCoord, yCoord, zCoord, "edx:oreCrumble", 1.0F, (random.nextFloat() - random.nextFloat()) * 0.2F + 1.0F);
-                    }
+					durability -= ItemHammer.STRENGTH[hammer.getItemDamage()];
 
-                    stack = output.getOutput(stack);
-                    worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+                    if (durability <= 0F) {
+						if (stack.getItem() instanceof ItemBlock) {
+							PacketFX.breakFX(worldObj, xCoord, yCoord, zCoord, stack);
+							getWorldObj().playSoundEffect(xCoord, yCoord, zCoord, "edx:oreCrumble", 1.0F, (random.nextFloat() - random.nextFloat()) * 0.2F + 1.0F);
+						}
+
+						stack = output.getOutput(stack);
+						worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+					}
                 }
             }
         }
