@@ -4,11 +4,13 @@ package com.edxmod.electrodynamics;
  * @author Royalixor.
  */
 public class CommonProxy {
-    public CommonProxy preInit() {
-        return this;
+
+    public void preInit() {
+
     }
 
-    public CommonProxy registerRenders() {
-        return this;
+    public void registerRenders() {
+
     }
+
 }

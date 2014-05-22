@@ -45,16 +45,18 @@ public class Electrodynamics {
 
         NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiHandler());
 
-        proxy.registerRenders().preInit();
+        proxy.registerRenders();
+		proxy.preInit();
     }
 
     @Mod.EventHandler
-    public void load(FMLInitializationEvent event) {
+    public void init(FMLInitializationEvent event) {
         packetPipeline.init();
     }
 
     @Mod.EventHandler
-    public void modsLoaded(FMLPostInitializationEvent event) {
+    public void postInit(FMLPostInitializationEvent event) {
         packetPipeline.postInit();
     }
+
 }
