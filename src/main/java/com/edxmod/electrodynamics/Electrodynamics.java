@@ -19,7 +19,7 @@ import cpw.mods.fml.common.network.NetworkRegistry;
 /**
  * @author Royalixor.
  */
-@Mod(modid = EDXProps.ID, name = EDXProps.NAME, version = EDXProps.VERSION, dependencies = "required-after:Forge@[10.12.0.1024,)")
+@Mod(modid = EDXProps.ID, name = EDXProps.NAME, version = EDXProps.VERSION, dependencies = "required-after:Forge@[10.12.0.1060,)")
 public class Electrodynamics {
 
     @Mod.Instance(EDXProps.ID)
