@@ -23,11 +23,15 @@ public class ClientProxy extends CommonProxy {
 
     @Override
     public void preInit() {
+		super.preInit();
+
         FMLCommonHandler.instance().bus().register(DynamicOreCache.INSTANCE);
     }
 
     @Override
     public void registerRenders() {
+		super.preInit();
+
         // BLOCK
         RenderingRegistry.registerBlockHandler(new RenderBlockOre());
         RenderingRegistry.registerBlockHandler(new RenderEmptyBlock());

@@ -15,15 +15,13 @@ public class EDXItems {
 	public static ItemHammer hammerSteel;
 	public static ItemHammer hammerDiamond;
 
+	public static Item net;
+
     public static void init() {
         registerItems();
     }
 
     private static void registerItems() {
-//        registerItem(new ItemGrindings().setUnlocalizedName("grindings"));
-//        registerItem(new ItemDust().setUnlocalizedName("dust"));
-//        registerItem(new ItemTool().setUnlocalizedName("tool"));
-
 		// HAMMERS
 		hammerWood = new ItemHammer(64, "wood", "plankWood");
 		hammerStone = new ItemHammer(128, "stone", "cobblestone");
@@ -36,9 +34,13 @@ public class EDXItems {
 		registerItem(hammerIron);
 		registerItem(hammerSteel);
 		registerItem(hammerDiamond);
+
+		net = new ItemNet().setUnlocalizedName("net");
+
+		registerItem(net);
     }
 
     public static void registerItem(Item item) {
-        GameRegistry.registerItem(item, item.getUnlocalizedName().replace("item.", ""));
+        GameRegistry.registerItem(item, "edx:" + item.getUnlocalizedName().replace("item.", ""));
     }
 }
