@@ -2,14 +2,9 @@ package com.edxmod.electrodynamics.common.item;
 
 import com.edxmod.electrodynamics.common.item.prefab.ItemEDX;
 import com.edxmod.electrodynamics.common.lib.EDXProps;
-import com.edxmod.electrodynamics.common.tabs.EDXCreativeTab;
+import com.edxmod.electrodynamics.common.core.EDXCreativeTab;
 import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
-
-import java.util.List;
 
 /**
  * @author Royalixor

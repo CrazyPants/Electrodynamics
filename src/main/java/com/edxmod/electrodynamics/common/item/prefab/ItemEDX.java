@@ -1,6 +1,6 @@
 package com.edxmod.electrodynamics.common.item.prefab;
 
-import com.edxmod.electrodynamics.common.tabs.EDXCreativeTab;
+import com.edxmod.electrodynamics.common.core.EDXCreativeTab;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.item.Item;
 

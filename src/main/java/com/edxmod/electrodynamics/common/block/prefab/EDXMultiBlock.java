@@ -1,6 +1,6 @@
 package com.edxmod.electrodynamics.common.block.prefab;
 
-import com.edxmod.electrodynamics.common.tabs.EDXCreativeTab;
+import com.edxmod.electrodynamics.common.core.EDXCreativeTab;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;

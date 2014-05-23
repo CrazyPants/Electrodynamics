@@ -1,4 +1,4 @@
-package com.edxmod.electrodynamics.common.entity;
+package com.edxmod.electrodynamics.common.core.handler;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.TickEvent;

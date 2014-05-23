@@ -1,4 +1,4 @@
-package com.edxmod.electrodynamics.common.tabs;
+package com.edxmod.electrodynamics.common.core;
 
 import com.edxmod.electrodynamics.api.EDXBlockHelper;
 import com.edxmod.electrodynamics.api.EDXItemHelper;

@@ -1,9 +1,8 @@
 package com.edxmod.electrodynamics;
 
 import com.edxmod.electrodynamics.common.core.handler.BlockEventHandler;
-import com.edxmod.electrodynamics.common.entity.SpiderTracker;
+import com.edxmod.electrodynamics.common.core.handler.SpiderTracker;
 import cpw.mods.fml.common.FMLCommonHandler;
-import net.minecraft.client.Minecraft;
 import net.minecraftforge.common.MinecraftForge;
 
 /**

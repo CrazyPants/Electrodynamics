@@ -1,4 +1,4 @@
-package com.edxmod.electrodynamics.common.core;
+package com.edxmod.electrodynamics.common.recipe;
 
 import com.edxmod.electrodynamics.common.recipe.RecipeManager;
 import net.minecraft.item.crafting.CraftingManager;

@@ -2,7 +2,7 @@ package com.edxmod.electrodynamics.common.block;
 
 import com.edxmod.electrodynamics.common.block.prefab.EDXMultiBlock;
 import com.edxmod.electrodynamics.common.lib.EDXProps;
-import com.edxmod.electrodynamics.common.tabs.EDXCreativeTab;
+import com.edxmod.electrodynamics.common.core.EDXCreativeTab;
 import com.edxmod.electrodynamics.common.util.UtilArray;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;

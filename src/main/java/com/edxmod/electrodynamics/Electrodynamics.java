@@ -1,10 +1,8 @@
 package com.edxmod.electrodynamics;
 
 import com.edxmod.electrodynamics.common.block.EDXBlocks;
-import com.edxmod.electrodynamics.common.config.EDXConfiguration;
-import com.edxmod.electrodynamics.common.core.EDXRecipes;
+import com.edxmod.electrodynamics.common.recipe.EDXRecipes;
 import com.edxmod.electrodynamics.common.core.handler.GuiHandler;
-import com.edxmod.electrodynamics.common.events.EDXEvents;
 import com.edxmod.electrodynamics.common.item.EDXItems;
 import com.edxmod.electrodynamics.common.lib.EDXProps;
 import com.edxmod.electrodynamics.common.network.PacketPipeline;
@@ -38,11 +36,9 @@ public class Electrodynamics {
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
         configPath = event.getModConfigurationDirectory() + "/EDX/";
-        EDXConfiguration.init(configPath);
 
         EDXBlocks.init();
         EDXItems.init();
-        EDXEvents.init();
         EDXRecipes.init();
 
 		File recipes = new File(configPath, "recipes/");

@@ -4,7 +4,7 @@ import com.edxmod.electrodynamics.Electrodynamics;
 import com.edxmod.electrodynamics.common.core.handler.GuiHandler;
 import com.edxmod.electrodynamics.common.inventory.InventoryItem;
 import com.edxmod.electrodynamics.common.lib.EDXProps;
-import com.edxmod.electrodynamics.common.tabs.EDXCreativeTab;
+import com.edxmod.electrodynamics.common.core.EDXCreativeTab;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
