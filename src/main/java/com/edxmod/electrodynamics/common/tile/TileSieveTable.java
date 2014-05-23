@@ -9,6 +9,7 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntityHopper;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraftforge.common.util.ForgeDirection;
@@ -30,13 +31,42 @@ public class TileSieveTable extends TileCore implements ISidedInventory {
 
     @Override
     public void readCustomNBT(NBTTagCompound nbt) {
+		NBTTagList nbttaglist = nbt.getTagList("Items", 10);
+		processing = new ItemStack[this.getSizeInventory()];
 
-    }
+		for (int i = 0; i < nbttaglist.tagCount(); ++i) {
+			NBTTagCompound tag = nbttaglist.getCompoundTagAt(i);
+			byte slot = tag.getByte("Slot");
+
+			if (slot >= 0 && slot < processing.length) {
+				processing[slot] = ItemStack.loadItemStackFromNBT(tag);
+			}
+		}
+
+		// Durations
+		currentProcessingTime = nbt.getInteger("current");
+		maxProcessingTime = nbt.getInteger("max");
+	}
 
     @Override
     public void writeCustomNBT(NBTTagCompound nbt) {
+		NBTTagList nbttaglist = new NBTTagList();
 
-    }
+		for (int i = 0; i < processing.length; ++i) {
+			if (processing[i] != null) {
+				NBTTagCompound tag = new NBTTagCompound();
+				tag.setByte("Slot", (byte) i);
+				processing[i].writeToNBT(tag);
+				nbttaglist.appendTag(tag);
+			}
+		}
+
+		nbt.setTag("Items", nbttaglist);
+
+		// Durations
+		nbt.setInteger("current", currentProcessingTime);
+		nbt.setInteger("max", maxProcessingTime);
+	}
 
 	@Override
 	public void updateEntity() {
