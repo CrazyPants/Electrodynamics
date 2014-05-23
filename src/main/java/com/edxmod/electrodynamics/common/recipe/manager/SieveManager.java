@@ -20,11 +20,14 @@ public class SieveManager implements ISieveManager {
 		private final ItemStack input;
 		private final RandomStack[] output;
 
+		private final int duration;
+
 		private final boolean ignoreNBT;
 
-		public SieveRecipe(ItemStack input, RandomStack[] output, boolean ignoreNBT) {
+		public SieveRecipe(ItemStack input, RandomStack[] output, int duration, boolean ignoreNBT) {
 			this.input = input;
 			this.output = output;
+			this.duration = duration;
 			this.ignoreNBT = ignoreNBT;
 		}
 
@@ -34,6 +37,10 @@ public class SieveManager implements ISieveManager {
 			} else {
 				return ((stack.getItem() == input.getItem()) && stack.getItemDamage() == input.getItemDamage()) && (ignoreNBT || ItemStack.areItemStacksEqual(stack, input));
 			}
+		}
+
+		public int getDuration() {
+			return duration;
 		}
 
 		public ItemStack[] getOutput() {
@@ -50,12 +57,12 @@ public class SieveManager implements ISieveManager {
 	private Set<SieveRecipe> recipes = new HashSet<SieveRecipe>();
 
 	@Override
-	public void register(ItemStack input, RandomStack[] output) {
+	public void register(ItemStack input, RandomStack[] output, int duration) {
 		if (input == null || output == null || output.length < 1) {
 			return;
 		}
 
-		register(new SieveRecipe(input, output, true));
+		register(new SieveRecipe(input, output, duration, true));
 	}
 
 	public void register(SieveRecipe recipe) {

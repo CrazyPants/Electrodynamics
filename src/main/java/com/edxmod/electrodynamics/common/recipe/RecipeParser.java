@@ -69,6 +69,7 @@ public class RecipeParser {
 
 	public static class Recipe {
 		public String input;
+		public int duration = 100;
 		public Output[] outputs;
 
 		@Override
@@ -137,7 +138,7 @@ public class RecipeParser {
 				}
 			}
 
-			RecipeManager.INSTANCE.sieve.register(input, output);
+			RecipeManager.INSTANCE.sieve.register(input, output, recipe1.duration);
 		}
 
 		int length = recipe.recipes.length;

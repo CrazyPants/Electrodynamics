@@ -8,6 +8,6 @@ import net.minecraft.item.ItemStack;
  */
 public interface ISieveManager {
 
-	public void register(ItemStack input, RandomStack[] output);
+	public void register(ItemStack input, RandomStack[] output, int duration);
 
 }

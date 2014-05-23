@@ -25,6 +25,9 @@ public class TileSieveTable extends TileCore implements ISidedInventory {
 
 	public ItemStack[] processing = new ItemStack[INVENTORY_SIZE];
 
+	public int maxProcessingTime = 0;
+	public int currentProcessingTime = 0;
+
     @Override
     public void readCustomNBT(NBTTagCompound nbt) {
 
@@ -62,27 +65,51 @@ public class TileSieveTable extends TileCore implements ISidedInventory {
 				}
 			}
 
-			// Process items
-			//TODO Implement time
-			for (int i=0; i<processing.length; i++) {
-				ItemStack processed = processing[i];
+			// Set timing if need be
+			if (currentProcessingTime == 0 && maxProcessingTime == 0) {
+				for (int i=0; i<processing.length; i++) {
+					ItemStack processed = processing[i];
 
-				if (processed != null && processed.stackSize > 0) {
-					SieveManager.SieveRecipe processingRecipe = RecipeManager.INSTANCE.sieve.get(processed);
-					ItemStack[] output = processingRecipe.getOutput();
-					Random random = new Random();
+					if (processed != null) {
+						SieveManager.SieveRecipe processingRecipe = RecipeManager.INSTANCE.sieve.get(processed);
 
-					for (ItemStack out : output) {
-						InventoryHelper.ejectItem(worldObj, xCoord, yCoord, zCoord, ForgeDirection.DOWN, out, random);
+						if (processingRecipe != null) {
+							maxProcessingTime = processingRecipe.getDuration();
+							break;
+						}
 					}
-
-					processed.stackSize--;
-					if (processed.stackSize <= 0) {
-						processing[i] = null;
-					}
-
-					break;
 				}
+			}
+
+			// Process items
+			if (currentProcessingTime == maxProcessingTime && maxProcessingTime != 0) {
+				for (int i=0; i<processing.length; i++) {
+					ItemStack processed = processing[i];
+
+					if (processed != null && processed.stackSize > 0) {
+						SieveManager.SieveRecipe processingRecipe = RecipeManager.INSTANCE.sieve.get(processed);
+						ItemStack[] output = processingRecipe.getOutput();
+						Random random = new Random();
+
+						for (ItemStack out : output) {
+							InventoryHelper.ejectItem(worldObj, xCoord, yCoord, zCoord, ForgeDirection.DOWN, out, random);
+						}
+
+						processed.stackSize--;
+						if (processed.stackSize <= 0) {
+							processing[i] = null;
+						}
+
+						maxProcessingTime = currentProcessingTime = 0;
+
+						break;
+					}
+				}
+			}
+
+			// Tick process times
+			if (maxProcessingTime != 0 && currentProcessingTime < maxProcessingTime) {
+				currentProcessingTime++;
 			}
 		}
 	}
