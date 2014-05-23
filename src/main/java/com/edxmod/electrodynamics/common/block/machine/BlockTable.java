@@ -13,6 +13,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -125,10 +126,10 @@ public class BlockTable extends EDXTileMultiBlock implements IRaytracable {
         targets.add(new IndexedAABB(0, getBlockBoundsMinX(), getBlockBoundsMinY(), getBlockBoundsMinZ(), getBlockBoundsMaxX(), renderMax, getBlockBoundsMaxZ()));
 
         if (tile.stack != null) {
-            if (tile.stack.getItem() instanceof ItemBlock) {
+            if (tile.stack.getItem() instanceof ItemBlock && RenderBlocks.renderItemIn3d(Block.getBlockFromItem(tile.stack.getItem()).getRenderType())) {
                 Block block = UtilItem.getBlock(tile.stack.getItem());
                 AxisAlignedBB blockBounds = AxisAlignedBB.getBoundingBox(0.25, renderMax, 0.25, 0.75, renderMax + (block.getBlockBoundsMaxY() / 2), 0.75);
-                targets.add(new IndexedAABB(1, blockBounds));
+				targets.add(new IndexedAABB(1, blockBounds));
             } else {
                 targets.add(new IndexedAABB(1, 0.25, renderMax, 0.25, 0.75, renderMax + 0.0625F, 0.75));
             }

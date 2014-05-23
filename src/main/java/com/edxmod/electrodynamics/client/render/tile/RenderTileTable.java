@@ -7,6 +7,7 @@ import com.edxmod.electrodynamics.common.tile.TileTable;
 import com.edxmod.electrodynamics.common.util.UtilItem;
 import com.edxmod.electrodynamics.common.util.UtilRender;
 import net.minecraft.block.Block;
+import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.tileentity.TileEntity;
@@ -55,7 +56,7 @@ public class RenderTileTable extends TileEntitySpecialRenderer {
 
         if (tile.stack != null) {
             float renderMax = tile.getBlockMetadata() == 0 ? WOOD_RENDER_MAX : STONE_RENDER_MAX;
-            if (tile.stack.getItem() instanceof ItemBlock) {
+            if (tile.stack.getItem() instanceof ItemBlock && RenderBlocks.renderItemIn3d(Block.getBlockFromItem(tile.stack.getItem()).getRenderType())) {
                 Block block = UtilItem.getBlock(tile.stack);
                 boolean fixOffset = false;
 
