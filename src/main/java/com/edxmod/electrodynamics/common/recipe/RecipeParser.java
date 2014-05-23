@@ -100,20 +100,28 @@ public class RecipeParser {
 
 	public static void parseFile(File file) {
 		try {
+			FMLLog.info("[Electrodynamics] Parsing " + file.getName());
 			ParsedRecipe recipe = new Gson().fromJson(new FileReader(file), ParsedRecipe.class);
-			verifyParse(recipe);
+			verifyParse(file.getName(), recipe);
 		} catch (IOException ex) {
 			FMLLog.warning("[Electrodynamics] Failed to parse " + file.getName());
 		}
 	}
 
-	public static void verifyParse(ParsedRecipe recipe) {
+	public static void verifyParse(String name, ParsedRecipe recipe) {
 		for (Recipe recipe1 : recipe.recipes) {
 			ItemStack input = getItem(recipe1.input);
 			RandomStack[] output = new RandomStack[recipe1.outputs.length];
 
 			for (int i=0; i<recipe1.outputs.length; i++) {
 				ItemStack item = getItem(recipe1.outputs[i].item);
+				float chance = recipe1.outputs[i].chance;
+				if (chance < 0F) {
+					chance = 0F;
+				} else if (chance > 1F) {
+					chance = 1F;
+				}
+
 				output[i] = new RandomStack(item, recipe1.outputs[i].chance);
 			}
 
@@ -131,6 +139,9 @@ public class RecipeParser {
 
 			RecipeManager.INSTANCE.sieve.register(input, output);
 		}
+
+		int length = recipe.recipes.length;
+		FMLLog.info("[Electrodynamics] Parsed " + name + ". Loaded " + length + (length > 1 ? " recipes" : " recipe"));
 	}
 
 	public static ItemStack getItem(String item) {

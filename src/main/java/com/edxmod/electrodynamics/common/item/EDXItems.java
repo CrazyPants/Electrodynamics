@@ -41,6 +41,6 @@ public class EDXItems {
     }
 
     public static void registerItem(Item item) {
-        GameRegistry.registerItem(item, "edx:" + item.getUnlocalizedName().replace("item.", ""));
+        GameRegistry.registerItem(item, item.getUnlocalizedName().replace("item.", ""));
     }
 }
