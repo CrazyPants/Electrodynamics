@@ -3,8 +3,8 @@ package com.edxmod.electrodynamics.common.tile;
 import com.edxmod.electrodynamics.api.EDXBlockHelper;
 import com.edxmod.electrodynamics.common.item.ItemHammer;
 import com.edxmod.electrodynamics.common.network.PacketFX;
-import com.edxmod.electrodynamics.common.recipe.generic.GenericRecipe;
 import com.edxmod.electrodynamics.common.recipe.RecipeManager;
+import com.edxmod.electrodynamics.common.recipe.manager.TableManager;
 import com.edxmod.electrodynamics.common.util.UtilItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -61,13 +61,10 @@ public class TileTable extends TileCore {
 	public void setStack(ItemStack stack) {
 		this.stack = stack;
 
-		GenericRecipe output = RecipeManager.INSTANCE.table.get(stack);
+		TableManager.TableRecipe output = RecipeManager.INSTANCE.table.get(stack);
 
 		if (output != null) {
-			Object[] data = output.getData();
-			if (data.length == 1) { // Eww, more sanity checking here plz
-				durability = ((Float)data[0]).floatValue();
-			}
+			durability = output.getDurability();
 		}
 
 		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
@@ -88,7 +85,7 @@ public class TileTable extends TileCore {
             }
         } else if (meta == 1) {
             if (stack != null) {
-                GenericRecipe output = RecipeManager.INSTANCE.table.get(stack);
+                TableManager.TableRecipe output = RecipeManager.INSTANCE.table.get(stack);
 
                 if (output != null) {
 					durability -= ItemHammer.STRENGTH[hammer.getItemDamage()];

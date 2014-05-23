@@ -2,8 +2,11 @@ package com.edxmod.electrodynamics.common.recipe;
 
 import com.edxmod.electrodynamics.api.EDXBlockHelper;
 import com.edxmod.electrodynamics.api.EDXItemHelper;
-import com.edxmod.electrodynamics.common.recipe.generic.GenericManager;
+import com.edxmod.electrodynamics.api.util.RandomStack;
+import com.edxmod.electrodynamics.common.recipe.manager.SieveManager;
+import com.edxmod.electrodynamics.common.recipe.manager.TableManager;
 import net.minecraft.init.Blocks;
+import net.minecraft.item.ItemStack;
 
 /**
  * @author dmillerw
@@ -16,7 +19,7 @@ public class RecipeManager {
 		table.register(Blocks.stone, Blocks.cobblestone, 1F);
     }
 
-    public GenericManager table = new GenericManager();
-    public GenericManager kiln = new GenericManager();
+    public TableManager table = new TableManager();
+	public SieveManager sieve = new SieveManager();
 
 }

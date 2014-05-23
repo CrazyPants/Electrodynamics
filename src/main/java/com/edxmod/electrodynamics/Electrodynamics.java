@@ -45,7 +45,7 @@ public class Electrodynamics {
         EDXEvents.init();
         EDXRecipes.init();
 
-//		RecipeParser.parseFile(new File(configPath, "recipes.json"));
+		RecipeParser.parseFile(new File(configPath, "recipes.json"));
 
 		NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiHandler());
 

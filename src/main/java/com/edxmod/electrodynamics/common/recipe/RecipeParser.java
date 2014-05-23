@@ -1,6 +1,8 @@
 package com.edxmod.electrodynamics.common.recipe;
 
+import com.edxmod.electrodynamics.api.util.RandomStack;
 import com.google.gson.Gson;
+import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.registry.GameData;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.item.ItemStack;
@@ -96,18 +98,23 @@ public class RecipeParser {
 		}
 	}
 
-	public static void parseFile(File file) throws IOException {
-		ParsedRecipe recipe = new Gson().fromJson(new FileReader(file), ParsedRecipe.class);
-		verifyParse(recipe);
+	public static void parseFile(File file) {
+		try {
+			ParsedRecipe recipe = new Gson().fromJson(new FileReader(file), ParsedRecipe.class);
+			verifyParse(recipe);
+		} catch (IOException ex) {
+			FMLLog.warning("[Electrodynamics] Failed to parse " + file.getName());
+		}
 	}
 
 	public static void verifyParse(ParsedRecipe recipe) {
 		for (Recipe recipe1 : recipe.recipes) {
 			ItemStack input = getItem(recipe1.input);
-			ItemStack[] output = new ItemStack[recipe1.outputs.length];
+			RandomStack[] output = new RandomStack[recipe1.outputs.length];
 
 			for (int i=0; i<recipe1.outputs.length; i++) {
-				output[i] = getItem(recipe1.outputs[i].item);
+				ItemStack item = getItem(recipe1.outputs[i].item);
+				output[i] = new RandomStack(item, recipe1.outputs[i].chance);
 			}
 
 			if (recipe.crash_on_fail) {
@@ -115,12 +122,14 @@ public class RecipeParser {
 					throw new NullPointerException();
 				} else {
 					for (int i=0; i<output.length; i++) {
-						if (output[i] == null) {
+						if (output[i] == null || output[i].stack == null) {
 							throw new NullPointerException();
 						}
 					}
 				}
 			}
+
+			RecipeManager.INSTANCE.sieve.register(input, output);
 		}
 	}
 

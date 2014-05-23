@@ -2,7 +2,7 @@ package com.edxmod.electrodynamics.common.tile;
 
 import com.edxmod.electrodynamics.common.inventory.InventoryItem;
 import com.edxmod.electrodynamics.common.recipe.RecipeManager;
-import com.edxmod.electrodynamics.common.recipe.generic.GenericRecipe;
+//import com.edxmod.electrodynamics.common.recipe.generic.GenericRecipe;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 
@@ -47,17 +47,17 @@ public class TileBasicKiln extends TileCore {
                             // Cook
                             totalCookTime = currentCookTime = 0;
 
-                            GenericRecipe out = RecipeManager.INSTANCE.kiln.get(tray.getStackInSlot(0));
-                            tray.setInventorySlotContents(0, out.getOutput(tray.getStackInSlot(0)));
-                            tray.markDirty();
+//                            GenericRecipe out = RecipeManager.INSTANCE.kiln.get(tray.getStackInSlot(0));
+//                            tray.setInventorySlotContents(0, out.getOutput(tray.getStackInSlot(0)));
+//                            tray.markDirty();
                         } else {
                             // Check
-                            GenericRecipe out = RecipeManager.INSTANCE.kiln.get(tray.getStackInSlot(0));
-
-                            if (out != null) {
-                                totalCookTime = 200;
-                                currentCookTime = 0;
-                            }
+//                            GenericRecipe out = RecipeManager.INSTANCE.kiln.get(tray.getStackInSlot(0));
+//
+//                            if (out != null) {
+//                                totalCookTime = 200;
+//                                currentCookTime = 0;
+//                            }
                         }
                     }
                 }
