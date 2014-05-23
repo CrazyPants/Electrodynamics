@@ -17,6 +17,8 @@ public class EDXItems {
 
 	public static Item net;
 
+	public static Item handSieve;
+
     public static void init() {
         registerItems();
     }
@@ -38,6 +40,10 @@ public class EDXItems {
 		net = new ItemNet().setUnlocalizedName("net");
 
 		registerItem(net);
+
+		handSieve = new ItemHandSieve().setUnlocalizedName("hand_sieve");
+
+		registerItem(handSieve);
     }
 
     public static void registerItem(Item item) {

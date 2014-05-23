@@ -13,8 +13,6 @@ public class ItemHammer extends ItemEDX {
 
 	public static final float[] STRENGTH = new float[] {1F, 2F, 2.5F, 5F, 10F};
 
-    private IIcon icon;
-
 	private final String type;
 
 	private final Object component;
@@ -30,14 +28,9 @@ public class ItemHammer extends ItemEDX {
 		this.component = component;
     }
 
-    @Override
-    public void registerIcons(IIconRegister iconRegister) {
-		icon = iconRegister.registerIcon(EDXProps.RESOURCE_PREFIX + "tools/" + type + "Hammer");
-    }
-
-    @Override
-    public IIcon getIconFromDamage(int meta) {
-        return icon;
-    }
+	@Override
+	public String getIcon() {
+		return "tools/" + type + "Hammer";
+	}
 
 }

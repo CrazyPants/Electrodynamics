@@ -14,8 +14,6 @@ import net.minecraft.util.IIcon;
  */
 public class ItemNet extends ItemEDX {
 
-	private IIcon icon;
-
 	public ItemNet() {
 		super(EDXCreativeTab.TOOLS);
 
@@ -35,12 +33,7 @@ public class ItemNet extends ItemEDX {
 	}
 
 	@Override
-	public void registerIcons(IIconRegister iconRegister) {
-		icon = iconRegister.registerIcon(EDXProps.RESOURCE_PREFIX + "tools/net");
-	}
-
-	@Override
-	public IIcon getIconFromDamage(int meta) {
-		return icon;
+	public String getIcon() {
+		return "tools/net";
 	}
 }
