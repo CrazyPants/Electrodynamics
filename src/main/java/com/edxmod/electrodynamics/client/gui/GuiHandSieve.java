@@ -1,7 +1,9 @@
 package com.edxmod.electrodynamics.client.gui;
 
 import com.edxmod.electrodynamics.common.inventory.InventoryItem;
+import com.edxmod.electrodynamics.common.inventory.container.ContainerItem;
 import com.edxmod.electrodynamics.common.inventory.container.ContainerTray;
+import com.edxmod.electrodynamics.common.item.ItemHandSieve;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;

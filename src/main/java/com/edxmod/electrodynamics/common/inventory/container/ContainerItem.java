@@ -73,4 +73,8 @@ public class ContainerItem extends Container {
         return true;
     }
 
+	public ItemStack getInventoryStack() {
+		return ((InventoryItem)inventory).getStack();
+	}
+
 }

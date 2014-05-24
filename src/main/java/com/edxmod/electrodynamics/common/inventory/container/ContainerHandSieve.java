@@ -26,11 +26,6 @@ public class ContainerHandSieve extends ContainerItem {
 			public boolean isItemValid(ItemStack stack) {
 				return RecipeManager.INSTANCE.sieve.get(stack) != null;
 			}
-
-			@Override
-			public void onSlotChanged() {
-				ItemHandSieve.recalculate(((InventoryItem)inventory).getStack());
-			}
 		});
 
         // Init player slots
@@ -45,7 +40,13 @@ public class ContainerHandSieve extends ContainerItem {
         }
     }
 
-    @Override
+	@Override
+	public void onContainerClosed(EntityPlayer player) {
+		super.onContainerClosed(player);
+		ItemHandSieve.recalculate(((InventoryItem)inventory).getStack(), player);
+	}
+
+	@Override
     public boolean canInteractWith(EntityPlayer player) {
         return true;
     }

@@ -10,6 +10,7 @@ import com.edxmod.electrodynamics.common.recipe.manager.SieveManager;
 import cpw.mods.fml.common.FMLCommonHandler;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -39,7 +40,7 @@ public class ItemHandSieve extends ItemEDX {
 		}
 	}
 
-	public static void recalculate(ItemStack stack) {
+	public static void recalculate(ItemStack stack, EntityPlayer player) {
 		ItemStack stack1 = new InventoryItem(stack, 1).getStackInSlot(0);
 
 		if (stack1 != null) {
@@ -50,6 +51,12 @@ public class ItemHandSieve extends ItemEDX {
 		} else {
 			ItemHandSieve.setCurrentDuration(stack, 0);
 			ItemHandSieve.setMaxDuration(stack, 0);
+		}
+
+		// Sync
+		player.setCurrentItemOrArmor(0, stack);
+		if (player instanceof EntityPlayerMP) {
+			((EntityPlayerMP)player).updateHeldItem();
 		}
 	}
 	
@@ -143,10 +150,10 @@ public class ItemHandSieve extends ItemEDX {
 				setCurrentDuration(stack, current + 1);
 			} else {
 				process(stack, player);
-				recalculate(stack);
+				recalculate(stack, player);
 			}
 		} else {
-			recalculate(stack);
+			recalculate(stack, player);
 		}
 	}
 
