@@ -29,14 +29,7 @@ public class ContainerHandSieve extends ContainerItem {
 
 			@Override
 			public void onSlotChanged() {
-				ItemStack stack1 = getStack();
-
-				if (stack1 != null) {
-					SieveManager.SieveRecipe recipe = RecipeManager.INSTANCE.sieve.get(stack1);
-
-					ItemHandSieve.setCurrentDuration(((InventoryItem) inventory).getStack(), 0);
-					ItemHandSieve.setMaxDuration(((InventoryItem) inventory).getStack(), recipe.getDuration());
-				}
+				ItemHandSieve.recalculate(((InventoryItem)inventory).getStack());
 			}
 		});
 

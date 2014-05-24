@@ -64,7 +64,7 @@ public class ContainerItem extends Container {
 
         inventory.writeToNBT();
 
-        player.setCurrentItemOrArmor(0, inventory.getStack());
+        player.setCurrentItemOrArmor(0, inventory.getStack().copy());
         player.inventory.markDirty();
     }
 

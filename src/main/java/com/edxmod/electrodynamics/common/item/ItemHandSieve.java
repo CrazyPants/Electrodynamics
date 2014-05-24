@@ -7,6 +7,8 @@ import com.edxmod.electrodynamics.common.inventory.InventoryItem;
 import com.edxmod.electrodynamics.common.item.prefab.ItemEDX;
 import com.edxmod.electrodynamics.common.recipe.RecipeManager;
 import com.edxmod.electrodynamics.common.recipe.manager.SieveManager;
+import cpw.mods.fml.common.FMLCommonHandler;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemStack;
@@ -37,6 +39,20 @@ public class ItemHandSieve extends ItemEDX {
 		}
 	}
 
+	public static void recalculate(ItemStack stack) {
+		ItemStack stack1 = new InventoryItem(stack, 1).getStackInSlot(0);
+
+		if (stack1 != null) {
+			SieveManager.SieveRecipe recipe = RecipeManager.INSTANCE.sieve.get(stack1);
+
+			ItemHandSieve.setCurrentDuration(stack, 0);
+			ItemHandSieve.setMaxDuration(stack, recipe.getDuration());
+		} else {
+			ItemHandSieve.setCurrentDuration(stack, 0);
+			ItemHandSieve.setMaxDuration(stack, 0);
+		}
+	}
+	
 	public static int getCurrentDuration(ItemStack stack) {
 		if (!stack.hasTagCompound()) {
 			return 0;
@@ -97,26 +113,20 @@ public class ItemHandSieve extends ItemEDX {
 	}
 
 	@Override
+	public boolean onItemUseFirst(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ) {
+		return false;
+	}
+
+	@Override
 	public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
 		if (!world.isRemote) {
 			if (player.isSneaking()) {
 				player.openGui(Electrodynamics.instance, GuiHandler.GUI_HAND_SIEVE, world, 0, 0, 0);
-			} else {
-				if (getMaxDuration(stack) > 0) {
-					player.setItemInUse(stack, getMaxDuration(stack));
-				} else {
-					InventoryItem inventoryItem = new InventoryItem(stack, 1);
-					ItemStack stack1 = inventoryItem.getStackInSlot(0);
-
-					if (stack1 != null) {
-						SieveManager.SieveRecipe recipe = RecipeManager.INSTANCE.sieve.get(stack1);
-
-						setCurrentDuration(stack, 0);
-						setMaxDuration(stack, recipe.getDuration());
-					}
-				}
+				return stack;
 			}
 		}
+
+		player.setItemInUse(stack, getMaxItemUseDuration(stack));
 
 		return stack;
 	}
@@ -126,25 +136,28 @@ public class ItemHandSieve extends ItemEDX {
 		int current = getCurrentDuration(stack);
 		int max = getMaxDuration(stack);
 
-		if (current < max) {
-			setCurrentDuration(stack, current + 1);
+		player.swingItem();
+
+		if (max != 0) {
+			if (current < max) {
+				setCurrentDuration(stack, current + 1);
+			} else {
+				process(stack, player);
+				recalculate(stack);
+			}
 		} else {
-			process(stack, player);
-			setCurrentDuration(stack, 0);
-			setMaxDuration(stack, 0);
+			recalculate(stack);
 		}
 	}
 
-	public EnumAction getItemUseAction(ItemStack stack) {
-		return EnumAction.bow;
+	@Override
+	public int getMaxItemUseDuration(ItemStack stack) {
+		return getMaxDuration(stack);
 	}
 
 	@Override
-	public double getDurabilityForDisplay(ItemStack stack) {
-		int current = getCurrentDuration(stack);
-		int max = getMaxDuration(stack);
-
-		return max > 0 ? max / current : 1;
+	public EnumAction getItemUseAction(ItemStack stack) {
+		return EnumAction.none;
 	}
 
 	@Override

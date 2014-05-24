@@ -47,7 +47,7 @@ public class SieveManager implements ISieveManager {
 			List<ItemStack> out = new ArrayList<ItemStack>();
 
 			for (RandomStack stack : output) {
-				out.add(stack.get());
+				out.add(stack.stack.copy());
 			}
 
 			return out.toArray(new ItemStack[out.size()]);

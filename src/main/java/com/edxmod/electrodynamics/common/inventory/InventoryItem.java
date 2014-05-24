@@ -30,7 +30,7 @@ public class InventoryItem implements IInventory {
     }
 
     public ItemStack getStack() {
-        return stack.copy();
+        return stack;
     }
 
     public void readFromNBT() {
