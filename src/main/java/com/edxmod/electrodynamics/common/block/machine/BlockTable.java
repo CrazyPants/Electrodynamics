@@ -36,7 +36,26 @@ public class BlockTable extends EDXTileMultiBlock implements IRaytracable {
 
     private static final String[] NAMES = new String[]{"wood", "stone"};
 
-    @Override
+	@Override
+	public void onBlockClicked(World world, int x, int y, int z, EntityPlayer player) {
+		if (!world.isRemote) {
+			TileTable tile = (TileTable) world.getTileEntity(x, y, z);
+
+			if (tile != null) {
+				RayTracer.RaytraceResult result = RayTracer.doRaytrace(world, x, y, z, player);
+
+				if (result.hitID == 1) {
+					if (!player.isSneaking()) {
+						if (player.getHeldItem() != null && player.getHeldItem().getItem() instanceof ItemHammer) {
+							tile.smash(player);
+						}
+					}
+				}
+			}
+		}
+	}
+
+	@Override
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float fx, float fy, float fz) {
         if (!world.isRemote) {
             TileTable tile = (TileTable) world.getTileEntity(x, y, z);

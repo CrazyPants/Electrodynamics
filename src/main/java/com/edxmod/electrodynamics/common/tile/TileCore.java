@@ -20,6 +20,8 @@ public abstract class TileCore extends TileEntity {
 
 	public void onPokeReceived() {}
 
+	public void onBlockBroken() {}
+
 	@Override
 	public void writeToNBT(NBTTagCompound nbt) {
 		super.writeToNBT(nbt);

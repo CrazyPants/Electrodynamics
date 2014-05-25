@@ -69,6 +69,16 @@ public class TileSieveTable extends TileCore implements ISidedInventory {
 	}
 
 	@Override
+	public void onBlockBroken() {
+		Random random = new Random();
+		for (ItemStack stack : processing) {
+			if (stack != null) {
+				InventoryHelper.dropItem(worldObj, xCoord, yCoord, zCoord, ForgeDirection.UNKNOWN, stack, random);
+			}
+		}
+	}
+
+	@Override
 	public void updateEntity() {
 		if (!worldObj.isRemote) {
 			// Collect items
