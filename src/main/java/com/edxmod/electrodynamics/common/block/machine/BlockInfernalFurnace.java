@@ -13,6 +13,7 @@ import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -35,7 +36,20 @@ public class BlockInfernalFurnace extends EDXTileBlock {
 	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float fx, float fy, float fz) {
 		if (!world.isRemote && !player.isSneaking()) {
-			player.openGui(Electrodynamics.instance, GuiHandler.GUI_INFERNAL_FURNACE, world, x, y, z);
+			if (player.getHeldItem() != null && player.getHeldItem().getItem() == Items.flint_and_steel) {
+				TileInfernalFurnace tile = (TileInfernalFurnace) world.getTileEntity(x, y, z);
+
+				if (tile != null && !tile.lit) {
+					tile.lit = true;
+
+					world.playSoundEffect((double)x + 0.5D, (double)y + 0.5D, (double)z + 0.5D, "fire.ignite", 1.0F, new Random().nextFloat() * 0.4F + 0.8F);
+					player.getHeldItem().damageItem(1, player);
+
+					tile.markForUpdate();
+				}
+			} else {
+				player.openGui(Electrodynamics.instance, GuiHandler.GUI_INFERNAL_FURNACE, world, x, y, z);
+			}
 		}
 		return !player.isSneaking();
 	}
@@ -58,6 +72,11 @@ public class BlockInfernalFurnace extends EDXTileBlock {
 	}
 
 	@Override
+	public int getLightValue(IBlockAccess world, int x, int y, int z) {
+		return world.getBlockMetadata(x, y, z) == 1 ? (int)(0.875F * 16) : 0;
+	}
+
+	@Override
 	public TileEntity createNewTileEntity(World world, int meta) {
 		return new TileInfernalFurnace();
 	}
@@ -73,7 +92,7 @@ public class BlockInfernalFurnace extends EDXTileBlock {
 
 		if (tile != null) {
 			if (tile.orientation.ordinal() == side) {
-				return icons[tile.burning() ? 2 : 1];
+				return icons[world.getBlockMetadata(x, y, z) == 1 ? 2 : 1];
 			}
 		}
 

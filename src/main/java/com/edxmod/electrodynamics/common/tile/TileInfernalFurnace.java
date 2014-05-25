@@ -17,12 +17,6 @@ import net.minecraft.tileentity.TileEntityFurnace;
  */
 public class TileInfernalFurnace extends TileCoreMachine implements ISidedInventory {
 
-	public static void sendBurningFlag(TileInfernalFurnace tile, boolean flag) {
-		NBTTagCompound nbt = new NBTTagCompound();
-		nbt.setBoolean("burning", flag);
-		tile.sendClientUpdate(nbt);
-	}
-
 	public static final int[] SLOTS_TOP = new int[] {0};
 	// Two comes before one to give slot 2 priority
 	public static final int[] SLOTS_BOTTOM = new int[] {2, 1};
@@ -30,11 +24,9 @@ public class TileInfernalFurnace extends TileCoreMachine implements ISidedInvent
 
 	public static final int SIZE = 3;
 	public static final int COOK_TIME = 200;
+	public static final int LIT_COOK_TIME = 400;
 
 	private ItemStack[] inv = new ItemStack[SIZE];
-
-	@SideOnly(Side.CLIENT)
-	private boolean burning = false;
 
 	/**
 	 * The number of ticks that the furnace will keep burning
@@ -49,10 +41,13 @@ public class TileInfernalFurnace extends TileCoreMachine implements ISidedInvent
 	 */
 	public int furnaceCookTime;
 
+	public boolean lit = false;
+
 	@Override
 	public void writeCustomNBT(NBTTagCompound nbt) {
 		nbt.setShort("BurnTime", (short) this.furnaceBurnTime);
 		nbt.setShort("CookTime", (short) this.furnaceCookTime);
+		nbt.setBoolean("lit", lit);
 		NBTTagList nbttaglist = new NBTTagList();
 
 		for (int i = 0; i < inv.length; ++i) {
@@ -81,21 +76,23 @@ public class TileInfernalFurnace extends TileCoreMachine implements ISidedInvent
 			}
 		}
 
+		this.lit = nbt.getBoolean("lit");
 		this.furnaceBurnTime = nbt.getShort("BurnTime");
 		this.furnaceCookTime = nbt.getShort("CookTime");
-		this.currentItemBurnTime = TileEntityFurnace.getItemBurnTime(inv[1]);
+		this.currentItemBurnTime = TileEntityFurnace.getItemBurnTime(lit ? new ItemStack(Items.lava_bucket) : inv[1]);
 	}
 
-	@Override
-	public void onClientUpdate(NBTTagCompound nbt) {
-		if (nbt.hasKey("burning")) {
-			burning = nbt.getBoolean("burning");
-		}
+	public int getCookTime() {
+		return lit ? LIT_COOK_TIME : COOK_TIME;
+	}
+
+	public boolean isBurning() {
+		return furnaceBurnTime > 0;
 	}
 
 	@Override
 	public void updateEntity() {
-		boolean flag = furnaceBurnTime > 0;
+		boolean flag = isBurning();
 		boolean flag1 = false;
 
 		if (furnaceBurnTime > 0) {
@@ -103,10 +100,10 @@ public class TileInfernalFurnace extends TileCoreMachine implements ISidedInvent
 		}
 
 		if (!worldObj.isRemote) {
-			if (furnaceBurnTime == 0 && canSmelt()) {
-				currentItemBurnTime = furnaceBurnTime = TileEntityFurnace.getItemBurnTime(inv[1]);
+			if (furnaceBurnTime == 0 && (canSmelt() || lit)) {
+				currentItemBurnTime = furnaceBurnTime = TileEntityFurnace.getItemBurnTime(lit ? new ItemStack(Items.lava_bucket) : inv[1]);
 
-				if (furnaceBurnTime > 0) {
+				if (!lit && furnaceBurnTime > 0) {
 					flag1 = true;
 
 					if (inv[1] != null) {
@@ -122,7 +119,7 @@ public class TileInfernalFurnace extends TileCoreMachine implements ISidedInvent
 			if (furnaceBurnTime > 0 && canSmelt()) {
 				++furnaceCookTime;
 
-				if (furnaceCookTime == 200) {
+				if (furnaceCookTime == getCookTime()) {
 					furnaceCookTime = 0;
 					smeltItem();
 					flag1 = true;
@@ -131,9 +128,9 @@ public class TileInfernalFurnace extends TileCoreMachine implements ISidedInvent
 				furnaceCookTime = 0;
 			}
 
-			if (flag != furnaceBurnTime > 0) {
+			if (flag != isBurning()) {
 				flag1 = true;
-				sendBurningFlag(this, furnaceBurnTime > 0);
+				worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, isBurning() ? 1 : 0, 2);
 			}
 		}
 
@@ -181,19 +178,14 @@ public class TileInfernalFurnace extends TileCoreMachine implements ISidedInvent
 
 	/* CLIENT METHODS */
 	@SideOnly(Side.CLIENT)
-	public boolean burning() {
-		return burning;
-	}
-
-	@SideOnly(Side.CLIENT)
 	public int getScaledCookProgess(int scale) {
-		return furnaceCookTime * scale / COOK_TIME;
+		return furnaceCookTime * scale / getCookTime();
 	}
 
 	@SideOnly(Side.CLIENT)
 	public int getRemainingTimeScaled(int scale) {
 		if (currentItemBurnTime == 0) {
-			currentItemBurnTime = COOK_TIME;
+			currentItemBurnTime = getCookTime();
 		}
 		return furnaceBurnTime * scale / currentItemBurnTime;
 	}
