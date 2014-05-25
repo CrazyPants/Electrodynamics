@@ -2,7 +2,6 @@ package com.edxmod.electrodynamics.common.recipe.manager;
 
 import com.edxmod.electrodynamics.api.recipe.ISieveManager;
 import com.edxmod.electrodynamics.api.util.RandomStack;
-import com.edxmod.electrodynamics.common.util.UtilItem;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 

@@ -3,7 +3,7 @@ package com.edxmod.electrodynamics.common.util;
 /**
  * @author dmillerw
  */
-public class UtilArray {
+public class ArrayHelper {
 
     /**
      * Takes an array size and returns an int array containing all the indexes contained in that array

@@ -1,4 +1,4 @@
-package com.edxmod.electrodynamics.common.block.prefab.item;
+package com.edxmod.electrodynamics.common.block.prefab;
 
 import com.edxmod.electrodynamics.common.block.prefab.EDXBasicBlock;
 import com.edxmod.electrodynamics.common.core.EDXCreativeTab;

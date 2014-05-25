@@ -2,6 +2,7 @@ package com.edxmod.electrodynamics.client.render.tile;
 
 import com.edxmod.electrodynamics.client.render.WrappedModel;
 import com.edxmod.electrodynamics.common.tile.TileSinteringOven;
+import com.edxmod.electrodynamics.common.util.RenderHelper;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
@@ -26,6 +27,10 @@ public class RenderTileSinteringOven extends TileEntitySpecialRenderer {
         OpenGlHelper.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA, 1, 0);
 
         GL11.glTranslated(x, y, z);
+
+		GL11.glTranslated(0.5, 0, 0.5);
+		GL11.glRotated(RenderHelper.getRotationAngle(tileSinteringOven.orientation), 0, 1, 0);
+		GL11.glTranslated(-0.5, 0, -0.5);
 
         sinteringOven.bindTexture();
         sinteringOven.renderAllExcept("Door", "Glass");

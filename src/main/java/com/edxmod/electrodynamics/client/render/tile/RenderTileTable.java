@@ -2,10 +2,10 @@ package com.edxmod.electrodynamics.client.render.tile;
 
 import com.edxmod.electrodynamics.client.render.WrappedModel;
 import com.edxmod.electrodynamics.common.block.prefab.EDXTileMultiBlock;
-import com.edxmod.electrodynamics.common.block.prefab.item.EDXTileBlock;
+import com.edxmod.electrodynamics.common.block.prefab.EDXTileBlock;
 import com.edxmod.electrodynamics.common.tile.TileTable;
-import com.edxmod.electrodynamics.common.util.UtilItem;
-import com.edxmod.electrodynamics.common.util.UtilRender;
+import com.edxmod.electrodynamics.common.util.ItemHelper;
+import com.edxmod.electrodynamics.common.util.RenderHelper;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
@@ -57,7 +57,7 @@ public class RenderTileTable extends TileEntitySpecialRenderer {
         if (tile.stack != null) {
             float renderMax = tile.getBlockMetadata() == 0 ? WOOD_RENDER_MAX : STONE_RENDER_MAX;
             if (tile.stack.getItem() instanceof ItemBlock && RenderBlocks.renderItemIn3d(Block.getBlockFromItem(tile.stack.getItem()).getRenderType())) {
-                Block block = UtilItem.getBlock(tile.stack);
+                Block block = ItemHelper.getBlock(tile.stack);
                 boolean fixOffset = false;
 
                 // EDX specific rendering, since we offset our models
@@ -79,7 +79,7 @@ public class RenderTileTable extends TileEntitySpecialRenderer {
                 GL11.glRotated(90, 1, 0, 0);
             }
 
-            UtilRender.renderItemStack(tile.stack, true);
+            RenderHelper.renderItemStack(tile.stack, true);
         }
 
         GL11.glPopMatrix();

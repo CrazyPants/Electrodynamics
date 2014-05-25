@@ -5,7 +5,7 @@ import com.edxmod.electrodynamics.common.item.ItemHammer;
 import com.edxmod.electrodynamics.common.network.PacketFX;
 import com.edxmod.electrodynamics.common.recipe.RecipeManager;
 import com.edxmod.electrodynamics.common.recipe.manager.TableManager;
-import com.edxmod.electrodynamics.common.util.UtilItem;
+import com.edxmod.electrodynamics.common.util.ItemHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemBlock;
@@ -76,7 +76,7 @@ public class TileTable extends TileCore {
         Random random = new Random();
 
         if (meta == 0) {
-            if (stack != null && UtilItem.isBlock(stack, Blocks.stone_slab) && stack.getItemDamage() == 0) {
+            if (stack != null && ItemHelper.isBlock(stack, Blocks.stone_slab) && stack.getItemDamage() == 0) {
                 PacketFX.breakFX(worldObj, xCoord, yCoord, zCoord, new ItemStack(Blocks.stone_slab));
                 getWorldObj().playSoundEffect(xCoord, yCoord, zCoord, "edx:oreCrumble", 1.0F, (random.nextFloat() - random.nextFloat()) * 0.2F + 1.0F);
 

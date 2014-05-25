@@ -2,7 +2,7 @@ package com.edxmod.electrodynamics.common.network;
 
 import com.edxmod.electrodynamics.Electrodynamics;
 import com.edxmod.electrodynamics.common.lib.client.EnumParticle;
-import com.edxmod.electrodynamics.common.util.UtilItem;
+import com.edxmod.electrodynamics.common.util.ItemHelper;
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.relauncher.Side;
@@ -53,7 +53,7 @@ public class PacketFX extends AbstractPacket {
     }
 
     public PacketFX(double x, double y, double z, ItemStack stack) {
-        this(x, y, z, FX_BLOCK_BREAK, new int[]{UtilItem.getID(stack), stack.getItemDamage()});
+        this(x, y, z, FX_BLOCK_BREAK, new int[]{ItemHelper.getID(stack), stack.getItemDamage()});
     }
 
     @Override
@@ -95,9 +95,9 @@ public class PacketFX extends AbstractPacket {
             // Block destroy FX
             case 1: {
                 if (extraData[0] > 0 && extraData[0] < 4096) {
-                    FMLClientHandler.instance().getClient().effectRenderer.addBlockDestroyEffects((int) Math.floor(x), (int) Math.floor(y), (int) Math.floor(z), UtilItem.getBlock(extraData[0]), extraData[1]);
+                    FMLClientHandler.instance().getClient().effectRenderer.addBlockDestroyEffects((int) Math.floor(x), (int) Math.floor(y), (int) Math.floor(z), ItemHelper.getBlock(extraData[0]), extraData[1]);
                 } else {
-                    EnumParticle.ITEM_BREAK(new ItemStack(UtilItem.getItem(extraData[0]), extraData[1]), FMLClientHandler.instance().getWorldClient(), x, y, z);
+                    EnumParticle.ITEM_BREAK(new ItemStack(ItemHelper.getItem(extraData[0]), extraData[1]), FMLClientHandler.instance().getWorldClient(), x, y, z);
                 }
             }
         }

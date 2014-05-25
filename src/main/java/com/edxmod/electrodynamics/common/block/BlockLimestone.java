@@ -3,7 +3,7 @@ package com.edxmod.electrodynamics.common.block;
 import com.edxmod.electrodynamics.common.block.prefab.EDXMultiBlock;
 import com.edxmod.electrodynamics.common.lib.EDXProps;
 import com.edxmod.electrodynamics.common.core.EDXCreativeTab;
-import com.edxmod.electrodynamics.common.util.UtilArray;
+import com.edxmod.electrodynamics.common.util.ArrayHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -48,7 +48,7 @@ public class BlockLimestone extends EDXMultiBlock {
 
     @Override
     public int[] getSubtypes() {
-        return UtilArray.getArrayIndexes(limestoneTypes.length);
+        return ArrayHelper.getArrayIndexes(limestoneTypes.length);
     }
 
     @Override

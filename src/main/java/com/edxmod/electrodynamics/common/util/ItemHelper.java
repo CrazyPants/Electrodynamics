@@ -9,7 +9,7 @@ import net.minecraft.item.ItemStack;
 /**
  * @author dmillerw
  */
-public class UtilItem {
+public class ItemHelper {
 
     /**
      * Returns the internal ID used for Item/Block reference
@@ -60,11 +60,11 @@ public class UtilItem {
         }
 
         if (object instanceof Block) {
-            return new ItemStack(Block.getBlockById(UtilItem.getID((Block) object)), 1, -1);
+            return new ItemStack(Block.getBlockById(ItemHelper.getID((Block) object)), 1, -1);
         }
 
         if (object instanceof Item) {
-            return new ItemStack(Item.getItemById(UtilItem.getID((Item) object)), 1, -1);
+            return new ItemStack(Item.getItemById(ItemHelper.getID((Item) object)), 1, -1);
         }
         return null;
     }

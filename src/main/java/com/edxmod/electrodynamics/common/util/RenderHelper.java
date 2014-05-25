@@ -10,12 +10,13 @@ import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
+import net.minecraftforge.common.util.ForgeDirection;
 import org.lwjgl.opengl.GL11;
 
 /**
  * @author dmillerw
  */
-public class UtilRender {
+public class RenderHelper {
 
     public static boolean graphicsCache;
 
@@ -60,6 +61,17 @@ public class UtilRender {
         float b = (float) (color & 255) / 255.0F;
         GL11.glColor4f(r, g, b, 1.0F);
     }
+
+	public static double getRotationAngle(ForgeDirection direction) {
+		switch (direction) {
+			case NORTH: return 180D;
+			case SOUTH: return 0D;
+			case EAST: return 90D;
+			case WEST: return 270D;
+
+		}
+		return 0D;
+	}
 
     public static void renderAllSides(RenderBlocks renderer, Block block) {
         renderAllSides(renderer, block, renderer.overrideBlockTexture);

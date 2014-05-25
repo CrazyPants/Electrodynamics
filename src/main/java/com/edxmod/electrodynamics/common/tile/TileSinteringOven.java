@@ -7,7 +7,7 @@ import net.minecraft.nbt.NBTTagCompound;
 /**
  * @author Royalixor
  */
-public class TileSinteringOven extends TileCore {
+public class TileSinteringOven extends TileCoreMachine {
 
 	@SideOnly(Side.CLIENT)
 	public float currentAngle = 0.0F;

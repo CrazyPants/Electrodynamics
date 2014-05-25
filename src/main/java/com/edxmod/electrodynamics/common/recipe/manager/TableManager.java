@@ -1,7 +1,7 @@
 package com.edxmod.electrodynamics.common.recipe.manager;
 
 import com.edxmod.electrodynamics.api.recipe.ITableManager;
-import com.edxmod.electrodynamics.common.util.UtilItem;
+import com.edxmod.electrodynamics.common.util.ItemHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 
@@ -59,7 +59,7 @@ public class TableManager implements ITableManager {
 			return;
 		}
 
-		register(new TableRecipe(UtilItem.convertToItemStack(input), UtilItem.convertToItemStack(output), durability, true));
+		register(new TableRecipe(ItemHelper.convertToItemStack(input), ItemHelper.convertToItemStack(output), durability, true));
 	}
 
 	public void register(TableRecipe recipe) {
