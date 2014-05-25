@@ -1,8 +1,6 @@
 package com.edxmod.electrodynamics.common.block;
 
-import com.edxmod.electrodynamics.common.block.example.BlockRaytraceExample;
 import com.edxmod.electrodynamics.common.block.machine.*;
-import com.edxmod.electrodynamics.common.block.prefab.EDXMultiBlock;
 import com.edxmod.electrodynamics.common.block.prefab.item.EDXItemBlock;
 import com.edxmod.electrodynamics.common.block.prefab.item.EDXItemMultiBlock;
 import com.edxmod.electrodynamics.common.block.prefab.item.EDXMachineBlock;
@@ -26,9 +24,7 @@ public class EDXBlocks {
 	public static Block metalPress;
 	public static Block barrel;
 	public static Block crucible;
-
 	public static Block infernalFurnace;
-	public static Block infernalFurnaceActive;
 
 	public static Block component;
 
@@ -44,8 +40,7 @@ public class EDXBlocks {
 		metalPress = new BlockMetalPress().setBlockName("metal_press");
 		barrel = new BlockBarrel().setBlockName("barrel");
 		crucible = new BlockCrucible().setBlockName("crucible");
-
-		infernalFurnace = new BlockNetherFurnace().setBlockName("infernal_furnace");
+		infernalFurnace = new BlockInfernalFurnace().setBlockName("infernal_furnace");
 
 		component = new BlockComponent().setBlockName("component_block");
 
@@ -60,8 +55,7 @@ public class EDXBlocks {
 		registerBlock(metalPress, EDXMachineBlock.class);
 		registerBlock(barrel, EDXItemBlock.class);
 		registerBlock(crucible, EDXItemBlock.class);
-
-		registerBlock(infernalFurnace);
+		registerBlock(infernalFurnace, EDXMachineBlock.class);
 
 		registerBlock(component, EDXItemMultiBlock.class);
 
@@ -76,6 +70,7 @@ public class EDXBlocks {
 		GameRegistry.registerTileEntity(TileMetalPress.class, "edx:metal_press");
 		GameRegistry.registerTileEntity(TileBarrel.class, "edx:barrel");
 		GameRegistry.registerTileEntity(TileCrucible.class, "edx:crucible");
+		GameRegistry.registerTileEntity(TileInfernalFurnace.class, "edx:infernal_furnace");
 	}
 
     public static void registerBlock(Block block) {
