@@ -1,18 +1,38 @@
 package com.edxmod.electrodynamics.common.block;
 
 import com.edxmod.electrodynamics.common.block.prefab.EDXMultiBlock;
+import com.edxmod.electrodynamics.common.item.resource.ItemResource;
 import com.edxmod.electrodynamics.common.lib.EDXProps;
 import com.edxmod.electrodynamics.common.core.EDXCreativeTab;
 import com.edxmod.electrodynamics.common.util.ArrayHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.init.Blocks;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 
 /**
  * @author Royalixor
  */
 public class BlockStorage extends EDXMultiBlock {
+
+	public static ItemStack getStorageFromResource(ItemStack resource) {
+		String name = ItemResource.NAMES[resource.getItemDamage()];
+
+		if (name.equalsIgnoreCase("gold")) {
+			return new ItemStack(Blocks.gold_block);
+		} else if (name.equalsIgnoreCase("iron")) {
+			return new ItemStack(Blocks.iron_block);
+		}
+
+		for (int i=0; i<NAMES.length; i++) {
+			if (name.equalsIgnoreCase(NAMES[i])) {
+				return new ItemStack(EDXBlocks.storage, 1, i);
+			}
+		}
+		return null;
+	}
 
     public static final String[] NAMES = new String[]{"copper", "lead", "nickel", "silver", "steel", "tin"};
     private IIcon[] textures;
