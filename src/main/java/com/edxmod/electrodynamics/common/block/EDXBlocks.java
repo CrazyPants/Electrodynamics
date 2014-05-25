@@ -19,6 +19,7 @@ public class EDXBlocks {
 	public static Block tableSieve;
 	public static Block sinteringOven;
 	public static Block hammerMill;
+	public static Block waterMill;
 	public static Block kiln;
 	public static Block metalPress;
 	public static Block barrel;
@@ -29,6 +30,7 @@ public class EDXBlocks {
 		tableSieve = new BlockSieveTable().setBlockName("table_sieve");
 		sinteringOven = new BlockSinteringOven().setBlockName("sintering_oven");
 		hammerMill = new BlockHammerMill().setBlockName("hammer_mill");
+		hammerMill = new BlockWaterMill().setBlockName("water_mill");
 		kiln = new BlockKiln().setBlockName("kiln");
 		metalPress = new BlockMetalPress().setBlockName("metal_press");
 		barrel = new BlockBarrel().setBlockName("barrel");
@@ -38,6 +40,7 @@ public class EDXBlocks {
         registerBlock(tableSieve, EDXItemBlock.class);
 		registerBlock(sinteringOven, EDXMachineBlock.class);
 		registerBlock(hammerMill, EDXMachineBlock.class);
+		registerBlock(waterMill, EDXItemBlock.class);
 		registerBlock(kiln, EDXMachineBlock.class);
 		registerBlock(metalPress, EDXMachineBlock.class);
 		registerBlock(barrel, EDXItemBlock.class);
@@ -47,6 +50,7 @@ public class EDXBlocks {
 		GameRegistry.registerTileEntity(TileSieveTable.class, "edx:table_sieve");
     	GameRegistry.registerTileEntity(TileSinteringOven.class, "edx:sintering_oven");
 		GameRegistry.registerTileEntity(TileHammerMill.class, "edx:hammer_mill");
+		GameRegistry.registerTileEntity(TileWaterMill.class, "edx:water_mill");
 		GameRegistry.registerTileEntity(TileKiln.class, "edx:kiln");
 		GameRegistry.registerTileEntity(TileMetalPress.class, "edx:metal_press");
 		GameRegistry.registerTileEntity(TileBarrel.class, "edx:barrel");
