@@ -1,5 +1,6 @@
 package com.edxmod.electrodynamics.common.util;
 
+import com.edxmod.electrodynamics.common.tile.TileCoreMachine;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.EntityRenderer;
