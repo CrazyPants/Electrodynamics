@@ -4,11 +4,9 @@ import com.edxmod.electrodynamics.Electrodynamics;
 import com.edxmod.electrodynamics.common.core.EDXCreativeTab;
 import com.edxmod.electrodynamics.common.core.handler.GuiHandler;
 import com.edxmod.electrodynamics.common.inventory.InventoryItem;
-import com.edxmod.electrodynamics.common.item.prefab.ItemEDX;
+import com.edxmod.electrodynamics.common.item.prefab.EDXItem;
 import com.edxmod.electrodynamics.common.recipe.RecipeManager;
 import com.edxmod.electrodynamics.common.recipe.manager.SieveManager;
-import cpw.mods.fml.common.FMLCommonHandler;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.EnumAction;
@@ -19,7 +17,7 @@ import net.minecraft.world.World;
 /**
  * @author dmillerw
  */
-public class ItemHandSieve extends ItemEDX {
+public class ItemHandSieve extends EDXItem {
 
 	public static void process(ItemStack stack, EntityPlayer player) {
 		InventoryItem inventoryItem = new InventoryItem(stack, 1);

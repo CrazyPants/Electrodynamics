@@ -1,18 +1,15 @@
 package com.edxmod.electrodynamics.common.item;
 
-import com.edxmod.electrodynamics.common.item.prefab.ItemEDX;
-import com.edxmod.electrodynamics.common.lib.EDXProps;
+import com.edxmod.electrodynamics.common.item.prefab.EDXItem;
 import com.edxmod.electrodynamics.common.core.EDXCreativeTab;
 import net.minecraft.block.Block;
-import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.IIcon;
 
 /**
  * @author dmillerw
  */
-public class ItemNet extends ItemEDX {
+public class ItemNet extends EDXItem {
 
 	public ItemNet() {
 		super(EDXCreativeTab.TOOLS);

@@ -3,12 +3,9 @@ package com.edxmod.electrodynamics.common.item;
 import com.edxmod.electrodynamics.Electrodynamics;
 import com.edxmod.electrodynamics.common.core.handler.GuiHandler;
 import com.edxmod.electrodynamics.common.inventory.InventoryItem;
-import com.edxmod.electrodynamics.common.lib.EDXProps;
+import com.edxmod.electrodynamics.common.item.prefab.EDXMultiItem;
 import com.edxmod.electrodynamics.common.core.EDXCreativeTab;
-import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
@@ -18,15 +15,15 @@ import java.util.List;
 /**
  * @author Royalixor
  */
-public class ItemTool extends Item {
+public class ItemTool extends EDXMultiItem {
 
-	private static String[] tools = {"spudPeeler", "screwdriver", "sinteringTray", "solderIron", "treeTap", "wireCutters", "wirelessScanner", "handSieve", "mixingJar"};
+	private static String[] NAMES = {"spudPeeler", "screwdriver", "sinteringTray", "solderIron", "treeTap", "wireCutters", "wirelessScanner", "handSieve", "mixingJar"};
 	private IIcon[] textures;
 
 	public ItemTool() {
-		setHasSubtypes(true);
+		super(EDXCreativeTab.TOOLS);
+
 		setMaxStackSize(1);
-		setCreativeTab(EDXCreativeTab.TOOLS.get());
 	}
 
 	@Override
@@ -65,37 +62,14 @@ public class ItemTool extends Item {
 		return stack;
 	}
 
-	@Override
-	public String getUnlocalizedName(ItemStack itemStack) {
-		int meta = itemStack.getItemDamage();
 
-		if (meta < 0 || meta >= tools.length) {
-			meta = 0;
-		}
-		return super.getUnlocalizedName() + "." + tools[meta];
+	@Override
+	public String[] getNames() {
+		return NAMES;
 	}
 
 	@Override
-	public void registerIcons(IIconRegister iconRegister) {
-		textures = new IIcon[tools.length];
-
-		for (int i = 0; i < tools.length; ++i) {
-			textures[i] = iconRegister.registerIcon(EDXProps.RESOURCE_PREFIX + "tools/" + tools[i]);
-		}
-	}
-
-	@Override
-	public IIcon getIconFromDamage(int meta) {
-		if (meta < 0 || meta >= textures.length) {
-			meta = 0;
-		}
-		return textures[meta];
-	}
-
-	@Override
-	public void getSubItems(Item item, CreativeTabs creativeTabs, List list) {
-		for (int meta = 0; meta < tools.length; ++meta) {
-			list.add(new ItemStack(item, 1, meta));
-		}
+	public String getIconPrefix() {
+		return "tool";
 	}
 }

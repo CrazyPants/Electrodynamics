@@ -16,8 +16,8 @@ public class EDXItems {
 	public static ItemHammer hammerDiamond;
 
 	public static Item net;
-
 	public static Item handSieve;
+	public static Item component;
 
     public static void initialize() {
 		// HAMMERS
@@ -37,6 +37,9 @@ public class EDXItems {
 
 		handSieve = new ItemHandSieve().setUnlocalizedName("hand_sieve");
 		registerItem(handSieve);
+
+		component = new ItemComponent().setUnlocalizedName("component");
+		registerItem(component);
     }
 
     public static void registerItem(Item item) {

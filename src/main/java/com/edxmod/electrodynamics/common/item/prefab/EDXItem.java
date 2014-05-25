@@ -10,11 +10,11 @@ import scala.annotation.varargs;
 /**
  * @author dmillerw
  */
-public class ItemEDX extends Item {
+public class EDXItem extends Item {
 
 	private IIcon icon;
 
-	public ItemEDX(EDXCreativeTab tab) {
+	public EDXItem(EDXCreativeTab tab) {
 		super();
 
 		setCreativeTab(tab.get());

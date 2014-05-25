@@ -1,15 +1,12 @@
 package com.edxmod.electrodynamics.common.item;
 
-import com.edxmod.electrodynamics.common.item.prefab.ItemEDX;
-import com.edxmod.electrodynamics.common.lib.EDXProps;
+import com.edxmod.electrodynamics.common.item.prefab.EDXItem;
 import com.edxmod.electrodynamics.common.core.EDXCreativeTab;
-import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.util.IIcon;
 
 /**
  * @author Royalixor
  */
-public class ItemHammer extends ItemEDX {
+public class ItemHammer extends EDXItem {
 
 	public static final float[] STRENGTH = new float[] {1F, 2F, 2.5F, 5F, 10F};
 
