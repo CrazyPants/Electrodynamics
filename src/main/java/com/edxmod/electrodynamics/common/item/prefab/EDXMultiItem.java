@@ -15,12 +15,13 @@ import java.util.List;
  */
 public abstract class EDXMultiItem extends Item {
 
-	private IIcon[] icons;
+	protected IIcon[] icons;
 
 	public EDXMultiItem(EDXCreativeTab tab) {
 		super();
 
 		setCreativeTab(tab.get());
+		setHasSubtypes(true);
 	}
 
 	@Override

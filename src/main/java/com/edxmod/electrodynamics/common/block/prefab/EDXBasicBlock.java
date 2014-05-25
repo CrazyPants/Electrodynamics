@@ -1,5 +1,6 @@
 package com.edxmod.electrodynamics.common.block.prefab;
 
+import com.edxmod.electrodynamics.common.core.EDXCreativeTab;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
@@ -20,6 +21,8 @@ public abstract class EDXBasicBlock extends Block {
 
     public EDXBasicBlock(Material material) {
         super(material);
+
+		setCreativeTab(EDXCreativeTab.BLOCKS.get());
     }
 
     public EDXBasicBlock(Material material, float hardness, float resistance) {

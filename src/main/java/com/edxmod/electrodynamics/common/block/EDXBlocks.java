@@ -2,6 +2,7 @@ package com.edxmod.electrodynamics.common.block;
 
 import com.edxmod.electrodynamics.common.block.example.BlockRaytraceExample;
 import com.edxmod.electrodynamics.common.block.machine.*;
+import com.edxmod.electrodynamics.common.block.prefab.EDXMultiBlock;
 import com.edxmod.electrodynamics.common.block.prefab.item.EDXItemBlock;
 import com.edxmod.electrodynamics.common.block.prefab.item.EDXItemMultiBlock;
 import com.edxmod.electrodynamics.common.block.prefab.item.EDXMachineBlock;
@@ -15,6 +16,7 @@ import net.minecraft.item.ItemBlock;
  */
 public class EDXBlocks {
 
+	// MACHINES
 	public static Block table;
 	public static Block tableSieve;
 	public static Block sinteringOven;
@@ -25,16 +27,20 @@ public class EDXBlocks {
 	public static Block barrel;
 	public static Block crucible;
 
+	public static Block component;
+
     public static void initialize() {
 		table = new BlockTable().setBlockName("table");
 		tableSieve = new BlockSieveTable().setBlockName("table_sieve");
 		sinteringOven = new BlockSinteringOven().setBlockName("sintering_oven");
 		hammerMill = new BlockHammerMill().setBlockName("hammer_mill");
-		hammerMill = new BlockWaterMill().setBlockName("water_mill");
+		waterMill = new BlockWaterMill().setBlockName("water_mill");
 		kiln = new BlockKiln().setBlockName("kiln");
 		metalPress = new BlockMetalPress().setBlockName("metal_press");
 		barrel = new BlockBarrel().setBlockName("barrel");
 		crucible = new BlockCrucible().setBlockName("crucible");
+
+		component = new BlockComponent().setBlockName("component_block");
 
         registerBlock(table, EDXItemMultiBlock.class);
         registerBlock(tableSieve, EDXItemBlock.class);
@@ -45,6 +51,8 @@ public class EDXBlocks {
 		registerBlock(metalPress, EDXMachineBlock.class);
 		registerBlock(barrel, EDXItemBlock.class);
 		registerBlock(crucible, EDXItemBlock.class);
+
+		registerBlock(component, EDXItemMultiBlock.class);
 
 		GameRegistry.registerTileEntity(TileTable.class, "edx:table");
 		GameRegistry.registerTileEntity(TileSieveTable.class, "edx:table_sieve");
