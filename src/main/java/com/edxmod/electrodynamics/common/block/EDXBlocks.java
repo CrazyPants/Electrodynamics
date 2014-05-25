@@ -14,19 +14,18 @@ import net.minecraft.item.ItemBlock;
  */
 public class EDXBlocks {
 
-    public static void init() {
-        registerBlocks();
-        registerTileEntities();
-    }
+	public static Block table;
+	public static Block tableSieve;
 
-    private static void registerBlocks() {
-        registerBlock(new BlockTable().setBlockName("table"), EDXItemMultiBlock.class);
-        registerBlock(new BlockSieveTable().setBlockName("sieveTable"), EDXItemBlock.class);
-    }
+    public static void initialize() {
+		table = new BlockTable().setBlockName("table");
+		tableSieve = new BlockSieveTable().setBlockName("table_sieve");
 
-    private static void registerTileEntities() {
-        GameRegistry.registerTileEntity(TileTable.class, "table");
-        GameRegistry.registerTileEntity(TileSieveTable.class, "sieveTable");
+        registerBlock(table, EDXItemMultiBlock.class);
+        registerBlock(tableSieve, EDXItemBlock.class);
+
+		GameRegistry.registerTileEntity(TileTable.class, "table");
+		GameRegistry.registerTileEntity(TileSieveTable.class, "table_sieve");
     }
 
     public static void registerBlock(Block block) {

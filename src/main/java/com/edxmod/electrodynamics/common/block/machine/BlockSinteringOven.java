@@ -25,7 +25,7 @@ public class BlockSinteringOven extends EDXTileBlock {
 
                 if (tile != null) {
                     tile.open = !tile.open;
-                    tile.poke();
+                    tile.sendPoke();
                 }
             }
         }

@@ -13,7 +13,7 @@ public class EDXRecipes {
 
     private static List frontRecipes = new ArrayList();
 
-    public static void init() {
+    public static void initialize() {
         addCraftingRecipes();
         addOreRegistration();
         addSmeltingRecipes();

@@ -19,18 +19,13 @@ public class EDXItems {
 
 	public static Item handSieve;
 
-    public static void init() {
-        registerItems();
-    }
-
-    private static void registerItems() {
+    public static void initialize() {
 		// HAMMERS
 		hammerWood = new ItemHammer(64, "wood", "plankWood");
 		hammerStone = new ItemHammer(128, "stone", "cobblestone");
 		hammerIron = new ItemHammer(160, "iron", "ingotIron");
 		hammerSteel = new ItemHammer(320, "steel", "ingotSteel");
 		hammerDiamond = new ItemHammer(640, "diamond", Items.diamond);
-
 		registerItem(hammerWood);
 		registerItem(hammerStone);
 		registerItem(hammerIron);
@@ -38,11 +33,9 @@ public class EDXItems {
 		registerItem(hammerDiamond);
 
 		net = new ItemNet().setUnlocalizedName("net");
-
 		registerItem(net);
 
 		handSieve = new ItemHandSieve().setUnlocalizedName("hand_sieve");
-
 		registerItem(handSieve);
     }
 

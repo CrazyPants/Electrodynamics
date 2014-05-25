@@ -18,6 +18,8 @@ public abstract class TileCore extends TileEntity {
 
 	public void onClientUpdate(NBTTagCompound nbt) {}
 
+	public void onPokeReceived() {}
+
 	@Override
 	public void writeToNBT(NBTTagCompound nbt) {
 		super.writeToNBT(nbt);
@@ -63,11 +65,16 @@ public abstract class TileCore extends TileEntity {
 		VanillaPacketHelper.sendToAllWatchingTile(this, new S35PacketUpdateTileEntity(xCoord, yCoord, zCoord, 1, tag));
 	}
 
+	public void sendPoke() {
+		VanillaPacketHelper.sendToAllWatchingTile(this, new S35PacketUpdateTileEntity(xCoord, yCoord, zCoord, 2, new NBTTagCompound()));
+	}
+
 	@Override
 	public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity pkt) {
 		switch(pkt.func_148853_f()) {
 			case 0: readFromNBT(pkt.func_148857_g()); break;
 			case 1: onClientUpdate(pkt.func_148857_g()); break;
+			case 2: onPokeReceived(); break;
 			default: break;
 		}
 		worldObj.markBlockRangeForRenderUpdate(xCoord, yCoord, zCoord, xCoord, yCoord, zCoord);

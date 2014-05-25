@@ -1,6 +1,6 @@
 package com.edxmod.electrodynamics.common.tile;
 
-import com.edxmod.electrodynamics.api.EDXBlockHelper;
+import com.edxmod.electrodynamics.common.block.EDXBlocks;
 import com.edxmod.electrodynamics.common.item.ItemHammer;
 import com.edxmod.electrodynamics.common.network.PacketFX;
 import com.edxmod.electrodynamics.common.recipe.RecipeManager;
@@ -81,7 +81,7 @@ public class TileTable extends TileCore {
                 getWorldObj().playSoundEffect(xCoord, yCoord, zCoord, "edx:oreCrumble", 1.0F, (random.nextFloat() - random.nextFloat()) * 0.2F + 1.0F);
 
                 stack = null;
-                worldObj.setBlock(xCoord, yCoord, zCoord, EDXBlockHelper.get("table"), 1, 3);
+                worldObj.setBlock(xCoord, yCoord, zCoord, EDXBlocks.table, 1, 3);
             }
         } else if (meta == 1) {
             if (stack != null) {

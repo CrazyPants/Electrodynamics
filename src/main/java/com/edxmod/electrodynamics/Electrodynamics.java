@@ -37,9 +37,9 @@ public class Electrodynamics {
     public void preInit(FMLPreInitializationEvent event) {
         configPath = event.getModConfigurationDirectory() + "/EDX/";
 
-        EDXBlocks.init();
-        EDXItems.init();
-        EDXRecipes.init();
+        EDXBlocks.initialize();
+        EDXItems.initialize();
+        EDXRecipes.initialize();
 
 		File recipes = new File(configPath, "recipes/");
 		if (!recipes.exists()) {
