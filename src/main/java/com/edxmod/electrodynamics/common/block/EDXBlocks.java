@@ -21,6 +21,8 @@ public class EDXBlocks {
 	public static Block hammerMill;
 	public static Block kiln;
 	public static Block metalPress;
+	public static Block barrel;
+	public static Block crucible;
 
     public static void initialize() {
 		table = new BlockTable().setBlockName("table");
@@ -29,6 +31,8 @@ public class EDXBlocks {
 		hammerMill = new BlockHammerMill().setBlockName("hammer_mill");
 		kiln = new BlockKiln().setBlockName("kiln");
 		metalPress = new BlockMetalPress().setBlockName("metal_press");
+		barrel = new BlockBarrel().setBlockName("barrel");
+		crucible = new BlockCrucible().setBlockName("crucible");
 
         registerBlock(table, EDXItemMultiBlock.class);
         registerBlock(tableSieve, EDXItemBlock.class);
@@ -36,6 +40,8 @@ public class EDXBlocks {
 		registerBlock(hammerMill, EDXMachineBlock.class);
 		registerBlock(kiln, EDXMachineBlock.class);
 		registerBlock(metalPress, EDXMachineBlock.class);
+		registerBlock(barrel, EDXItemBlock.class);
+		registerBlock(crucible, EDXItemBlock.class);
 
 		GameRegistry.registerTileEntity(TileTable.class, "edx:table");
 		GameRegistry.registerTileEntity(TileSieveTable.class, "edx:table_sieve");
@@ -43,6 +49,8 @@ public class EDXBlocks {
 		GameRegistry.registerTileEntity(TileHammerMill.class, "edx:hammer_mill");
 		GameRegistry.registerTileEntity(TileKiln.class, "edx:kiln");
 		GameRegistry.registerTileEntity(TileMetalPress.class, "edx:metal_press");
+		GameRegistry.registerTileEntity(TileBarrel.class, "edx:barrel");
+		GameRegistry.registerTileEntity(TileCrucible.class, "edx:crucible");
 	}
 
     public static void registerBlock(Block block) {
