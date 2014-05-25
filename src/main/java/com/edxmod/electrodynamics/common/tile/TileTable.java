@@ -5,12 +5,14 @@ import com.edxmod.electrodynamics.common.item.ItemHammer;
 import com.edxmod.electrodynamics.common.network.PacketFX;
 import com.edxmod.electrodynamics.common.recipe.RecipeManager;
 import com.edxmod.electrodynamics.common.recipe.manager.TableManager;
+import com.edxmod.electrodynamics.common.util.InventoryHelper;
 import com.edxmod.electrodynamics.common.util.ItemHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraftforge.common.util.ForgeDirection;
 
 import java.util.Random;
 
@@ -49,7 +51,14 @@ public class TileTable extends TileCore {
         nbt.setByte("rotation", stackRotation);
     }
 
-    public void rotate() {
+	@Override
+	public void onBlockBroken() {
+		if (stack != null) {
+			InventoryHelper.dropItem(worldObj, xCoord, yCoord, zCoord, ForgeDirection.UNKNOWN, stack, new Random());
+		}
+	}
+
+	public void rotate() {
         stackRotation++;
         if (stackRotation > 3) {
             stackRotation = 0;
