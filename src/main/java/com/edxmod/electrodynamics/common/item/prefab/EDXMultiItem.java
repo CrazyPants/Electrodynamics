@@ -22,6 +22,7 @@ public abstract class EDXMultiItem extends Item {
 
 		setCreativeTab(tab.get());
 		setHasSubtypes(true);
+		setMaxDamage(0);
 	}
 
 	@Override

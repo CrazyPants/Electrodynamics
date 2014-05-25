@@ -130,7 +130,7 @@ public class TileInfernalFurnace extends TileCoreMachine implements ISidedInvent
 
 			if (flag != isBurning()) {
 				flag1 = true;
-				worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, isBurning() ? 1 : 0, 2);
+				worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, isBurning() ? 1 : 0, 3);
 			}
 		}
 

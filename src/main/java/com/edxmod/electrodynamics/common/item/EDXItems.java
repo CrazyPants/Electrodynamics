@@ -31,6 +31,9 @@ public class EDXItems {
 	public static Item resourceNugget;
 	public static Item resourcePebble;
 
+	// OTHER
+	public static Item seeds;
+
     public static void initialize() {
 		hammerWood = new ItemHammer(64, "wood", "plankWood");
 		hammerStone = new ItemHammer(128, "stone", "cobblestone");
@@ -65,6 +68,10 @@ public class EDXItems {
 		registerItem(resourceIngot);
 		registerItem(resourceNugget);
 		registerItem(resourcePebble);
+
+		seeds = new ItemSeeds().setUnlocalizedName("seeds");
+
+		registerItem(seeds);
     }
 
     public static void registerItem(Item item) {
