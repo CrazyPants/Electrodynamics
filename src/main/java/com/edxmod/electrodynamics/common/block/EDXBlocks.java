@@ -29,6 +29,8 @@ public class EDXBlocks {
 
 	public static Block component;
 
+	public static Block storage;
+
     public static void initialize() {
 		table = new BlockTable().setBlockName("table");
 		tableSieve = new BlockSieveTable().setBlockName("table_sieve");
@@ -42,6 +44,8 @@ public class EDXBlocks {
 
 		component = new BlockComponent().setBlockName("component_block");
 
+		storage = new BlockStorage().setBlockName("storage");
+
         registerBlock(table, EDXItemMultiBlock.class);
         registerBlock(tableSieve, EDXItemBlock.class);
 		registerBlock(sinteringOven, EDXMachineBlock.class);
@@ -53,6 +57,8 @@ public class EDXBlocks {
 		registerBlock(crucible, EDXItemBlock.class);
 
 		registerBlock(component, EDXItemMultiBlock.class);
+
+		registerBlock(storage, EDXItemMultiBlock.class);
 
 		GameRegistry.registerTileEntity(TileTable.class, "edx:table");
 		GameRegistry.registerTileEntity(TileSieveTable.class, "edx:table_sieve");

@@ -14,7 +14,7 @@ import net.minecraft.util.IIcon;
  */
 public class BlockStorage extends EDXMultiBlock {
 
-    public static final String[] storageTypes = new String[]{"cobaltStorage", "copperStorage", "leadStorage", "loadstoneStorage", "nickelStorage", "telluriumStorage", "tungstenStorage"};
+    public static final String[] NAMES = new String[]{"copper", "lead", "nickel", "silver", "steel", "tin"};
     private IIcon[] textures;
 
     public BlockStorage() {
@@ -32,9 +32,9 @@ public class BlockStorage extends EDXMultiBlock {
 
     @Override
     public void registerBlockIcons(IIconRegister iconRegister) {
-        textures = new IIcon[storageTypes.length];
-        for (int i = 0; i < storageTypes.length; i++) {
-            textures[i] = iconRegister.registerIcon(EDXProps.RESOURCE_PREFIX + "misc/" + storageTypes[i]);
+        textures = new IIcon[NAMES.length];
+        for (int i = 0; i < NAMES.length; i++) {
+            textures[i] = iconRegister.registerIcon(EDXProps.RESOURCE_PREFIX + "ore/storage/" + NAMES[i]);
         }
     }
 
@@ -48,12 +48,12 @@ public class BlockStorage extends EDXMultiBlock {
 
     @Override
     public int[] getSubtypes() {
-        return ArrayHelper.getArrayIndexes(storageTypes.length);
+        return ArrayHelper.getArrayIndexes(NAMES.length);
     }
 
     @Override
     public String getNameForType(int type) {
-        return storageTypes[type];
+        return NAMES[type];
     }
 
     @Override
