@@ -27,6 +27,9 @@ public class EDXBlocks {
 	public static Block barrel;
 	public static Block crucible;
 
+	public static Block infernalFurnace;
+	public static Block infernalFurnaceActive;
+
 	public static Block component;
 
 	public static Block storage;
@@ -42,6 +45,8 @@ public class EDXBlocks {
 		barrel = new BlockBarrel().setBlockName("barrel");
 		crucible = new BlockCrucible().setBlockName("crucible");
 
+		infernalFurnace = new BlockNetherFurnace().setBlockName("infernal_furnace");
+
 		component = new BlockComponent().setBlockName("component_block");
 
 		storage = new BlockStorage().setBlockName("storage");
@@ -55,6 +60,8 @@ public class EDXBlocks {
 		registerBlock(metalPress, EDXMachineBlock.class);
 		registerBlock(barrel, EDXItemBlock.class);
 		registerBlock(crucible, EDXItemBlock.class);
+
+		registerBlock(infernalFurnace);
 
 		registerBlock(component, EDXItemMultiBlock.class);
 
