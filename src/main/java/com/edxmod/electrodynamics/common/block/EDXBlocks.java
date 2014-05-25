@@ -4,6 +4,7 @@ import com.edxmod.electrodynamics.common.block.machine.*;
 import com.edxmod.electrodynamics.common.block.prefab.item.EDXItemBlock;
 import com.edxmod.electrodynamics.common.block.prefab.item.EDXItemMultiBlock;
 import com.edxmod.electrodynamics.common.block.prefab.item.EDXMachineBlock;
+import com.edxmod.electrodynamics.common.item.prefab.EDXItem;
 import com.edxmod.electrodynamics.common.tile.*;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
@@ -30,6 +31,8 @@ public class EDXBlocks {
 
 	public static Block storage;
 
+	public static Block netherGrass;
+
     public static void initialize() {
 		table = new BlockTable().setBlockName("table");
 		tableSieve = new BlockSieveTable().setBlockName("table_sieve");
@@ -46,6 +49,8 @@ public class EDXBlocks {
 
 		storage = new BlockStorage().setBlockName("storage");
 
+		netherGrass = new BlockNetherGrass().setBlockName("nether_grass");
+
         registerBlock(table, EDXItemMultiBlock.class);
         registerBlock(tableSieve, EDXItemBlock.class);
 		registerBlock(sinteringOven, EDXMachineBlock.class);
@@ -60,6 +65,8 @@ public class EDXBlocks {
 		registerBlock(component, EDXItemMultiBlock.class);
 
 		registerBlock(storage, EDXItemMultiBlock.class);
+
+		registerBlock(netherGrass, EDXItemBlock.class);
 
 		GameRegistry.registerTileEntity(TileTable.class, "edx:table");
 		GameRegistry.registerTileEntity(TileSieveTable.class, "edx:table_sieve");
