@@ -18,7 +18,7 @@ public abstract class EDXTileMultiBlock extends EDXMultiBlock implements ITileEn
     }
 
     public EDXTileMultiBlock() {
-        this(Material.iron);
+        this(Material.iron, 2F, 2F);
     }
 
     public EDXTileMultiBlock(Material material, float hardness, float resistance) {

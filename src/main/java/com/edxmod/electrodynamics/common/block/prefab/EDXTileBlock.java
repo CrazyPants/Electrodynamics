@@ -15,7 +15,7 @@ import net.minecraft.world.World;
 public abstract class EDXTileBlock extends EDXBasicBlock implements ITileEntityProvider {
 
     public EDXTileBlock(Material material) {
-        super(material);
+        super(material, 2F, 2F);
         setCreativeTab(EDXCreativeTab.BLOCKS.get());
     }
 

@@ -21,7 +21,7 @@ public class BlockComponent extends EDXMultiBlock {
 	public IIcon[] icons;
 
 	public BlockComponent() {
-		super(Material.ground);
+		super(Material.ground, 2F, 2F);
 	}
 
 	@Override
