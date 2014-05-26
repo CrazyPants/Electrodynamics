@@ -1,5 +1,6 @@
 package com.edxmod.electrodynamics.common.block;
 
+import com.edxmod.electrodynamics.common.block.core.BlockSpawnMarker;
 import com.edxmod.electrodynamics.common.block.machine.*;
 import com.edxmod.electrodynamics.common.block.prefab.item.EDXItemBlock;
 import com.edxmod.electrodynamics.common.block.prefab.item.EDXItemMultiBlock;
@@ -33,6 +34,8 @@ public class EDXBlocks {
 
 	public static Block netherGrass;
 
+	public static Block spawnMarker;
+
     public static void initialize() {
 		table = new BlockTable().setBlockName("table");
 		tableSieve = new BlockSieveTable().setBlockName("table_sieve");
@@ -51,6 +54,8 @@ public class EDXBlocks {
 
 		netherGrass = new BlockNetherGrass().setBlockName("nether_grass");
 
+		spawnMarker = new BlockSpawnMarker().setBlockName("spawn_marker");
+
         registerBlock(table, EDXItemMultiBlock.class);
         registerBlock(tableSieve, EDXItemBlock.class);
 		registerBlock(sinteringOven, EDXMachineBlock.class);
@@ -67,6 +72,8 @@ public class EDXBlocks {
 		registerBlock(storage, EDXItemMultiBlock.class);
 
 		registerBlock(netherGrass, EDXItemBlock.class);
+
+		registerBlock(spawnMarker);
 
 		GameRegistry.registerTileEntity(TileTable.class, "edx:table");
 		GameRegistry.registerTileEntity(TileSieveTable.class, "edx:table_sieve");
