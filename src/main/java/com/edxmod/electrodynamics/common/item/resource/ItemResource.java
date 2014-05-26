@@ -4,7 +4,6 @@ import com.edxmod.electrodynamics.common.core.EDXCreativeTab;
 import com.edxmod.electrodynamics.common.item.prefab.EDXItem;
 import com.edxmod.electrodynamics.common.item.prefab.EDXMultiItem;
 import com.edxmod.electrodynamics.common.lib.EDXProps;
-import com.sun.org.apache.xml.internal.security.utils.I18n;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
