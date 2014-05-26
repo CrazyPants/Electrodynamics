@@ -38,49 +38,19 @@ public class Electrodynamics {
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
         configPath = event.getModConfigurationDirectory() + "/EDX/";
-
-        EDXBlocks.initialize();
-        EDXItems.initialize();
-        EDXRecipes.initialize();
-
-		File recipes = new File(configPath, "recipes/");
-		if (!recipes.exists()) {
-			recipes.mkdirs();
-		}
-
-		for (File file : recipes.listFiles()) {
-			String extension = file.getName().substring(file.getName().lastIndexOf(".") + 1);
-
-			if (extension.equalsIgnoreCase("json")) {
-				RecipeParser.parseFile(file);
-			}
-		}
-
-		NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiHandler());
-
-        proxy.registerRenders();
 		proxy.preInit();
     }
 
     @Mod.EventHandler
     public void init(FMLInitializationEvent event) {
         packetPipeline.init();
+		proxy.init();
     }
 
     @Mod.EventHandler
     public void postInit(FMLPostInitializationEvent event) {
         packetPipeline.postInit();
-
-		try {
-			RecipeParser.dumpItems(new File(configPath, "key_dump.txt"));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
-		DimensionManager.unregisterProviderType(-1);
-		DimensionManager.unregisterDimension(-1);
-		DimensionManager.registerProviderType(-1, WorldProviderSkyblockHell.class, false);
-		DimensionManager.registerDimension(-1, -1);
+		proxy.postInit();
 	}
 
 }
