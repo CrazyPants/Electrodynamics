@@ -5,10 +5,14 @@ import com.edxmod.electrodynamics.common.lib.EDXProps;
 import net.minecraft.block.BlockLog;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.init.Blocks;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.common.util.ForgeDirection;
+
+import java.util.ArrayList;
 
 /**
  * @author dmillerw
@@ -17,15 +21,19 @@ public class BlockInfernalLog extends BlockLog {
 
 	private IIcon[] icons;
 
-	public BlockInfernalLog() {
+	private boolean rich;
+
+	public BlockInfernalLog(boolean rich) {
 		super();
+
+		this.rich = rich;
 
 		setCreativeTab(EDXCreativeTab.BLOCKS.get());
 	}
 
 	@Override
 	protected IIcon getSideIcon(int meta) {
-		return icons[meta];
+		return icons[rich ? 1 : 0];
 	}
 
 	@Override

@@ -111,7 +111,7 @@ public class WorldGenInfernalTree extends WorldGenAbstractTree {
 					block = par1World.getBlock(par3, par4 + k1, par5);
 
 					if (block.isAir(par1World, par3, par4 + k1, par5) || block.isLeaves(par1World, par3, par4 + k1, par5)) {
-						this.setBlockAndNotifyAdequately(par1World, par3, par4 + k1, par5, EDXBlocks.infernalLog, par2Random.nextInt(100) <= 5 ? 1 : 0);
+						this.setBlockAndNotifyAdequately(par1World, par3, par4 + k1, par5, par2Random.nextInt(100) <= 5 ? EDXBlocks.richInfernalLog : EDXBlocks.infernalLog, 0);
 					}
 				}
 

@@ -33,6 +33,7 @@ public class EDXBlocks {
 	public static Block netherGrass;
 	public static Block spawnMarker;
 	public static Block infernalLog;
+	public static Block richInfernalLog;
 	public static Block infernalLeaves;
 	public static Block infernalSapling;
 
@@ -52,7 +53,8 @@ public class EDXBlocks {
 		storage = new BlockStorage().setBlockName("storage");
 		netherGrass = new BlockNetherGrass().setBlockName("nether_grass");
 		spawnMarker = new BlockSpawnMarker().setBlockName("spawn_marker");
-		infernalLog = new BlockInfernalLog().setBlockName("infernal_log");
+		infernalLog = new BlockInfernalLog(false).setBlockName("infernal_log");
+		richInfernalLog = new BlockInfernalLog(true).setBlockName("infernal_log");
 		infernalLeaves = new BlockInfernaLeaves().setBlockName("infernal_leaves");
 		infernalSapling = new BlockInfernalSapling().setBlockName("infernal_sapling");
 
@@ -72,6 +74,7 @@ public class EDXBlocks {
 		registerBlock(netherGrass, EDXItemBlock.class);
 		registerBlock(spawnMarker);
 		registerBlock(infernalLog);
+		registerBlock(richInfernalLog, "rich_infernal_log");
 		registerBlock(infernalLeaves);
 		registerBlock(infernalSapling);
 
@@ -91,6 +94,10 @@ public class EDXBlocks {
     public static void registerBlock(Block block) {
         GameRegistry.registerBlock(block, block.getUnlocalizedName().replace("tile.", ""));
     }
+
+	public static void registerBlock(Block block, String override) {
+		GameRegistry.registerBlock(block, override);
+	}
 
     public static void registerBlock(Block block, Class<? extends ItemBlock> itemBlockClass) {
         GameRegistry.registerBlock(block, itemBlockClass, block.getUnlocalizedName().replace("tile.", ""));
