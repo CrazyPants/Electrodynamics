@@ -42,7 +42,8 @@ public class BlockSpawnMarker extends BlockContainer {
 	public BlockSpawnMarker() {
 		super(Material.rock);
 
-		setBlockUnbreakable();
+		setHardness(2F);
+		setResistance(100F);
 		setLightLevel(0.5F);
 		setBlockBounds(0.25F, 0, 0.25F, 0.75F, 0.5F, 0.75F);
 		setCreativeTab(EDXCreativeTab.BLOCKS.get());
