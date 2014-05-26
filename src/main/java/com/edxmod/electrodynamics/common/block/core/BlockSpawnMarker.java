@@ -2,6 +2,7 @@ package com.edxmod.electrodynamics.common.block.core;
 
 import com.edxmod.electrodynamics.common.core.EDXCreativeTab;
 import com.edxmod.electrodynamics.common.core.data.WorldDataSpawnPosition;
+import com.edxmod.electrodynamics.common.tile.TileSpawnMarker;
 import com.edxmod.electrodynamics.common.util.EntityHelper;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -10,9 +11,11 @@ import net.minecraft.block.BlockBed;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ChunkCoordinates;
+import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
 import java.util.Random;
@@ -20,7 +23,7 @@ import java.util.Random;
 /**
  * @author dmillerw
  */
-public class BlockSpawnMarker extends Block {
+public class BlockSpawnMarker extends BlockContainer {
 
 	public static ChunkCoordinates getSpawnPosition(World world) {
 		if (world.perWorldStorage.loadData(WorldDataSpawnPosition.class, "edx:spawn_position") == null) {
@@ -40,7 +43,19 @@ public class BlockSpawnMarker extends Block {
 		super(Material.rock);
 
 		setBlockUnbreakable();
+		setLightLevel(0.5F);
+		setBlockBounds(0.25F, 0, 0.25F, 0.75F, 0.5F, 0.75F);
 		setCreativeTab(EDXCreativeTab.BLOCKS.get());
+	}
+
+	@Override
+	public boolean isOpaqueCube() {
+		return false;
+	}
+
+	@Override
+	public boolean renderAsNormalBlock() {
+		return false;
 	}
 
 	@Override
@@ -55,13 +70,28 @@ public class BlockSpawnMarker extends Block {
 		world.setBlockMetadataWithNotify(x, y, z, EntityHelper.get2DRotation(entity).ordinal(), 3);
 	}
 
+	@Override
+	public int getRenderType() {
+		return -1;
+	}
+
+	@Override
+	public IIcon getIcon(int side, int meta) {
+		return Blocks.quartz_block.getIcon(0, 0);
+	}
+
 	@SideOnly(Side.CLIENT)
 	public void randomDisplayTick(World world, int x, int y, int z, Random random) {
 		double d0 = (double)((float)x + 0.5F);
-		double d1 = (double)((float)y + 0.7F);
+		double d1 = (double)((float)y + 0.3F);
 		double d2 = (double)((float)z + 0.5F);
 
 		world.spawnParticle("smoke", d0, d1, d2, 0.0D, 0.0D, 0.0D);
 		world.spawnParticle("flame", d0, d1, d2, 0.0D, 0.0D, 0.0D);
+	}
+
+	@Override
+	public TileEntity createNewTileEntity(World var1, int var2) {
+		return new TileSpawnMarker();
 	}
 }

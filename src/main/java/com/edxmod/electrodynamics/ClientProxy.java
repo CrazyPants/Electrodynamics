@@ -1,17 +1,15 @@
 package com.edxmod.electrodynamics;
 
+import com.edxmod.electrodynamics.client.model.FixedTechneModelLoader;
+import com.edxmod.electrodynamics.client.render.tile.RenderTileSpawnMarker;
 import com.edxmod.electrodynamics.client.render.item.*;
 import com.edxmod.electrodynamics.client.render.tile.*;
 import com.edxmod.electrodynamics.common.block.EDXBlocks;
-import com.edxmod.electrodynamics.common.lib.EDXProps;
 import com.edxmod.electrodynamics.common.tile.*;
 import cpw.mods.fml.client.registry.ClientRegistry;
-import cpw.mods.fml.client.registry.RenderingRegistry;
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.item.Item;
 import net.minecraftforge.client.MinecraftForgeClient;
-import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.client.model.AdvancedModelLoader;
 
 /**
  * @author Royalixor.
@@ -24,6 +22,8 @@ public class ClientProxy extends CommonProxy {
     public void preInit() {
 		super.preInit();
 
+		AdvancedModelLoader.registerModelHandler(new FixedTechneModelLoader());
+
 		// BLOCK
 
 		// TILE
@@ -33,6 +33,7 @@ public class ClientProxy extends CommonProxy {
 		ClientRegistry.bindTileEntitySpecialRenderer(TileHammerMill.class, new RenderTileHammerMill());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileKiln.class, new RenderTileKiln());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileMetalPress.class, new RenderTileMetalPress());
+		ClientRegistry.bindTileEntitySpecialRenderer(TileSpawnMarker.class, new RenderTileSpawnMarker());
 
 		// ITEM
 		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(EDXBlocks.table), new RenderItemTable());
@@ -41,6 +42,7 @@ public class ClientProxy extends CommonProxy {
 		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(EDXBlocks.hammerMill), new RenderItemHammerMill());
 		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(EDXBlocks.kiln), new RenderItemKiln());
 		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(EDXBlocks.metalPress), new RenderItemMetalPress());
+		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(EDXBlocks.spawnMarker), new RenderItemSpawnMarker());
     }
 
 }

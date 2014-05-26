@@ -85,6 +85,7 @@ public class EDXBlocks {
 		GameRegistry.registerTileEntity(TileBarrel.class, "edx:barrel");
 		GameRegistry.registerTileEntity(TileCrucible.class, "edx:crucible");
 		GameRegistry.registerTileEntity(TileInfernalFurnace.class, "edx:infernal_furnace");
+		GameRegistry.registerTileEntity(TileSpawnMarker.class, "edx:spawn_marker");
 	}
 
     public static void registerBlock(Block block) {
