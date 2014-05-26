@@ -1,17 +1,28 @@
 package com.edxmod.electrodynamics.common.item.resource;
 
 import com.edxmod.electrodynamics.common.core.EDXCreativeTab;
+import com.edxmod.electrodynamics.common.item.prefab.EDXItem;
 import com.edxmod.electrodynamics.common.item.prefab.EDXMultiItem;
 import com.edxmod.electrodynamics.common.lib.EDXProps;
+import com.sun.org.apache.xml.internal.security.utils.I18n;
 import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
+import net.minecraft.util.StatCollector;
+import net.minecraft.util.StringUtils;
+
+import java.util.List;
 
 /**
  * @author dmillerw
  */
-public class ItemResource extends EDXMultiItem {
+public class ItemResource extends EDXItem {
 
 	public static final String[] NAMES = new String[] {"copper", "gold", "graphite", "iron", "lead", "nickel", "silver", "steel", "tin"};
+
+	protected IIcon[] icons;
 
 	private String type;
 
@@ -26,18 +37,32 @@ public class ItemResource extends EDXMultiItem {
 	}
 
 	@Override
+	public String getItemStackDisplayName(ItemStack stack) {
+		System.out.println(super.getItemStackDisplayName(stack));
+		System.out.println(StatCollector.translateToLocal("ore." + NAMES[stack.getItemDamage()]));
+		return String.format(super.getItemStackDisplayName(stack), StatCollector.translateToLocal("ore." + NAMES[stack.getItemDamage()]));
+	}
+
+	@Override
+	public IIcon getIconFromDamage(int damage) {
+		return icons[damage];
+	}
+
+	@Override
 	public void registerIcons(IIconRegister register) {
-		icons = new IIcon[getNames().length];
+		icons = new IIcon[NAMES.length];
 		if (!getIconPrefix().isEmpty()) {
-			for (int i=0; i<getNames().length; i++) {
-				icons[i] = register.registerIcon(EDXProps.RESOURCE_PREFIX + getIconPrefix() + "/" + getNames()[i] + type);
+			for (int i=0; i<NAMES.length; i++) {
+				icons[i] = register.registerIcon(EDXProps.RESOURCE_PREFIX + getIconPrefix() + "/" + NAMES[i] + type);
 			}
 		}
 	}
 
 	@Override
-	public String[] getNames() {
-		return NAMES;
+	public void getSubItems(Item item, CreativeTabs creativeTabs, List list) {
+		for (int meta = 0; meta < NAMES.length; ++meta) {
+			list.add(new ItemStack(item, 1, meta));
+		}
 	}
 
 	public String getIconPrefix() {

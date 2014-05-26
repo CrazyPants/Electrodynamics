@@ -1,25 +1,46 @@
+# GUI
+gui.container.infernal_furnace=Infernal Furnace
+
+# RESOURCES
+ore.copper=Copper
+ore.gold=Gold
+ore.graphite=Graphite
+ore.iron=Iron
+ore.lead=Lead
+ore.nickel=Nickel
+ore.silver=Silver
+ore.steel=Steel
+ore.tin=Tin
+
+# ITEM GROUP
 itemGroup.edx.blocks=EDX Blocks
 itemGroup.edx.items=EDX Items
 itemGroup.edx.tools=EDX Tools
 
+# COMPONENT BLOCKS
+tile.component_block.fine_sand.name=Fine Sand
+tile.component_block.nether_grit.name=Nether Grit
+tile.component_block.nether_rind.name=Netherrind
+tile.component_block.soul_dust.name=Soul Dust
+
+# MISC BLOCKS
+tile.nether_grass.name=Nether Grass
+tile.spawn_marker.name=Nether Spawn Marker
+
+# MACHINES
 tile.table.wood.name=Wooden Table
 tile.table.stone.name=Smashing Table
+tile.table_sieve.name=Table Sieve
+tile.sintering_oven.name=Sintering Oven
+tile.hammer_mill.name=Hammer Mill
+tile.water_mill.name=Water Mill
+tile.kiln.name=Kiln
+tile.metal_press.name=Metal Press
+tile.barrel.name=Barrel
+tile.crucible.name=Crucible
+tile.infernal_furnace.name=Infernal Furnace
 
-tile.hammerMill.name=Hammer Mill
-tile.basicKiln.name=Basic Kiln
-tile.dustMixer.name=Dust Mixer
-tile.metalPress.name=Metal Press
-tile.sinteringOven.name=Sintering Oven
-tile.sieveTable.name=Sieve Table
-
-tile.ore.chalcopyrite.name=Chalcopyrite Ore
-tile.ore.cobaltite.name=Cobaltite Ore
-tile.ore.galena.name=Galena Ore
-tile.ore.graphite.name=Graphite Ore
-tile.ore.magnetite.name=Magnetite Ore
-tile.ore.nickel.name=Nickel Ore
-tile.ore.wolframite.name=Wolframite Ore
-
+# LIMESTONE
 tile.limestone.limestone.name=Limestone
 tile.limestone.limestoneCobblestone.name=Limestone Cobblestone
 tile.limestone.limestoneBricks.name=Limestone Bricks
@@ -27,23 +48,36 @@ tile.limestone.limestoneScorched.name=Scorched Limestone
 tile.limestone.limestoneScorcedBricks.name=Scorched Limestone Bricks
 tile.limestone.limestoneTiled.name=Tiled Limestone
 
-tile.storage.cobaltStorage.name=Cobalt Block
-tile.storage.copperStorage.name=Copper Block
-tile.storage.leadStorage.name=Lead Block
-tile.storage.loadstoneStorage.name=Loadstone Block
-tile.storage.nickelStorage.name=Nickel Block
-tile.storage.telluriumStorage.name=Tellurium Block
-tile.storage.tungstenStorage.name=Tungsten Block
+# INGOT STORAGE
+tile.storage.copper.name=Copper Block
+tile.storage.lead.name=Lead Block
+tile.storage.nickel.name=Nickel Block
+tile.storage.silver.name=Silver Block
+tile.storage.steel.name=Steel Block
+tile.storage.tin.name=Tin Block
 
-item.tool.spudPeeler.name=Spud Peeler
-item.tool.screwdriver.name=Screwdriver (WIP)
-item.tool.sinteringTray.name=Sintering Tray
-item.tool.solderIron.name=Solder Iron (WIP)
-item.tool.treeTap.name=Treetap
-item.tool.wireCutters.name=Wire Cutters (WIP)
-item.tool.wirelessScanner.name=Wireless Scanner (WIP)
-item.tool.handSieve.name=Hand Sieve
-item.tool.mixingJar.name=Mixing Jar
+# MISC TOOLS
+item.net.name=Net
+item.hand_sieve.name=Hand Sieve
 
-item.hammer.stone.name=Stone Hammer
-item.hammer.steel.name=Steel Hammer
+# MISC ITEMS
+item.component_item.twine.name=Twine
+item.component_item.twine_mesh.name=Twine Mesh
+item.seed.grass.name=Grass Seeds
+item.seed.nether_grass=Nether Grass Seeds
+
+# RESOURCE ITEMS
+item.resource.chunk.name=%s Chunk
+item.resource.clump.name=%s Clump
+item.resource.dust.name=%s Dust
+item.resource.flakes.name=%s Flakes
+item.resource.ingot.name=%s Ingot
+item.resource.nugget.name=%s Nugget
+item.resource.pebbles.name=%s Pebbles
+
+# HAMMERS
+item.hammer_wood.name=Wooden Mallet
+item.hammer_stone.name=Stone Hammer
+item.hammer_iron.name=Iron Hammer
+item.hammer_steel.name=Steel Hammer
+item.hammer_diamond.name=Diamond Hammer

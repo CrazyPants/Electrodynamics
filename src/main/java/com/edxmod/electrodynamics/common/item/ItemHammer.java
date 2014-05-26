@@ -20,6 +20,7 @@ public class ItemHammer extends EDXItem {
 		setMaxStackSize(1);
 		setMaxDamage(damage);
 		setUnlocalizedName("hammer_" + type);
+		setFull3D();
 
 		this.type = type;
 		this.component = component;

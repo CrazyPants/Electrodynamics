@@ -16,7 +16,6 @@ public class ItemNet extends EDXItem {
 
 		setMaxDamage(0);
 		setMaxStackSize(1);
-		setFull3D();
 	}
 
 	@Override
