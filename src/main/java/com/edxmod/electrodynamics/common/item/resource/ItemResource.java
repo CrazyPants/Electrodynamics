@@ -37,8 +37,6 @@ public class ItemResource extends EDXItem {
 
 	@Override
 	public String getItemStackDisplayName(ItemStack stack) {
-		System.out.println(super.getItemStackDisplayName(stack));
-		System.out.println(StatCollector.translateToLocal("ore." + NAMES[stack.getItemDamage()]));
 		return String.format(super.getItemStackDisplayName(stack), StatCollector.translateToLocal("ore." + NAMES[stack.getItemDamage()]));
 	}
 

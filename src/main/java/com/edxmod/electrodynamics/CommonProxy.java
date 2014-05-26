@@ -8,8 +8,10 @@ import com.edxmod.electrodynamics.common.item.EDXItems;
 import com.edxmod.electrodynamics.common.recipe.EDXRecipes;
 import com.edxmod.electrodynamics.common.recipe.RecipeParser;
 import com.edxmod.electrodynamics.common.world.WorldProviderSkyblockHell;
+import com.edxmod.electrodynamics.common.world.generation.WorldGenInfernalTree;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.network.NetworkRegistry;
+import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.MinecraftForge;
 

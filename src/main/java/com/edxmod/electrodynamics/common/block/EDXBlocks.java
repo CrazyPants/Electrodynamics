@@ -29,12 +29,12 @@ public class EDXBlocks {
 	public static Block infernalFurnace;
 
 	public static Block component;
-
 	public static Block storage;
-
 	public static Block netherGrass;
-
 	public static Block spawnMarker;
+	public static Block infernalLog;
+	public static Block infernalLeaves;
+	public static Block infernalSapling;
 
     public static void initialize() {
 		table = new BlockTable().setBlockName("table");
@@ -49,12 +49,12 @@ public class EDXBlocks {
 		infernalFurnace = new BlockInfernalFurnace().setBlockName("infernal_furnace");
 
 		component = new BlockComponent().setBlockName("component_block");
-
 		storage = new BlockStorage().setBlockName("storage");
-
 		netherGrass = new BlockNetherGrass().setBlockName("nether_grass");
-
 		spawnMarker = new BlockSpawnMarker().setBlockName("spawn_marker");
+		infernalLog = new BlockInfernalLog().setBlockName("infernal_log");
+		infernalLeaves = new BlockInfernaLeaves().setBlockName("infernal_leaves");
+		infernalSapling = new BlockInfernalSapling().setBlockName("infernal_sapling");
 
         registerBlock(table, EDXItemMultiBlock.class);
         registerBlock(tableSieve, EDXItemBlock.class);
@@ -68,12 +68,12 @@ public class EDXBlocks {
 		registerBlock(infernalFurnace, EDXMachineBlock.class);
 
 		registerBlock(component, EDXItemMultiBlock.class);
-
 		registerBlock(storage, EDXItemMultiBlock.class);
-
 		registerBlock(netherGrass, EDXItemBlock.class);
-
 		registerBlock(spawnMarker);
+		registerBlock(infernalLog);
+		registerBlock(infernalLeaves);
+		registerBlock(infernalSapling);
 
 		GameRegistry.registerTileEntity(TileTable.class, "edx:table");
 		GameRegistry.registerTileEntity(TileSieveTable.class, "edx:table_sieve");

@@ -26,6 +26,9 @@ tile.component_block.soul_dust.name=Soul Dust
 # MISC BLOCKS
 tile.nether_grass.name=Nether Grass
 tile.spawn_marker.name=Nether Spawn Marker
+tile.infernal_log.name=Infernal Log
+tile.infernal_leaves.name=Infernal Leaves
+tile.infernal_sapling.name=Infernal Tree Sapling
 
 # MACHINES
 tile.table.wood.name=Wooden Table
@@ -38,7 +41,7 @@ tile.kiln.name=Kiln
 tile.metal_press.name=Metal Press
 tile.barrel.name=Barrel
 tile.crucible.name=Crucible
-tile.infernal_furnace.name=Infernal Furnace
+tile.infernal_furnace.name=Hellfire Furnace
 
 # LIMESTONE
 tile.limestone.limestone.name=Limestone
