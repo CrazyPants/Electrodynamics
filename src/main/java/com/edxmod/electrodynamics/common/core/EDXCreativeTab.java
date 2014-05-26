@@ -37,7 +37,7 @@ public enum EDXCreativeTab {
             case BLOCKS:
                 return new ItemStack(EDXBlocks.table, 1, 0);
             case ITEMS:
-                return new ItemStack(EDXItems.hammerWood, 1, 0);
+                return new ItemStack(EDXItems.resourcePebble, 1, 0);
             case TOOLS:
                 return new ItemStack(EDXItems.hammerWood, 1, 0);
             default:
