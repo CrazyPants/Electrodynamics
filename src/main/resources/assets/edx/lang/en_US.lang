@@ -28,7 +28,7 @@ tile.nether_grass.name=Nether Grass
 tile.spawn_marker.name=Nether Spawn Marker
 tile.infernal_log.name=Infernal Log
 tile.infernal_leaves.name=Infernal Leaves
-tile.infernal_sapling.name=Infernal Tree Sapling
+tile.infernal_sapling.name=Hellfire Sapling
 
 # MACHINES
 tile.table.wood.name=Wooden Table

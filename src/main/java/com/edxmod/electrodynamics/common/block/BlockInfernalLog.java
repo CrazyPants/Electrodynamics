@@ -1,7 +1,9 @@
 package com.edxmod.electrodynamics.common.block;
 
 import com.edxmod.electrodynamics.common.core.EDXCreativeTab;
+import com.edxmod.electrodynamics.common.lib.EDXProps;
 import net.minecraft.block.BlockLog;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
@@ -13,6 +15,8 @@ import net.minecraftforge.common.util.ForgeDirection;
  */
 public class BlockInfernalLog extends BlockLog {
 
+	private IIcon[] icons;
+
 	public BlockInfernalLog() {
 		super();
 
@@ -20,13 +24,20 @@ public class BlockInfernalLog extends BlockLog {
 	}
 
 	@Override
-	protected IIcon getSideIcon(int value) {
-		return Blocks.log.getIcon(2, 0);
+	protected IIcon getSideIcon(int meta) {
+		return icons[meta];
 	}
 
 	@Override
-	protected IIcon getTopIcon(int value) {
+	protected IIcon getTopIcon(int meta) {
 		return Blocks.log.getIcon(1, 0);
+	}
+
+	@Override
+	public void registerBlockIcons(IIconRegister register) {
+		icons = new IIcon[2];
+		icons[0] = register.registerIcon(EDXProps.RESOURCE_PREFIX + "world/infernalLog");
+		icons[1] = register.registerIcon(EDXProps.RESOURCE_PREFIX + "world/infernalLog_rich");
 	}
 
 	@Override

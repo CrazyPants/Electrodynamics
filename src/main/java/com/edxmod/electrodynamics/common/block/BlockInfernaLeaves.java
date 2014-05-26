@@ -1,11 +1,16 @@
 package com.edxmod.electrodynamics.common.block;
 
 import com.edxmod.electrodynamics.common.core.EDXCreativeTab;
+import com.edxmod.electrodynamics.common.lib.EDXProps;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.BlockLeaves;
 import net.minecraft.block.BlockLog;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.util.IIcon;
+import net.minecraft.world.ColorizerFoliage;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
@@ -17,6 +22,8 @@ import java.util.Random;
  */
 public class BlockInfernaLeaves extends BlockLeaves {
 
+	private IIcon[] icons;
+
 	public BlockInfernaLeaves() {
 		super();
 
@@ -25,7 +32,14 @@ public class BlockInfernaLeaves extends BlockLeaves {
 
 	@Override
 	public IIcon getIcon(int side, int meta) {
-		return Blocks.leaves.getIcon(side, meta);
+		return icons[field_150127_b];
+	}
+
+	@Override
+	public void registerBlockIcons(IIconRegister register) {
+		icons = new IIcon[2];
+		icons[0] = register.registerIcon(EDXProps.RESOURCE_PREFIX + "world/infernalLeaves_fancy");
+		icons[1] = register.registerIcon(EDXProps.RESOURCE_PREFIX + "world/infernalLeaves_fast");
 	}
 
 	@Override

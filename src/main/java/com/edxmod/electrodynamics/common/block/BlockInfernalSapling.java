@@ -1,11 +1,13 @@
 package com.edxmod.electrodynamics.common.block;
 
 import com.edxmod.electrodynamics.common.core.EDXCreativeTab;
+import com.edxmod.electrodynamics.common.lib.EDXProps;
 import com.edxmod.electrodynamics.common.world.generation.WorldGenInfernalTree;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockBush;
 import net.minecraft.block.BlockSapling;
 import net.minecraft.block.IGrowable;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -18,6 +20,8 @@ import java.util.Random;
  * @author dmillerw
  */
 public class BlockInfernalSapling extends BlockBush implements IGrowable {
+
+	private IIcon icon;
 
 	public BlockInfernalSapling() {
 		setBlockBounds(0.5F - 0.4F, 0.0F, 0.5F - 0.4F, 0.5F + 0.4F, 0.4F * 2.0F, 0.5F + 0.4F);
@@ -49,7 +53,12 @@ public class BlockInfernalSapling extends BlockBush implements IGrowable {
 
 	@Override
 	public IIcon getIcon(int side, int meta) {
-		return Blocks.sapling.getIcon(side, meta);
+		return icon;
+	}
+
+	@Override
+	public void registerBlockIcons(IIconRegister register) {
+		icon = register.registerIcon(EDXProps.RESOURCE_PREFIX + "world/hellfireSapling");
 	}
 
 	/* IGROWABLE */
