@@ -39,7 +39,7 @@ public class CommonProxy {
 			}
 		}
 
-		NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiHandler());
+		NetworkRegistry.INSTANCE.registerGuiHandler(Electrodynamics.instance, new GuiHandler());
 
 		MinecraftForge.EVENT_BUS.register(new BlockEventHandler());
 
