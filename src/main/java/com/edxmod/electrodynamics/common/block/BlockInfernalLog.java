@@ -38,14 +38,15 @@ public class BlockInfernalLog extends BlockLog {
 
 	@Override
 	protected IIcon getTopIcon(int meta) {
-		return Blocks.log.getIcon(1, 0);
+		return icons[2];
 	}
 
 	@Override
 	public void registerBlockIcons(IIconRegister register) {
-		icons = new IIcon[2];
+		icons = new IIcon[3];
 		icons[0] = register.registerIcon(EDXProps.RESOURCE_PREFIX + "world/infernalLog");
 		icons[1] = register.registerIcon(EDXProps.RESOURCE_PREFIX + "world/infernalLog_rich");
+		icons[2] = register.registerIcon(EDXProps.RESOURCE_PREFIX + "world/infernalLog_top");
 	}
 
 	@Override
