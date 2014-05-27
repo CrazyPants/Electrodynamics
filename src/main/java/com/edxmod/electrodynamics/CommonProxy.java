@@ -78,9 +78,9 @@ public class CommonProxy {
 
 		// Axe registration
 		for (Object key : GameData.getItemRegistry().getKeys()) {
-			String str = key.toString();
-			if (str.contains("_axe")) {
-				Item axe = (Item) Item.itemRegistry.getObject(str);
+			Item axe = (Item) Item.itemRegistry.getObject(key.toString());
+
+			if (axe instanceof ItemAxe) {
 				ToolDefinition.register(new ItemStack(axe), ToolDefinition.AXE, ((ItemTool)axe).func_150913_i().getEfficiencyOnProperMaterial());
 			}
 		}
