@@ -55,7 +55,7 @@ public class RenderTileTable extends TileEntitySpecialRenderer {
         if (tile.stack != null) {
             float renderMax = tile.getBlockMetadata() == 0 ? WOOD_RENDER_MAX : STONE_RENDER_MAX;
             if (tile.stack.getItem() instanceof ItemBlock && RenderBlocks.renderItemIn3d(Block.getBlockFromItem(tile.stack.getItem()).getRenderType())) {
-                Block block = ItemHelper.getBlock(tile.stack);
+                Block block = Block.getBlockFromItem(tile.stack.getItem());
                 boolean fixOffset = false;
 
                 // EDX specific rendering, since we offset our models
