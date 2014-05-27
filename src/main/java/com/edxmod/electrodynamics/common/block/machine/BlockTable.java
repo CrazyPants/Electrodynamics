@@ -128,7 +128,7 @@ public class BlockTable extends EDXTileMultiBlock implements IRaytracable {
 
         if (tile.stack != null) {
             if (tile.stack.getItem() instanceof ItemBlock && RenderBlocks.renderItemIn3d(Block.getBlockFromItem(tile.stack.getItem()).getRenderType())) {
-                Block block = ItemHelper.getBlock(tile.stack.getItem());
+                Block block = Block.getBlockFromItem(tile.stack.getItem());
                 AxisAlignedBB blockBounds = AxisAlignedBB.getBoundingBox(0.25, renderMax, 0.25, 0.75, renderMax + (block.getBlockBoundsMaxY() / 2), 0.75);
 				targets.add(new IndexedAABB(1, blockBounds));
             } else {

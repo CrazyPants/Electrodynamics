@@ -9,7 +9,9 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
+import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
@@ -95,9 +97,9 @@ public class PacketFX extends AbstractPacket {
             // Block destroy FX
             case 1: {
                 if (extraData[0] > 0 && extraData[0] < 4096) {
-                    FMLClientHandler.instance().getClient().effectRenderer.addBlockDestroyEffects((int) Math.floor(x), (int) Math.floor(y), (int) Math.floor(z), ItemHelper.getBlock(extraData[0]), extraData[1]);
+                    FMLClientHandler.instance().getClient().effectRenderer.addBlockDestroyEffects((int) Math.floor(x), (int) Math.floor(y), (int) Math.floor(z), Block.getBlockById(extraData[0]), extraData[1]);
                 } else {
-                    EnumParticle.ITEM_BREAK(new ItemStack(ItemHelper.getItem(extraData[0]), extraData[1]), FMLClientHandler.instance().getWorldClient(), x, y, z);
+                    EnumParticle.ITEM_BREAK(new ItemStack(Item.getItemById(extraData[0]), extraData[1]), FMLClientHandler.instance().getWorldClient(), x, y, z);
                 }
             }
         }
