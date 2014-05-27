@@ -47,6 +47,7 @@ public class RenderHelper {
         }
 
         EntityItem item = new EntityItem(Minecraft.getMinecraft().theWorld, 0, 0, 0, stack);
+		item.getEntityItem().stackSize = 1;
         item.hoverStart = 0;
 
         RenderManager.instance.renderEntityWithPosYaw(item, 0, 0, 0, 0, 0);

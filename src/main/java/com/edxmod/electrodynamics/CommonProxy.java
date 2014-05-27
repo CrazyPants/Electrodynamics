@@ -1,17 +1,22 @@
 package com.edxmod.electrodynamics;
 
+import com.edxmod.electrodynamics.api.tool.ToolDefinition;
 import com.edxmod.electrodynamics.common.block.EDXBlocks;
 import com.edxmod.electrodynamics.common.core.handler.BlockEventHandler;
 import com.edxmod.electrodynamics.common.core.handler.GuiHandler;
 import com.edxmod.electrodynamics.common.core.handler.SpiderTracker;
 import com.edxmod.electrodynamics.common.item.EDXItems;
+import com.edxmod.electrodynamics.common.item.ItemHammer;
 import com.edxmod.electrodynamics.common.recipe.EDXRecipes;
 import com.edxmod.electrodynamics.common.recipe.RecipeParser;
 import com.edxmod.electrodynamics.common.world.WorldProviderSkyblockHell;
-import com.edxmod.electrodynamics.common.world.generation.WorldGenInfernalTree;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.network.NetworkRegistry;
-import cpw.mods.fml.common.registry.GameRegistry;
+import cpw.mods.fml.common.registry.GameData;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemAxe;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.ItemTool;
 import net.minecraftforge.common.DimensionManager;
 import net.minecraftforge.common.MinecraftForge;
 
@@ -63,6 +68,22 @@ public class CommonProxy {
 		DimensionManager.unregisterDimension(-1);
 		DimensionManager.registerProviderType(-1, WorldProviderSkyblockHell.class, false);
 		DimensionManager.registerDimension(-1, -1);
+
+		// Tool registration
+		ToolDefinition.register(new ItemStack(EDXItems.hammerWood), ToolDefinition.HAMMER, ItemHammer.STRENGTH[0]);
+		ToolDefinition.register(new ItemStack(EDXItems.hammerStone), ToolDefinition.HAMMER, ItemHammer.STRENGTH[1]);
+		ToolDefinition.register(new ItemStack(EDXItems.hammerIron), ToolDefinition.HAMMER, ItemHammer.STRENGTH[2]);
+		ToolDefinition.register(new ItemStack(EDXItems.hammerSteel), ToolDefinition.HAMMER, ItemHammer.STRENGTH[3]);
+		ToolDefinition.register(new ItemStack(EDXItems.hammerDiamond), ToolDefinition.HAMMER, ItemHammer.STRENGTH[4]);
+
+		// Axe registration
+		for (Object key : GameData.getItemRegistry().getKeys()) {
+			String str = key.toString();
+			if (str.contains("_axe")) {
+				Item axe = (Item) Item.itemRegistry.getObject(str);
+				ToolDefinition.register(new ItemStack(axe), ToolDefinition.AXE, ((ItemTool)axe).func_150913_i().getEfficiencyOnProperMaterial());
+			}
+		}
     }
 
 }

@@ -57,29 +57,30 @@ public class BlockTable extends EDXTileMultiBlock implements IRaytracable {
                 } else {
                     RayTracer.RaytraceResult result = RayTracer.doRaytrace(world, x, y, z, player);
 
-                    if (result.hitID == 1) {
+                    if (result != null && result.hitID == 1) {
                         if (!player.isSneaking()) {
-                            if (player.getHeldItem() != null && player.getHeldItem().getItem() instanceof ItemHammer) {
-                                tile.smash(player);
-                            } else {
-                                if (tile.stack != null && player.getHeldItem() == null) {
-                                    player.setCurrentItemOrArmor(0, tile.stack.copy());
-                                    tile.stack = null;
+                            if (!tile.smash(player)) {
+								if (tile.stack != null && player.getHeldItem() == null) {
+									player.setCurrentItemOrArmor(0, tile.stack.copy());
+									tile.stack = null;
 
-                                    world.markBlockForUpdate(x, y, z);
-                                    return true;
-                                } else if (tile.stack != null && player.getHeldItem() != null) {
-                                    if (tile.stack.isItemEqual(player.getHeldItem()) && (player.getHeldItem().stackSize + 1 <= player.getHeldItem().getItem().getItemStackLimit(player.getHeldItem()))) {
-                                        player.getHeldItem().stackSize++;
-                                        tile.stack = null;
+									world.markBlockForUpdate(x, y, z);
+									return true;
+								} else if (tile.stack != null && player.getHeldItem() != null) {
+									if (tile.stack.isItemEqual(player.getHeldItem()) && (player.getHeldItem().stackSize + 1 <= player.getHeldItem().getItem().getItemStackLimit(player.getHeldItem()))) {
+										player.getHeldItem().stackSize += tile.stack.stackSize;
 
-                                        world.markBlockForUpdate(x, y, z);
-                                        return true;
-                                    }
-                                }
-                            }
-                        } else {
-                            tile.rotate();
+										if (player.getHeldItem().stackSize > player.getHeldItem().getMaxStackSize()) {
+											tile.stack.stackSize = player.getHeldItem().stackSize - player.getHeldItem().getMaxStackSize();
+										} else {
+											tile.stack = null;
+										}
+
+										world.markBlockForUpdate(x, y, z);
+										return true;
+									}
+								}
+							}
                         }
                     }
                 }

@@ -52,8 +52,6 @@ public class RenderTileTable extends TileEntitySpecialRenderer {
 
         GL11.glTranslated(0.5, 0, 0.5);
 
-        GL11.glRotated(90 * tile.stackRotation, 0, 1, 0);
-
         if (tile.stack != null) {
             float renderMax = tile.getBlockMetadata() == 0 ? WOOD_RENDER_MAX : STONE_RENDER_MAX;
             if (tile.stack.getItem() instanceof ItemBlock && RenderBlocks.renderItemIn3d(Block.getBlockFromItem(tile.stack.getItem()).getRenderType())) {

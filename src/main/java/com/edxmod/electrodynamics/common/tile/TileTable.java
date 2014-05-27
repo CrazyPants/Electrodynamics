@@ -1,5 +1,6 @@
 package com.edxmod.electrodynamics.common.tile;
 
+import com.edxmod.electrodynamics.api.tool.ToolDefinition;
 import com.edxmod.electrodynamics.common.block.EDXBlocks;
 import com.edxmod.electrodynamics.common.item.ItemHammer;
 import com.edxmod.electrodynamics.common.network.PacketFX;
@@ -25,8 +26,6 @@ public class TileTable extends TileCore {
 
 	public float durability;
 
-    public byte stackRotation = 0;
-
     @Override
     public void readCustomNBT(NBTTagCompound nbt) {
         if (nbt.hasKey("stack")) {
@@ -36,7 +35,6 @@ public class TileTable extends TileCore {
         }
 
 		durability = nbt.getFloat("durability");
-        stackRotation = nbt.getByte("rotation");
     }
 
     @Override
@@ -48,7 +46,6 @@ public class TileTable extends TileCore {
         }
 
 		nbt.setFloat("durability", durability);
-        nbt.setByte("rotation", stackRotation);
     }
 
 	@Override
@@ -58,30 +55,19 @@ public class TileTable extends TileCore {
 		}
 	}
 
-	public void rotate() {
-        stackRotation++;
-        if (stackRotation > 3) {
-            stackRotation = 0;
-        }
-
-        worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
-    }
-
 	public void setStack(ItemStack stack) {
 		this.stack = stack;
 
-		TableManager.TableRecipe output = RecipeManager.INSTANCE.table.get(stack);
-
-		if (output != null) {
-			durability = output.getDurability();
+		if (stack != null) {
+			durability = RecipeManager.INSTANCE.table.getDurability(stack);
 		}
 
 		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 	}
 
-    public void smash(EntityPlayer player) {
+    public boolean smash(EntityPlayer player) {
         int meta = worldObj.getBlockMetadata(xCoord, yCoord, zCoord);
-		ItemStack hammer = player.getCurrentEquippedItem();
+		ItemStack tool = player.getCurrentEquippedItem();
         Random random = new Random();
 
         if (meta == 0) {
@@ -91,26 +77,36 @@ public class TileTable extends TileCore {
 
                 stack = null;
                 worldObj.setBlock(xCoord, yCoord, zCoord, EDXBlocks.table, 1, 3);
+
+				return true;
             }
         } else if (meta == 1) {
             if (stack != null) {
-                TableManager.TableRecipe output = RecipeManager.INSTANCE.table.get(stack);
+                TableManager.TableRecipe output = RecipeManager.INSTANCE.table.get(stack, tool);
 
-                if (output != null) {
-					durability -= ItemHammer.STRENGTH[hammer.getItemDamage()];
+				if (output != null) {
+					durability -= ToolDefinition.getStrength(tool);
 
                     if (durability <= 0F) {
 						if (stack.getItem() instanceof ItemBlock) {
 							PacketFX.breakFX(worldObj, xCoord, yCoord, zCoord, stack);
-							getWorldObj().playSoundEffect(xCoord, yCoord, zCoord, "edx:oreCrumble", 1.0F, (random.nextFloat() - random.nextFloat()) * 0.2F + 1.0F);
+//							getWorldObj().playSoundEffect(xCoord, yCoord, zCoord, "edx:oreCrumble", 1.0F, (random.nextFloat() - random.nextFloat()) * 0.2F + 1.0F);
 						}
 
-						stack = output.getOutput(stack);
+						if (output.damageTool) {
+							tool.damageItem(1, player);
+						}
+
+						stack = output.getOutput(false);
 						worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+
+						return true;
 					}
                 }
             }
         }
+
+		return false;
     }
 
 }
