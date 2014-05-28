@@ -15,13 +15,13 @@ import java.util.List;
 /**
  * @author dmillerw
  */
-public class BlockComponent extends EDXMultiBlock {
+public class BlockComponentWood extends EDXMultiBlock {
 
-	public static final String[] NAMES = new String[] {"fine_sand", "nether_grit", "nether_rind", "soul_dust"};
+	public static final String[] NAMES = new String[] {"sawdust", "sawdust_nether", "sawdust_nether_glow", "woodchips", "woodchips_nether", "woodchips_nether_glow"};
 	public IIcon[] icons;
 
-	public BlockComponent() {
-		super(Material.ground, 2F, 2F);
+	public BlockComponentWood() {
+		super(Material.wood, 2F, 2F);
 	}
 
 	@Override

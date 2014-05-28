@@ -5,7 +5,6 @@ import com.edxmod.electrodynamics.common.block.machine.*;
 import com.edxmod.electrodynamics.common.block.prefab.item.EDXItemBlock;
 import com.edxmod.electrodynamics.common.block.prefab.item.EDXItemMultiBlock;
 import com.edxmod.electrodynamics.common.block.prefab.item.EDXMachineBlock;
-import com.edxmod.electrodynamics.common.item.prefab.EDXItem;
 import com.edxmod.electrodynamics.common.tile.*;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
@@ -28,7 +27,8 @@ public class EDXBlocks {
 	public static Block crucible;
 	public static Block infernalFurnace;
 
-	public static Block component;
+	public static Block componentGround;
+	public static Block componentWood;
 	public static Block storage;
 	public static Block netherGrass;
 	public static Block spawnMarker;
@@ -49,7 +49,8 @@ public class EDXBlocks {
 		crucible = new BlockCrucible().setBlockName("crucible");
 		infernalFurnace = new BlockInfernalFurnace().setBlockName("infernal_furnace");
 
-		component = new BlockComponent().setBlockName("component_block");
+		componentGround = new BlockComponentGround().setBlockName("component_ground");
+		componentWood = new BlockComponentWood().setBlockName("component_wood");
 		storage = new BlockStorage().setBlockName("storage");
 		netherGrass = new BlockNetherGrass().setBlockName("nether_grass");
 		spawnMarker = new BlockSpawnMarker().setBlockName("spawn_marker");
@@ -69,7 +70,8 @@ public class EDXBlocks {
 		registerBlock(crucible, EDXItemBlock.class);
 		registerBlock(infernalFurnace, EDXMachineBlock.class);
 
-		registerBlock(component, EDXItemMultiBlock.class);
+		registerBlock(componentGround, EDXItemMultiBlock.class);
+		registerBlock(componentWood, EDXItemMultiBlock.class);
 		registerBlock(storage, EDXItemMultiBlock.class);
 		registerBlock(netherGrass, EDXItemBlock.class);
 		registerBlock(spawnMarker);
@@ -102,6 +104,10 @@ public class EDXBlocks {
     public static void registerBlock(Block block, Class<? extends ItemBlock> itemBlockClass) {
         GameRegistry.registerBlock(block, itemBlockClass, block.getUnlocalizedName().replace("tile.", ""));
     }
+
+	public static void registerBlock(Block block, Class<? extends ItemBlock> itemBlockClass, String override) {
+		GameRegistry.registerBlock(block, itemBlockClass, override);
+	}
 
     public static void registerBlock(Block block, Class<? extends ItemBlock> itemBlockClass, Object... constructorArgs) {
         GameRegistry.registerBlock(block, itemBlockClass, block.getUnlocalizedName().replace("tile.", ""), null, constructorArgs);

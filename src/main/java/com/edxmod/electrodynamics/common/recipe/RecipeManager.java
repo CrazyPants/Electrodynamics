@@ -23,12 +23,12 @@ public class RecipeManager {
 		table.registerHammerRecipe(Blocks.stone, Blocks.cobblestone);
 		table.registerHammerRecipe(Blocks.cobblestone, Blocks.gravel);
 		table.registerHammerRecipe(Blocks.gravel, Blocks.sand);
-		table.registerHammerRecipe(Blocks.sand, new ItemStack(EDXBlocks.component, 0, 0));
+		table.registerHammerRecipe(Blocks.sand, new ItemStack(EDXBlocks.componentGround, 0, 0));
 
 		// NETHERRACK
-		table.registerHammerRecipe(Blocks.netherrack, new ItemStack(EDXBlocks.component, 0, 1));
-		table.registerHammerRecipe(new ItemStack(EDXBlocks.component, 0, 1), Blocks.soul_sand);
-		table.registerHammerRecipe(Blocks.soul_sand, new ItemStack(EDXBlocks.component, 0, 3));
+		table.registerHammerRecipe(Blocks.netherrack, new ItemStack(EDXBlocks.componentGround, 0, 1));
+		table.registerHammerRecipe(new ItemStack(EDXBlocks.componentGround, 0, 1), Blocks.soul_sand);
+		table.registerHammerRecipe(Blocks.soul_sand, new ItemStack(EDXBlocks.componentGround, 0, 3));
 
 		// WOOD
 		for (int i=0; i<4; i++) {

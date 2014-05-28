@@ -18,10 +18,17 @@ itemGroup.edx.items=EDX Items
 itemGroup.edx.tools=EDX Tools
 
 # COMPONENT BLOCKS
-tile.component_block.fine_sand.name=Fine Sand
-tile.component_block.nether_grit.name=Nether Grit
-tile.component_block.nether_rind.name=Netherrind
-tile.component_block.soul_dust.name=Soul Dust
+tile.component_ground.fine_sand.name=Fine Sand
+tile.component_ground.nether_grit.name=Nether Grit
+tile.component_ground.nether_rind.name=Netherrind
+tile.component_ground.soul_dust.name=Soul Dust
+
+tile.component_wood.sawdust.name=Sawdust
+tile.component_wood.sawdust_nether.name=Infernal Sawdust
+tile.component_wood.sawdust_nether_glow.name=Glowing Infernal Sawdust
+tile.component_wood.woodchips.name=Woodchips
+tile.component_wood.woodchips_nether.name=Infernal Woodchips
+tile.component_wood.woodchips_nether_glow.name=Glowing Infernal Woodchips
 
 # MISC BLOCKS
 tile.nether_grass.name=Nether Grass
