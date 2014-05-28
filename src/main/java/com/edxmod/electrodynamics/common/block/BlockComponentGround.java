@@ -21,7 +21,10 @@ public class BlockComponentGround extends EDXMultiBlock {
 	public IIcon[] icons;
 
 	public BlockComponentGround() {
-		super(Material.ground, 2F, 2F);
+		super(Material.sand, 0.5F, 0F);
+
+		setStepSound(soundTypeGravel);
+		setHarvestLevel("shovel", 0);
 	}
 
 	@Override

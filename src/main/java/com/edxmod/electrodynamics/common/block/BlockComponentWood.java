@@ -22,6 +22,9 @@ public class BlockComponentWood extends EDXMultiBlock {
 
 	public BlockComponentWood() {
 		super(Material.wood, 2F, 2F);
+
+		setStepSound(soundTypeWood);
+		setHarvestLevel("axe", 0);
 	}
 
 	@Override

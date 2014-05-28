@@ -55,9 +55,4 @@ public class BlockLimestone extends EDXMultiBlock {
     public String getNameForType(int type) {
         return limestoneTypes[type];
     }
-
-    @Override
-    public int damageDropped(int meta) {
-        return meta;
-    }
 }

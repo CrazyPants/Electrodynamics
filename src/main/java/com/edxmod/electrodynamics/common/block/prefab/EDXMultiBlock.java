@@ -48,6 +48,11 @@ public abstract class EDXMultiBlock extends Block {
         }
     }
 
+	@Override
+	public int damageDropped(int meta) {
+		return meta;
+	}
+
     @SideOnly(Side.CLIENT)
     public abstract boolean useCustomRender();
 
