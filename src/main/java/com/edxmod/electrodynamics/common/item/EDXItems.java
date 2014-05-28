@@ -33,6 +33,7 @@ public class EDXItems {
 
 	// OTHER
 	public static Item seeds;
+	public static Item cosmetic;
 
     public static void initialize() {
 		hammerWood = new ItemHammer(64, "wood", "plankWood");
@@ -60,7 +61,6 @@ public class EDXItems {
 		resourceIngot = new ItemResource().setType("Ingot");
 		resourceNugget = new ItemResource().setType("Nugget");
 		resourcePebble = new ItemResource().setType("Pebbles");
-
 		registerItem(resourceChunk);
 		registerItem(resourceClump);
 		registerItem(resourceDust);
@@ -70,8 +70,9 @@ public class EDXItems {
 		registerItem(resourcePebble);
 
 		seeds = new ItemSeeds().setUnlocalizedName("seeds");
-
+		cosmetic = new ItemCosmetic().setUnlocalizedName("cosmetic");
 		registerItem(seeds);
+		registerItem(cosmetic);
     }
 
     public static void registerItem(Item item) {
