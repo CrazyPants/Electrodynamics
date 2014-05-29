@@ -6,6 +6,7 @@ import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.IChunkProvider;
+import net.minecraft.world.gen.feature.WorldGenMinable;
 import net.minecraftforge.common.util.ForgeDirection;
 
 import java.util.Random;
@@ -36,12 +37,8 @@ public class GenWolframite implements IWorldGenerator {
                         break;
                     }
                 }
-
-                world.setBlock(x, y - 1, z, oreBlock, 6, 3);
-                world.setBlock(x + 1, y - 1, z, oreBlock, 6, 3);
-                world.setBlock(x - 1, y - 1, z, oreBlock, 6, 3);
-                world.setBlock(x, y - 1, z + 1, oreBlock, 6, 3);
-                world.setBlock(x, y - 1, z - 1, oreBlock, 6, 3);
+                y = 5;
+                new WorldGenMinable(oreBlock, 6, count, Blocks.stone).generate(world, random, x, y, z);
             }
         }
     }
