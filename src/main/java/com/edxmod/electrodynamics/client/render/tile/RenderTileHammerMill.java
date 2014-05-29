@@ -12,6 +12,8 @@ import org.lwjgl.opengl.GL11;
  */
 public class RenderTileHammerMill extends TileEntitySpecialRenderer {
 
+	public static final String PART_GRINDER = "HammerMill___Grinder_1";
+
 	public static WrappedModel hammerMill;
 
 	static {
@@ -28,7 +30,22 @@ public class RenderTileHammerMill extends TileEntitySpecialRenderer {
 		GL11.glTranslated(-0.5, 0, -0.5);
 
 		hammerMill.bindTexture();
-		hammerMill.renderAll();
+		hammerMill.renderAllExcept(PART_GRINDER);
+
+		float rotation = (((float)tile.getWorldObj().getTotalWorldTime()) / 2F) * (180F / (float)Math.PI);
+
+		GL11.glPushMatrix();
+
+		// First we move the pivot point
+		GL11.glTranslated(0, 0.55, 0.55);
+		GL11.glRotated(rotation, 1, 0, 0);
+		GL11.glTranslated(0, -0.55, -0.55);
+
+		// Then we move the object in relation to that pivot point
+		GL11.glTranslated(0, 0.02, 0);
+		hammerMill.renderOnly(PART_GRINDER);
+
+		GL11.glPopMatrix();
 
 		GL11.glPopMatrix();
 	}
