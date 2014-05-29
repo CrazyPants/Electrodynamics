@@ -30,6 +30,7 @@ public class EDXBlocks {
 	public static Block componentGround;
 	public static Block componentWood;
 	public static Block storage;
+	public static Block limestone;
 	public static Block netherGrass;
 	public static Block spawnMarker;
 	public static Block infernalLog;
@@ -52,6 +53,7 @@ public class EDXBlocks {
 		componentGround = new BlockComponentGround().setBlockName("component_ground");
 		componentWood = new BlockComponentWood().setBlockName("component_wood");
 		storage = new BlockStorage().setBlockName("storage");
+		limestone = new BlockLimestone().setBlockName("limestone");
 		netherGrass = new BlockNetherGrass().setBlockName("nether_grass");
 		spawnMarker = new BlockSpawnMarker().setBlockName("spawn_marker");
 		infernalLog = new BlockInfernalLog(false).setBlockName("infernal_log");
@@ -73,6 +75,7 @@ public class EDXBlocks {
 		registerBlock(componentGround, EDXItemMultiBlock.class);
 		registerBlock(componentWood, EDXItemMultiBlock.class);
 		registerBlock(storage, EDXItemMultiBlock.class);
+		registerBlock(limestone, EDXItemMultiBlock.class);
 		registerBlock(netherGrass, EDXItemBlock.class);
 		registerBlock(spawnMarker);
 		registerBlock(infernalLog);

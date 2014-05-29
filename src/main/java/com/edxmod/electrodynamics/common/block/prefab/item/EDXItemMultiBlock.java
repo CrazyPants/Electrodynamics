@@ -12,6 +12,8 @@ public class EDXItemMultiBlock extends ItemBlock {
 
     public EDXItemMultiBlock(Block block) {
         super(block);
+
+		setHasSubtypes(true);
     }
 
     @Override
