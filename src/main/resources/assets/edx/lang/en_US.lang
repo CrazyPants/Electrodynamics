@@ -1,6 +1,9 @@
 # GUI
 gui.container.infernal_furnace=Infernal Furnace
 
+# CHAT
+chat.hammer_mill.stage=Stage set to %s
+
 # RESOURCES
 ore.copper=Copper
 ore.gold=Gold

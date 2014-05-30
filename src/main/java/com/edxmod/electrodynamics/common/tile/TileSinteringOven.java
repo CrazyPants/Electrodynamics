@@ -32,7 +32,7 @@ public class TileSinteringOven extends TileCoreMachine {
 	@Override
 	public void updateEntity() {
 		if (worldObj.isRemote) {
-			currentAngle += (open ? 10F : -10F);
+			currentAngle += (open ? 7.5F : -7.5F);
 
 			if (currentAngle <= 0F) {
 				currentAngle = 0F;

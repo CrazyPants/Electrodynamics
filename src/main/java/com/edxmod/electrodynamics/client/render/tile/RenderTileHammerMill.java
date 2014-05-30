@@ -12,7 +12,8 @@ import org.lwjgl.opengl.GL11;
  */
 public class RenderTileHammerMill extends TileEntitySpecialRenderer {
 
-	public static final String PART_GRINDER = "HammerMill___Grinder_1";
+	public static final String PART_GRINDER = "VIFS001";
+	public static final String PART_SWITCH = "VIFS003";
 
 	public static WrappedModel hammerMill;
 
@@ -30,15 +31,13 @@ public class RenderTileHammerMill extends TileEntitySpecialRenderer {
 		GL11.glTranslated(-0.5, 0, -0.5);
 
 		hammerMill.bindTexture();
-		hammerMill.renderAllExcept(PART_GRINDER);
-
-		float rotation = (((float)tile.getWorldObj().getTotalWorldTime()) / 2F) * (180F / (float)Math.PI);
+		hammerMill.renderAllExcept(PART_GRINDER, PART_SWITCH);
 
 		GL11.glPushMatrix();
 
 		// First we move the pivot point
 		GL11.glTranslated(0, 0.55, 0.55);
-		GL11.glRotated(rotation, 1, 0, 0);
+		GL11.glRotated(-tile.spinLeft, 1, 0, 0);
 		GL11.glTranslated(0, -0.55, -0.55);
 
 		// Then we move the object in relation to that pivot point
@@ -46,6 +45,33 @@ public class RenderTileHammerMill extends TileEntitySpecialRenderer {
 		hammerMill.renderOnly(PART_GRINDER);
 
 		GL11.glPopMatrix();
+
+		if (TileHammerMill.MAX_STAGE % 2 == 0) {
+			int min = (int) Math.floor(((float)TileHammerMill.MAX_STAGE / (float)2) - 0.5F);
+			int max = (int) Math.ceil(((float)TileHammerMill.MAX_STAGE / (float)2) - 0.5F);
+
+			if (tile.grindingStage <= min) {
+				float offset = -0.0625F;
+				offset += -0.125F * (min - tile.grindingStage);
+				GL11.glTranslated(offset, 0, 0);
+			} else if (tile.grindingStage >= max) {
+				float offset = 0.0625F;
+				offset += 0.125F * (tile.grindingStage - max);
+				GL11.glTranslated(offset, 0, 0);
+			}
+		} else {
+			int middle = TileHammerMill.MAX_STAGE / 2;
+
+			if (tile.grindingStage <= middle) {
+				float offset = -0.0625F * (middle - tile.grindingStage);
+				GL11.glTranslated(offset, 0, 0);
+			} else if (tile.grindingStage >= middle) {
+				float offset = 0.0625F * (tile.grindingStage - middle);
+				GL11.glTranslated(offset, 0, 0);
+			}
+		}
+
+		hammerMill.renderOnly(PART_SWITCH);
 
 		GL11.glPopMatrix();
 	}

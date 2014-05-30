@@ -1,9 +1,14 @@
 package com.edxmod.electrodynamics.client.render.item;
 
 import com.edxmod.electrodynamics.client.render.WrappedModel;
+import com.edxmod.electrodynamics.common.block.EDXBlocks;
+import com.edxmod.electrodynamics.common.tile.TileHammerMill;
+import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.IItemRenderer;
+import net.minecraftforge.common.util.ForgeDirection;
 import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.GL12;
 
 /**
  * @author Royalixor
@@ -30,17 +35,17 @@ public class RenderItemHammerMill implements IItemRenderer {
     public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
         GL11.glPushMatrix();
 
-        if (type == ItemRenderType.ENTITY) {
-            GL11.glTranslated(-0.5, 0, -0.5);
-        }
+		if (type == ItemRenderType.ENTITY) {
+			GL11.glTranslated(-0.5, 0, -0.5);
+		}
 
-        if (type == ItemRenderType.INVENTORY) {
-            GL11.glTranslated(0.1, 0, 0.1);
-        }
+		if (type == ItemRenderType.INVENTORY) {
+			GL11.glTranslated(0.1, 0, 0.1);
+		}
 
-        hammerMill.bindTexture();
-        hammerMill.renderAll();
+		hammerMill.bindTexture();
+		hammerMill.renderAll();
 
-        GL11.glPopMatrix();
+		GL11.glPopMatrix();
     }
 }

@@ -1,6 +1,7 @@
 package com.edxmod.electrodynamics.common.block;
 
 import com.edxmod.electrodynamics.common.block.core.BlockSpawnMarker;
+import com.edxmod.electrodynamics.common.block.item.ItemBlockCrank;
 import com.edxmod.electrodynamics.common.block.machine.*;
 import com.edxmod.electrodynamics.common.block.prefab.item.EDXItemBlock;
 import com.edxmod.electrodynamics.common.block.prefab.item.EDXItemMultiBlock;
@@ -67,7 +68,7 @@ public class EDXBlocks {
         registerBlock(tableSieve, EDXItemBlock.class);
 		registerBlock(sinteringOven, EDXMachineBlock.class);
 		registerBlock(hammerMill, EDXMachineBlock.class);
-		registerBlock(crank, EDXMachineBlock.class);
+		registerBlock(crank, ItemBlockCrank.class);
 		registerBlock(waterMill, EDXItemBlock.class);
 		registerBlock(kiln, EDXMachineBlock.class);
 		registerBlock(metalPress, EDXMachineBlock.class);

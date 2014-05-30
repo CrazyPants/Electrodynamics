@@ -2,6 +2,7 @@ package com.edxmod.electrodynamics.client.render.tile;
 
 import com.edxmod.electrodynamics.client.render.WrappedModel;
 import com.edxmod.electrodynamics.common.tile.TileCrank;
+import com.edxmod.electrodynamics.common.tile.TileHammerMill;
 import com.edxmod.electrodynamics.common.util.RenderHelper;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.init.Blocks;
@@ -27,21 +28,25 @@ public class RenderTileCrank extends TileEntitySpecialRenderer {
 		GL11.glDisable(GL11.GL_LIGHTING);
 
 		ForgeDirection orientation = tile.orientation.getOpposite();
+		TileHammerMill hammerMill = (TileHammerMill) tile.getWorldObj().getTileEntity(tile.xCoord + tile.orientation.offsetX, tile.yCoord + tile.orientation.offsetY, tile.zCoord + tile.orientation.offsetZ);
+
+		if (hammerMill == null) {
+			// Probably the tick inbetween hammer mill breaking and the crank updating, so just cancel render
+			return;
+		}
 
 		GL11.glTranslated(x, y, z);
 
 		GL11.glTranslated(0.5 - 0.03125F, 0, 0.5 - 0.03125F);
 		GL11.glTranslated(0.03125F, 0, 0.03125F);
-		GL11.glRotated(RenderHelper.getRotationAngle(orientation), 0, 1, 0);
+		GL11.glRotated(RenderHelper.getRotationAngle(orientation) + 90, 0, 1, 0);
 		GL11.glTranslated(-0.03125F, 0, -0.03125F);
 
 		GL11.glRotated(90, 0, 0, 1);
 		GL11.glTranslated(0.5 - 0.0625F / 2, -0.5 - 0.03125F, 0);
 
-		float rotation = (((float)tile.getWorldObj().getTotalWorldTime()) / 20F) * (180F / (float)Math.PI);
-
 		GL11.glTranslated(0.03125, 0, 0.03125);
-		GL11.glRotated(rotation, 0, 1, 0);
+		GL11.glRotated(tile.reverse ? hammerMill.spinLeft : -hammerMill.spinLeft, 0, 1, 0);
 		GL11.glTranslated(-0.03125, 0, -0.03125F);
 
 		GL11.glPushMatrix();
