@@ -2,9 +2,10 @@ package com.edxmod.electrodynamics.common.recipe.manager;
 
 import com.edxmod.electrodynamics.api.recipe.ITableManager;
 import com.edxmod.electrodynamics.api.tool.ToolDefinition;
+import com.edxmod.electrodynamics.common.recipe.wrapper.TableRecipe;
 import com.edxmod.electrodynamics.common.util.ItemHelper;
+import com.edxmod.electrodynamics.common.util.StackHelper;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.oredict.OreDictionary;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -15,47 +16,6 @@ import java.util.Set;
  * @author dmillerw
  */
 public class TableManager implements ITableManager {
-
-	public static class TableRecipe {
-		private final ItemStack input;
-		private final ToolDefinition tool;
-		private final ItemStack output;
-
-		private final boolean ignoreNBT;
-		public final boolean damageTool;
-
-		public TableRecipe(ItemStack input, ToolDefinition tool, ItemStack output, boolean ignoreNBT, boolean damageTool) {
-			this.input = input;
-			this.tool = tool;
-			this.output = output;
-			this.ignoreNBT = ignoreNBT;
-			this.damageTool = damageTool;
-		}
-
-		public boolean isInput(ItemStack stack, ItemStack tool) {
-			return isInputStack(stack) && isTool(tool);
-		}
-
-		private boolean isInputStack(ItemStack stack) {
-			if (stack.getItemDamage() == OreDictionary.WILDCARD_VALUE || input.getItemDamage() == OreDictionary.WILDCARD_VALUE) {
-				return stack.getItem() == input.getItem() && (ignoreNBT || ItemStack.areItemStackTagsEqual(stack, input));
-			} else {
-				return ((stack.getItem() == input.getItem()) && stack.getItemDamage() == input.getItemDamage()) && (ignoreNBT || ItemStack.areItemStacksEqual(stack, input));
-			}
-		}
-
-		private boolean isTool(ItemStack stack) {
-			return (ToolDefinition.isType(stack, tool));
-		}
-
-		public ItemStack getOutput(boolean equivalentSize) {
-			ItemStack out = output.copy();
-			if (equivalentSize) {
-				out.stackSize = input.stackSize;
-			}
-			return out;
-		}
-	}
 
 	private Set<TableRecipe> recipes = new HashSet<TableRecipe>();
 
@@ -72,20 +32,24 @@ public class TableManager implements ITableManager {
 		return 1F;
 	}
 
-	public void registerRecipe(Object input, ToolDefinition tool, Object output) {
-		if (input == null || tool == null || output == null) {
-			return;
-		}
-
-		register(new TableRecipe(ItemHelper.convertToItemStack(input), tool, ItemHelper.convertToItemStack(output), true, true));
+	public void registerHammerRecipe(Object input, Object output, float durability) {
+		registerRecipe(input, output, ToolDefinition.HAMMER, durability);
 	}
 
-	public void registerHammerRecipe(Object input, Object output) {
-		if (input == null || output == null) {
+	public void registerRecipe(Object input, Object output, ToolDefinition tool, float durability) {
+		if (input == null || output == null || tool == null || durability < 0F) {
 			return;
 		}
 
-		register(new TableRecipe(ItemHelper.convertToItemStack(input), ToolDefinition.HAMMER, ItemHelper.convertToItemStack(output), true, true));
+		ItemStack[] in = StackHelper.convert(input);
+		ItemStack[] out = StackHelper.convert(output);
+
+		if (out.length > 0) {
+			for (ItemStack stack : in) {
+				registerDurablity(stack, durability);
+				register(new TableRecipe(stack, out[0], tool, true, true));
+			}
+		}
 	}
 
 	public void register(TableRecipe recipe) {

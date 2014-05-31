@@ -8,7 +8,7 @@ import com.edxmod.electrodynamics.common.core.handler.SpiderTracker;
 import com.edxmod.electrodynamics.common.item.EDXItems;
 import com.edxmod.electrodynamics.common.item.ItemHammer;
 import com.edxmod.electrodynamics.common.recipe.EDXRecipes;
-import com.edxmod.electrodynamics.common.recipe.RecipeParser;
+import com.edxmod.electrodynamics.common.recipe.core.RecipeParser;
 import com.edxmod.electrodynamics.common.world.WorldProviderSkyblockHell;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.network.NetworkRegistry;

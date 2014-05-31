@@ -1,11 +1,11 @@
 package com.edxmod.electrodynamics.common.tile;
 
-import com.edxmod.electrodynamics.common.recipe.RecipeManager;
+import com.edxmod.electrodynamics.common.recipe.EDXRecipes;
 import com.edxmod.electrodynamics.common.recipe.manager.SieveManager;
+import com.edxmod.electrodynamics.common.recipe.wrapper.SieveRecipe;
 import com.edxmod.electrodynamics.common.util.InventoryHelper;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -88,7 +88,7 @@ public class TileSieveTable extends TileCore implements ISidedInventory {
 			if (entities != null && entities.size() > 0) {
 				EntityItem item = (EntityItem) entities.get(0);
 				if (item.getEntityItem() != null) {
-					SieveManager.SieveRecipe recipe = RecipeManager.INSTANCE.sieve.get(item.getEntityItem());
+					SieveRecipe recipe = EDXRecipes.SIEVE.get(item.getEntityItem());
 
 					if (recipe != null) {
 						ItemStack stack = item.getEntityItem().copy();
@@ -111,7 +111,7 @@ public class TileSieveTable extends TileCore implements ISidedInventory {
 					ItemStack processed = processing[i];
 
 					if (processed != null) {
-						SieveManager.SieveRecipe processingRecipe = RecipeManager.INSTANCE.sieve.get(processed);
+						SieveRecipe processingRecipe = EDXRecipes.SIEVE.get(processed);
 
 						if (processingRecipe != null) {
 							maxProcessingTime = processingRecipe.getDuration();
@@ -127,7 +127,7 @@ public class TileSieveTable extends TileCore implements ISidedInventory {
 					ItemStack processed = processing[i];
 
 					if (processed != null && processed.stackSize > 0) {
-						SieveManager.SieveRecipe processingRecipe = RecipeManager.INSTANCE.sieve.get(processed);
+						SieveRecipe processingRecipe = EDXRecipes.SIEVE.get(processed);
 						ItemStack[] output = processingRecipe.getOutput();
 						Random random = new Random();
 
@@ -246,7 +246,7 @@ public class TileSieveTable extends TileCore implements ISidedInventory {
 
 	@Override
 	public boolean canInsertItem(int slot, ItemStack stack, int side) {
-		return side == 1 && RecipeManager.INSTANCE.sieve.get(stack) != null;
+		return side == 1 && EDXRecipes.SIEVE.get(stack) != null;
 	}
 
 	@Override

@@ -27,24 +27,4 @@ public class ItemHelper {
     public static boolean isBlock(ItemStack stack, Block block) {
         return getID(stack) == getID(block);
     }
-
-    public static ItemStack convertToItemStack(Object object) {
-        if (object instanceof ItemStack) {
-            ItemStack itemStack = (ItemStack) object;
-            if (itemStack.getItemDamage() < 0) {
-                itemStack.setItemDamage(0);
-            }
-            return itemStack;
-        }
-
-        if (object instanceof Block) {
-            return new ItemStack(Block.getBlockById(ItemHelper.getID((Block) object)), 1, OreDictionary.WILDCARD_VALUE);
-        }
-
-        if (object instanceof Item) {
-            return new ItemStack(Item.getItemById(ItemHelper.getID((Item) object)), 1, OreDictionary.WILDCARD_VALUE);
-        }
-        return null;
-    }
-
 }

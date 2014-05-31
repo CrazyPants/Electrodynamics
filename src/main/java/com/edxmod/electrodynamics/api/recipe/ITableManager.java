@@ -8,8 +8,6 @@ import net.minecraft.item.ItemStack;
  */
 public interface ITableManager {
 
-	public void registerDurablity(ItemStack stack, float durability);
-
-	public void registerRecipe(Object input, ToolDefinition tool, Object output);
+	public void registerRecipe(Object input, Object output, ToolDefinition tool, float durability);
 
 }

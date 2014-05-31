@@ -2,10 +2,9 @@ package com.edxmod.electrodynamics.common.tile;
 
 import com.edxmod.electrodynamics.api.tool.ToolDefinition;
 import com.edxmod.electrodynamics.common.block.EDXBlocks;
-import com.edxmod.electrodynamics.common.item.ItemHammer;
 import com.edxmod.electrodynamics.common.network.PacketFX;
-import com.edxmod.electrodynamics.common.recipe.RecipeManager;
-import com.edxmod.electrodynamics.common.recipe.manager.TableManager;
+import com.edxmod.electrodynamics.common.recipe.EDXRecipes;
+import com.edxmod.electrodynamics.common.recipe.wrapper.TableRecipe;
 import com.edxmod.electrodynamics.common.util.InventoryHelper;
 import com.edxmod.electrodynamics.common.util.ItemHelper;
 import net.minecraft.entity.player.EntityPlayer;
@@ -59,7 +58,7 @@ public class TileTable extends TileCore {
 		this.stack = stack;
 
 		if (stack != null) {
-			durability = RecipeManager.INSTANCE.table.getDurability(stack);
+			durability = EDXRecipes.TABLE.getDurability(stack);
 		}
 
 		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
@@ -82,7 +81,7 @@ public class TileTable extends TileCore {
             }
         } else if (meta == 1) {
             if (stack != null) {
-                TableManager.TableRecipe output = RecipeManager.INSTANCE.table.get(stack, tool);
+                TableRecipe output = EDXRecipes.TABLE.get(stack, tool);
 
 				if (output != null) {
 					durability -= ToolDefinition.getStrength(tool);

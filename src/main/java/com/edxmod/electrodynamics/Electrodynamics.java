@@ -1,23 +1,12 @@
 package com.edxmod.electrodynamics;
 
-import com.edxmod.electrodynamics.common.block.EDXBlocks;
-import com.edxmod.electrodynamics.common.recipe.EDXRecipes;
-import com.edxmod.electrodynamics.common.core.handler.GuiHandler;
-import com.edxmod.electrodynamics.common.item.EDXItems;
 import com.edxmod.electrodynamics.common.lib.EDXProps;
 import com.edxmod.electrodynamics.common.network.PacketPipeline;
-import com.edxmod.electrodynamics.common.recipe.RecipeParser;
-import com.edxmod.electrodynamics.common.world.WorldProviderSkyblockHell;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-import cpw.mods.fml.common.network.NetworkRegistry;
-import net.minecraftforge.common.DimensionManager;
-
-import java.io.File;
-import java.io.IOException;
 
 /**
  * @author Royalixor.

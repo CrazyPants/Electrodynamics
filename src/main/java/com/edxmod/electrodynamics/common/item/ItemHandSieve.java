@@ -5,8 +5,9 @@ import com.edxmod.electrodynamics.common.core.EDXCreativeTab;
 import com.edxmod.electrodynamics.common.core.handler.GuiHandler;
 import com.edxmod.electrodynamics.common.inventory.InventoryItem;
 import com.edxmod.electrodynamics.common.item.prefab.EDXItem;
-import com.edxmod.electrodynamics.common.recipe.RecipeManager;
+import com.edxmod.electrodynamics.common.recipe.EDXRecipes;
 import com.edxmod.electrodynamics.common.recipe.manager.SieveManager;
+import com.edxmod.electrodynamics.common.recipe.wrapper.SieveRecipe;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.EnumAction;
@@ -24,7 +25,7 @@ public class ItemHandSieve extends EDXItem {
 		ItemStack stack1 = inventoryItem.getStackInSlot(0);
 
 		if (stack1 != null) {
-			SieveManager.SieveRecipe recipe = RecipeManager.INSTANCE.sieve.get(stack1);
+			SieveRecipe recipe = EDXRecipes.SIEVE.get(stack1);
 
 			for (ItemStack stack2 : recipe.getOutput()) {
 				player.dropPlayerItemWithRandomChoice(stack2, false);
@@ -42,7 +43,7 @@ public class ItemHandSieve extends EDXItem {
 		ItemStack stack1 = new InventoryItem(stack, 1).getStackInSlot(0);
 
 		if (stack1 != null) {
-			SieveManager.SieveRecipe recipe = RecipeManager.INSTANCE.sieve.get(stack1);
+			SieveRecipe recipe = EDXRecipes.SIEVE.get(stack1);
 
 			ItemHandSieve.setCurrentDuration(stack, 0);
 			ItemHandSieve.setMaxDuration(stack, recipe.getDuration());

@@ -2,7 +2,7 @@ package com.edxmod.electrodynamics.common.tile;
 
 import com.edxmod.electrodynamics.common.item.EDXItems;
 import com.edxmod.electrodynamics.common.item.prefab.EDXItem;
-import com.edxmod.electrodynamics.common.recipe.RecipeManager;
+import com.edxmod.electrodynamics.common.recipe.EDXRecipes;
 import com.edxmod.electrodynamics.common.recipe.manager.SieveManager;
 import com.edxmod.electrodynamics.common.recipe.manager.TableManager;
 import com.edxmod.electrodynamics.common.util.InventoryHelper;
@@ -133,10 +133,10 @@ public class TileHammerMill extends TileCoreMachine implements ISidedInventory {
 	}
 
 	public void crank() {
-		spinning = true;
-		spinLeft += 360;
-
-		sendPoke();
+		if (spinLeft <= 0) {
+			spinLeft += 360F;
+			sendPoke();
+		}
 	}
 
 	public void updateStage() {
@@ -242,7 +242,7 @@ public class TileHammerMill extends TileCoreMachine implements ISidedInventory {
 
 	@Override
 	public boolean canInsertItem(int slot, ItemStack stack, int side) {
-		return side == 1 && RecipeManager.INSTANCE.sieve.get(stack) != null;
+		return side == 1 && EDXRecipes.SIEVE.get(stack) != null;
 	}
 
 	@Override

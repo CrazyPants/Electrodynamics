@@ -1,6 +1,7 @@
-package com.edxmod.electrodynamics.common.recipe;
+package com.edxmod.electrodynamics.common.recipe.core;
 
 import com.edxmod.electrodynamics.api.util.RandomStack;
+import com.edxmod.electrodynamics.common.recipe.EDXRecipes;
 import com.google.gson.Gson;
 import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.registry.GameData;
@@ -138,7 +139,7 @@ public class RecipeParser {
 				}
 			}
 
-			RecipeManager.INSTANCE.sieve.register(input, output, recipe1.duration);
+			EDXRecipes.SIEVE.register(input, output, recipe1.duration);
 		}
 
 		int length = recipe.recipes.length;

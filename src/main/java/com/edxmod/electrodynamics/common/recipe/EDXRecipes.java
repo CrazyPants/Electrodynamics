@@ -1,13 +1,16 @@
 package com.edxmod.electrodynamics.common.recipe;
 
+import com.edxmod.electrodynamics.api.tool.ToolDefinition;
 import com.edxmod.electrodynamics.common.block.BlockStorage;
 import com.edxmod.electrodynamics.common.block.EDXBlocks;
 import com.edxmod.electrodynamics.common.item.EDXItems;
 import com.edxmod.electrodynamics.common.item.prefab.EDXItem;
 import com.edxmod.electrodynamics.common.item.resource.ItemResource;
-import com.edxmod.electrodynamics.common.recipe.RecipeManager;
+import com.edxmod.electrodynamics.common.recipe.manager.SieveManager;
+import com.edxmod.electrodynamics.common.recipe.manager.TableManager;
 import com.edxmod.electrodynamics.common.util.StackHelper;
 import cpw.mods.fml.common.registry.GameRegistry;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.CraftingManager;
 
@@ -15,20 +18,30 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author Royalixor
+ * @author dmillerw
  */
 public class EDXRecipes {
 
-    private static List frontRecipes = new ArrayList();
+	public static TableManager TABLE = new TableManager();
+
+	public static SieveManager SIEVE = new SieveManager();
 
     public static void initialize() {
-        addCraftingRecipes();
-        addOreRegistration();
-        addSmeltingRecipes();
-        CraftingManager.getInstance().getRecipeList().addAll(0, frontRecipes);
+		// TABLE - STONE
+		TABLE.registerHammerRecipe(Blocks.stone, Blocks.cobblestone, 1F);
+		TABLE.registerHammerRecipe(Blocks.cobblestone, Blocks.gravel, 1F);
+		TABLE.registerHammerRecipe(Blocks.gravel, Blocks.sand, 1F);
+		TABLE.registerHammerRecipe(Blocks.sand, new ItemStack(EDXBlocks.componentGround, 0, 0), 1F);
 
-        // Ours
-        RecipeManager.INSTANCE.init();
+		// TABLE - NETHERRACK
+		TABLE.registerHammerRecipe(Blocks.netherrack, new ItemStack(EDXBlocks.componentGround, 0, 1), 1F);
+		TABLE.registerHammerRecipe(new ItemStack(EDXBlocks.componentGround, 0, 1), Blocks.soul_sand, 1F);
+		TABLE.registerHammerRecipe(Blocks.soul_sand, new ItemStack(EDXBlocks.componentGround, 0, 3), 1F);
+
+		// TABLE - WOOD
+		for (int i=0; i<4; i++) {
+			TABLE.registerRecipe(new ItemStack(Blocks.log, 1, i), new ItemStack(Blocks.planks, 6, i),  ToolDefinition.AXE, 1F);
+		}
     }
 
     private static void addCraftingRecipes() {
@@ -42,11 +55,4 @@ public class EDXRecipes {
 			}
 		}
     }
-
-    private static void addOreRegistration() {
-    }
-
-    private static void addSmeltingRecipes() {
-    }
-
 }

@@ -2,7 +2,7 @@ package com.edxmod.electrodynamics.common.inventory.container;
 
 import com.edxmod.electrodynamics.common.inventory.InventoryItem;
 import com.edxmod.electrodynamics.common.item.ItemHandSieve;
-import com.edxmod.electrodynamics.common.recipe.RecipeManager;
+import com.edxmod.electrodynamics.common.recipe.EDXRecipes;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
@@ -23,7 +23,7 @@ public class ContainerHandSieve extends ContainerItem {
         addSlotToContainer(new Slot(inventory, 0, 80, 35) {
 			@Override
 			public boolean isItemValid(ItemStack stack) {
-				return RecipeManager.INSTANCE.sieve.get(stack) != null;
+				return EDXRecipes.SIEVE.get(stack) != null;
 			}
 		});
 
