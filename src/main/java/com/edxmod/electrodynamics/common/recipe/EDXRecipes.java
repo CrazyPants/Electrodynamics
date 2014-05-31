@@ -31,12 +31,12 @@ public class EDXRecipes {
 		TABLE.registerHammerRecipe(Blocks.stone, Blocks.cobblestone, 1F);
 		TABLE.registerHammerRecipe(Blocks.cobblestone, Blocks.gravel, 1F);
 		TABLE.registerHammerRecipe(Blocks.gravel, Blocks.sand, 1F);
-		TABLE.registerHammerRecipe(Blocks.sand, new ItemStack(EDXBlocks.componentGround, 0, 0), 1F);
+		TABLE.registerHammerRecipe(Blocks.sand, new ItemStack(EDXBlocks.componentGround, 1, 0), 1F);
 
 		// TABLE - NETHERRACK
-		TABLE.registerHammerRecipe(Blocks.netherrack, new ItemStack(EDXBlocks.componentGround, 0, 1), 1F);
-		TABLE.registerHammerRecipe(new ItemStack(EDXBlocks.componentGround, 0, 1), Blocks.soul_sand, 1F);
-		TABLE.registerHammerRecipe(Blocks.soul_sand, new ItemStack(EDXBlocks.componentGround, 0, 3), 1F);
+		TABLE.registerHammerRecipe(Blocks.netherrack, new ItemStack(EDXBlocks.componentGround, 1, 1), 1F);
+		TABLE.registerHammerRecipe(new ItemStack(EDXBlocks.componentGround, 1, 1), Blocks.soul_sand, 1F);
+		TABLE.registerHammerRecipe(Blocks.soul_sand, new ItemStack(EDXBlocks.componentGround, 1, 3), 1F);
 
 		// TABLE - WOOD
 		for (int i=0; i<4; i++) {

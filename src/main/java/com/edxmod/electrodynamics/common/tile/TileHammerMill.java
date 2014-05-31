@@ -1,10 +1,13 @@
 package com.edxmod.electrodynamics.common.tile;
 
+import com.edxmod.electrodynamics.api.tool.ToolDefinition;
+import com.edxmod.electrodynamics.api.util.DurabilityMapping;
 import com.edxmod.electrodynamics.common.item.EDXItems;
 import com.edxmod.electrodynamics.common.item.prefab.EDXItem;
 import com.edxmod.electrodynamics.common.recipe.EDXRecipes;
 import com.edxmod.electrodynamics.common.recipe.manager.SieveManager;
 import com.edxmod.electrodynamics.common.recipe.manager.TableManager;
+import com.edxmod.electrodynamics.common.recipe.wrapper.TableRecipe;
 import com.edxmod.electrodynamics.common.util.InventoryHelper;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -71,46 +74,50 @@ public class TileHammerMill extends TileCoreMachine implements ISidedInventory {
 			if (entities != null && entities.size() > 0) {
 				EntityItem item = (EntityItem) entities.get(0);
 				if (item.getEntityItem() != null) {
-//					SieveManager.SieveRecipe recipe = RecipeManager.INSTANCE.sieve.get(item.getEntityItem());
+					TableRecipe recipe = EDXRecipes.TABLE.get(item.getEntityItem(), ToolDefinition.HAMMER);
 
-//					if (recipe != null) {
+					if (recipe != null) {
 						ItemStack stack = item.getEntityItem().copy();
 						stack.stackSize = 1;
 
 						if (TileEntityHopper.func_145889_a(this, stack, 1) == null) {
+							charge = 0; // Reset charge to prevent wind-up and massive automation
+
 							item.getEntityItem().stackSize--;
 
 							if (item.getEntityItem().stackSize <= 0) {
 								item.setDead();
 							}
 						}
-//					}
+					}
 				}
 			}
 
 			// Process items
-			// Recipe would be here
-			for (int i=0; i<processing.length; i++) {
-				ItemStack processed = processing[i];
+			if (charge > 0) {
+				for (int i=0; i<processing.length; i++) {
+					ItemStack processed = processing[i];
 
-				if (processed != null && processed.stackSize > 0) {
-					float durability = 0F;
+					if (processed != null && processed.stackSize > 0) {
+						TableRecipe recipe = EDXRecipes.TABLE.get(processed, ToolDefinition.HAMMER);
+						float durability = DurabilityMapping.INSTANCE.getDurability(processed);
 
-					if (charge >= durability) {
-						charge -= durability;
+						if (charge >= durability) {
+							charge -= durability;
 
-						Random random = new Random();
+							Random random = new Random();
 
-//						for (ItemStack stack : recipe.getOutput()) {
-//							InventoryHelper.ejectItem(worldObj, xCoord, yCoord, zCoord, ForgeDirection.UP, stack, random);
-//						}
+							ItemStack output = recipe.getOutput(false);
 
-						processed.stackSize--;
-						if (processed.stackSize <= 0) {
-							processing[i] = null;
+							InventoryHelper.ejectItem(worldObj, xCoord, yCoord, zCoord, ForgeDirection.DOWN, output, random);
+
+							processed.stackSize--;
+							if (processed.stackSize <= 0) {
+								processing[i] = null;
+							}
+
+							break;
 						}
-
-						break;
 					}
 				}
 			}
@@ -127,14 +134,17 @@ public class TileHammerMill extends TileCoreMachine implements ISidedInventory {
 
 		if (spinLeft > 0) {
 			spinLeft -= 20F;
+			spinning = true;
 		} else {
 			spinLeft = 0;
+			spinning = false;
 		}
 	}
 
 	public void crank() {
 		if (spinLeft <= 0) {
 			spinLeft += 360F;
+			spinning = true;
 			sendPoke();
 		}
 	}
@@ -242,7 +252,7 @@ public class TileHammerMill extends TileCoreMachine implements ISidedInventory {
 
 	@Override
 	public boolean canInsertItem(int slot, ItemStack stack, int side) {
-		return side == 1 && EDXRecipes.SIEVE.get(stack) != null;
+		return side == 1 && EDXRecipes.TABLE.get(stack, ToolDefinition.HAMMER) != null;
 	}
 
 	@Override

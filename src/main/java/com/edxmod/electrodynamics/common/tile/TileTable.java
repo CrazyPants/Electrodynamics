@@ -1,6 +1,7 @@
 package com.edxmod.electrodynamics.common.tile;
 
 import com.edxmod.electrodynamics.api.tool.ToolDefinition;
+import com.edxmod.electrodynamics.api.util.DurabilityMapping;
 import com.edxmod.electrodynamics.common.block.EDXBlocks;
 import com.edxmod.electrodynamics.common.network.PacketFX;
 import com.edxmod.electrodynamics.common.recipe.EDXRecipes;
@@ -58,7 +59,7 @@ public class TileTable extends TileCore {
 		this.stack = stack;
 
 		if (stack != null) {
-			durability = EDXRecipes.TABLE.getDurability(stack);
+			durability = DurabilityMapping.INSTANCE.getDurability(stack);
 		}
 
 		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
@@ -70,7 +71,7 @@ public class TileTable extends TileCore {
         Random random = new Random();
 
         if (meta == 0) {
-            if (stack != null && ItemHelper.isBlock(stack, Blocks.stone_slab) && stack.getItemDamage() == 0) {
+            if (stack != null && ItemHelper.isBlock(stack, Blocks.stone_slab) && stack.getItemDamage() == 0 && ToolDefinition.isType(tool, ToolDefinition.HAMMER)) {
                 PacketFX.breakFX(worldObj, xCoord, yCoord, zCoord, new ItemStack(Blocks.stone_slab));
                 getWorldObj().playSoundEffect(xCoord, yCoord, zCoord, "edx:oreCrumble", 1.0F, (random.nextFloat() - random.nextFloat()) * 0.2F + 1.0F);
 
@@ -89,7 +90,6 @@ public class TileTable extends TileCore {
                     if (durability <= 0F) {
 						if (stack.getItem() instanceof ItemBlock) {
 							PacketFX.breakFX(worldObj, xCoord, yCoord, zCoord, stack);
-//							getWorldObj().playSoundEffect(xCoord, yCoord, zCoord, "edx:oreCrumble", 1.0F, (random.nextFloat() - random.nextFloat()) * 0.2F + 1.0F);
 						}
 
 						if (output.damageTool) {

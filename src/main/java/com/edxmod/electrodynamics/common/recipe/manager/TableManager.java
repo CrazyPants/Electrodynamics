@@ -2,6 +2,7 @@ package com.edxmod.electrodynamics.common.recipe.manager;
 
 import com.edxmod.electrodynamics.api.recipe.ITableManager;
 import com.edxmod.electrodynamics.api.tool.ToolDefinition;
+import com.edxmod.electrodynamics.api.util.DurabilityMapping;
 import com.edxmod.electrodynamics.common.recipe.wrapper.TableRecipe;
 import com.edxmod.electrodynamics.common.util.ItemHelper;
 import com.edxmod.electrodynamics.common.util.StackHelper;
@@ -19,19 +20,6 @@ public class TableManager implements ITableManager {
 
 	private Set<TableRecipe> recipes = new HashSet<TableRecipe>();
 
-	private Map<ItemStack, Float> durabilityMapping = new HashMap<ItemStack, Float>();
-
-	public void registerDurablity(ItemStack stack, float durability) {
-		durabilityMapping.put(stack, durability);
-	}
-
-	public float getDurability(ItemStack stack) {
-		for (Map.Entry<ItemStack, Float> entry : durabilityMapping.entrySet()) {
-			if (entry.getKey().isItemEqual(stack)) return entry.getValue();
-		}
-		return 1F;
-	}
-
 	public void registerHammerRecipe(Object input, Object output, float durability) {
 		registerRecipe(input, output, ToolDefinition.HAMMER, durability);
 	}
@@ -46,7 +34,7 @@ public class TableManager implements ITableManager {
 
 		if (out.length > 0) {
 			for (ItemStack stack : in) {
-				registerDurablity(stack, durability);
+				DurabilityMapping.INSTANCE.registerDurablity(stack, durability);
 				register(new TableRecipe(stack, out[0], tool, true, true));
 			}
 		}
@@ -57,6 +45,15 @@ public class TableManager implements ITableManager {
 	}
 
 	public TableRecipe get(ItemStack input, ItemStack tool) {
+		for (TableRecipe recipe : recipes) {
+			if (recipe.isInput(input, tool)) {
+				return recipe;
+			}
+		}
+		return null;
+	}
+
+	public TableRecipe get(ItemStack input, ToolDefinition tool) {
 		for (TableRecipe recipe : recipes) {
 			if (recipe.isInput(input, tool)) {
 				return recipe;

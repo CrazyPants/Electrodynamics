@@ -22,11 +22,11 @@ public class StackHelper {
 		}
 
 		if (object instanceof Block) {
-			return new ItemStack[] {new ItemStack((Block)object, 1, OreDictionary.WILDCARD_VALUE)};
+			return new ItemStack[] {new ItemStack((Block)object)};
 		}
 
 		if (object instanceof Item) {
-			return new ItemStack[] {new ItemStack((Item)object, 1, OreDictionary.WILDCARD_VALUE)};
+			return new ItemStack[] {new ItemStack((Item)object)};
 		}
 
 		if (object instanceof String) {
@@ -35,6 +35,14 @@ public class StackHelper {
 		}
 
 		return null;
+	}
+
+	public static boolean areStacksSimilar(ItemStack stack1, ItemStack stack2, boolean ignoreNBT) {
+		if (stack1.getItemDamage() == OreDictionary.WILDCARD_VALUE || stack2.getItemDamage() == OreDictionary.WILDCARD_VALUE) {
+			return stack1.getItem() == stack2.getItem() && (ignoreNBT || ItemStack.areItemStackTagsEqual(stack1, stack2));
+		} else {
+			return ((stack1.getItem() == stack2.getItem()) && stack1.getItemDamage() == stack2.getItemDamage()) && (ignoreNBT || ItemStack.areItemStacksEqual(stack1, stack2));
+		}
 	}
 
 	public static ItemStack copyAndResize(ItemStack ingot, int size) {

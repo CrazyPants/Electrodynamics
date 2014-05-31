@@ -1,6 +1,7 @@
 package com.edxmod.electrodynamics.common.recipe.wrapper;
 
 import com.edxmod.electrodynamics.api.util.RandomStack;
+import com.edxmod.electrodynamics.common.util.StackHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 
@@ -24,11 +25,7 @@ public class SieveRecipe {
 	}
 
 	public boolean isInput(ItemStack stack) {
-		if (stack.getItemDamage() == OreDictionary.WILDCARD_VALUE || input.getItemDamage() == OreDictionary.WILDCARD_VALUE) {
-			return stack.getItem() == input.getItem() && (ignoreNBT || ItemStack.areItemStackTagsEqual(stack, input));
-		} else {
-			return ((stack.getItem() == input.getItem()) && stack.getItemDamage() == input.getItemDamage()) && (ignoreNBT || ItemStack.areItemStacksEqual(stack, input));
-		}
+		return StackHelper.areStacksSimilar(stack, input, ignoreNBT);
 	}
 
 	public int getDuration() {

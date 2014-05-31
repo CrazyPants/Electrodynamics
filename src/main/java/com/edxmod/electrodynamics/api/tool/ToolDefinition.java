@@ -1,5 +1,6 @@
 package com.edxmod.electrodynamics.api.tool;
 
+import com.edxmod.electrodynamics.common.util.StackHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 
@@ -48,7 +49,9 @@ public enum ToolDefinition {
 		List<ItemStack> toolList = toolDefinitionMap.get(definition);
 		for (ItemStack stack1 : toolList) {
 			if (stack != null) {
-				if (stack.isItemEqual(stack1)) return true;
+				if (StackHelper.areStacksSimilar(stack, stack1, true)) {
+					return true;
+				}
 			}
 		}
 		return false;
@@ -56,7 +59,7 @@ public enum ToolDefinition {
 
 	public static float getStrength(ItemStack stack) {
 		for (Map.Entry<ItemStack, Float> entry : toolStrengthMap.entrySet()) {
-			if (entry.getKey().isItemEqual(stack)) return entry.getValue();
+			if (StackHelper.areStacksSimilar(entry.getKey(), stack, true)) return entry.getValue();
 		}
 		return 0F;
 	}

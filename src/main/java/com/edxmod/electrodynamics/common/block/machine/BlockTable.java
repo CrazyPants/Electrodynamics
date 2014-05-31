@@ -32,7 +32,7 @@ import java.util.List;
 /**
  * @author dmillerw
  */
-public class BlockTable extends EDXTileMultiBlock implements IRaytracable {
+public class BlockTable extends EDXTileMultiBlock {
 
     private static final String[] NAMES = new String[]{"wood", "stone"};
 
@@ -42,48 +42,43 @@ public class BlockTable extends EDXTileMultiBlock implements IRaytracable {
             TileTable tile = (TileTable) world.getTileEntity(x, y, z);
 
             if (tile != null) {
-                if (!player.isSneaking() && side == 1 && tile.stack == null && player.getHeldItem() != null) {
-                    ItemStack stack = player.getHeldItem().copy();
-                    stack.stackSize = 1;
+                if (!player.isSneaking() && side == 1) {
+					ItemStack held = player.getHeldItem();
 
-					tile.setStack(stack);
+					if (held != null && tile.stack == null) {
+						ItemStack stack = held.copy();
+						stack.stackSize = 1;
 
-                    player.getHeldItem().stackSize--;
-                    if (player.getHeldItem().stackSize <= 0) {
-                        player.setCurrentItemOrArmor(0, null);
-                    }
+						tile.setStack(stack);
 
-                    return true;
-                } else {
-                    RayTracer.RaytraceResult result = RayTracer.doRaytrace(world, x, y, z, player);
+						held.stackSize--;
+						if (held.stackSize <= 0) {
+							player.setCurrentItemOrArmor(0, null);
+						}
+					} else {
+						if (!tile.smash(player)) {
+							if (tile.stack != null && held == null) {
+								player.setCurrentItemOrArmor(0, tile.stack.copy());
+								tile.setStack(null);
+								return true;
+							} else if (tile.stack != null && held != null) {
+								if (tile.stack.isItemEqual(held) && (held.stackSize + 1 <= held.getItem().getItemStackLimit(held))) {
+									held.stackSize += tile.stack.stackSize;
 
-                    if (result != null && result.hitID == 1) {
-                        if (!player.isSneaking()) {
-                            if (!tile.smash(player)) {
-								if (tile.stack != null && player.getHeldItem() == null) {
-									player.setCurrentItemOrArmor(0, tile.stack.copy());
-									tile.stack = null;
-
-									world.markBlockForUpdate(x, y, z);
-									return true;
-								} else if (tile.stack != null && player.getHeldItem() != null) {
-									if (tile.stack.isItemEqual(player.getHeldItem()) && (player.getHeldItem().stackSize + 1 <= player.getHeldItem().getItem().getItemStackLimit(player.getHeldItem()))) {
-										player.getHeldItem().stackSize += tile.stack.stackSize;
-
-										if (player.getHeldItem().stackSize > player.getHeldItem().getMaxStackSize()) {
-											tile.stack.stackSize = player.getHeldItem().stackSize - player.getHeldItem().getMaxStackSize();
-										} else {
-											tile.stack = null;
-										}
-
+									if (held.stackSize > held.getMaxStackSize()) {
+										held.stackSize = held.getMaxStackSize();
+										tile.stack.stackSize = held.stackSize - held.getMaxStackSize();
 										world.markBlockForUpdate(x, y, z);
-										return true;
+									} else {
+										tile.setStack(null);
 									}
+
+									return true;
 								}
 							}
-                        }
-                    }
-                }
+						}
+					}
+				}
             }
         }
 
@@ -113,66 +108,5 @@ public class BlockTable extends EDXTileMultiBlock implements IRaytracable {
     @Override
     public TileEntity createNewTileEntity(World world, int meta) {
         return new TileTable();
-    }
-
-    /* IRAYTRACABLE */
-    @Override
-    public List<IndexedAABB> getTargets(World world, int x, int y, int z) {
-        List<IndexedAABB> targets = new ArrayList<IndexedAABB>();
-        TileTable tile = (TileTable) world.getTileEntity(x, y, z);
-
-        float renderMax = tile.getBlockMetadata() == 0 ? RenderTileTable.WOOD_RENDER_MAX : RenderTileTable.STONE_RENDER_MAX;
-
-        // This target takes the place of setBlockBoundsBasedOnState
-        targets.add(new IndexedAABB(0, getBlockBoundsMinX(), getBlockBoundsMinY(), getBlockBoundsMinZ(), getBlockBoundsMaxX(), renderMax, getBlockBoundsMaxZ()));
-
-        if (tile.stack != null) {
-            if (tile.stack.getItem() instanceof ItemBlock && RenderBlocks.renderItemIn3d(Block.getBlockFromItem(tile.stack.getItem()).getRenderType())) {
-                Block block = Block.getBlockFromItem(tile.stack.getItem());
-                AxisAlignedBB blockBounds = AxisAlignedBB.getBoundingBox(0.25, renderMax, 0.25, 0.75, renderMax + (block.getBlockBoundsMaxY() / 2), 0.75);
-				targets.add(new IndexedAABB(1, blockBounds));
-            } else {
-                targets.add(new IndexedAABB(1, 0.25, renderMax, 0.25, 0.75, renderMax + 0.0625F, 0.75));
-            }
-        }
-
-        return targets;
-    }
-
-    @SuppressWarnings("rawtypes")
-    @Override
-    public void addCollisionBoxesToList(World world, int x, int y, int z, AxisAlignedBB aabb, List list, Entity entity) {
-        // For this example, just sets the bounds to full. This can change
-        setBlockBounds(0, 0, 0, 1, 1, 1);
-        super.addCollisionBoxesToList(world, x, y, z, aabb, list, entity);
-    }
-
-    @SideOnly(Side.CLIENT)
-    @Override
-    public AxisAlignedBB getSelectedBoundingBoxFromPool(World world, int x, int y, int z) {
-        RayTracer.RaytraceResult result = RayTracer.doRaytrace(world, x, y, z, Minecraft.getMinecraft().thePlayer);
-
-        if (result != null && result.aabb != null) {
-            // Returns the resulting bounding box, offset to match the block coordinates
-            return result.aabb.offset(x, y, z);
-        } else {
-            return super.getSelectedBoundingBoxFromPool(world, x, y, z);
-        }
-    }
-
-    @Override
-    public MovingObjectPosition collisionRayTrace(World world, int x, int y, int z, Vec3 origin, Vec3 direction) {
-        RayTracer.RaytraceResult result = RayTracer.doRaytrace(world, x, y, z, origin, direction);
-
-        if (result == null) {
-            return null;
-        } else {
-            return result.mob;
-        }
-    }
-
-    @Override
-    public MovingObjectPosition raytrace(World world, int x, int y, int z, Vec3 origin, Vec3 direction) {
-        return super.collisionRayTrace(world, x, y, z, origin, direction);
     }
 }

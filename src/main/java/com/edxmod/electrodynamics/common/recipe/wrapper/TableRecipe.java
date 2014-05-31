@@ -1,6 +1,8 @@
 package com.edxmod.electrodynamics.common.recipe.wrapper;
 
 import com.edxmod.electrodynamics.api.tool.ToolDefinition;
+import com.edxmod.electrodynamics.common.tile.TileTable;
+import com.edxmod.electrodynamics.common.util.StackHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 
@@ -29,16 +31,16 @@ public class TableRecipe {
 		return isInputStack(stack) && isTool(tool);
 	}
 
+	public boolean isInput(ItemStack stack, ToolDefinition tool) {
+		return isInputStack(stack) && tool == this.tool;
+	}
+
 	private boolean isInputStack(ItemStack stack) {
-		if (stack.getItemDamage() == OreDictionary.WILDCARD_VALUE || input.getItemDamage() == OreDictionary.WILDCARD_VALUE) {
-			return stack.getItem() == input.getItem() && (ignoreNBT || ItemStack.areItemStackTagsEqual(stack, input));
-		} else {
-			return ((stack.getItem() == input.getItem()) && stack.getItemDamage() == input.getItemDamage()) && (ignoreNBT || ItemStack.areItemStacksEqual(stack, input));
-		}
+		return StackHelper.areStacksSimilar(stack, input, ignoreNBT);
 	}
 
 	private boolean isTool(ItemStack stack) {
-		return (ToolDefinition.isType(stack, tool));
+		return ToolDefinition.isType(stack, tool);
 	}
 
 	public ItemStack getOutput(boolean equivalentSize) {
