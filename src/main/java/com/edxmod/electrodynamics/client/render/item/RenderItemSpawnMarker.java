@@ -30,6 +30,8 @@ public class RenderItemSpawnMarker implements IItemRenderer {
     public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
         GL11.glPushMatrix();
 
+		GL11.glRotated(180, 0, 1, 0);
+
         if (type == ItemRenderType.ENTITY) {
             GL11.glTranslated(-0.5, 0, -0.5);
         }
