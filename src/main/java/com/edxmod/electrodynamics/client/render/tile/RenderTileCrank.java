@@ -19,7 +19,7 @@ public class RenderTileCrank extends TileEntitySpecialRenderer {
 	public static WrappedModel crank;
 
 	static {
-		crank = new WrappedModel("blocks/crank.obj", "blocks/crank.png");
+		crank = new WrappedModel("blocks/handCrank.obj", "blocks/handCrank.png");
 	}
 
 	public void renderCrankAt(TileCrank tile, double x, double y, double z, float partial) {
