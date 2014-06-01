@@ -32,6 +32,8 @@ public class ClientProxy extends CommonProxy {
 		ClientRegistry.bindTileEntitySpecialRenderer(TileSinteringOven.class, new RenderTileSinteringOven());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileHammerMill.class, new RenderTileHammerMill());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileCrank.class, new RenderTileCrank());
+		ClientRegistry.bindTileEntitySpecialRenderer(TileKineticCrank.class, new RenderTileKineticCrank());
+		ClientRegistry.bindTileEntitySpecialRenderer(TileWaterMill.class, new RenderTileWaterMill());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileKiln.class, new RenderTileKiln());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileMetalPress.class, new RenderTileMetalPress());
 		ClientRegistry.bindTileEntitySpecialRenderer(TileSpawnMarker.class, new RenderTileSpawnMarker());
@@ -41,6 +43,7 @@ public class ClientProxy extends CommonProxy {
 		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(EDXBlocks.tableSieve), new RenderItemSieveTable());
 		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(EDXBlocks.sinteringOven), new RenderItemSinteringOven());
 		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(EDXBlocks.hammerMill), new RenderItemHammerMill());
+		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(EDXBlocks.kineticCrank), new RenderItemKineticCrank());
 		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(EDXBlocks.kiln), new RenderItemKiln());
 		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(EDXBlocks.metalPress), new RenderItemMetalPress());
 		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(EDXBlocks.spawnMarker), new RenderItemSpawnMarker());

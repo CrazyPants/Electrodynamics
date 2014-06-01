@@ -5,6 +5,8 @@ import com.edxmod.electrodynamics.common.block.prefab.item.EDXItemBlock;
 import com.edxmod.electrodynamics.common.lib.EDXProps;
 import com.edxmod.electrodynamics.common.tile.TileCrank;
 import com.edxmod.electrodynamics.common.tile.TileHammerMill;
+import com.edxmod.electrodynamics.common.tile.TileKineticCrank;
+import com.edxmod.electrodynamics.common.tile.TileWaterMill;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
@@ -16,11 +18,11 @@ import net.minecraftforge.common.util.ForgeDirection;
 /**
  * @author dmillerw
  */
-public class ItemBlockCrank extends EDXItemBlock {
+public class ItemBlockWaterMill extends EDXItemBlock {
 
 	private IIcon icon;
 
-	public ItemBlockCrank(Block block) {
+	public ItemBlockWaterMill(Block block) {
 		super(block);
 	}
 
@@ -52,32 +54,22 @@ public class ItemBlockCrank extends EDXItemBlock {
 
 		ForgeDirection opposite = ForgeDirection.getOrientation(side).getOpposite();
 
-		if (world.getBlock(x + opposite.offsetX, y + opposite.offsetY, z + opposite.offsetZ) != EDXBlocks.hammerMill) {
+		if (world.getBlock(x + opposite.offsetX, y + opposite.offsetY, z + opposite.offsetZ) != EDXBlocks.kineticCrank) {
 			return false;
 		}
 
-		TileHammerMill tile = (TileHammerMill) world.getTileEntity(x + opposite.offsetX, y + opposite.offsetY, z + opposite.offsetZ);
+		TileKineticCrank tile = (TileKineticCrank) world.getTileEntity(x + opposite.offsetX, y + opposite.offsetY, z + opposite.offsetZ);
 
-		// Prevents the crank from being placed on the front/back of the block
-		if (!(opposite == tile.orientation.getRotation(ForgeDirection.UP) || opposite == tile.orientation.getRotation(ForgeDirection.UP).getOpposite())) {
+		// Prevents the mill from being placed on the front/back of the block
+		if (!(opposite == tile.orientation || opposite == tile.orientation.getOpposite())) {
 			return false;
 		}
 
 		boolean result = super.placeBlockAt(stack, player, world, x, y, z, side, hitX, hitY, hitZ, metadata);
 
 		if (result) {
-			TileCrank crank = (TileCrank) world.getTileEntity(x, y, z);
-			crank.orientation = ForgeDirection.getOrientation(side).getOpposite();
-
-			if (tile.orientation == ForgeDirection.WEST && crank.orientation == ForgeDirection.SOUTH) {
-				crank.reverse = true;
-			} else if (tile.orientation == ForgeDirection.SOUTH && crank.orientation == ForgeDirection.EAST) {
-				crank.reverse = true;
-			} else if (tile.orientation == ForgeDirection.EAST && crank.orientation == ForgeDirection.NORTH) {
-				crank.reverse = true;
-			} else if (tile.orientation == ForgeDirection.NORTH && crank.orientation == ForgeDirection.WEST) {
-				crank.reverse = true;
-			}
+			TileWaterMill mill = (TileWaterMill) world.getTileEntity(x, y, z);
+			mill.orientation = ForgeDirection.getOrientation(side).getOpposite();
 		}
 
 		return result;

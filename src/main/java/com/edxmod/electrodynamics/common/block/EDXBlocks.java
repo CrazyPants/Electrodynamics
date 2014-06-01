@@ -2,6 +2,7 @@ package com.edxmod.electrodynamics.common.block;
 
 import com.edxmod.electrodynamics.common.block.core.BlockSpawnMarker;
 import com.edxmod.electrodynamics.common.block.item.ItemBlockCrank;
+import com.edxmod.electrodynamics.common.block.item.ItemBlockWaterMill;
 import com.edxmod.electrodynamics.common.block.machine.*;
 import com.edxmod.electrodynamics.common.block.prefab.item.EDXItemBlock;
 import com.edxmod.electrodynamics.common.block.prefab.item.EDXItemMultiBlock;
@@ -22,6 +23,7 @@ public class EDXBlocks {
 	public static Block sinteringOven;
 	public static Block hammerMill;
 	public static Block crank;
+	public static Block kineticCrank;
 	public static Block waterMill;
 	public static Block kiln;
 	public static Block metalPress;
@@ -46,6 +48,7 @@ public class EDXBlocks {
 		sinteringOven = new BlockSinteringOven().setBlockName("sintering_oven");
 		hammerMill = new BlockHammerMill().setBlockName("hammer_mill");
 		crank = new BlockCrank().setBlockName("crank");
+		kineticCrank = new BlockKineticCrank().setBlockName("kinetic_crank");
 		waterMill = new BlockWaterMill().setBlockName("water_mill");
 		kiln = new BlockKiln().setBlockName("kiln");
 		metalPress = new BlockMetalPress().setBlockName("metal_press");
@@ -69,7 +72,8 @@ public class EDXBlocks {
 		registerBlock(sinteringOven, EDXMachineBlock.class);
 		registerBlock(hammerMill, EDXMachineBlock.class);
 		registerBlock(crank, ItemBlockCrank.class);
-		registerBlock(waterMill, EDXItemBlock.class);
+		registerBlock(kineticCrank, EDXMachineBlock.class);
+		registerBlock(waterMill, ItemBlockWaterMill.class);
 		registerBlock(kiln, EDXMachineBlock.class);
 		registerBlock(metalPress, EDXMachineBlock.class);
 		registerBlock(barrel, EDXItemBlock.class);
@@ -92,6 +96,7 @@ public class EDXBlocks {
     	GameRegistry.registerTileEntity(TileSinteringOven.class, "edx:sintering_oven");
 		GameRegistry.registerTileEntity(TileHammerMill.class, "edx:hammer_mill");
 		GameRegistry.registerTileEntity(TileCrank.class, "edx:crank");
+		GameRegistry.registerTileEntity(TileKineticCrank.class, "edx:kinetic_crank");
 		GameRegistry.registerTileEntity(TileWaterMill.class, "edx:water_mill");
 		GameRegistry.registerTileEntity(TileKiln.class, "edx:kiln");
 		GameRegistry.registerTileEntity(TileMetalPress.class, "edx:metal_press");
