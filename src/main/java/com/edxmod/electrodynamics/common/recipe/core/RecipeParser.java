@@ -129,11 +129,11 @@ public class RecipeParser {
 
 			if (recipe.crash_on_fail) {
 				if (input == null) {
-					throw new NullPointerException();
+					throw new NullPointerException(recipe1.input + " is not a valid item!");
 				} else {
 					for (int i=0; i<output.length; i++) {
 						if (output[i] == null || output[i].stack == null) {
-							throw new NullPointerException();
+							throw new NullPointerException(recipe1.outputs[i].item + " is not a valid item!");
 						}
 					}
 				}
