@@ -33,6 +33,18 @@ public class CommonProxy {
 		EDXItems.initialize();
 		EDXRecipes.initialize();
 
+		NetworkRegistry.INSTANCE.registerGuiHandler(Electrodynamics.instance, new GuiHandler());
+
+		MinecraftForge.EVENT_BUS.register(new BlockEventHandler());
+
+		FMLCommonHandler.instance().bus().register(new SpiderTracker());
+    }
+
+    public void init() {
+
+    }
+
+	public void postInit() {
 		File recipes = new File(Electrodynamics.configPath, "recipes/");
 		if (!recipes.exists()) {
 			recipes.mkdirs();
@@ -46,18 +58,6 @@ public class CommonProxy {
 			}
 		}
 
-		NetworkRegistry.INSTANCE.registerGuiHandler(Electrodynamics.instance, new GuiHandler());
-
-		MinecraftForge.EVENT_BUS.register(new BlockEventHandler());
-
-		FMLCommonHandler.instance().bus().register(new SpiderTracker());
-    }
-
-    public void init() {
-
-    }
-
-	public void postInit() {
 		try {
 			RecipeParser.dumpItems(new File(Electrodynamics.configPath, "key_dump.txt"));
 		} catch (IOException e) {
