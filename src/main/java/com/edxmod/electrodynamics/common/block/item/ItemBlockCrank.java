@@ -1,5 +1,6 @@
 package com.edxmod.electrodynamics.common.block.item;
 
+import com.edxmod.electrodynamics.api.tool.ICrankable;
 import com.edxmod.electrodynamics.common.block.EDXBlocks;
 import com.edxmod.electrodynamics.common.block.prefab.item.EDXItemBlock;
 import com.edxmod.electrodynamics.common.lib.EDXProps;
@@ -9,6 +10,7 @@ import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
@@ -56,10 +58,15 @@ public class ItemBlockCrank extends EDXItemBlock {
 			return false;
 		}
 
-		TileHammerMill tile = (TileHammerMill) world.getTileEntity(x + opposite.offsetX, y + opposite.offsetY, z + opposite.offsetZ);
+		TileEntity tile = world.getTileEntity(x + opposite.offsetX, y + opposite.offsetY, z + opposite.offsetZ);
 
-		// Prevents the crank from being placed on the front/back of the block
-		if (!(opposite == tile.orientation.getRotation(ForgeDirection.UP) || opposite == tile.orientation.getRotation(ForgeDirection.UP).getOpposite())) {
+		if (!(tile instanceof ICrankable)) {
+			return false;
+		}
+
+		ICrankable crankable = (ICrankable) tile;
+
+		if (!crankable.canConnect(opposite.getOpposite())) {
 			return false;
 		}
 
@@ -69,14 +76,18 @@ public class ItemBlockCrank extends EDXItemBlock {
 			TileCrank crank = (TileCrank) world.getTileEntity(x, y, z);
 			crank.orientation = ForgeDirection.getOrientation(side).getOpposite();
 
-			if (tile.orientation == ForgeDirection.WEST && crank.orientation == ForgeDirection.SOUTH) {
-				crank.reverse = true;
-			} else if (tile.orientation == ForgeDirection.SOUTH && crank.orientation == ForgeDirection.EAST) {
-				crank.reverse = true;
-			} else if (tile.orientation == ForgeDirection.EAST && crank.orientation == ForgeDirection.NORTH) {
-				crank.reverse = true;
-			} else if (tile.orientation == ForgeDirection.NORTH && crank.orientation == ForgeDirection.WEST) {
-				crank.reverse = true;
+			if (crankable instanceof TileHammerMill) {
+				TileHammerMill hammerMill = (TileHammerMill) crankable;
+
+				if (hammerMill.orientation == ForgeDirection.WEST && crank.orientation == ForgeDirection.SOUTH) {
+					crank.reverse = true;
+				} else if (hammerMill.orientation == ForgeDirection.SOUTH && crank.orientation == ForgeDirection.EAST) {
+					crank.reverse = true;
+				} else if (hammerMill.orientation == ForgeDirection.EAST && crank.orientation == ForgeDirection.NORTH) {
+					crank.reverse = true;
+				} else if (hammerMill.orientation == ForgeDirection.NORTH && crank.orientation == ForgeDirection.WEST) {
+					crank.reverse = true;
+				}
 			}
 		}
 

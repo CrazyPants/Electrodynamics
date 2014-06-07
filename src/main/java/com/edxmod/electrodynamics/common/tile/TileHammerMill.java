@@ -1,5 +1,6 @@
 package com.edxmod.electrodynamics.common.tile;
 
+import com.edxmod.electrodynamics.api.tool.ICrankable;
 import com.edxmod.electrodynamics.api.tool.ToolDefinition;
 import com.edxmod.electrodynamics.api.util.DurabilityMapping;
 import com.edxmod.electrodynamics.common.item.EDXItems;
@@ -27,7 +28,7 @@ import java.util.Random;
 /**
  * @author dmillerw
  */
-public class TileHammerMill extends TileCoreMachine implements ISidedInventory {
+public class TileHammerMill extends TileCoreMachine implements ISidedInventory, ICrankable {
 
 	public static final byte MAX_STAGE = 5;
 
@@ -141,14 +142,6 @@ public class TileHammerMill extends TileCoreMachine implements ISidedInventory {
 		}
 	}
 
-	public void crank() {
-		if (spinLeft <= 0) {
-			spinLeft += 360F;
-			spinning = true;
-			sendPoke();
-		}
-	}
-
 	public void updateStage() {
 		grindingStage++;
 		if (grindingStage >= MAX_STAGE) {
@@ -158,6 +151,21 @@ public class TileHammerMill extends TileCoreMachine implements ISidedInventory {
 		NBTTagCompound nbt = new NBTTagCompound();
 		nbt.setByte("stage", grindingStage);
 		sendClientUpdate(nbt);
+	}
+
+	/* ICRANKABLE */
+	@Override
+	public void crank() {
+		if (spinLeft <= 0) {
+			spinLeft += 360F;
+			spinning = true;
+			sendPoke();
+		}
+	}
+
+	@Override
+	public boolean canConnect(ForgeDirection side) {
+		return (side == orientation.getRotation(ForgeDirection.UP) || side == orientation.getRotation(ForgeDirection.UP).getOpposite());
 	}
 
 	/* IINVENTORY / ISIDEDINVENTORY */
