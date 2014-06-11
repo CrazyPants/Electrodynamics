@@ -5,9 +5,10 @@ import com.edxmod.electrodynamics.common.config.EDXConfiguration;
 import com.edxmod.electrodynamics.common.core.EDXRecipes;
 import com.edxmod.electrodynamics.common.core.handler.GuiHandler;
 import com.edxmod.electrodynamics.common.events.EDXEvents;
+import com.edxmod.electrodynamics.common.fluid.EDXFluids;
 import com.edxmod.electrodynamics.common.item.EDXItems;
-import com.edxmod.electrodynamics.common.network.PacketPipeline;
 import com.edxmod.electrodynamics.common.lib.EDXProps;
+import com.edxmod.electrodynamics.common.network.PacketPipeline;
 import com.edxmod.electrodynamics.common.world.EDXWorldGenerator;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;
@@ -37,6 +38,7 @@ public class Electrodynamics {
         configPath = event.getModConfigurationDirectory() + "/EDX/";
         EDXConfiguration.init(configPath);
 
+        EDXFluids.init();
         EDXBlocks.init();
         EDXItems.init();
         EDXEvents.init();
@@ -46,7 +48,7 @@ public class Electrodynamics {
         NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiHandler());
 
         proxy.registerRenders();
-		proxy.preInit();
+        proxy.preInit();
     }
 
     @Mod.EventHandler

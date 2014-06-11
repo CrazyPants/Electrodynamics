@@ -5,12 +5,12 @@ package com.edxmod.electrodynamics;
  */
 public class CommonProxy {
 
-    public void preInit() {
-
+    public CommonProxy preInit() {
+        return this;
     }
 
-    public void registerRenders() {
-
+    public CommonProxy registerRenders() {
+        return this;
     }
 
 }
