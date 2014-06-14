@@ -65,7 +65,8 @@ public class ItemBlockCrank extends EDXItemBlock {
 
 		TileHammerMill hammerMill = (TileHammerMill) tile;
 
-		if (side == hammerMill.orientation.getRotation(ForgeDirection.UP).ordinal() || side == hammerMill.orientation.getRotation(ForgeDirection.UP).getOpposite().ordinal()) {
+		ForgeDirection orientation = ForgeDirection.getOrientation(side);
+		if (orientation != hammerMill.orientation.getRotation(ForgeDirection.UP) && orientation != hammerMill.orientation.getRotation(ForgeDirection.UP).getOpposite()) {
 			return false;
 		}
 

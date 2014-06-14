@@ -1,14 +1,12 @@
 package com.edxmod.electrodynamics.common.tile;
 
 import com.edxmod.electrodynamics.api.tool.ToolDefinition;
-import com.edxmod.electrodynamics.common.block.BlockComponentGround;
-import com.edxmod.electrodynamics.common.block.EDXBlocks;
+import com.edxmod.electrodynamics.common.lib.StackReference;
 import com.edxmod.electrodynamics.common.recipe.EDXRecipes;
 import com.edxmod.electrodynamics.common.recipe.wrapper.TableRecipe;
 import com.edxmod.electrodynamics.common.util.InventoryHelper;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -27,17 +25,6 @@ public class TileHammerMill extends TileCoreMachine implements ISidedInventory {
 	public static final byte MAX_STAGE = 4;
 
 	private static final int INVENTORY_SIZE = 1;
-
-	private static final ItemStack STONE = new ItemStack(Blocks.stone);
-	private static final ItemStack COBBLESTONE = new ItemStack(Blocks.cobblestone);
-	private static final ItemStack GRAVEL = new ItemStack(Blocks.gravel);
-	private static final ItemStack SAND = new ItemStack(Blocks.sand);
-	private static final ItemStack FINE_SAND = new ItemStack(EDXBlocks.componentGround, 1, BlockComponentGround.FINE_SAND);
-
-	private static final ItemStack NETHERRACK = new ItemStack(Blocks.netherrack);
-	private static final ItemStack NETHER_RIND = new ItemStack(EDXBlocks.componentGround, 1, BlockComponentGround.NETHER_RIND);
-	private static final ItemStack SOUL_SAND = new ItemStack(Blocks.soul_sand);
-	private static final ItemStack NETHER_GRIT = new ItemStack(EDXBlocks.componentGround, 1, BlockComponentGround.NETHER_GRIT);
 
 	private static final Random random = new Random();
 
@@ -90,8 +77,6 @@ public class TileHammerMill extends TileCoreMachine implements ISidedInventory {
 						stack.stackSize = 1;
 
 						if (TileEntityHopper.func_145889_a(this, stack, 1) == null) {
-							charge = 0; // Reset charge to prevent wind-up and massive automation
-
 							item.getEntityItem().stackSize--;
 
 							if (item.getEntityItem().stackSize <= 0) {
@@ -102,7 +87,13 @@ public class TileHammerMill extends TileCoreMachine implements ISidedInventory {
 				}
 			}
 
-			// Process items
+			if (spinLeft <= 0 && spinning) {
+				charge++;
+				spinning = false;
+				spinLeft = 0;
+			}
+
+			// Processing
 			if (charge >= 4) {
 				for (int i=0; i<processing.length; i++) {
 					ItemStack processed = processing[i];
@@ -110,9 +101,19 @@ public class TileHammerMill extends TileCoreMachine implements ISidedInventory {
 					if (processed != null && processed.stackSize > 0) {
 						byte type = -1; // 0 is vanilla, 1 is nether
 
-						if (processed.isItemEqual(STONE) || processed.isItemEqual(COBBLESTONE) || processed.isItemEqual(GRAVEL) || processed.isItemEqual(SAND) || processed.isItemEqual(FINE_SAND)) {
+						if (
+								processed.isItemEqual(StackReference.STONE) ||
+										processed.isItemEqual(StackReference.COBBLESTONE) ||
+										processed.isItemEqual(StackReference.GRAVEL) ||
+										processed.isItemEqual(StackReference.SAND) ||
+										processed.isItemEqual(StackReference.FINE_SAND)) {
 							type = 0;
-						} else if (processed.isItemEqual(NETHERRACK) || processed.isItemEqual(NETHER_RIND) || processed.isItemEqual(SOUL_SAND) || processed.isItemEqual(NETHER_GRIT)) {
+						} else if (
+								processed.isItemEqual(StackReference.NETHER_RIND) ||
+										processed.isItemEqual(StackReference.NETHERRACK) ||
+										processed.isItemEqual(StackReference.NETHER_GRIT) ||
+										processed.isItemEqual(StackReference.SOUL_SAND) ||
+										processed.isItemEqual(StackReference.SOUL_DUST)) {
 							type = 1;
 						}
 
@@ -120,30 +121,34 @@ public class TileHammerMill extends TileCoreMachine implements ISidedInventory {
 						switch (grindingStage) {
 							case 0: {
 								switch (type) {
-									case 1: output = NETHER_RIND; break;
-									default: output = COBBLESTONE; break;
+									case 1: output = StackReference.NETHERRACK.copy(); break;
+									default: output = StackReference.COBBLESTONE.copy(); break;
 								}
+								break;
 							}
 
 							case 1: {
 								switch (type) {
-									case 1: output = SOUL_SAND; break;
-									default: output = GRAVEL; break;
+									case 1: output = StackReference.NETHER_GRIT.copy(); break;
+									default: output = StackReference.GRAVEL.copy(); break;
 								}
+								break;
 							}
 
 							case 2: {
 								switch (type) {
-									case 1: output = NETHER_GRIT; break;
-									default: output = SAND; break;
+									case 1: output = StackReference.SOUL_SAND.copy(); break;
+									default: output = StackReference.SAND.copy(); break;
 								}
+								break;
 							}
 
 							case 3: {
 								switch (type) {
-									case 1: output = NETHER_GRIT; break;
-									default: output = FINE_SAND; break;
+									case 1: output = StackReference.SOUL_DUST.copy(); break;
+									default: output = StackReference.FINE_SAND.copy(); break;
 								}
+								break;
 							}
 						}
 
@@ -157,12 +162,8 @@ public class TileHammerMill extends TileCoreMachine implements ISidedInventory {
 						break;
 					}
 				}
-			}
 
-			if (spinLeft <= 0) {
-				charge++;
-				spinning = false;
-				spinLeft = 0;
+				charge = 0;
 			}
 		}
 

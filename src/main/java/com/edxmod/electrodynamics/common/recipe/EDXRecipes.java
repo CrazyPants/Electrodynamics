@@ -2,20 +2,15 @@ package com.edxmod.electrodynamics.common.recipe;
 
 import com.edxmod.electrodynamics.api.tool.ToolDefinition;
 import com.edxmod.electrodynamics.common.block.BlockStorage;
-import com.edxmod.electrodynamics.common.block.EDXBlocks;
 import com.edxmod.electrodynamics.common.item.EDXItems;
-import com.edxmod.electrodynamics.common.item.prefab.EDXItem;
 import com.edxmod.electrodynamics.common.item.resource.ItemResource;
+import com.edxmod.electrodynamics.common.lib.StackReference;
 import com.edxmod.electrodynamics.common.recipe.manager.SieveManager;
 import com.edxmod.electrodynamics.common.recipe.manager.TableManager;
 import com.edxmod.electrodynamics.common.util.StackHelper;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.CraftingManager;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * @author dmillerw
@@ -28,15 +23,16 @@ public class EDXRecipes {
 
     public static void initialize() {
 		// TABLE - STONE
-		TABLE.registerHammerRecipe(Blocks.stone, Blocks.cobblestone, 1F);
-		TABLE.registerHammerRecipe(Blocks.cobblestone, Blocks.gravel, 1F);
-		TABLE.registerHammerRecipe(Blocks.gravel, Blocks.sand, 1F);
-		TABLE.registerHammerRecipe(Blocks.sand, new ItemStack(EDXBlocks.componentGround, 1, 0), 1F);
+		TABLE.registerHammerRecipe(StackReference.STONE,       StackReference.COBBLESTONE, 1F);
+		TABLE.registerHammerRecipe(StackReference.COBBLESTONE, StackReference.GRAVEL,      1F);
+		TABLE.registerHammerRecipe(StackReference.GRAVEL,      StackReference.SAND,        1F);
+		TABLE.registerHammerRecipe(StackReference.SAND,        StackReference.FINE_SAND,   1F);
 
 		// TABLE - NETHERRACK
-		TABLE.registerHammerRecipe(Blocks.netherrack, new ItemStack(EDXBlocks.componentGround, 1, 1), 1F);
-		TABLE.registerHammerRecipe(new ItemStack(EDXBlocks.componentGround, 1, 1), Blocks.soul_sand, 1F);
-		TABLE.registerHammerRecipe(Blocks.soul_sand, new ItemStack(EDXBlocks.componentGround, 1, 3), 1F);
+		TABLE.registerHammerRecipe(StackReference.NETHER_RIND, StackReference.NETHERRACK,  1F);
+		TABLE.registerHammerRecipe(StackReference.NETHERRACK,  StackReference.NETHER_GRIT, 1F);
+		TABLE.registerHammerRecipe(StackReference.NETHER_GRIT, StackReference.SOUL_SAND,   1F);
+		TABLE.registerHammerRecipe(StackReference.SOUL_SAND,   StackReference.SOUL_DUST,   1F);
 
 		// TABLE - WOOD
 		for (int i=0; i<4; i++) {
