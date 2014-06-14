@@ -5,6 +5,7 @@ import com.edxmod.electrodynamics.common.config.EDXConfiguration;
 import com.edxmod.electrodynamics.common.core.EDXRecipes;
 import com.edxmod.electrodynamics.common.core.handler.GuiHandler;
 import com.edxmod.electrodynamics.common.events.EDXEvents;
+import com.edxmod.electrodynamics.common.fluid.EDXFluids;
 import com.edxmod.electrodynamics.common.item.EDXItems;
 import com.edxmod.electrodynamics.common.lib.EDXProps;
 import com.edxmod.electrodynamics.common.network.PacketHandler;
@@ -22,38 +23,39 @@ import cpw.mods.fml.common.network.NetworkRegistry;
 @Mod(modid = EDXProps.ID, name = EDXProps.NAME, version = EDXProps.VERSION, dependencies = "required-after:Forge@[10.12.0.1060,)")
 public class Electrodynamics {
 
-    @Mod.Instance(EDXProps.ID)
-    public static Electrodynamics instance;
+	@Mod.Instance(EDXProps.ID)
+	public static Electrodynamics instance;
 
-    @SidedProxy(clientSide = EDXProps.CLIENT, serverSide = EDXProps.SERVER)
-    public static CommonProxy proxy;
+	@SidedProxy(clientSide = EDXProps.CLIENT, serverSide = EDXProps.SERVER)
+	public static CommonProxy proxy;
 
-    public static String configPath;
+	public static String configPath;
 
-    @Mod.EventHandler
-    public void preInit(FMLPreInitializationEvent event) {
-        configPath = event.getModConfigurationDirectory() + "/EDX/";
-        EDXConfiguration.init(configPath);
+	@Mod.EventHandler
+	public void preInit(FMLPreInitializationEvent event) {
+		configPath = event.getModConfigurationDirectory() + "/EDX/";
+		EDXConfiguration.init(configPath);
 
-        EDXBlocks.init();
-        EDXItems.init();
-        EDXEvents.init();
-        EDXRecipes.init();
-        EDXWorldGenerator.init();
+		EDXFluids.init();
+		EDXBlocks.init();
+		EDXItems.init();
+		EDXEvents.init();
+		EDXRecipes.init();
+		EDXWorldGenerator.init();
 
-        NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiHandler());
+		NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiHandler());
 
-        proxy.registerRenders();
+		proxy.registerRenders();
 		proxy.preInit();
-    }
+	}
 
-    @Mod.EventHandler
-    public void init(FMLInitializationEvent event) {
+	@Mod.EventHandler
+	public void init(FMLInitializationEvent event) {
 		PacketHandler.initialize();
-    }
+	}
 
-    @Mod.EventHandler
-    public void postInit(FMLPostInitializationEvent event) {
+	@Mod.EventHandler
+	public void postInit(FMLPostInitializationEvent event) {
 
-    }
+	}
 }

@@ -1,12 +1,12 @@
 package com.edxmod.electrodynamics.common.block;
 
-import com.edxmod.electrodynamics.common.block.example.BlockRaytraceExample;
 import com.edxmod.electrodynamics.common.block.machine.*;
 import com.edxmod.electrodynamics.common.block.prefab.item.EDXItemBlock;
 import com.edxmod.electrodynamics.common.block.prefab.item.EDXItemMultiBlock;
 import com.edxmod.electrodynamics.common.block.world.BlockLog;
 import com.edxmod.electrodynamics.common.block.world.BlockOre;
 import com.edxmod.electrodynamics.common.block.world.EmptyBlock;
+import com.edxmod.electrodynamics.common.block.world.gas.BlockGas;
 import com.edxmod.electrodynamics.common.tile.*;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
@@ -35,6 +35,7 @@ public class EDXBlocks {
         registerBlock(new BlockSinteringOven().setBlockName("sinteringOven"), EDXItemBlock.class);
         registerBlock(new BlockSieveTable().setBlockName("sieveTable"), EDXItemBlock.class);
         registerBlock(new EmptyBlock().setBlockName("empty"));
+        registerBlock(new BlockGas().setBlockName("naturalGas"));
     }
 
     private static void registerTileEntities() {
