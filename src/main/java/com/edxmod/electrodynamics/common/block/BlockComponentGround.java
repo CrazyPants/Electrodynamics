@@ -17,6 +17,11 @@ import java.util.List;
  */
 public class BlockComponentGround extends EDXMultiBlock {
 
+	public static final int FINE_SAND = 0;
+	public static final int NETHER_GRIT = 0;
+	public static final int NETHER_RIND = 0;
+	public static final int SOUL_DUST = 0;
+
 	public static final String[] NAMES = new String[] {"fine_sand", "nether_grit", "nether_rind", "soul_dust"};
 	public IIcon[] icons;
 

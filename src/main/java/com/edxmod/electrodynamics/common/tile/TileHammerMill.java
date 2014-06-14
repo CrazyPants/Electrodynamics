@@ -1,20 +1,14 @@
 package com.edxmod.electrodynamics.common.tile;
 
-import com.edxmod.electrodynamics.api.tool.ICrankable;
 import com.edxmod.electrodynamics.api.tool.ToolDefinition;
-import com.edxmod.electrodynamics.api.util.DurabilityMapping;
-import com.edxmod.electrodynamics.common.item.EDXItems;
-import com.edxmod.electrodynamics.common.item.prefab.EDXItem;
+import com.edxmod.electrodynamics.common.block.BlockComponentGround;
+import com.edxmod.electrodynamics.common.block.EDXBlocks;
 import com.edxmod.electrodynamics.common.recipe.EDXRecipes;
-import com.edxmod.electrodynamics.common.recipe.manager.SieveManager;
-import com.edxmod.electrodynamics.common.recipe.manager.TableManager;
 import com.edxmod.electrodynamics.common.recipe.wrapper.TableRecipe;
 import com.edxmod.electrodynamics.common.util.InventoryHelper;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.IInventory;
+import net.minecraft.init.Blocks;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -28,13 +22,27 @@ import java.util.Random;
 /**
  * @author dmillerw
  */
-public class TileHammerMill extends TileCoreMachine implements ISidedInventory, ICrankable {
+public class TileHammerMill extends TileCoreMachine implements ISidedInventory {
 
-	public static final byte MAX_STAGE = 5;
+	public static final byte MAX_STAGE = 4;
 
-	private static final int INVENTORY_SIZE = 9;
+	private static final int INVENTORY_SIZE = 1;
+
+	private static final ItemStack STONE = new ItemStack(Blocks.stone);
+	private static final ItemStack COBBLESTONE = new ItemStack(Blocks.cobblestone);
+	private static final ItemStack GRAVEL = new ItemStack(Blocks.gravel);
+	private static final ItemStack SAND = new ItemStack(Blocks.sand);
+	private static final ItemStack FINE_SAND = new ItemStack(EDXBlocks.componentGround, 1, BlockComponentGround.FINE_SAND);
+
+	private static final ItemStack NETHERRACK = new ItemStack(Blocks.netherrack);
+	private static final ItemStack NETHER_RIND = new ItemStack(EDXBlocks.componentGround, 1, BlockComponentGround.NETHER_RIND);
+	private static final ItemStack SOUL_SAND = new ItemStack(Blocks.soul_sand);
+	private static final ItemStack NETHER_GRIT = new ItemStack(EDXBlocks.componentGround, 1, BlockComponentGround.NETHER_GRIT);
+
+	private static final Random random = new Random();
 
 	public ItemStack[] processing = new ItemStack[INVENTORY_SIZE];
+	public ItemStack[] buffer = new ItemStack[INVENTORY_SIZE];
 
 	public byte grindingStage;
 
@@ -95,39 +103,64 @@ public class TileHammerMill extends TileCoreMachine implements ISidedInventory, 
 			}
 
 			// Process items
-			if (charge > 0) {
+			if (charge >= 4) {
 				for (int i=0; i<processing.length; i++) {
 					ItemStack processed = processing[i];
 
 					if (processed != null && processed.stackSize > 0) {
-						TableRecipe recipe = EDXRecipes.TABLE.get(processed, ToolDefinition.HAMMER);
-						float durability = DurabilityMapping.INSTANCE.getDurability(processed);
+						byte type = -1; // 0 is vanilla, 1 is nether
 
-						if (charge >= durability) {
-							charge -= durability;
+						if (processed.isItemEqual(STONE) || processed.isItemEqual(COBBLESTONE) || processed.isItemEqual(GRAVEL) || processed.isItemEqual(SAND) || processed.isItemEqual(FINE_SAND)) {
+							type = 0;
+						} else if (processed.isItemEqual(NETHERRACK) || processed.isItemEqual(NETHER_RIND) || processed.isItemEqual(SOUL_SAND) || processed.isItemEqual(NETHER_GRIT)) {
+							type = 1;
+						}
 
-							Random random = new Random();
-
-							ItemStack output = recipe.getOutput(false);
-
-							InventoryHelper.ejectItem(worldObj, xCoord, yCoord, zCoord, ForgeDirection.DOWN, output, random);
-
-							processed.stackSize--;
-							if (processed.stackSize <= 0) {
-								processing[i] = null;
+						ItemStack output = null;
+						switch (grindingStage) {
+							case 0: {
+								switch (type) {
+									case 1: output = NETHER_RIND; break;
+									default: output = COBBLESTONE; break;
+								}
 							}
 
-							break;
+							case 1: {
+								switch (type) {
+									case 1: output = SOUL_SAND; break;
+									default: output = GRAVEL; break;
+								}
+							}
+
+							case 2: {
+								switch (type) {
+									case 1: output = NETHER_GRIT; break;
+									default: output = SAND; break;
+								}
+							}
+
+							case 3: {
+								switch (type) {
+									case 1: output = NETHER_GRIT; break;
+									default: output = FINE_SAND; break;
+								}
+							}
 						}
+
+						InventoryHelper.ejectItem(worldObj, xCoord, yCoord, zCoord, ForgeDirection.DOWN, output, random);
+
+						processed.stackSize--;
+						if (processed.stackSize <= 0) {
+							processing[i] = null;
+						}
+
+						break;
 					}
 				}
 			}
 
-			if (spinLeft % 90F == 0 && spinning) {
-				charge++;
-			}
-
 			if (spinLeft <= 0) {
+				charge++;
 				spinning = false;
 				spinLeft = 0;
 			}
@@ -153,19 +186,19 @@ public class TileHammerMill extends TileCoreMachine implements ISidedInventory, 
 		sendClientUpdate(nbt);
 	}
 
-	/* ICRANKABLE */
-	@Override
 	public void crank() {
 		if (spinLeft <= 0) {
-			spinLeft += 360F;
-			spinning = true;
-			sendPoke();
-		}
-	}
+			for (int i=0; i<processing.length; i++) {
+				ItemStack processed = processing[i];
 
-	@Override
-	public boolean canConnect(ForgeDirection side) {
-		return (side == orientation.getRotation(ForgeDirection.UP) || side == orientation.getRotation(ForgeDirection.UP).getOpposite());
+				if (processed != null && processed.stackSize > 0) {
+					spinLeft += 360F;
+					spinning = true;
+					sendPoke();
+					return;
+				}
+			}
+		}
 	}
 
 	/* IINVENTORY / ISIDEDINVENTORY */
