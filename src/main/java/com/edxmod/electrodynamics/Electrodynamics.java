@@ -6,8 +6,8 @@ import com.edxmod.electrodynamics.common.core.EDXRecipes;
 import com.edxmod.electrodynamics.common.core.handler.GuiHandler;
 import com.edxmod.electrodynamics.common.events.EDXEvents;
 import com.edxmod.electrodynamics.common.item.EDXItems;
-import com.edxmod.electrodynamics.common.network.PacketPipeline;
 import com.edxmod.electrodynamics.common.lib.EDXProps;
+import com.edxmod.electrodynamics.common.network.PacketHandler;
 import com.edxmod.electrodynamics.common.world.EDXWorldGenerator;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;
@@ -27,8 +27,6 @@ public class Electrodynamics {
 
     @SidedProxy(clientSide = EDXProps.CLIENT, serverSide = EDXProps.SERVER)
     public static CommonProxy proxy;
-
-    public static final PacketPipeline packetPipeline = new PacketPipeline();
 
     public static String configPath;
 
@@ -51,12 +49,11 @@ public class Electrodynamics {
 
     @Mod.EventHandler
     public void init(FMLInitializationEvent event) {
-        packetPipeline.init();
+		PacketHandler.initialize();
     }
 
     @Mod.EventHandler
     public void postInit(FMLPostInitializationEvent event) {
-        packetPipeline.postInit();
-    }
 
+    }
 }
