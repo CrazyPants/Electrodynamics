@@ -1,7 +1,7 @@
 package com.edxmod.electrodynamics;
 
 import com.edxmod.electrodynamics.common.lib.EDXProps;
-import com.edxmod.electrodynamics.common.network.PacketPipeline;
+import com.edxmod.electrodynamics.common.network.PacketHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
@@ -20,8 +20,6 @@ public class Electrodynamics {
     @SidedProxy(clientSide = EDXProps.CLIENT, serverSide = EDXProps.SERVER)
     public static CommonProxy proxy;
 
-    public static final PacketPipeline packetPipeline = new PacketPipeline();
-
     public static String configPath;
 
     @Mod.EventHandler
@@ -32,13 +30,12 @@ public class Electrodynamics {
 
     @Mod.EventHandler
     public void init(FMLInitializationEvent event) {
-        packetPipeline.init();
+		PacketHandler.initialize();
 		proxy.init();
     }
 
     @Mod.EventHandler
     public void postInit(FMLPostInitializationEvent event) {
-        packetPipeline.postInit();
 		proxy.postInit();
 	}
 
