@@ -2,8 +2,6 @@ package com.edxmod.electrodynamics.common.block.machine;
 
 import com.edxmod.electrodynamics.common.block.EDXBlocks;
 import com.edxmod.electrodynamics.common.block.prefab.EDXTileBlock;
-import com.edxmod.electrodynamics.common.tile.TileBarrel;
-import com.edxmod.electrodynamics.common.tile.TileCrank;
 import com.edxmod.electrodynamics.common.tile.TileWaterMill;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;

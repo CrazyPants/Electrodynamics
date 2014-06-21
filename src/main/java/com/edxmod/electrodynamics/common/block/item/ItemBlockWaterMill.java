@@ -3,13 +3,12 @@ package com.edxmod.electrodynamics.common.block.item;
 import com.edxmod.electrodynamics.common.block.EDXBlocks;
 import com.edxmod.electrodynamics.common.block.prefab.item.EDXItemBlock;
 import com.edxmod.electrodynamics.common.lib.EDXProps;
-import com.edxmod.electrodynamics.common.tile.TileCrank;
-import com.edxmod.electrodynamics.common.tile.TileHammerMill;
 import com.edxmod.electrodynamics.common.tile.TileKineticCrank;
 import com.edxmod.electrodynamics.common.tile.TileWaterMill;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
@@ -63,6 +62,24 @@ public class ItemBlockWaterMill extends EDXItemBlock {
 		// Prevents the mill from being placed on the front/back of the block
 		if (!(opposite == tile.orientation || opposite == tile.orientation.getOpposite())) {
 			return false;
+		}
+
+		boolean xAxis = ForgeDirection.getOrientation(side).getRotation(ForgeDirection.UP).getOpposite().offsetX != 0;
+		for (int ix=-1; ix<2; ix++) {
+			for (int iy=-1; iy<2; iy++) {
+				for (int iz=-1; iz<2; iz++) {
+					int sx = xAxis ? x + ix : x;
+					int sy = y + iy;
+					int sz = xAxis ? z : z + iz;
+
+					if (sy != 0 && (xAxis ? (iz == -1) : (ix == -1))) {
+						Block block = world.getBlock(sx, sy, sz);
+						if (!world.isAirBlock(sx, sy, sz) || block == Blocks.water || block == Blocks.flowing_water) {
+							return false;
+						}
+					}
+				}
+			}
 		}
 
 		boolean result = super.placeBlockAt(stack, player, world, x, y, z, side, hitX, hitY, hitZ, metadata);

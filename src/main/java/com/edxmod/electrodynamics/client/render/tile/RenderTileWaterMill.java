@@ -1,7 +1,6 @@
 package com.edxmod.electrodynamics.client.render.tile;
 
 import com.edxmod.electrodynamics.client.render.WrappedModel;
-import com.edxmod.electrodynamics.common.tile.TileKiln;
 import com.edxmod.electrodynamics.common.tile.TileWaterMill;
 import com.edxmod.electrodynamics.common.util.RenderHelper;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
@@ -26,6 +25,11 @@ public class RenderTileWaterMill extends TileEntitySpecialRenderer {
 
 		GL11.glTranslated(0.5, 0, 0.5);
 		GL11.glRotated(RenderHelper.getRotationAngle(tile.orientation), 0, 1, 0);
+
+		GL11.glTranslated(0, 0.5, 0);
+		GL11.glRotated(tile.angle, 0, 0, 1);
+		GL11.glTranslated(0, -0.5, 0);
+
 		GL11.glTranslated(-0.5, 0, -0.5);
 
 		waterMill.bindTexture();

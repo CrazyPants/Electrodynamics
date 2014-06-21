@@ -3,13 +3,14 @@ package com.edxmod.electrodynamics.common.tile;
 import com.edxmod.electrodynamics.api.tool.ToolDefinition;
 import com.edxmod.electrodynamics.common.lib.StackReference;
 import com.edxmod.electrodynamics.common.recipe.EDXRecipes;
-import com.edxmod.electrodynamics.common.recipe.wrapper.TableRecipe;
-import com.edxmod.electrodynamics.common.util.InventoryHelper;
+import com.edxmod.electrodynamics.common.util.StackHelper;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityHopper;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraftforge.common.util.ForgeDirection;
@@ -28,8 +29,8 @@ public class TileHammerMill extends TileCoreMachine implements ISidedInventory {
 
 	private static final Random random = new Random();
 
-	public ItemStack[] processing = new ItemStack[INVENTORY_SIZE];
-	public ItemStack[] buffer = new ItemStack[INVENTORY_SIZE];
+	public ItemStack processing;
+	public ItemStack buffer;
 
 	public byte grindingStage;
 
@@ -70,9 +71,7 @@ public class TileHammerMill extends TileCoreMachine implements ISidedInventory {
 			if (entities != null && entities.size() > 0) {
 				EntityItem item = (EntityItem) entities.get(0);
 				if (item.getEntityItem() != null) {
-					TableRecipe recipe = EDXRecipes.TABLE.get(item.getEntityItem(), ToolDefinition.HAMMER);
-
-					if (recipe != null) {
+					if (canInput(item.getEntityItem())) {
 						ItemStack stack = item.getEntityItem().copy();
 						stack.stackSize = 1;
 
@@ -94,76 +93,45 @@ public class TileHammerMill extends TileCoreMachine implements ISidedInventory {
 			}
 
 			// Processing
-			if (charge >= 4) {
-				for (int i=0; i<processing.length; i++) {
-					ItemStack processed = processing[i];
+			if (charge >= 4 && canFunction()) {
+				ItemStack output = getOutput(processing);
 
-					if (processed != null && processed.stackSize > 0) {
-						byte type = -1; // 0 is vanilla, 1 is nether
+				if (output != null) {
+					IInventory below = getBelowInventory();
+					if (below != null) {
+						ItemStack result = TileEntityHopper.func_145889_a(below, output, ForgeDirection.UP.ordinal());
 
-						if (
-								processed.isItemEqual(StackReference.STONE) ||
-										processed.isItemEqual(StackReference.COBBLESTONE) ||
-										processed.isItemEqual(StackReference.GRAVEL) ||
-										processed.isItemEqual(StackReference.SAND) ||
-										processed.isItemEqual(StackReference.FINE_SAND)) {
-							type = 0;
-						} else if (
-								processed.isItemEqual(StackReference.NETHER_RIND) ||
-										processed.isItemEqual(StackReference.NETHERRACK) ||
-										processed.isItemEqual(StackReference.NETHER_GRIT) ||
-										processed.isItemEqual(StackReference.SOUL_SAND) ||
-										processed.isItemEqual(StackReference.SOUL_DUST)) {
-							type = 1;
-						}
-
-						ItemStack output = null;
-						switch (grindingStage) {
-							case 0: {
-								switch (type) {
-									case 1: output = StackReference.NETHERRACK.copy(); break;
-									default: output = StackReference.COBBLESTONE.copy(); break;
-								}
-								break;
-							}
-
-							case 1: {
-								switch (type) {
-									case 1: output = StackReference.NETHER_GRIT.copy(); break;
-									default: output = StackReference.GRAVEL.copy(); break;
-								}
-								break;
-							}
-
-							case 2: {
-								switch (type) {
-									case 1: output = StackReference.SOUL_SAND.copy(); break;
-									default: output = StackReference.SAND.copy(); break;
-								}
-								break;
-							}
-
-							case 3: {
-								switch (type) {
-									case 1: output = StackReference.SOUL_DUST.copy(); break;
-									default: output = StackReference.FINE_SAND.copy(); break;
-								}
-								break;
+						if (result != null) {
+							if (buffer == null) {
+								buffer = result;
+							} else {
+								buffer.stackSize += result.stackSize;
 							}
 						}
-
-						InventoryHelper.ejectItem(worldObj, xCoord, yCoord, zCoord, ForgeDirection.DOWN, output, random);
-
-						processed.stackSize--;
-						if (processed.stackSize <= 0) {
-							processing[i] = null;
+					} else {
+						if (buffer == null) {
+							buffer = output;
+						} else {
+							buffer.stackSize += output.stackSize;
 						}
-
-						break;
 					}
-				}
 
-				charge = 0;
+					processing.stackSize--;
+					if (processing.stackSize <= 0) {
+						processing = null;
+					}
+
+					charge = 0;
+				}
+			}
+		}
+
+		// Empty buffer
+		if (buffer != null) {
+			ItemStack out = buffer.copy();
+			IInventory inventory = getBelowInventory();
+			if (inventory != null) {
+				buffer = TileEntityHopper.func_145889_a(getBelowInventory(), out, ForgeDirection.UP.ordinal());
 			}
 		}
 
@@ -189,17 +157,95 @@ public class TileHammerMill extends TileCoreMachine implements ISidedInventory {
 
 	public void crank() {
 		if (spinLeft <= 0) {
-			for (int i=0; i<processing.length; i++) {
-				ItemStack processed = processing[i];
-
-				if (processed != null && processed.stackSize > 0) {
+			if (canFunction()) {
+				if (processing != null && processing.stackSize > 0) {
 					spinLeft += 360F;
 					spinning = true;
 					sendPoke();
-					return;
 				}
 			}
 		}
+	}
+
+	private boolean canInput(ItemStack stack) {
+		return getType(stack) != -1;
+	}
+
+	private int getType(ItemStack stack) {
+		int type = -1; // 0 is vanilla, 1 is nether
+
+		if (stack == null) {
+			return type;
+		}
+
+		if (
+			stack.isItemEqual(StackReference.STONE) ||
+			stack.isItemEqual(StackReference.COBBLESTONE) ||
+			stack.isItemEqual(StackReference.GRAVEL) ||
+			stack.isItemEqual(StackReference.SAND) ||
+			stack.isItemEqual(StackReference.FINE_SAND)) {
+			type = 0;
+		} else if (
+			stack.isItemEqual(StackReference.NETHER_RIND) ||
+			stack.isItemEqual(StackReference.NETHERRACK) ||
+			stack.isItemEqual(StackReference.NETHER_GRIT) ||
+			stack.isItemEqual(StackReference.SOUL_SAND) ||
+			stack.isItemEqual(StackReference.SOUL_DUST)) {
+			type = 1;
+		}
+
+		return type;
+	}
+
+	private ItemStack getOutput(ItemStack stack) {
+		int type = getType(stack);
+		ItemStack output = null;
+		switch (grindingStage) {
+			case 0: {
+				switch (type) {
+					case 1: output = StackReference.NETHERRACK.copy(); break;
+					default: output = StackReference.COBBLESTONE.copy(); break;
+				}
+				break;
+			}
+
+			case 1: {
+				switch (type) {
+					case 1: output = StackReference.NETHER_GRIT.copy(); break;
+					default: output = StackReference.GRAVEL.copy(); break;
+				}
+				break;
+			}
+
+			case 2: {
+				switch (type) {
+					case 1: output = StackReference.SOUL_SAND.copy(); break;
+					default: output = StackReference.SAND.copy(); break;
+				}
+				break;
+			}
+
+			case 3: {
+				switch (type) {
+					case 1: output = StackReference.SOUL_DUST.copy(); break;
+					default: output = StackReference.FINE_SAND.copy(); break;
+				}
+				break;
+			}
+		}
+		return output;
+	}
+
+	private IInventory getBelowInventory() {
+		TileEntity tile = worldObj.getTileEntity(xCoord, yCoord - 1, zCoord);
+		if (tile != null && tile instanceof IInventory) {
+			return (IInventory) tile;
+		}
+		return null;
+	}
+
+	private boolean canFunction() {
+		return processing != null && processing.stackSize > 0 && (buffer == null || (StackHelper.areStacksSimilar(getOutput(processing), buffer, true) && buffer.stackSize < buffer.getMaxStackSize()));
 	}
 
 	/* IINVENTORY / ISIDEDINVENTORY */
@@ -210,23 +256,23 @@ public class TileHammerMill extends TileCoreMachine implements ISidedInventory {
 
 	@Override
 	public ItemStack getStackInSlot(int slot) {
-		return processing[slot];
+		return processing;
 	}
 
 	@Override
 	public ItemStack decrStackSize(int slot, int amt) {
-		if (processing[slot] != null) {
+		if (processing != null) {
 			ItemStack itemstack;
 
-			if (processing[slot].stackSize <= amt) {
-				itemstack = processing[slot];
-				processing[slot] = null;
+			if (processing.stackSize <= amt) {
+				itemstack = processing;
+				processing = null;
 				return itemstack;
 			} else {
-				itemstack = processing[slot].splitStack(amt);
+				itemstack = processing.splitStack(amt);
 
-				if (processing[slot].stackSize == 0) {
-					processing[slot] = null;
+				if (processing.stackSize == 0) {
+					processing = null;
 				}
 
 				return itemstack;
@@ -238,9 +284,9 @@ public class TileHammerMill extends TileCoreMachine implements ISidedInventory {
 
 	@Override
 	public ItemStack getStackInSlotOnClosing(int slot) {
-		if (processing[slot] != null) {
-			ItemStack itemstack = processing[slot];
-			processing[slot] = null;
+		if (processing != null) {
+			ItemStack itemstack = processing;
+			processing = null;
 			return itemstack;
 		} else {
 			return null;
@@ -249,7 +295,7 @@ public class TileHammerMill extends TileCoreMachine implements ISidedInventory {
 
 	@Override
 	public void setInventorySlotContents(int slot, ItemStack stack) {
-		processing[slot] = stack;
+		processing = stack;
 	}
 
 	@Override
