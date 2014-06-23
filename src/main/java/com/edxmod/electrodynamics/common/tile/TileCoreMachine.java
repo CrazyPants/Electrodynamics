@@ -1,6 +1,6 @@
 package com.edxmod.electrodynamics.common.tile;
 
-import net.minecraft.nbt.NBTTagCompound;
+import com.edxmod.electrodynamics.common.tile.nbt.NBTHandler;
 import net.minecraftforge.common.util.ForgeDirection;
 
 /**
@@ -8,20 +8,12 @@ import net.minecraftforge.common.util.ForgeDirection;
  */
 public abstract class TileCoreMachine extends TileCore {
 
+	@NBTHandler.NBTData
 	public ForgeDirection orientation = ForgeDirection.UNKNOWN;
 
-	@Override
-	public void writeToNBT(NBTTagCompound nbt) {
-		super.writeToNBT(nbt);
+	public TileCoreMachine() {
+		super();
 
-		nbt.setByte("orientation", (byte) orientation.ordinal());
+		this.handler.addField(TileCoreMachine.class, "orientation");
 	}
-
-	@Override
-	public void readFromNBT(NBTTagCompound nbt) {
-		super.readFromNBT(nbt);
-
-		orientation = ForgeDirection.getOrientation(nbt.getByte("orientation"));
-	}
-
 }

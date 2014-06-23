@@ -1,23 +1,14 @@
 package com.edxmod.electrodynamics.common.tile;
 
-import net.minecraft.nbt.NBTTagCompound;
+import com.edxmod.electrodynamics.common.tile.nbt.NBTHandler;
 
 /**
  * @author dmillerw
  */
 public class TileCrank extends TileCoreMachine {
 
+	@NBTHandler.NBTData
 	public boolean reverse = false;
-
-	@Override
-	public void writeCustomNBT(NBTTagCompound nbt) {
-		nbt.setBoolean("reverse", reverse);
-	}
-
-	@Override
-	public void readCustomNBT(NBTTagCompound nbt) {
-		reverse = nbt.getBoolean("reverse");
-	}
 
 	public void crank() {
 		TileHammerMill tile = (TileHammerMill) worldObj.getTileEntity(xCoord + orientation.offsetX, yCoord + orientation.offsetY, zCoord + orientation.offsetZ);

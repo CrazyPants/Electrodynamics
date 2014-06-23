@@ -1,6 +1,7 @@
 package com.edxmod.electrodynamics.common.tile;
 
 import com.edxmod.electrodynamics.common.network.VanillaPacketHelper;
+import com.edxmod.electrodynamics.common.tile.nbt.NBTHandler;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
@@ -12,9 +13,9 @@ import net.minecraft.tileentity.TileEntity;
  */
 public abstract class TileCore extends TileEntity {
 
-	public abstract void writeCustomNBT(NBTTagCompound nbt);
+	public void writeCustomNBT(NBTTagCompound nbt) {}
 
-	public abstract void readCustomNBT(NBTTagCompound nbt);
+	public void readCustomNBT(NBTTagCompound nbt) {}
 
 	public void onClientUpdate(NBTTagCompound nbt) {}
 
@@ -22,15 +23,27 @@ public abstract class TileCore extends TileEntity {
 
 	public void onBlockBroken() {}
 
+	protected NBTHandler handler;
+
+	public TileCore() {
+		this(true);
+	}
+
+	public TileCore(boolean scan) {
+		handler = new NBTHandler(this, scan);
+	}
+
 	@Override
 	public void writeToNBT(NBTTagCompound nbt) {
 		super.writeToNBT(nbt);
+		handler.writeAllToNBT(nbt);
 		writeCustomNBT(nbt);
 	}
 
 	@Override
 	public void readFromNBT(NBTTagCompound nbt) {
 		super.readFromNBT(nbt);
+		handler.readFromNBT(nbt);
 		readCustomNBT(nbt);
 	}
 
@@ -81,5 +94,4 @@ public abstract class TileCore extends TileEntity {
 		}
 		worldObj.markBlockRangeForRenderUpdate(xCoord, yCoord, zCoord, xCoord, yCoord, zCoord);
 	}
-
 }

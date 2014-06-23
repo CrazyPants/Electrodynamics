@@ -1,5 +1,6 @@
 package com.edxmod.electrodynamics.common.tile;
 
+import com.edxmod.electrodynamics.common.tile.nbt.NBTHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.nbt.NBTTagCompound;
@@ -12,17 +13,8 @@ public class TileSinteringOven extends TileCoreMachine {
 	@SideOnly(Side.CLIENT)
 	public float currentAngle = 0.0F;
 
+	@NBTHandler.NBTData
     public boolean open = false;
-
-    @Override
-    public void readCustomNBT(NBTTagCompound nbt) {
-        open = nbt.getBoolean("open");
-    }
-
-    @Override
-    public void writeCustomNBT(NBTTagCompound nbt) {
-        nbt.setBoolean("open", open);
-    }
 
 	@Override
 	public void onPokeReceived() {

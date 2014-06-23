@@ -1,5 +1,7 @@
 package com.edxmod.electrodynamics.common.tile;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.nbt.NBTTagCompound;
 
 /**
@@ -7,13 +9,6 @@ import net.minecraft.nbt.NBTTagCompound;
  */
 public class TileKineticCrank extends TileCoreMachine {
 
-	@Override
-	public void writeCustomNBT(NBTTagCompound nbt) {
-
-	}
-
-	@Override
-	public void readCustomNBT(NBTTagCompound nbt) {
-
-	}
+	@SideOnly(Side.CLIENT)
+	public float angle = 0F;
 }

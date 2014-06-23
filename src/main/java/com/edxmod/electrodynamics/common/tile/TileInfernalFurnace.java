@@ -1,15 +1,13 @@
 package com.edxmod.electrodynamics.common.tile;
 
+import com.edxmod.electrodynamics.common.tile.nbt.NBTHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.block.BlockFurnace;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntityFurnace;
 
 /**
@@ -26,61 +24,66 @@ public class TileInfernalFurnace extends TileCoreMachine implements ISidedInvent
 	public static final int COOK_TIME = 200;
 	public static final int LIT_COOK_TIME = 400;
 
+	@NBTHandler.NBTData
 	private ItemStack[] inv = new ItemStack[SIZE];
 
 	/**
 	 * The number of ticks that the furnace will keep burning
 	 */
+	@NBTHandler.NBTData
 	public int furnaceBurnTime;
 	/**
 	 * The number of ticks that a fresh copy of the currently-burning item would keep the furnace burning for
 	 */
+	@NBTHandler.NBTData
 	public int currentItemBurnTime;
 	/**
 	 * The number of ticks that the current item has been cooking for
 	 */
+	@NBTHandler.NBTData
 	public int furnaceCookTime;
 
+	@NBTHandler.NBTData
 	public boolean lit = false;
 
-	@Override
-	public void writeCustomNBT(NBTTagCompound nbt) {
-		nbt.setShort("BurnTime", (short) this.furnaceBurnTime);
-		nbt.setShort("CookTime", (short) this.furnaceCookTime);
-		nbt.setBoolean("lit", lit);
-		NBTTagList nbttaglist = new NBTTagList();
+//	@Override
+//	public void writeCustomNBT(NBTTagCompound nbt) {
+//		nbt.setShort("BurnTime", (short) this.furnaceBurnTime);
+//		nbt.setShort("CookTime", (short) this.furnaceCookTime);
+//		nbt.setBoolean("lit", lit);
+//		NBTTagList nbttaglist = new NBTTagList();
+//
+//		for (int i = 0; i < inv.length; ++i) {
+//			if (inv[i] != null) {
+//				NBTTagCompound item = new NBTTagCompound();
+//				item.setByte("Slot", (byte) i);
+//				inv[i].writeToNBT(item);
+//				nbttaglist.appendTag(item);
+//			}
+//		}
+//
+//		nbt.setTag("Items", nbttaglist);
+//	}
 
-		for (int i = 0; i < inv.length; ++i) {
-			if (inv[i] != null) {
-				NBTTagCompound item = new NBTTagCompound();
-				item.setByte("Slot", (byte) i);
-				inv[i].writeToNBT(item);
-				nbttaglist.appendTag(item);
-			}
-		}
-
-		nbt.setTag("Items", nbttaglist);
-	}
-
-	@Override
-	public void readCustomNBT(NBTTagCompound nbt) {
-		NBTTagList nbttaglist = nbt.getTagList("Items", 10);
-		inv = new ItemStack[this.getSizeInventory()];
-
-		for (int i = 0; i < nbttaglist.tagCount(); ++i) {
-			NBTTagCompound item = nbttaglist.getCompoundTagAt(i);
-			byte b0 = item.getByte("Slot");
-
-			if (b0 >= 0 && b0 < inv.length) {
-				inv[b0] = ItemStack.loadItemStackFromNBT(item);
-			}
-		}
-
-		this.lit = nbt.getBoolean("lit");
-		this.furnaceBurnTime = nbt.getShort("BurnTime");
-		this.furnaceCookTime = nbt.getShort("CookTime");
-		this.currentItemBurnTime = TileEntityFurnace.getItemBurnTime(lit ? new ItemStack(Items.lava_bucket) : inv[1]);
-	}
+//	@Override
+//	public void readCustomNBT(NBTTagCompound nbt) {
+//		NBTTagList nbttaglist = nbt.getTagList("Items", 10);
+//		inv = new ItemStack[this.getSizeInventory()];
+//
+//		for (int i = 0; i < nbttaglist.tagCount(); ++i) {
+//			NBTTagCompound item = nbttaglist.getCompoundTagAt(i);
+//			byte b0 = item.getByte("Slot");
+//
+//			if (b0 >= 0 && b0 < inv.length) {
+//				inv[b0] = ItemStack.loadItemStackFromNBT(item);
+//			}
+//		}
+//
+//		this.lit = nbt.getBoolean("lit");
+//		this.furnaceBurnTime = nbt.getShort("BurnTime");
+//		this.furnaceCookTime = nbt.getShort("CookTime");
+//		this.currentItemBurnTime = TileEntityFurnace.getItemBurnTime(lit ? new ItemStack(Items.lava_bucket) : inv[1]);
+//	}
 
 	public int getCookTime() {
 		return lit ? LIT_COOK_TIME : COOK_TIME;

@@ -1,5 +1,6 @@
 package com.edxmod.electrodynamics.common.tile;
 
+import com.edxmod.electrodynamics.common.block.EDXBlocks;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
@@ -23,19 +24,12 @@ public class TileWaterMill extends TileCoreMachine {
 	public float angle = 0F;
 
 	@Override
-	public void writeCustomNBT(NBTTagCompound nbt) {
-
-	}
-
-	@Override
-	public void readCustomNBT(NBTTagCompound nbt) {
-
-	}
-
-	@Override
 	public void onClientUpdate(NBTTagCompound nbt) {
 		if (nbt.hasKey("speed")) {
 			speed = nbt.getFloat("speed");
+			if (nbt.getBoolean("force")) {
+				clientSpeed = speed;
+			}
 		}
 	}
 
@@ -55,6 +49,12 @@ public class TileWaterMill extends TileCoreMachine {
 			if (angle > 360F) {
 				angle = angle - 360F;
 			}
+
+			TileKineticCrank crank = (TileKineticCrank) worldObj.getTileEntity(xCoord + orientation.offsetX, yCoord, zCoord + orientation.offsetZ);
+
+			if (crank != null) {
+				crank.angle = angle;
+			}
 		}
 	}
 
@@ -67,8 +67,8 @@ public class TileWaterMill extends TileCoreMachine {
 
 		ForgeDirection right = orientation.getRotation(ForgeDirection.UP).getOpposite();
 		boolean xAxis = right.offsetX != 0;
-		boolean reverse = (xAxis ? right.offsetX < 0 : right.offsetY < 0);
 
+		boolean force = false;
 		int count = 0;
 		for (int ix=-1; ix<2; ix++) {
 			for (int iy=-1; iy<2; iy++) {
@@ -82,7 +82,18 @@ public class TileWaterMill extends TileCoreMachine {
 						int meta = worldObj.getBlockMetadata(sx, sy, sz);
 
 						if ((block == Blocks.water || block == Blocks.flowing_water) && meta > 0) {
-							count++;
+							// Is the block flowing on the ground?
+							Block below = worldObj.getBlock(sx, sy - 1, sz);
+
+							if (!below.isAir(worldObj, sx, sy, sz) && block != Blocks.water && block != Blocks.flowing_water) {
+								// It's flowing on something solid
+							}
+						} else {
+							if (block != null && block != EDXBlocks.waterMill && !block.isAir(worldObj, sx, sy, sz)) {
+								force = true;
+								count = 0;
+								break;
+							}
 						}
 					}
 				}
@@ -95,6 +106,7 @@ public class TileWaterMill extends TileCoreMachine {
 			lastSpeed = speed;
 
 			NBTTagCompound nbt = new NBTTagCompound();
+			nbt.setBoolean("force", force);
 			nbt.setFloat("speed", speed);
 			sendClientUpdate(nbt);
 		}

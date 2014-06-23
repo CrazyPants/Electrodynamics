@@ -6,13 +6,13 @@ import com.edxmod.electrodynamics.common.block.EDXBlocks;
 import com.edxmod.electrodynamics.common.network.PacketFX;
 import com.edxmod.electrodynamics.common.recipe.EDXRecipes;
 import com.edxmod.electrodynamics.common.recipe.wrapper.TableRecipe;
+import com.edxmod.electrodynamics.common.tile.nbt.NBTHandler;
 import com.edxmod.electrodynamics.common.util.InventoryHelper;
 import com.edxmod.electrodynamics.common.util.ItemHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.util.ForgeDirection;
 
 import java.util.Random;
@@ -22,31 +22,33 @@ import java.util.Random;
  */
 public class TileTable extends TileCore {
 
+	@NBTHandler.NBTData
     public ItemStack stack;
 
+	@NBTHandler.NBTData
 	public float durability;
 
-    @Override
-    public void readCustomNBT(NBTTagCompound nbt) {
-        if (nbt.hasKey("stack")) {
-            stack = ItemStack.loadItemStackFromNBT(nbt.getCompoundTag("stack"));
-        } else {
-            stack = null;
-        }
-
-		durability = nbt.getFloat("durability");
-    }
-
-    @Override
-    public void writeCustomNBT(NBTTagCompound nbt) {
-        if (stack != null) {
-            NBTTagCompound stackNBT = new NBTTagCompound();
-            stack.writeToNBT(stackNBT);
-            nbt.setTag("stack", stackNBT);
-        }
-
-		nbt.setFloat("durability", durability);
-    }
+//    @Override
+//    public void readCustomNBT(NBTTagCompound nbt) {
+//        if (nbt.hasKey("stack")) {
+//            stack = ItemStack.loadItemStackFromNBT(nbt.getCompoundTag("stack"));
+//        } else {
+//            stack = null;
+//        }
+//
+//		durability = nbt.getFloat("durability");
+//    }
+//
+//    @Override
+//    public void writeCustomNBT(NBTTagCompound nbt) {
+//        if (stack != null) {
+//            NBTTagCompound stackNBT = new NBTTagCompound();
+//            stack.writeToNBT(stackNBT);
+//            nbt.setTag("stack", stackNBT);
+//        }
+//
+//		nbt.setFloat("durability", durability);
+//    }
 
 	@Override
 	public void onBlockBroken() {

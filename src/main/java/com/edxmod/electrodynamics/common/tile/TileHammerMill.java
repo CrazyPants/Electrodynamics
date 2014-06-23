@@ -3,6 +3,7 @@ package com.edxmod.electrodynamics.common.tile;
 import com.edxmod.electrodynamics.api.tool.ToolDefinition;
 import com.edxmod.electrodynamics.common.lib.StackReference;
 import com.edxmod.electrodynamics.common.recipe.EDXRecipes;
+import com.edxmod.electrodynamics.common.tile.nbt.NBTHandler;
 import com.edxmod.electrodynamics.common.util.StackHelper;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
@@ -29,25 +30,30 @@ public class TileHammerMill extends TileCoreMachine implements ISidedInventory {
 
 	private static final Random random = new Random();
 
+	@NBTHandler.NBTData
 	public ItemStack processing;
+	@NBTHandler.NBTData
 	public ItemStack buffer;
 
+	@NBTHandler.NBTData
 	public byte grindingStage;
 
 	public boolean spinning = false;
 
+	@NBTHandler.NBTData
 	public float charge = 0F;
+	@NBTHandler.NBTData
 	public float spinLeft = 0F;
 
-	@Override
-	public void writeCustomNBT(NBTTagCompound nbt) {
-		nbt.setByte("stage", grindingStage);
-	}
-
-	@Override
-	public void readCustomNBT(NBTTagCompound nbt) {
-		grindingStage = nbt.getByte("stage");
-	}
+//	@Override
+//	public void writeCustomNBT(NBTTagCompound nbt) {
+//		nbt.setByte("stage", grindingStage);
+//	}
+//
+//	@Override
+//	public void readCustomNBT(NBTTagCompound nbt) {
+//		grindingStage = nbt.getByte("stage");
+//	}
 
 	@Override
 	public void onClientUpdate(NBTTagCompound nbt) {

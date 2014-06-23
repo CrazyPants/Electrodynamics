@@ -1,15 +1,13 @@
 package com.edxmod.electrodynamics.common.tile;
 
 import com.edxmod.electrodynamics.common.recipe.EDXRecipes;
-import com.edxmod.electrodynamics.common.recipe.manager.SieveManager;
 import com.edxmod.electrodynamics.common.recipe.wrapper.SieveRecipe;
+import com.edxmod.electrodynamics.common.tile.nbt.NBTHandler;
 import com.edxmod.electrodynamics.common.util.InventoryHelper;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntityHopper;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraftforge.common.util.ForgeDirection;
@@ -24,49 +22,52 @@ public class TileSieveTable extends TileCore implements ISidedInventory {
 
 	private static final int INVENTORY_SIZE = 9;
 
+	@NBTHandler.NBTData
 	public ItemStack[] processing = new ItemStack[INVENTORY_SIZE];
 
+	@NBTHandler.NBTData
 	public int maxProcessingTime = 0;
+	@NBTHandler.NBTData
 	public int currentProcessingTime = 0;
 
-    @Override
-    public void readCustomNBT(NBTTagCompound nbt) {
-		NBTTagList nbttaglist = nbt.getTagList("Items", 10);
-		processing = new ItemStack[this.getSizeInventory()];
-
-		for (int i = 0; i < nbttaglist.tagCount(); ++i) {
-			NBTTagCompound tag = nbttaglist.getCompoundTagAt(i);
-			byte slot = tag.getByte("Slot");
-
-			if (slot >= 0 && slot < processing.length) {
-				processing[slot] = ItemStack.loadItemStackFromNBT(tag);
-			}
-		}
-
-		// Durations
-		currentProcessingTime = nbt.getInteger("current");
-		maxProcessingTime = nbt.getInteger("max");
-	}
-
-    @Override
-    public void writeCustomNBT(NBTTagCompound nbt) {
-		NBTTagList nbttaglist = new NBTTagList();
-
-		for (int i = 0; i < processing.length; ++i) {
-			if (processing[i] != null) {
-				NBTTagCompound tag = new NBTTagCompound();
-				tag.setByte("Slot", (byte) i);
-				processing[i].writeToNBT(tag);
-				nbttaglist.appendTag(tag);
-			}
-		}
-
-		nbt.setTag("Items", nbttaglist);
-
-		// Durations
-		nbt.setInteger("current", currentProcessingTime);
-		nbt.setInteger("max", maxProcessingTime);
-	}
+//    @Override
+//    public void readCustomNBT(NBTTagCompound nbt) {
+//		NBTTagList nbttaglist = nbt.getTagList("Items", 10);
+//		processing = new ItemStack[this.getSizeInventory()];
+//
+//		for (int i = 0; i < nbttaglist.tagCount(); ++i) {
+//			NBTTagCompound tag = nbttaglist.getCompoundTagAt(i);
+//			byte slot = tag.getByte("Slot");
+//
+//			if (slot >= 0 && slot < processing.length) {
+//				processing[slot] = ItemStack.loadItemStackFromNBT(tag);
+//			}
+//		}
+//
+//		// Durations
+//		currentProcessingTime = nbt.getInteger("current");
+//		maxProcessingTime = nbt.getInteger("max");
+//	}
+//
+//    @Override
+//    public void writeCustomNBT(NBTTagCompound nbt) {
+//		NBTTagList nbttaglist = new NBTTagList();
+//
+//		for (int i = 0; i < processing.length; ++i) {
+//			if (processing[i] != null) {
+//				NBTTagCompound tag = new NBTTagCompound();
+//				tag.setByte("Slot", (byte) i);
+//				processing[i].writeToNBT(tag);
+//				nbttaglist.appendTag(tag);
+//			}
+//		}
+//
+//		nbt.setTag("Items", nbttaglist);
+//
+//		// Durations
+//		nbt.setInteger("current", currentProcessingTime);
+//		nbt.setInteger("max", maxProcessingTime);
+//	}
 
 	@Override
 	public void onBlockBroken() {
