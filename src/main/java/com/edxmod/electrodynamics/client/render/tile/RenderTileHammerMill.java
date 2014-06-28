@@ -3,14 +3,12 @@ package com.edxmod.electrodynamics.client.render.tile;
 import com.edxmod.electrodynamics.client.render.WrappedModel;
 import com.edxmod.electrodynamics.common.tile.TileHammerMill;
 import com.edxmod.electrodynamics.common.util.RenderHelper;
-import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
-import net.minecraft.tileentity.TileEntity;
 import org.lwjgl.opengl.GL11;
 
 /**
  * @author dmillerw
  */
-public class RenderTileHammerMill extends TileEntitySpecialRenderer {
+public class RenderTileHammerMill extends EDXTileRenderer<TileHammerMill> {
 
 	public static final String PART_GRINDER = "VIFS001";
 	public static final String PART_SWITCH = "VIFS003";
@@ -21,7 +19,7 @@ public class RenderTileHammerMill extends TileEntitySpecialRenderer {
 		hammerMill = new WrappedModel("blocks/hammerMill.obj", "blocks/hammerMill.png");
 	}
 
-	public void renderMillAt(TileHammerMill tile, double x, double y, double z, float partial) {
+	public void renderTileAt(TileHammerMill tile, double x, double y, double z, float delta) {
 		GL11.glPushMatrix();
 
 		GL11.glTranslated(x, y, z);
@@ -37,7 +35,7 @@ public class RenderTileHammerMill extends TileEntitySpecialRenderer {
 
 		// First we move the pivot point
 		GL11.glTranslated(0, 0.55, 0.55);
-		GL11.glRotated(-tile.spinLeft, 1, 0, 0);
+		GL11.glRotated(-tile.angle, 1, 0, 0);
 		GL11.glTranslated(0, -0.55, -0.55);
 
 		// Then we move the object in relation to that pivot point
@@ -74,10 +72,5 @@ public class RenderTileHammerMill extends TileEntitySpecialRenderer {
 		hammerMill.renderOnly(PART_SWITCH);
 
 		GL11.glPopMatrix();
-	}
-
-	@Override
-	public void renderTileEntityAt(TileEntity var1, double var2, double var4, double var6, float var8) {
-		renderMillAt((TileHammerMill) var1, var2, var4, var6, var8);
 	}
 }

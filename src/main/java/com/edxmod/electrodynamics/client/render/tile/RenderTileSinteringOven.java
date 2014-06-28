@@ -5,14 +5,12 @@ import com.edxmod.electrodynamics.common.lib.MathFX;
 import com.edxmod.electrodynamics.common.tile.TileSinteringOven;
 import com.edxmod.electrodynamics.common.util.RenderHelper;
 import net.minecraft.client.renderer.OpenGlHelper;
-import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
-import net.minecraft.tileentity.TileEntity;
 import org.lwjgl.opengl.GL11;
 
 /**
  * @author Royalixor
  */
-public class RenderTileSinteringOven extends TileEntitySpecialRenderer {
+public class RenderTileSinteringOven extends EDXTileRenderer<TileSinteringOven> {
 
 	public static final String PART_DOOR = "VIFS002";
 	public static final String PART_GLASS = "VIFS003";
@@ -23,7 +21,7 @@ public class RenderTileSinteringOven extends TileEntitySpecialRenderer {
         sinteringOven = new WrappedModel("blocks/sinteringOven.obj", "blocks/sinteringOven.png");
     }
 
-    private void renderOvenAt(TileSinteringOven tileSinteringOven, double x, double y, double z, float partial) {
+    public void renderTileAt(TileSinteringOven tile, double x, double y, double z, float delta) {
         GL11.glPushMatrix();
 
         // Required for any models with partially transparent textures
@@ -33,7 +31,7 @@ public class RenderTileSinteringOven extends TileEntitySpecialRenderer {
         GL11.glTranslated(x, y, z);
 
 		GL11.glTranslated(0.5, 0, 0.5);
-		GL11.glRotated(RenderHelper.getRotationAngle(tileSinteringOven.orientation), 0, 1, 0);
+		GL11.glRotated(RenderHelper.getRotationAngle(tile.orientation), 0, 1, 0);
 		GL11.glTranslated(-0.5, 0, -0.5);
 
 		sinteringOven.bindTexture();
@@ -43,7 +41,7 @@ public class RenderTileSinteringOven extends TileEntitySpecialRenderer {
         // Essentially this sets the pivot point for the next rotation
         GL11.glTranslated(0.0625F / 2, 0, 1 - (0.0625F / 2));
 
-		float percent = tileSinteringOven.currentAngle / 90F;
+		float percent = tile.currentAngle / 90F;
 		float sinerp = MathFX.sinerp(0, 1, percent);
 
         GL11.glRotated((-sinerp) * 90F, 0, 1, 0);
@@ -56,10 +54,5 @@ public class RenderTileSinteringOven extends TileEntitySpecialRenderer {
         GL11.glDisable(GL11.GL_BLEND);
 
         GL11.glPopMatrix();
-    }
-
-    @Override
-    public void renderTileEntityAt(TileEntity tile, double x, double y, double z, float partial) {
-        renderOvenAt((TileSinteringOven) tile, x, y, z, partial);
     }
 }

@@ -13,6 +13,8 @@ import net.minecraftforge.common.util.ForgeDirection;
  */
 public class TileWaterMill extends TileCoreMachine {
 
+	public static final float MAX_SPEED = 10F;
+
 	private float lastSpeed = 0F;
 
 	public float speed = 0F;
@@ -65,11 +67,12 @@ public class TileWaterMill extends TileCoreMachine {
 
 		//TODO Rotate based on flow direction?
 
+		TileKineticCrank crank = (TileKineticCrank) worldObj.getTileEntity(xCoord + orientation.offsetX, yCoord, zCoord + orientation.offsetZ);
 		ForgeDirection right = orientation.getRotation(ForgeDirection.UP).getOpposite();
 		boolean xAxis = right.offsetX != 0;
 
-		boolean force = false;
 		int count = 0;
+		crank.stopTick = false;
 		for (int ix=-1; ix<2; ix++) {
 			for (int iy=-1; iy<2; iy++) {
 				for (int iz=-1; iz<2; iz++) {
@@ -81,16 +84,19 @@ public class TileWaterMill extends TileCoreMachine {
 						Block block = worldObj.getBlock(sx, sy, sz);
 						int meta = worldObj.getBlockMetadata(sx, sy, sz);
 
-						if ((block == Blocks.water || block == Blocks.flowing_water) && meta > 0) {
+						if ((block == Blocks.water || block == Blocks.flowing_water)) {
 							// Is the block flowing on the ground?
 							Block below = worldObj.getBlock(sx, sy - 1, sz);
 
 							if (!below.isAir(worldObj, sx, sy, sz) && block != Blocks.water && block != Blocks.flowing_water) {
 								// It's flowing on something solid
+								count++;
+							} else {
+								count += 2;
 							}
 						} else {
 							if (block != null && block != EDXBlocks.waterMill && !block.isAir(worldObj, sx, sy, sz)) {
-								force = true;
+								crank.stopTick = true;
 								count = 0;
 								break;
 							}
@@ -100,13 +106,17 @@ public class TileWaterMill extends TileCoreMachine {
 			}
 		}
 
-		speed = 10F * ((float)count / (float)8);
+		speed = MAX_SPEED * ((float)count / (float)8);
+		crank.speed = speed;
 
 		if (lastSpeed != speed) {
+			if (lastSpeed > 0 && speed <= 0) {
+				crank.stopTick = true;
+			}
 			lastSpeed = speed;
 
 			NBTTagCompound nbt = new NBTTagCompound();
-			nbt.setBoolean("force", force);
+			nbt.setBoolean("force", crank.stopTick);
 			nbt.setFloat("speed", speed);
 			sendClientUpdate(nbt);
 		}

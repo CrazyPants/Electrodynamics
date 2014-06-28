@@ -1,22 +1,19 @@
 package com.edxmod.electrodynamics.client.render.tile;
 
 import com.edxmod.electrodynamics.client.render.WrappedModel;
-import com.edxmod.electrodynamics.common.block.prefab.EDXTileMultiBlock;
 import com.edxmod.electrodynamics.common.block.prefab.EDXTileBlock;
+import com.edxmod.electrodynamics.common.block.prefab.EDXTileMultiBlock;
 import com.edxmod.electrodynamics.common.tile.TileTable;
-import com.edxmod.electrodynamics.common.util.ItemHelper;
 import com.edxmod.electrodynamics.common.util.RenderHelper;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
-import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.item.ItemBlock;
-import net.minecraft.tileentity.TileEntity;
 import org.lwjgl.opengl.GL11;
 
 /**
  * @author dmillerw
  */
-public class RenderTileTable extends TileEntitySpecialRenderer {
+public class RenderTileTable extends EDXTileRenderer<TileTable> {
 
     public static final float WOOD_RENDER_MAX = 0.5625F;
     public static final float STONE_RENDER_MAX = 0.875F;
@@ -29,7 +26,7 @@ public class RenderTileTable extends TileEntitySpecialRenderer {
         stoneTable = new WrappedModel("blocks/smashingTable.obj", "blocks/smashingTable.png");
     }
 
-    private void renderTableAt(TileTable tile, double x, double y, double z, float partial) {
+    public void renderTileAt(TileTable tile, double x, double y, double z, float delta) {
         GL11.glPushMatrix();
 
         GL11.glTranslated(x, y, z);
@@ -82,10 +79,4 @@ public class RenderTileTable extends TileEntitySpecialRenderer {
 
         GL11.glPopMatrix();
     }
-
-    @Override
-    public void renderTileEntityAt(TileEntity tile, double x, double y, double z, float partial) {
-        renderTableAt((TileTable) tile, x, y, z, partial);
-    }
-
 }

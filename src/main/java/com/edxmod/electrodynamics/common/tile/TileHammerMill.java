@@ -5,6 +5,8 @@ import com.edxmod.electrodynamics.common.lib.StackReference;
 import com.edxmod.electrodynamics.common.recipe.EDXRecipes;
 import com.edxmod.electrodynamics.common.tile.nbt.NBTHandler;
 import com.edxmod.electrodynamics.common.util.StackHelper;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
@@ -24,9 +26,9 @@ import java.util.Random;
  */
 public class TileHammerMill extends TileCoreMachine implements ISidedInventory {
 
-	public static final byte MAX_STAGE = 4;
-
 	private static final int INVENTORY_SIZE = 1;
+
+	public static final byte MAX_STAGE = 4;
 
 	private static final Random random = new Random();
 
@@ -38,12 +40,11 @@ public class TileHammerMill extends TileCoreMachine implements ISidedInventory {
 	@NBTHandler.NBTData
 	public byte grindingStage;
 
-	public boolean spinning = false;
-
 	@NBTHandler.NBTData
 	public float charge = 0F;
-	@NBTHandler.NBTData
-	public float spinLeft = 0F;
+
+	@SideOnly(Side.CLIENT)
+	public float angle = 0F;
 
 //	@Override
 //	public void writeCustomNBT(NBTTagCompound nbt) {
@@ -60,11 +61,6 @@ public class TileHammerMill extends TileCoreMachine implements ISidedInventory {
 		if (nbt.hasKey("stage")) {
 			grindingStage = nbt.getByte("stage");
 		}
-	}
-
-	@Override
-	public void onPokeReceived() {
-		spinLeft += 360F;
 	}
 
 	@Override
@@ -90,12 +86,6 @@ public class TileHammerMill extends TileCoreMachine implements ISidedInventory {
 						}
 					}
 				}
-			}
-
-			if (spinLeft <= 0 && spinning) {
-				charge++;
-				spinning = false;
-				spinLeft = 0;
 			}
 
 			// Processing
@@ -140,14 +130,6 @@ public class TileHammerMill extends TileCoreMachine implements ISidedInventory {
 				buffer = TileEntityHopper.func_145889_a(getBelowInventory(), out, ForgeDirection.UP.ordinal());
 			}
 		}
-
-		if (spinLeft > 0) {
-			spinLeft -= 20F;
-			spinning = true;
-		} else {
-			spinLeft = 0;
-			spinning = false;
-		}
 	}
 
 	public void updateStage() {
@@ -159,18 +141,6 @@ public class TileHammerMill extends TileCoreMachine implements ISidedInventory {
 		NBTTagCompound nbt = new NBTTagCompound();
 		nbt.setByte("stage", grindingStage);
 		sendClientUpdate(nbt);
-	}
-
-	public void crank() {
-		if (spinLeft <= 0) {
-			if (canFunction()) {
-				if (processing != null && processing.stackSize > 0) {
-					spinLeft += 360F;
-					spinning = true;
-					sendPoke();
-				}
-			}
-		}
 	}
 
 	private boolean canInput(ItemStack stack) {

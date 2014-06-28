@@ -1,17 +1,14 @@
 package com.edxmod.electrodynamics.client.render.tile;
 
 import com.edxmod.electrodynamics.client.render.WrappedModel;
-import com.edxmod.electrodynamics.common.tile.TileHammerMill;
 import com.edxmod.electrodynamics.common.tile.TileKiln;
 import com.edxmod.electrodynamics.common.util.RenderHelper;
-import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
-import net.minecraft.tileentity.TileEntity;
 import org.lwjgl.opengl.GL11;
 
 /**
  * @author dmillerw
  */
-public class RenderTileKiln extends TileEntitySpecialRenderer {
+public class RenderTileKiln extends EDXTileRenderer<TileKiln> {
 
 	public static WrappedModel kiln;
 
@@ -19,7 +16,7 @@ public class RenderTileKiln extends TileEntitySpecialRenderer {
 		kiln = new WrappedModel("blocks/kiln.obj", "blocks/kiln.png");
 	}
 
-	public void renderMillAt(TileKiln tile, double x, double y, double z, float partial) {
+	public void renderTileAt(TileKiln tile, double x, double y, double z, float delta) {
 		GL11.glPushMatrix();
 
 		GL11.glTranslated(x, y, z);
@@ -32,10 +29,5 @@ public class RenderTileKiln extends TileEntitySpecialRenderer {
 		kiln.renderAll();
 
 		GL11.glPopMatrix();
-	}
-
-	@Override
-	public void renderTileEntityAt(TileEntity var1, double var2, double var4, double var6, float var8) {
-		renderMillAt((TileKiln) var1, var2, var4, var6, var8);
 	}
 }

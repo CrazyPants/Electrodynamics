@@ -15,6 +15,7 @@ public abstract class AbstractSerializer<T> {
 
 	public static void initialize() {
 		serializerList.add(new EnumSerializer());
+		serializerList.add(new ArraySerializer.ArrayItemStack());
 	}
 
 	public abstract boolean canHandle(Field field);

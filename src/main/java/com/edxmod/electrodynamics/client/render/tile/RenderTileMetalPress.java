@@ -1,17 +1,14 @@
 package com.edxmod.electrodynamics.client.render.tile;
 
 import com.edxmod.electrodynamics.client.render.WrappedModel;
-import com.edxmod.electrodynamics.common.tile.TileHammerMill;
 import com.edxmod.electrodynamics.common.tile.TileMetalPress;
 import com.edxmod.electrodynamics.common.util.RenderHelper;
-import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
-import net.minecraft.tileentity.TileEntity;
 import org.lwjgl.opengl.GL11;
 
 /**
  * @author dmillerw
  */
-public class RenderTileMetalPress extends TileEntitySpecialRenderer {
+public class RenderTileMetalPress extends EDXTileRenderer<TileMetalPress> {
 
 	public static WrappedModel metalPress;
 
@@ -19,7 +16,7 @@ public class RenderTileMetalPress extends TileEntitySpecialRenderer {
 		metalPress = new WrappedModel("blocks/metalPress.obj", "blocks/metalPress.png");
 	}
 
-	public void renderMillAt(TileMetalPress tile, double x, double y, double z, float partial) {
+	public void renderTileAt(TileMetalPress tile, double x, double y, double z, float delta) {
 		GL11.glPushMatrix();
 
 		GL11.glTranslated(x, y, z);
@@ -32,10 +29,5 @@ public class RenderTileMetalPress extends TileEntitySpecialRenderer {
 		metalPress.renderAll();
 
 		GL11.glPopMatrix();
-	}
-
-	@Override
-	public void renderTileEntityAt(TileEntity var1, double var2, double var4, double var6, float var8) {
-		renderMillAt((TileMetalPress) var1, var2, var4, var6, var8);
 	}
 }

@@ -10,7 +10,7 @@ import org.lwjgl.opengl.GL11;
 /**
  * @author dmillerw
  */
-public class RenderTileKineticCrank extends TileEntitySpecialRenderer {
+public class RenderTileKineticCrank extends EDXTileRenderer<TileKineticCrank> {
 
 	public static final String PART_WHEEL = "VIFS002";
 
@@ -20,7 +20,7 @@ public class RenderTileKineticCrank extends TileEntitySpecialRenderer {
 		kineticCrank = new WrappedModel("blocks/kineticCrank.obj", "blocks/kineticCrank.png");
 	}
 
-	public void renderKineticCrank(TileKineticCrank tile, double x, double y, double z, float partial) {
+	public void renderTileAt(TileKineticCrank tile, double x, double y, double z, float delta) {
 		GL11.glPushMatrix();
 
 		GL11.glTranslated(x, y, z);
@@ -40,10 +40,5 @@ public class RenderTileKineticCrank extends TileEntitySpecialRenderer {
 		kineticCrank.renderOnly(PART_WHEEL);
 
 		GL11.glPopMatrix();
-	}
-
-	@Override
-	public void renderTileEntityAt(TileEntity var1, double var2, double var4, double var6, float var8) {
-		renderKineticCrank((TileKineticCrank) var1, var2, var4, var6, var8);
 	}
 }
