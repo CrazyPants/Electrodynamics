@@ -1,7 +1,7 @@
 package com.edxmod.electrodynamics.common.tile;
 
 import com.edxmod.electrodynamics.common.lib.tool.ToolDefinition;
-import com.edxmod.electrodynamics.common.util.DurabilityMapping;
+import com.edxmod.electrodynamics.common.lib.DurabilityMapping;
 import com.edxmod.electrodynamics.common.block.EDXBlocks;
 import com.edxmod.electrodynamics.common.network.PacketFX;
 import com.edxmod.electrodynamics.common.recipe.EDXRecipes;

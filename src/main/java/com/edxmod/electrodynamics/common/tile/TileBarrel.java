@@ -1,6 +1,5 @@
 package com.edxmod.electrodynamics.common.tile;
 
-import com.edxmod.electrodynamics.common.recipe.EDXRecipes;
 import com.edxmod.electrodynamics.common.recipe.wrapper.BarrelRecipe;
 import com.edxmod.electrodynamics.common.tile.nbt.NBTHandler;
 import com.edxmod.electrodynamics.common.util.StackHelper;
@@ -43,9 +42,9 @@ public class TileBarrel extends TileCore {
 
 			if (duration == 0 && recipe != null) {
 				contents = recipe.get(contents)[0];
-				recipe = null;
-
 				updateContents();
+
+				recipe = null;
 			}
 		}
 	}
@@ -95,9 +94,9 @@ public class TileBarrel extends TileCore {
 			return false;
 		}
 
-		BarrelRecipe recipe = EDXRecipes.BARREL.get(stack);
+		BarrelRecipe temp = new BarrelRecipe(new ItemStack(Blocks.dirt, 8, 1), new ItemStack(Blocks.grass), true, 8, 20, 0);
 
-		if (recipe == null) {
+		if (temp == null) {
 			return false;
 		}
 
@@ -109,7 +108,7 @@ public class TileBarrel extends TileCore {
 			contents.stackSize++;
 			stack.stackSize--;
 		} else {
-			this.recipe = recipe;
+			recipe = temp;
 			contents = stack.copy();
 			contents.stackSize = 1;
 			stack.stackSize--;

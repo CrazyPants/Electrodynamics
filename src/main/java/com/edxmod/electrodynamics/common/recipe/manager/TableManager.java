@@ -2,7 +2,7 @@ package com.edxmod.electrodynamics.common.recipe.manager;
 
 import com.edxmod.electrodynamics.common.lib.tool.ToolDefinition;
 import com.edxmod.electrodynamics.common.recipe.wrapper.TableRecipe;
-import com.edxmod.electrodynamics.common.util.DurabilityMapping;
+import com.edxmod.electrodynamics.common.lib.DurabilityMapping;
 import com.edxmod.electrodynamics.common.util.StackHelper;
 import net.minecraft.item.ItemStack;
 
