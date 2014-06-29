@@ -1,7 +1,7 @@
 package com.edxmod.electrodynamics.common.recipe.core;
 
 import com.edxmod.electrodynamics.common.recipe.wrapper.SieveRecipe;
-import com.edxmod.electrodynamics.common.util.RandomStack;
+import com.edxmod.electrodynamics.common.lib.RandomStack;
 import com.edxmod.electrodynamics.common.recipe.EDXRecipes;
 import com.google.gson.Gson;
 import cpw.mods.fml.common.FMLLog;

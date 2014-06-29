@@ -1,6 +1,6 @@
 package com.edxmod.electrodynamics.common.recipe.wrapper;
 
-import com.edxmod.electrodynamics.common.util.RandomStack;
+import com.edxmod.electrodynamics.common.lib.RandomStack;
 import com.edxmod.electrodynamics.common.util.StackHelper;
 import net.minecraft.item.ItemStack;
 

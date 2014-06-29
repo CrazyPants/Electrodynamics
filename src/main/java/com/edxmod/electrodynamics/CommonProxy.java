@@ -1,17 +1,17 @@
 package com.edxmod.electrodynamics;
 
-import com.edxmod.electrodynamics.common.lib.tool.ToolDefinition;
 import com.edxmod.electrodynamics.common.block.EDXBlocks;
 import com.edxmod.electrodynamics.common.core.handler.BlockEventHandler;
 import com.edxmod.electrodynamics.common.core.handler.GuiHandler;
 import com.edxmod.electrodynamics.common.core.handler.SpiderTracker;
 import com.edxmod.electrodynamics.common.item.EDXItems;
 import com.edxmod.electrodynamics.common.item.ItemHammer;
+import com.edxmod.electrodynamics.common.lib.tool.ToolDefinition;
 import com.edxmod.electrodynamics.common.recipe.EDXRecipes;
 import com.edxmod.electrodynamics.common.recipe.core.RecipeParser;
 import com.edxmod.electrodynamics.common.tile.nbt.data.AbstractSerializer;
+import com.edxmod.electrodynamics.common.util.EventUtil;
 import com.edxmod.electrodynamics.common.world.WorldProviderSkyblockHell;
-import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameData;
 import net.minecraft.item.Item;
@@ -19,7 +19,6 @@ import net.minecraft.item.ItemAxe;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemTool;
 import net.minecraftforge.common.DimensionManager;
-import net.minecraftforge.common.MinecraftForge;
 
 import java.io.File;
 import java.io.IOException;
@@ -38,9 +37,8 @@ public class CommonProxy {
 
 		NetworkRegistry.INSTANCE.registerGuiHandler(Electrodynamics.instance, new GuiHandler());
 
-		MinecraftForge.EVENT_BUS.register(new BlockEventHandler());
-
-		FMLCommonHandler.instance().bus().register(new SpiderTracker());
+		EventUtil.register(new BlockEventHandler(), EventUtil.Type.FML);
+		EventUtil.register(new SpiderTracker(), EventUtil.Type.FORGE);
     }
 
     public void init() {
@@ -88,5 +86,4 @@ public class CommonProxy {
 			}
 		}
     }
-
 }
