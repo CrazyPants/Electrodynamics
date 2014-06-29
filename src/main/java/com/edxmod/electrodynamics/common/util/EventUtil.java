@@ -17,7 +17,9 @@ public class EventUtil {
 	public static void register(Object instance, Type type) {
 		if (type == Type.FML || type == Type.BOTH) {
 			FMLCommonHandler.instance().bus().register(instance);
-		} else if (type == Type.FORGE || type == Type.BOTH) {
+		}
+
+		if (type == Type.FORGE || type == Type.BOTH) {
 			MinecraftForge.EVENT_BUS.register(instance);
 		}
 	}
