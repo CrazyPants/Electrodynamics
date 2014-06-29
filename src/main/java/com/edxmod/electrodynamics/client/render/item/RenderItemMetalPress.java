@@ -13,7 +13,7 @@ public class RenderItemMetalPress implements IItemRenderer {
     private static WrappedModel metalPress;
 
     static {
-        metalPress = new WrappedModel("blocks/metalPress.obj", "blocks/metalPress.png");
+        metalPress = new WrappedModel("blocks/metalPress");
     }
 
     @Override

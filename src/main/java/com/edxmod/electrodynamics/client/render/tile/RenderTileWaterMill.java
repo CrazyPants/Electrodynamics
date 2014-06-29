@@ -14,7 +14,7 @@ public class RenderTileWaterMill extends EDXTileRenderer<TileWaterMill> {
 	public static WrappedModel waterMill;
 
 	static {
-		waterMill = new WrappedModel("blocks/mill.obj", "blocks/mill.png");
+		waterMill = new WrappedModel("blocks/mill");
 	}
 
 	public void renderTileAt(TileWaterMill tile, double x, double y, double z, float delta) {

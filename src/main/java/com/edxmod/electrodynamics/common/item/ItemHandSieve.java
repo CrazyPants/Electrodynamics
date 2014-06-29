@@ -6,7 +6,6 @@ import com.edxmod.electrodynamics.common.core.handler.GuiHandler;
 import com.edxmod.electrodynamics.common.inventory.InventoryItem;
 import com.edxmod.electrodynamics.common.item.prefab.EDXItem;
 import com.edxmod.electrodynamics.common.recipe.EDXRecipes;
-import com.edxmod.electrodynamics.common.recipe.manager.SieveManager;
 import com.edxmod.electrodynamics.common.recipe.wrapper.SieveRecipe;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -27,7 +26,7 @@ public class ItemHandSieve extends EDXItem {
 		if (stack1 != null) {
 			SieveRecipe recipe = EDXRecipes.SIEVE.get(stack1);
 
-			for (ItemStack stack2 : recipe.getOutput()) {
+			for (ItemStack stack2 : recipe.get(null)) {
 				player.dropPlayerItemWithRandomChoice(stack2, false);
 			}
 

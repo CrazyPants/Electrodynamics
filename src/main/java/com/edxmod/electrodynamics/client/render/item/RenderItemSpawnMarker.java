@@ -13,7 +13,7 @@ public class RenderItemSpawnMarker implements IItemRenderer {
     private static WrappedModel spawnMarker;
 
     static {
-        spawnMarker = new WrappedModel("blocks/skull.tcn", "blocks/skull.png");
+		spawnMarker = new WrappedModel("blocks/skull.tcn", "blocks/skull.png");
     }
 
     @Override

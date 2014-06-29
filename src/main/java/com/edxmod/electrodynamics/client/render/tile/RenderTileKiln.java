@@ -14,7 +14,7 @@ public class RenderTileKiln extends EDXTileRenderer<TileKiln> {
 	public static WrappedModel kiln;
 
 	static {
-		kiln = new WrappedModel("blocks/kiln.obj", "blocks/kiln.png");
+		kiln = new WrappedModel("blocks/kiln");
 	}
 
 	public void renderTileAt(TileKiln tile, double x, double y, double z, float delta) {

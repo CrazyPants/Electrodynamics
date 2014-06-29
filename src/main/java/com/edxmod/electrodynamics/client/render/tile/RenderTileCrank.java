@@ -15,7 +15,7 @@ public class RenderTileCrank extends EDXTileRenderer<TileCrank> {
 	public static WrappedModel crank;
 
 	static {
-		crank = new WrappedModel("blocks/handCrank.obj", "blocks/handCrank.png");
+		crank = new WrappedModel("blocks/handCrank");
 	}
 
 	public void renderTileAt(TileCrank tile, double x, double y, double z, float delta) {

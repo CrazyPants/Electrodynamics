@@ -19,7 +19,7 @@ public class RenderTileSinteringOven extends EDXTileRenderer<TileSinteringOven> 
     private static WrappedModel sinteringOven;
 
     static {
-        sinteringOven = new WrappedModel("blocks/sinteringOven.obj", "blocks/sinteringOven.png");
+        sinteringOven = new WrappedModel("blocks/sinteringOven");
     }
 
     public void renderTileAt(TileSinteringOven tile, double x, double y, double z, float delta) {

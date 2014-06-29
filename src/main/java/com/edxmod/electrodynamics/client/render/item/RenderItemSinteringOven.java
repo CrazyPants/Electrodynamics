@@ -14,7 +14,7 @@ public class RenderItemSinteringOven implements IItemRenderer {
     private static WrappedModel sinteringOven;
 
     static {
-        sinteringOven = new WrappedModel("blocks/sinteringOven.obj", "blocks/sinteringOven.png");
+        sinteringOven = new WrappedModel("blocks/sinteringOven");
     }
 
     @Override

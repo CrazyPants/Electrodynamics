@@ -47,7 +47,7 @@ public class ClientProxy extends CommonProxy {
 		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(EDXBlocks.kineticCrank), new RenderItemKineticCrank());
 		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(EDXBlocks.kiln), new RenderItemKiln());
 		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(EDXBlocks.metalPress), new RenderItemMetalPress());
-			// BARREL
+		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(EDXBlocks.barrel), new RenderItemBarrel());
 		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(EDXBlocks.spawnMarker), new RenderItemSpawnMarker());
     }
 

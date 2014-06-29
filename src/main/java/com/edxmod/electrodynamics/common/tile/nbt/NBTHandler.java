@@ -117,6 +117,10 @@ public class NBTHandler {
 		}
 
 		try {
+			if (field.get(parent) == null) {
+				return;
+			}
+
 			if (!field.getType().isEnum() && field.getType().getName().equalsIgnoreCase("String") || field.getType().isPrimitive()) {
 				String type = field.getType().getName();
 
@@ -160,6 +164,11 @@ public class NBTHandler {
 		}
 
 		try {
+			if (!nbt.hasKey(name)) {
+				field.set(parent, null);
+				return;
+			}
+
 			if (!field.getType().isEnum() && field.getType().getName().equalsIgnoreCase("String") || field.getType().isPrimitive()) {
 				String type = field.getType().getName();
 

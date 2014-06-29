@@ -1,14 +1,9 @@
 package com.edxmod.electrodynamics.client.render.item;
 
 import com.edxmod.electrodynamics.client.render.WrappedModel;
-import com.edxmod.electrodynamics.common.block.EDXBlocks;
-import com.edxmod.electrodynamics.common.tile.TileHammerMill;
-import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.IItemRenderer;
-import net.minecraftforge.common.util.ForgeDirection;
 import org.lwjgl.opengl.GL11;
-import org.lwjgl.opengl.GL12;
 
 /**
  * @author Royalixor
@@ -18,7 +13,7 @@ public class RenderItemHammerMill implements IItemRenderer {
     private static WrappedModel hammerMill;
 
     static {
-        hammerMill = new WrappedModel("blocks/hammerMill.obj", "blocks/hammerMill.png");
+        hammerMill = new WrappedModel("blocks/hammerMill");
     }
 
     @Override

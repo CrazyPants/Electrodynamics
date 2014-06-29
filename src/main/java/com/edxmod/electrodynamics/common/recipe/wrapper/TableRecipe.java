@@ -1,10 +1,8 @@
 package com.edxmod.electrodynamics.common.recipe.wrapper;
 
-import com.edxmod.electrodynamics.api.tool.ToolDefinition;
-import com.edxmod.electrodynamics.common.tile.TileTable;
+import com.edxmod.electrodynamics.common.lib.tool.ToolDefinition;
 import com.edxmod.electrodynamics.common.util.StackHelper;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.oredict.OreDictionary;
 
 /**
  * @author dmillerw

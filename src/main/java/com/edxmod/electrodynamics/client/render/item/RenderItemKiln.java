@@ -13,7 +13,7 @@ public class RenderItemKiln implements IItemRenderer {
     private static WrappedModel kiln;
 
     static {
-        kiln = new WrappedModel("blocks/kiln.obj", "blocks/kiln.png");
+        kiln = new WrappedModel("blocks/kiln");
     }
 
     @Override

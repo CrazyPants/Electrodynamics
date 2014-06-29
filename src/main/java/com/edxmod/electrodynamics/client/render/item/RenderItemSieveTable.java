@@ -13,7 +13,7 @@ public class RenderItemSieveTable implements IItemRenderer {
     private static WrappedModel sieveTable;
 
     static {
-        sieveTable = new WrappedModel("blocks/sieveTable.obj", "blocks/sieveTable.png");
+        sieveTable = new WrappedModel("blocks/sieveTable");
     }
 
     @Override

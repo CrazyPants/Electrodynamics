@@ -14,8 +14,8 @@ public class RenderItemTable implements IItemRenderer {
     private static WrappedModel stoneTable;
 
     static {
-        woodTable = new WrappedModel("blocks/basicTable.obj", "blocks/basicTable.png");
-        stoneTable = new WrappedModel("blocks/smashingTable.obj", "blocks/smashingTable.png");
+        woodTable = new WrappedModel("blocks/basicTable");
+        stoneTable = new WrappedModel("blocks/smashingTable");
     }
 
     @Override

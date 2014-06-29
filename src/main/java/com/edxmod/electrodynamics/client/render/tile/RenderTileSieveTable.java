@@ -13,7 +13,7 @@ public class RenderTileSieveTable extends EDXTileRenderer<TileSieveTable> {
     private static WrappedModel sieveTable;
 
     static {
-        sieveTable = new WrappedModel("blocks/sieveTable.obj", "blocks/sieveTable.png");
+        sieveTable = new WrappedModel("blocks/sieveTable");
     }
 
     public void renderTileAt(TileSieveTable tile, double x, double y, double z, float delta) {

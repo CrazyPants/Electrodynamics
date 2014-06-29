@@ -1,13 +1,13 @@
 package com.edxmod.electrodynamics.common.recipe.wrapper;
 
-import com.edxmod.electrodynamics.api.util.RandomStack;
+import com.edxmod.electrodynamics.common.util.RandomStack;
 import com.edxmod.electrodynamics.common.util.StackHelper;
 import net.minecraft.item.ItemStack;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class SieveRecipe {
+public class SieveRecipe implements IGenericRecipe {
 
 	private final ItemStack input;
 	private final RandomStack[] output;
@@ -22,16 +22,17 @@ public class SieveRecipe {
 		this.duration = duration;
 		this.ignoreNBT = ignoreNBT;
 	}
-
-	public boolean isInput(ItemStack stack) {
-		return StackHelper.areStacksSimilar(stack, input, ignoreNBT);
-	}
-
 	public int getDuration() {
 		return duration;
 	}
 
-	public ItemStack[] getOutput() {
+	@Override
+	public boolean valid(ItemStack stack) {
+		return StackHelper.areStacksSimilar(stack, input, ignoreNBT);
+	}
+
+	@Override
+	public ItemStack[] get(ItemStack input) {
 		List<ItemStack> out = new ArrayList<ItemStack>();
 
 		for (RandomStack stack : output) {

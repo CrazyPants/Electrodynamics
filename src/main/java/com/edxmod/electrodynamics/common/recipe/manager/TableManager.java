@@ -1,24 +1,20 @@
 package com.edxmod.electrodynamics.common.recipe.manager;
 
-import com.edxmod.electrodynamics.api.recipe.ITableManager;
-import com.edxmod.electrodynamics.api.tool.ToolDefinition;
-import com.edxmod.electrodynamics.api.util.DurabilityMapping;
+import com.edxmod.electrodynamics.common.lib.tool.ToolDefinition;
 import com.edxmod.electrodynamics.common.recipe.wrapper.TableRecipe;
-import com.edxmod.electrodynamics.common.util.ItemHelper;
+import com.edxmod.electrodynamics.common.util.DurabilityMapping;
 import com.edxmod.electrodynamics.common.util.StackHelper;
 import net.minecraft.item.ItemStack;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author dmillerw
  */
-public class TableManager implements ITableManager {
+public class TableManager {
 
-	private Set<TableRecipe> recipes = new HashSet<TableRecipe>();
+	private List<TableRecipe> recipes = new ArrayList<TableRecipe>();
 
 	public void registerHammerRecipe(Object input, Object output, float durability) {
 		registerRecipe(input, output, ToolDefinition.HAMMER, durability);
@@ -61,5 +57,4 @@ public class TableManager implements ITableManager {
 		}
 		return null;
 	}
-
 }

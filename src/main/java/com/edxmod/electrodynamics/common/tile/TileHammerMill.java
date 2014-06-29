@@ -1,6 +1,6 @@
 package com.edxmod.electrodynamics.common.tile;
 
-import com.edxmod.electrodynamics.api.tool.ToolDefinition;
+import com.edxmod.electrodynamics.common.lib.tool.ToolDefinition;
 import com.edxmod.electrodynamics.common.lib.StackReference;
 import com.edxmod.electrodynamics.common.recipe.EDXRecipes;
 import com.edxmod.electrodynamics.common.tile.nbt.NBTHandler;

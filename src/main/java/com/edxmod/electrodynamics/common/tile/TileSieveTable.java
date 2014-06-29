@@ -129,7 +129,7 @@ public class TileSieveTable extends TileCore implements ISidedInventory {
 
 					if (processed != null && processed.stackSize > 0) {
 						SieveRecipe processingRecipe = EDXRecipes.SIEVE.get(processed);
-						ItemStack[] output = processingRecipe.getOutput();
+						ItemStack[] output = processingRecipe.get(processed);
 						Random random = new Random();
 
 						for (ItemStack out : output) {

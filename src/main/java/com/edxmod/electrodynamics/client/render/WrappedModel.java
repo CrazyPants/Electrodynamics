@@ -15,10 +15,14 @@ public class WrappedModel {
 
     private ResourceLocation texture;
 
+	public WrappedModel(String path) {
+		this(path + ".obj", path + ".png");
+	}
+
     public WrappedModel(String model, String texture) {
         this(
-                new ResourceLocation(EDXProps.RESOURCE_PREFIX + "models/" + model),
-                new ResourceLocation(EDXProps.RESOURCE_PREFIX + "textures/models/" + texture)
+			new ResourceLocation(EDXProps.RESOURCE_PREFIX + "models/" + model),
+			new ResourceLocation(EDXProps.RESOURCE_PREFIX + "textures/models/" + texture)
         );
     }
 

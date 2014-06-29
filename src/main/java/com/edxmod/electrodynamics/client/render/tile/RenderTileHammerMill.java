@@ -17,7 +17,7 @@ public class RenderTileHammerMill extends EDXTileRenderer<TileHammerMill> {
 	public static WrappedModel hammerMill;
 
 	static {
-		hammerMill = new WrappedModel("blocks/hammerMill.obj", "blocks/hammerMill.png");
+		hammerMill = new WrappedModel("blocks/hammerMill");
 	}
 
 	public void renderTileAt(TileHammerMill tile, double x, double y, double z, float delta) {

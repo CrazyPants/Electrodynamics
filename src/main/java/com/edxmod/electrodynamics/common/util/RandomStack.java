@@ -1,4 +1,4 @@
-package com.edxmod.electrodynamics.api.util;
+package com.edxmod.electrodynamics.common.util;
 
 import net.minecraft.item.ItemStack;
 

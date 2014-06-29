@@ -14,7 +14,7 @@ public class RenderTileMetalPress extends EDXTileRenderer<TileMetalPress> {
 	public static WrappedModel metalPress;
 
 	static {
-		metalPress = new WrappedModel("blocks/metalPress.obj", "blocks/metalPress.png");
+		metalPress = new WrappedModel("blocks/metalPress");
 	}
 
 	public void renderTileAt(TileMetalPress tile, double x, double y, double z, float delta) {

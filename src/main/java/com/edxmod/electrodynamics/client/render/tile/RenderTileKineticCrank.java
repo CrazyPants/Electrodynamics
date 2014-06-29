@@ -16,7 +16,7 @@ public class RenderTileKineticCrank extends EDXTileRenderer<TileKineticCrank> {
 	public static WrappedModel kineticCrank;
 
 	static {
-		kineticCrank = new WrappedModel("blocks/kineticCrank.obj", "blocks/kineticCrank.png");
+		kineticCrank = new WrappedModel("blocks/kineticCrank");
 	}
 
 	public void renderTileAt(TileKineticCrank tile, double x, double y, double z, float delta) {

@@ -13,7 +13,7 @@ public class RenderItemKineticCrank implements IItemRenderer {
     private static WrappedModel kineticCrank;
 
     static {
-        kineticCrank = new WrappedModel("blocks/kineticCrank.obj", "blocks/kineticCrank.png");
+        kineticCrank = new WrappedModel("blocks/kineticCrank");
     }
 
     @Override

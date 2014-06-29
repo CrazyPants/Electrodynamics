@@ -90,6 +90,10 @@ public abstract class TileCore extends TileEntity {
 			case 0: readFromNBT(pkt.func_148857_g()); break;
 			case 1: onClientUpdate(pkt.func_148857_g()); break;
 			case 2: onPokeReceived(); break;
+			case 3: {
+				// Special client update tag
+				handler.readFromNBT(pkt.func_148857_g());
+			}
 			default: break;
 		}
 		worldObj.markBlockRangeForRenderUpdate(xCoord, yCoord, zCoord, xCoord, yCoord, zCoord);

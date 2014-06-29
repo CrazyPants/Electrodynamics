@@ -1,6 +1,6 @@
 package com.edxmod.electrodynamics;
 
-import com.edxmod.electrodynamics.api.tool.ToolDefinition;
+import com.edxmod.electrodynamics.common.lib.tool.ToolDefinition;
 import com.edxmod.electrodynamics.common.block.EDXBlocks;
 import com.edxmod.electrodynamics.common.core.handler.BlockEventHandler;
 import com.edxmod.electrodynamics.common.core.handler.GuiHandler;
