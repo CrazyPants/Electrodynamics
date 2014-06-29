@@ -1,5 +1,6 @@
 package com.edxmod.electrodynamics.client.render.tile;
 
+import com.edxmod.electrodynamics.client.render.EDXTileRenderer;
 import com.edxmod.electrodynamics.client.render.WrappedModel;
 import com.edxmod.electrodynamics.common.tile.TileKiln;
 import com.edxmod.electrodynamics.common.util.RenderHelper;

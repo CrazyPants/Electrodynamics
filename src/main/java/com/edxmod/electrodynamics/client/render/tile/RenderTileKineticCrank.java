@@ -1,10 +1,9 @@
 package com.edxmod.electrodynamics.client.render.tile;
 
+import com.edxmod.electrodynamics.client.render.EDXTileRenderer;
 import com.edxmod.electrodynamics.client.render.WrappedModel;
 import com.edxmod.electrodynamics.common.tile.TileKineticCrank;
 import com.edxmod.electrodynamics.common.util.RenderHelper;
-import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
-import net.minecraft.tileentity.TileEntity;
 import org.lwjgl.opengl.GL11;
 
 /**

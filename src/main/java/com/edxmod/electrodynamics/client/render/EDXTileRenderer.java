@@ -1,4 +1,4 @@
-package com.edxmod.electrodynamics.client.render.tile;
+package com.edxmod.electrodynamics.client.render;
 
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;

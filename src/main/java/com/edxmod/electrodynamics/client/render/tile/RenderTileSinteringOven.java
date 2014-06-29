@@ -1,5 +1,6 @@
 package com.edxmod.electrodynamics.client.render.tile;
 
+import com.edxmod.electrodynamics.client.render.EDXTileRenderer;
 import com.edxmod.electrodynamics.client.render.WrappedModel;
 import com.edxmod.electrodynamics.common.lib.MathFX;
 import com.edxmod.electrodynamics.common.tile.TileSinteringOven;
