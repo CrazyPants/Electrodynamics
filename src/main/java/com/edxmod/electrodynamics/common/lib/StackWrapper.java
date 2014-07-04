@@ -1,5 +1,6 @@
 package com.edxmod.electrodynamics.common.lib;
 
+import com.edxmod.electrodynamics.common.util.StackHelper;
 import net.minecraft.item.ItemStack;
 
 public class StackWrapper {
@@ -12,17 +13,25 @@ public class StackWrapper {
 
 	@Override
 	public boolean equals(Object obj) {
-		if (!(obj instanceof StackWrapper)) return false;
-		StackWrapper isw = (StackWrapper) obj;
-		if (wrap.getHasSubtypes()) {
-			return isw.wrap.isItemEqual(wrap);
-		} else {
-			return isw.wrap == wrap;
+		if (!(obj instanceof StackWrapper)) {
+			return false;
 		}
+
+		StackWrapper isw = (StackWrapper) obj;
+
+		if (isw.wrap == null || isw.wrap.getItem() == null) {
+			return false;
+		}
+
+		return StackHelper.areStacksSimilar(wrap, isw.wrap, false);
 	}
 
 	@Override
 	public int hashCode() {
-		return System.identityHashCode(wrap);
+		int hashCode = 1;
+		hashCode = (37 * hashCode) + wrap.getItem().hashCode();
+		hashCode = (37 * hashCode) + wrap.getItemDamage();
+
+		return hashCode;
 	}
 }

@@ -7,7 +7,7 @@ import net.minecraft.item.ItemStack;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SieveRecipe implements IGenericRecipe {
+public class SieveRecipe implements IGenericRecipe<ItemStack[]> {
 
 	private final ItemStack input;
 	private final RandomStack[] output;

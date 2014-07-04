@@ -7,7 +7,6 @@ import com.edxmod.electrodynamics.common.lib.StackReference;
 import com.edxmod.electrodynamics.common.lib.tool.ToolDefinition;
 import com.edxmod.electrodynamics.common.recipe.manager.GenericRecipeManager;
 import com.edxmod.electrodynamics.common.recipe.manager.TableManager;
-import com.edxmod.electrodynamics.common.recipe.wrapper.BarrelRecipe;
 import com.edxmod.electrodynamics.common.recipe.wrapper.SieveRecipe;
 import com.edxmod.electrodynamics.common.util.StackHelper;
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -22,8 +21,6 @@ public class EDXRecipes {
 	public static TableManager TABLE = new TableManager();
 
 	public static GenericRecipeManager<SieveRecipe> SIEVE = new GenericRecipeManager<SieveRecipe>();
-
-	public static GenericRecipeManager<BarrelRecipe> BARREL = new GenericRecipeManager<BarrelRecipe>();
 
     public static void initialize() {
 		// TABLE - STONE
@@ -42,10 +39,7 @@ public class EDXRecipes {
 		for (int i=0; i<4; i++) {
 			TABLE.registerRecipe(new ItemStack(Blocks.log, 1, i), new ItemStack(Blocks.planks, 6, i),  ToolDefinition.AXE, 1F);
 		}
-
-		// BARREL - TEST
-		BARREL.register(new BarrelRecipe(new ItemStack(Blocks.dirt, 8, 1), new ItemStack(Blocks.grass), true, 8, 20, 0));
-    }
+	}
 
     private static void addCraftingRecipes() {
 		for (int i=0; i<ItemResource.NAMES.length; i++) {

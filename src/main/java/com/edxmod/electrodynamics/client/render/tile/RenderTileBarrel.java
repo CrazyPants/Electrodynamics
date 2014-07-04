@@ -29,12 +29,11 @@ public class RenderTileBarrel extends EDXTileRenderer<TileBarrel> {
 		barrel.bindTexture();
 		barrel.renderAll();
 
-		if (tile.blockCache != null) {
-			float level = TileBarrel.DIMENSION_MIN;
-			System.out.println(tile.contents.stackSize + " " + tile.maxStackSize);
-			level += (TileBarrel.DIMENSION_FILL * ((float)tile.contents.stackSize / (float)tile.maxStackSize));
-			renderContents(tile.blockCache, tile.contents.getItemDamage(), level);
-		}
+//		if (tile.contents != null) {
+//			float level = TileBarrel.DIMENSION_MIN;
+//			level += (TileBarrel.DIMENSION_FILL * ((float)tile.contents.stackSize / (float)tile.maxStackSize));
+//			renderContents(Block.getBlockFromItem(tile.contents.getItem()), tile.contents.getItemDamage(), level);
+//		}
 
 		GL11.glPopMatrix();
 	}
