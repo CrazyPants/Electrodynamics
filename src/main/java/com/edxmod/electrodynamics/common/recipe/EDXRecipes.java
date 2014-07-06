@@ -5,12 +5,16 @@ import com.edxmod.electrodynamics.common.item.EDXItems;
 import com.edxmod.electrodynamics.common.item.resource.ItemResource;
 import com.edxmod.electrodynamics.common.lib.StackReference;
 import com.edxmod.electrodynamics.common.lib.tool.ToolDefinition;
+import com.edxmod.electrodynamics.common.recipe.manager.BarrelManager;
 import com.edxmod.electrodynamics.common.recipe.manager.GenericRecipeManager;
 import com.edxmod.electrodynamics.common.recipe.manager.TableManager;
+import com.edxmod.electrodynamics.common.recipe.wrapper.BarrelDurationRecipe;
+import com.edxmod.electrodynamics.common.recipe.wrapper.BarrelInteractionRecipe;
 import com.edxmod.electrodynamics.common.recipe.wrapper.SieveRecipe;
 import com.edxmod.electrodynamics.common.util.StackHelper;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 
 /**
@@ -21,6 +25,8 @@ public class EDXRecipes {
 	public static TableManager TABLE = new TableManager();
 
 	public static GenericRecipeManager<SieveRecipe> SIEVE = new GenericRecipeManager<SieveRecipe>();
+
+	public static BarrelManager BARREL = new BarrelManager();
 
     public static void initialize() {
 		// TABLE - STONE
@@ -39,6 +45,12 @@ public class EDXRecipes {
 		for (int i=0; i<4; i++) {
 			TABLE.registerRecipe(new ItemStack(Blocks.log, 1, i), new ItemStack(Blocks.planks, 6, i),  ToolDefinition.AXE, 1F);
 		}
+
+		// BARREL - TEST
+		BARREL.registerInteractionRecipe(new BarrelInteractionRecipe(new ItemStack(Blocks.dirt, 8), new ItemStack(Items.wheat_seeds), new ItemStack(Blocks.grass, 8)));
+		BARREL.registerDurationRecipe(new BarrelDurationRecipe(new ItemStack(Blocks.grass, 8), new ItemStack(Blocks.mycelium, 1), 20, 20));
+
+		// BARREL - TEST 2
 	}
 
     private static void addCraftingRecipes() {
