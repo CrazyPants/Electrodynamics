@@ -7,7 +7,6 @@ import com.edxmod.electrodynamics.common.tile.nbt.NBTHandler;
 import com.edxmod.electrodynamics.common.util.StackHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 
 import java.util.Random;
 
@@ -26,62 +25,47 @@ public class TileBarrel extends TileCore {
 	public ItemStack contents;
 
 	@NBTHandler.NBTData
-	public int duration = -1;
+	public int maxDuration = 0;
+
+	@NBTHandler.NBTData
+	public int duration = 0;
 
 	/** For the benefit of the client... */
+	@NBTHandler.NBTData
 	public int maxStackSize = 1;
 
 	@Override
-	public void onClientUpdate(NBTTagCompound nbt) {
-		if (nbt.hasKey("contents")) {
-			contents = ItemStack.loadItemStackFromNBT(nbt.getCompoundTag("contents"));
-			maxStackSize = nbt.getInteger("max");
-		} else if (nbt.hasKey("contents_null")) {
-			contents = null;
-		}
-	}
-
-	private void syncContents() {
-		NBTTagCompound nbt = new NBTTagCompound();
-		if (contents != null) {
-			NBTTagCompound contents = new NBTTagCompound();
-			this.contents.writeToNBT(contents);
-			nbt.setTag("contents", contents);
-			nbt.setInteger("max", maxStackSize);
-		} else {
-			nbt.setBoolean("contents_null", true);
-		}
-		sendClientUpdate(nbt);
-	}
-
-	@Override
 	public void updateEntity() {
-		if (!worldObj.isRemote) {
+		if (maxDuration > 0) {
 			if (contents != null) {
 				if (duration > 0) {
 					duration--;
 				}
 
 				if (duration == 0) {
-					BarrelDurationRecipe recipe = EDXRecipes.BARREL.getDurationRecipe(contents);
+					if (!worldObj.isRemote) {
+						BarrelDurationRecipe recipe = EDXRecipes.BARREL.getDurationRecipe(contents);
 
-					if (recipe != null && contents.stackSize == recipe.input.stackSize) {
-						contents = recipe.getOutput();
-						duration = -1;
+						if (recipe != null && contents.stackSize == recipe.input.stackSize) {
+							contents = recipe.getOutput();
+							maxDuration = duration = 0;
 
-						maxStackSize = recipe.output.stackSize;
+							maxStackSize = recipe.output.stackSize;
 
-						syncContents();
+							markForUpdate();
+						}
 					}
-				} else if (duration == -1) {
+				}
+			}
+		} else {
+			if (contents != null) {
+				if (!worldObj.isRemote) {
 					BarrelDurationRecipe recipe = EDXRecipes.BARREL.getDurationRecipe(contents);
 
 					if (recipe != null) {
-						duration = recipe.getDuration();
+						maxDuration = duration = recipe.getDuration();
 					}
 				}
-			} else {
-				duration = -1;
 			}
 		}
 	}
@@ -110,7 +94,7 @@ public class TileBarrel extends TileCore {
 
 			duration = -1;
 
-			syncContents();
+			markForUpdate();
 
 			return true;
 		} else {
@@ -121,7 +105,7 @@ public class TileBarrel extends TileCore {
 
 			duration = -1;
 
-			syncContents();
+			markForUpdate();
 
 			return true;
 		}
@@ -145,7 +129,7 @@ public class TileBarrel extends TileCore {
 
 		duration = -1;
 
-		syncContents();
+		markForUpdate();
 
 		return true;
 	}
@@ -160,7 +144,7 @@ public class TileBarrel extends TileCore {
 		if (held == null) {
 			player.setCurrentItemOrArmor(0, contents.copy());
 			contents = null;
-			syncContents();
+			markForUpdate();
 
 			return true;
 		} else {
@@ -176,7 +160,7 @@ public class TileBarrel extends TileCore {
 
 			contents = null;
 
-			syncContents();
+			markForUpdate();
 
 			return true;
 		}
