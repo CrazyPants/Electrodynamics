@@ -2,11 +2,12 @@ package com.edxmod.electrodynamics.common.tile;
 
 import com.edxmod.electrodynamics.common.tile.nbt.NBTHandler;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
 
 /**
  * @author dmillerw
  */
-public class TileCrank extends TileCoreMachine {
+public class TileHandCrank extends TileCoreMachine {
 
 	@NBTHandler.NBTData
 	public boolean reverse = false;
@@ -38,13 +39,17 @@ public class TileCrank extends TileCoreMachine {
 	public void crank() {
 		if (spin <= 0) {
 			TileHammerMill tile = (TileHammerMill) worldObj.getTileEntity(xCoord + orientation.offsetX, yCoord + orientation.offsetY, zCoord + orientation.offsetZ);
-			tile.charge++;
+			TileEntity beyond = worldObj.getTileEntity(tile.xCoord + orientation.offsetX, tile.yCoord + orientation.offsetY, tile.zCoord + orientation.offsetZ);
 
-			spin = 360F;
+			if (beyond == null || !(beyond instanceof TileHandCrank) && !(beyond instanceof TileKineticCrank) && !(beyond instanceof TileMetalShaft)) {
+				tile.charge++;
 
-			NBTTagCompound nbt = new NBTTagCompound();
-			nbt.setFloat("spin", spin);
-			sendClientUpdate(nbt);
+				spin = 360F;
+
+				NBTTagCompound nbt = new NBTTagCompound();
+				nbt.setFloat("spin", spin);
+				sendClientUpdate(nbt);
+			}
 		}
 	}
 }

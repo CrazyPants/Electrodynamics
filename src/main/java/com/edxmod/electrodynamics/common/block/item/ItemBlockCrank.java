@@ -3,7 +3,7 @@ package com.edxmod.electrodynamics.common.block.item;
 import com.edxmod.electrodynamics.common.block.EDXBlocks;
 import com.edxmod.electrodynamics.common.block.prefab.item.EDXItemBlock;
 import com.edxmod.electrodynamics.common.lib.EDXProps;
-import com.edxmod.electrodynamics.common.tile.TileCrank;
+import com.edxmod.electrodynamics.common.tile.TileHandCrank;
 import com.edxmod.electrodynamics.common.tile.TileHammerMill;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -73,7 +73,7 @@ public class ItemBlockCrank extends EDXItemBlock {
 		boolean result = super.placeBlockAt(stack, player, world, x, y, z, side, hitX, hitY, hitZ, metadata);
 
 		if (result) {
-			TileCrank crank = (TileCrank) world.getTileEntity(x, y, z);
+			TileHandCrank crank = (TileHandCrank) world.getTileEntity(x, y, z);
 			crank.orientation = ForgeDirection.getOrientation(side).getOpposite();
 
 			if (hammerMill.orientation == ForgeDirection.WEST && crank.orientation == ForgeDirection.SOUTH) {
