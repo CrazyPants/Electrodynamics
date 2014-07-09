@@ -1,7 +1,7 @@
 package com.edxmod.electrodynamics.client.render.tile;
 
+import com.edxmod.electrodynamics.client.lib.Model;
 import com.edxmod.electrodynamics.client.render.EDXTileRenderer;
-import com.edxmod.electrodynamics.client.render.WrappedModel;
 import com.edxmod.electrodynamics.common.tile.TileWaterMill;
 import com.edxmod.electrodynamics.common.util.RenderHelper;
 import org.lwjgl.opengl.GL11;
@@ -10,12 +10,6 @@ import org.lwjgl.opengl.GL11;
  * @author dmillerw
  */
 public class RenderTileWaterMill extends EDXTileRenderer<TileWaterMill> {
-
-	public static WrappedModel waterMill;
-
-	static {
-		waterMill = new WrappedModel("blocks/mill");
-	}
 
 	public void renderTileAt(TileWaterMill tile, double x, double y, double z, float delta) {
 		GL11.glPushMatrix();
@@ -32,8 +26,8 @@ public class RenderTileWaterMill extends EDXTileRenderer<TileWaterMill> {
 
 		GL11.glTranslated(-0.5, 0, -0.5);
 
-		waterMill.bindTexture();
-		waterMill.renderAll();
+		Model.WATER_MILL.bindTexture();
+		Model.WATER_MILL.renderAll();
 
 		GL11.glPopMatrix();
 	}

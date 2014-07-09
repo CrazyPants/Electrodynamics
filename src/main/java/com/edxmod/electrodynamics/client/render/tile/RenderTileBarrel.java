@@ -1,7 +1,7 @@
 package com.edxmod.electrodynamics.client.render.tile;
 
+import com.edxmod.electrodynamics.client.lib.Model;
 import com.edxmod.electrodynamics.client.render.EDXTileRenderer;
-import com.edxmod.electrodynamics.client.render.WrappedModel;
 import com.edxmod.electrodynamics.common.tile.TileBarrel;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.Tessellator;
@@ -14,20 +14,14 @@ import org.lwjgl.opengl.GL11;
  */
 public class RenderTileBarrel extends EDXTileRenderer<TileBarrel> {
 
-	private static WrappedModel barrel;
-
-	static {
-		barrel = new WrappedModel("blocks/barrelWood.tcn", "blocks/barrelWood.png");
-	}
-
 	@Override
 	public void renderTileAt(TileBarrel tile, double x, double y, double z, float delta) {
 		GL11.glPushMatrix();
 
 		GL11.glTranslated(x + 0.5, y + 0.5, z + 0.5);
 
-		barrel.bindTexture();
-		barrel.renderAll();
+		Model.BARREL_WOOD.bindTexture();
+		Model.BARREL_WOOD.renderAll();
 
 		if (tile.contents != null) {
 			float level = TileBarrel.DIMENSION_MIN;

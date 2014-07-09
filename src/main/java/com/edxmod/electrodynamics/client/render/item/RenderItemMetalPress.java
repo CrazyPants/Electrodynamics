@@ -1,6 +1,7 @@
 package com.edxmod.electrodynamics.client.render.item;
 
-import com.edxmod.electrodynamics.client.render.WrappedModel;
+import com.edxmod.electrodynamics.client.lib.Model;
+import com.edxmod.electrodynamics.client.model.WrappedModel;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.IItemRenderer;
 import org.lwjgl.opengl.GL11;
@@ -9,12 +10,6 @@ import org.lwjgl.opengl.GL11;
  * @author Royalixor
  */
 public class RenderItemMetalPress implements IItemRenderer {
-
-    private static WrappedModel metalPress;
-
-    static {
-        metalPress = new WrappedModel("blocks/metalPress");
-    }
 
     @Override
     public boolean handleRenderType(ItemStack item, ItemRenderType type) {
@@ -38,8 +33,8 @@ public class RenderItemMetalPress implements IItemRenderer {
             GL11.glTranslated(0.1, 0, 0.1);
         }
 
-        metalPress.bindTexture();
-        metalPress.renderAll();
+		Model.METAL_PRESS.bindTexture();
+        Model.METAL_PRESS.renderAll();
 
         GL11.glPopMatrix();
     }

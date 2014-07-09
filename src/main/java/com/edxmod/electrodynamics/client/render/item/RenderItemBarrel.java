@@ -1,6 +1,6 @@
 package com.edxmod.electrodynamics.client.render.item;
 
-import com.edxmod.electrodynamics.client.render.WrappedModel;
+import com.edxmod.electrodynamics.client.lib.Model;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.IItemRenderer;
 import org.lwjgl.opengl.GL11;
@@ -9,12 +9,6 @@ import org.lwjgl.opengl.GL11;
  * @author dmillerw
  */
 public class RenderItemBarrel implements IItemRenderer {
-
-	private static WrappedModel barrel;
-
-	static {
-		barrel = new WrappedModel("blocks/barrelWood.tcn", "blocks/barrelWood.png");
-	}
 
 	@Override
 	public boolean handleRenderType(ItemStack item, ItemRenderType type) {
@@ -38,8 +32,8 @@ public class RenderItemBarrel implements IItemRenderer {
 			GL11.glTranslated(0.1, 0, 0.1);
 		}
 
-		barrel.bindTexture();
-		barrel.renderAll();
+		Model.BARREL_WOOD.bindTexture();
+		Model.BARREL_WOOD.renderAll();
 
 		GL11.glPopMatrix();
 	}

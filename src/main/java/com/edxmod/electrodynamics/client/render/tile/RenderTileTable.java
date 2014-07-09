@@ -1,7 +1,7 @@
 package com.edxmod.electrodynamics.client.render.tile;
 
+import com.edxmod.electrodynamics.client.lib.Model;
 import com.edxmod.electrodynamics.client.render.EDXTileRenderer;
-import com.edxmod.electrodynamics.client.render.WrappedModel;
 import com.edxmod.electrodynamics.common.block.prefab.EDXTileBlock;
 import com.edxmod.electrodynamics.common.block.prefab.EDXTileMultiBlock;
 import com.edxmod.electrodynamics.common.tile.TileTable;
@@ -19,14 +19,6 @@ public class RenderTileTable extends EDXTileRenderer<TileTable> {
     public static final float WOOD_RENDER_MAX = 0.5625F;
     public static final float STONE_RENDER_MAX = 0.875F;
 
-    private static WrappedModel woodTable;
-    private static WrappedModel stoneTable;
-
-    static {
-        woodTable = new WrappedModel("blocks/basicTable");
-        stoneTable = new WrappedModel("blocks/smashingTable");
-    }
-
     public void renderTileAt(TileTable tile, double x, double y, double z, float delta) {
         GL11.glPushMatrix();
 
@@ -34,15 +26,15 @@ public class RenderTileTable extends EDXTileRenderer<TileTable> {
 
         switch (tile.getBlockMetadata()) {
             case 0: {
-                woodTable.bindTexture();
-                woodTable.renderAll();
+				Model.TABLE_WOOD.bindTexture();
+				Model.TABLE_WOOD.renderAll();
 
                 break;
             }
 
             case 1: {
-                stoneTable.bindTexture();
-                stoneTable.renderAll();
+                Model.TABLE_STONE.bindTexture();
+				Model.TABLE_STONE.renderAll();
 
                 break;
             }

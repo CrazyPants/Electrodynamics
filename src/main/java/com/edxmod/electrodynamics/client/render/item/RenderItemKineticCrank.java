@@ -1,6 +1,6 @@
 package com.edxmod.electrodynamics.client.render.item;
 
-import com.edxmod.electrodynamics.client.render.WrappedModel;
+import com.edxmod.electrodynamics.client.lib.Model;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.IItemRenderer;
 import org.lwjgl.opengl.GL11;
@@ -9,12 +9,6 @@ import org.lwjgl.opengl.GL11;
  * @author Royalixor
  */
 public class RenderItemKineticCrank implements IItemRenderer {
-
-    private static WrappedModel kineticCrank;
-
-    static {
-        kineticCrank = new WrappedModel("blocks/kineticCrank");
-    }
 
     @Override
     public boolean handleRenderType(ItemStack item, ItemRenderType type) {
@@ -38,8 +32,8 @@ public class RenderItemKineticCrank implements IItemRenderer {
             GL11.glTranslated(0.1, 0, 0.1);
         }
 
-        kineticCrank.bindTexture();
-        kineticCrank.renderAll();
+		Model.KINETIC_CRANK.bindTexture();
+        Model.KINETIC_CRANK.renderAll();
 
         GL11.glPopMatrix();
     }

@@ -1,6 +1,6 @@
 package com.edxmod.electrodynamics.client.render.item;
 
-import com.edxmod.electrodynamics.client.render.WrappedModel;
+import com.edxmod.electrodynamics.client.lib.Model;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.IItemRenderer;
@@ -10,12 +10,6 @@ import org.lwjgl.opengl.GL11;
  * @author Royalixor
  */
 public class RenderItemSinteringOven implements IItemRenderer {
-
-    private static WrappedModel sinteringOven;
-
-    static {
-        sinteringOven = new WrappedModel("blocks/sinteringOven");
-    }
 
     @Override
     public boolean handleRenderType(ItemStack item, ItemRenderType type) {
@@ -43,8 +37,8 @@ public class RenderItemSinteringOven implements IItemRenderer {
             GL11.glTranslated(0.1, 0, 0.1);
         }
 
-        sinteringOven.bindTexture();
-        sinteringOven.renderAll();
+		Model.SINTERING_OVEN.bindTexture();
+        Model.SINTERING_OVEN.renderAll();
 
         GL11.glDisable(GL11.GL_BLEND);
 

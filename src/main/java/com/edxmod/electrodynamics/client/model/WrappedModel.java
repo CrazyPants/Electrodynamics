@@ -1,4 +1,4 @@
-package com.edxmod.electrodynamics.client.render;
+package com.edxmod.electrodynamics.client.model;
 
 import com.edxmod.electrodynamics.common.lib.EDXProps;
 import net.minecraft.client.Minecraft;
@@ -50,5 +50,4 @@ public class WrappedModel {
     public void renderAllExcept(String... excludedGroupNames) {
         model.renderAllExcept(excludedGroupNames);
     }
-
 }

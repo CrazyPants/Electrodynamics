@@ -1,6 +1,6 @@
 package com.edxmod.electrodynamics.client.render.item;
 
-import com.edxmod.electrodynamics.client.render.WrappedModel;
+import com.edxmod.electrodynamics.client.lib.Model;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.IItemRenderer;
 import org.lwjgl.opengl.GL11;
@@ -9,12 +9,6 @@ import org.lwjgl.opengl.GL11;
  * @author Royalixor
  */
 public class RenderItemHammerMill implements IItemRenderer {
-
-    private static WrappedModel hammerMill;
-
-    static {
-        hammerMill = new WrappedModel("blocks/hammerMill");
-    }
 
     @Override
     public boolean handleRenderType(ItemStack item, ItemRenderType type) {
@@ -38,8 +32,8 @@ public class RenderItemHammerMill implements IItemRenderer {
 			GL11.glTranslated(0.1, 0, 0.1);
 		}
 
-		hammerMill.bindTexture();
-		hammerMill.renderAll();
+		Model.HAMMER_MILL.bindTexture();
+		Model.HAMMER_MILL.renderAll();
 
 		GL11.glPopMatrix();
     }

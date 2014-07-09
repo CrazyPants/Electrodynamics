@@ -2,6 +2,7 @@ package com.edxmod.electrodynamics.common.block;
 
 import com.edxmod.electrodynamics.common.block.core.BlockSpawnMarker;
 import com.edxmod.electrodynamics.common.block.item.ItemBlockCrank;
+import com.edxmod.electrodynamics.common.block.item.ItemBlockMetalShaft;
 import com.edxmod.electrodynamics.common.block.item.ItemBlockWaterMill;
 import com.edxmod.electrodynamics.common.block.machine.*;
 import com.edxmod.electrodynamics.common.block.prefab.item.EDXItemBlock;
@@ -30,6 +31,7 @@ public class EDXBlocks {
 	public static Block barrel;
 	public static Block crucible;
 	public static Block infernalFurnace;
+	public static Block metalShaft;
 
 	public static Block componentGround;
 	public static Block componentWood;
@@ -55,6 +57,7 @@ public class EDXBlocks {
 		barrel = new BlockBarrel().setBlockName("barrel");
 		crucible = new BlockCrucible().setBlockName("crucible");
 		infernalFurnace = new BlockInfernalFurnace().setBlockName("infernal_furnace");
+		metalShaft = new BlockMetalShaft().setBlockName("metal_shaft");
 
 		componentGround = new BlockComponentGround().setBlockName("component_ground");
 		componentWood = new BlockComponentWood().setBlockName("component_wood");
@@ -79,6 +82,7 @@ public class EDXBlocks {
 		registerBlock(barrel, EDXItemBlock.class);
 		registerBlock(crucible, EDXItemBlock.class);
 		registerBlock(infernalFurnace, EDXMachineBlock.class);
+		registerBlock(metalShaft, ItemBlockMetalShaft.class);
 
 		registerBlock(componentGround, EDXItemMultiBlock.class);
 		registerBlock(componentWood, EDXItemMultiBlock.class);
@@ -95,7 +99,7 @@ public class EDXBlocks {
 		GameRegistry.registerTileEntity(TileSieveTable.class, "edx:table_sieve");
     	GameRegistry.registerTileEntity(TileSinteringOven.class, "edx:sintering_oven");
 		GameRegistry.registerTileEntity(TileHammerMill.class, "edx:hammer_mill");
-		GameRegistry.registerTileEntity(TileCrank.class, "edx:crank");
+		GameRegistry.registerTileEntity(TileHandCrank.class, "edx:crank");
 		GameRegistry.registerTileEntity(TileKineticCrank.class, "edx:kinetic_crank");
 		GameRegistry.registerTileEntity(TileWaterMill.class, "edx:water_mill");
 		GameRegistry.registerTileEntity(TileKiln.class, "edx:kiln");
@@ -104,6 +108,7 @@ public class EDXBlocks {
 		GameRegistry.registerTileEntity(TileCrucible.class, "edx:crucible");
 		GameRegistry.registerTileEntity(TileInfernalFurnace.class, "edx:infernal_furnace");
 		GameRegistry.registerTileEntity(TileSpawnMarker.class, "edx:spawn_marker");
+		GameRegistry.registerTileEntity(TileMetalShaft.class, "edx:metal_shaft");
 	}
 
     public static void registerBlock(Block block) {

@@ -1,7 +1,7 @@
 package com.edxmod.electrodynamics.client.render.tile;
 
+import com.edxmod.electrodynamics.client.lib.Model;
 import com.edxmod.electrodynamics.client.render.EDXTileRenderer;
-import com.edxmod.electrodynamics.client.render.WrappedModel;
 import com.edxmod.electrodynamics.common.tile.TileHammerMill;
 import com.edxmod.electrodynamics.common.util.RenderHelper;
 import org.lwjgl.opengl.GL11;
@@ -14,12 +14,6 @@ public class RenderTileHammerMill extends EDXTileRenderer<TileHammerMill> {
 	public static final String PART_GRINDER = "VIFS001";
 	public static final String PART_SWITCH = "VIFS003";
 
-	public static WrappedModel hammerMill;
-
-	static {
-		hammerMill = new WrappedModel("blocks/hammerMill");
-	}
-
 	public void renderTileAt(TileHammerMill tile, double x, double y, double z, float delta) {
 		GL11.glPushMatrix();
 
@@ -29,8 +23,8 @@ public class RenderTileHammerMill extends EDXTileRenderer<TileHammerMill> {
 		GL11.glRotated(RenderHelper.getRotationAngle(tile.orientation), 0, 1, 0);
 		GL11.glTranslated(-0.5, 0, -0.5);
 
-		hammerMill.bindTexture();
-		hammerMill.renderAllExcept(PART_GRINDER, PART_SWITCH);
+		Model.HAMMER_MILL.bindTexture();
+		Model.HAMMER_MILL.renderAllExcept(PART_GRINDER, PART_SWITCH);
 
 		GL11.glPushMatrix();
 
@@ -41,7 +35,7 @@ public class RenderTileHammerMill extends EDXTileRenderer<TileHammerMill> {
 
 		// Then we move the object in relation to that pivot point
 		GL11.glTranslated(0, 0.02, 0);
-		hammerMill.renderOnly(PART_GRINDER);
+		Model.HAMMER_MILL.renderOnly(PART_GRINDER);
 
 		GL11.glPopMatrix();
 
@@ -70,7 +64,7 @@ public class RenderTileHammerMill extends EDXTileRenderer<TileHammerMill> {
 			}
 		}
 
-		hammerMill.renderOnly(PART_SWITCH);
+		Model.HAMMER_MILL.renderOnly(PART_SWITCH);
 
 		GL11.glPopMatrix();
 	}

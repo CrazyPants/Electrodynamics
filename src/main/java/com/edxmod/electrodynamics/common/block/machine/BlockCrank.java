@@ -3,7 +3,7 @@ package com.edxmod.electrodynamics.common.block.machine;
 import com.edxmod.electrodynamics.common.block.EDXBlocks;
 import com.edxmod.electrodynamics.common.block.prefab.EDXTileBlock;
 import com.edxmod.electrodynamics.common.tile.TileCoreMachine;
-import com.edxmod.electrodynamics.common.tile.TileCrank;
+import com.edxmod.electrodynamics.common.tile.TileHandCrank;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -14,7 +14,6 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
-import net.minecraftforge.common.util.ForgeDirection;
 
 /**
  * @author dmillerw
@@ -42,7 +41,7 @@ public class BlockCrank extends EDXTileBlock {
 			}
 		} else {
 			if (!world.isRemote) {
-				TileCrank tile = (TileCrank) world.getTileEntity(x, y, z);
+				TileHandCrank tile = (TileHandCrank) world.getTileEntity(x, y, z);
 				tile.crank();
 			}
 			return true;
@@ -53,7 +52,7 @@ public class BlockCrank extends EDXTileBlock {
 	@Override
 	public void onNeighborBlockChange(World world, int x, int y, int z, Block block) {
 		if (!world.isRemote) {
-			TileCrank tile = (TileCrank) world.getTileEntity(x, y, z);
+			TileHandCrank tile = (TileHandCrank) world.getTileEntity(x, y, z);
 
 			if (world.getBlock(x + tile.orientation.offsetX, y + tile.orientation.offsetY, z + tile.orientation.offsetZ) != EDXBlocks.hammerMill) {
 				dropBlockAsItem(world, x, y, z, 0, 0);
@@ -84,7 +83,7 @@ public class BlockCrank extends EDXTileBlock {
 
 	@Override
 	public TileEntity createNewTileEntity(World world, int meta) {
-		return new TileCrank();
+		return new TileHandCrank();
 	}
 
 	@Override

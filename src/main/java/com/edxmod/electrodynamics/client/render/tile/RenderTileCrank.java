@@ -1,8 +1,8 @@
 package com.edxmod.electrodynamics.client.render.tile;
 
+import com.edxmod.electrodynamics.client.lib.Model;
 import com.edxmod.electrodynamics.client.render.EDXTileRenderer;
-import com.edxmod.electrodynamics.client.render.WrappedModel;
-import com.edxmod.electrodynamics.common.tile.TileCrank;
+import com.edxmod.electrodynamics.common.tile.TileHandCrank;
 import com.edxmod.electrodynamics.common.util.RenderHelper;
 import net.minecraftforge.common.util.ForgeDirection;
 import org.lwjgl.opengl.GL11;
@@ -10,15 +10,9 @@ import org.lwjgl.opengl.GL11;
 /**
  * @author dmillerw
  */
-public class RenderTileCrank extends EDXTileRenderer<TileCrank> {
+public class RenderTileCrank extends EDXTileRenderer<TileHandCrank> {
 
-	public static WrappedModel crank;
-
-	static {
-		crank = new WrappedModel("blocks/handCrank");
-	}
-
-	public void renderTileAt(TileCrank tile, double x, double y, double z, float delta) {
+	public void renderTileAt(TileHandCrank tile, double x, double y, double z, float delta) {
 		GL11.glPushMatrix();
 
 		GL11.glDisable(GL11.GL_LIGHTING);
@@ -41,8 +35,8 @@ public class RenderTileCrank extends EDXTileRenderer<TileCrank> {
 
 		GL11.glPushMatrix();
 
-		crank.bindTexture();
-		crank.renderAll();
+		Model.HAND_CRANK.bindTexture();
+		Model.HAND_CRANK.renderAll();
 
 		GL11.glPopMatrix();
 
