@@ -14,6 +14,8 @@ import org.lwjgl.opengl.GL11;
  */
 public class RenderTileBarrel extends EDXTileRenderer<TileBarrel> {
 
+	public static final String[] LID_PARTS = new String[] {"lid", "lidHandle"};
+
 	@Override
 	public void renderTileAt(TileBarrel tile, double x, double y, double z, float delta) {
 		GL11.glPushMatrix();
@@ -21,7 +23,10 @@ public class RenderTileBarrel extends EDXTileRenderer<TileBarrel> {
 		GL11.glTranslated(x + 0.5, y + 0.5, z + 0.5);
 
 		Model.BARREL_WOOD.bindTexture();
-		Model.BARREL_WOOD.renderAll();
+		Model.BARREL_WOOD.renderAllExcept(LID_PARTS);
+		if (tile.hasLid) {
+			Model.BARREL_WOOD.renderOnly(LID_PARTS);
+		}
 
 		if (tile.contents != null) {
 			float level = TileBarrel.DIMENSION_MIN;

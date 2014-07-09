@@ -23,7 +23,7 @@ public class EDXBlocks {
 	public static Block tableSieve;
 	public static Block sinteringOven;
 	public static Block hammerMill;
-	public static Block crank;
+	public static Block handCrank;
 	public static Block kineticCrank;
 	public static Block waterMill;
 	public static Block kiln;
@@ -49,7 +49,7 @@ public class EDXBlocks {
 		tableSieve = new BlockSieveTable().setBlockName("table_sieve");
 		sinteringOven = new BlockSinteringOven().setBlockName("sintering_oven");
 		hammerMill = new BlockHammerMill().setBlockName("hammer_mill");
-		crank = new BlockCrank().setBlockName("crank");
+		handCrank = new BlockCrank().setBlockName("crank");
 		kineticCrank = new BlockKineticCrank().setBlockName("kinetic_crank");
 		waterMill = new BlockWaterMill().setBlockName("water_mill");
 		kiln = new BlockKiln().setBlockName("kiln");
@@ -74,7 +74,7 @@ public class EDXBlocks {
         registerBlock(tableSieve, EDXItemBlock.class);
 		registerBlock(sinteringOven, EDXMachineBlock.class);
 		registerBlock(hammerMill, EDXMachineBlock.class);
-		registerBlock(crank, ItemBlockCrank.class);
+		registerBlock(handCrank, ItemBlockCrank.class);
 		registerBlock(kineticCrank, EDXMachineBlock.class);
 		registerBlock(waterMill, ItemBlockWaterMill.class);
 		registerBlock(kiln, EDXMachineBlock.class);

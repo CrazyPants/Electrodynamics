@@ -16,7 +16,7 @@ import java.util.Random;
 public class TileBarrel extends TileCore {
 
 	public static final float DIMENSION_MIN = 0.0625F;
-	public static final float DIMENSION_MAX = 0.9375F;
+	public static final float DIMENSION_MAX = 0.875F;
 	public static final float DIMENSION_FILL = DIMENSION_MAX - DIMENSION_MIN;
 
 	public static Random random = new Random();
@@ -34,6 +34,9 @@ public class TileBarrel extends TileCore {
 	@NBTHandler.NBTData
 	public int maxStackSize = 1;
 
+	@NBTHandler.NBTData
+	public boolean hasLid = false;
+
 	@Override
 	public void updateEntity() {
 		if (maxDuration > 0) {
@@ -46,7 +49,7 @@ public class TileBarrel extends TileCore {
 					if (!worldObj.isRemote) {
 						BarrelDurationRecipe recipe = EDXRecipes.BARREL.getDurationRecipe(contents);
 
-						if (recipe != null && contents.stackSize == recipe.input.stackSize) {
+						if (recipe != null && contents.stackSize == recipe.input.stackSize && (!recipe.requireLid || hasLid)) {
 							contents = recipe.getOutput();
 							maxDuration = duration = 0;
 
@@ -62,7 +65,7 @@ public class TileBarrel extends TileCore {
 				if (!worldObj.isRemote) {
 					BarrelDurationRecipe recipe = EDXRecipes.BARREL.getDurationRecipe(contents);
 
-					if (recipe != null) {
+					if (recipe != null && (!recipe.requireLid || hasLid)) {
 						maxDuration = duration = recipe.getDuration();
 					}
 				}
@@ -92,7 +95,8 @@ public class TileBarrel extends TileCore {
 			contents.stackSize++;
 			stack.stackSize--;
 
-			duration = -1;
+			maxDuration = 0;
+			duration = 0;
 
 			markForUpdate();
 
@@ -103,7 +107,8 @@ public class TileBarrel extends TileCore {
 
 			stack.stackSize--;
 
-			duration = -1;
+			maxDuration = 0;
+			duration = 0;
 
 			markForUpdate();
 

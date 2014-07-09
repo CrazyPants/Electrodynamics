@@ -25,9 +25,16 @@ public class BlockBarrel extends EDXTileBlock {
 			TileBarrel tile = (TileBarrel) world.getTileEntity(x, y, z);
 
 			if (tile != null) {
-				if (!tile.addItem(player, player.getHeldItem())) {
-					if (!tile.interact(player, player.getHeldItem())) {
-						return tile.removeItem(player);
+				if (player.isSneaking()) {
+					tile.hasLid = !tile.hasLid;
+					tile.markForUpdate();
+				} else {
+					if (!tile.hasLid) {
+						if (!tile.addItem(player, player.getHeldItem())) {
+							if (!tile.interact(player, player.getHeldItem())) {
+								return tile.removeItem(player);
+							}
+						}
 					}
 				}
 

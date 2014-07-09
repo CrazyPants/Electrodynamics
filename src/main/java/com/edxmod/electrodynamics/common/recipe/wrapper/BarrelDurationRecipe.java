@@ -15,14 +15,17 @@ public class BarrelDurationRecipe {
 	public final ItemStack input;
 	public final ItemStack output;
 
-	public final int durationConstant;
-	public final int durationModifier;
+	private final int durationConstant;
+	private final int durationModifier;
 
-	public BarrelDurationRecipe(ItemStack input, ItemStack output, int durationConstant, int durationModifier) {
+	public final boolean requireLid;
+
+	public BarrelDurationRecipe(ItemStack input, ItemStack output, int durationConstant, int durationModifier, boolean requireLid) {
 		this.input = input;
 		this.output = output;
 		this.durationConstant = durationConstant;
 		this.durationModifier = durationModifier;
+		this.requireLid = requireLid;
 	}
 
 	public int getDuration() {

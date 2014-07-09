@@ -99,10 +99,7 @@ public class NBTHandler {
 	}
 
 	public void readFromNBT(NBTTagCompound nbt) {
-		for (Object obj : nbt.func_150296_c()) {
-			// It's a string, I know it is :|
-			String str = obj.toString();
-
+		for (String str : fields.keySet()) {
 			readField(str, nbt);
 		}
 	}
@@ -166,7 +163,6 @@ public class NBTHandler {
 		try {
 			if (!nbt.hasKey(name)) {
 				field.set(parent, null);
-				return;
 			}
 
 			if (!field.getType().isEnum() && field.getType().getName().equalsIgnoreCase("String") || field.getType().isPrimitive()) {

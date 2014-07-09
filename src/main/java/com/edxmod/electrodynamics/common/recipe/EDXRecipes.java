@@ -48,7 +48,7 @@ public class EDXRecipes {
 
 		// BARREL - TEST
 		BARREL.registerInteractionRecipe(new BarrelInteractionRecipe(new ItemStack(Blocks.dirt, 8), new ItemStack(Items.wheat_seeds), new ItemStack(Blocks.grass, 8)));
-		BARREL.registerDurationRecipe(new BarrelDurationRecipe(new ItemStack(Blocks.grass, 8), new ItemStack(Blocks.mycelium, 1), 20, 20));
+		BARREL.registerDurationRecipe(new BarrelDurationRecipe(new ItemStack(Blocks.grass, 8), new ItemStack(Blocks.mycelium, 1), 20, 20, true));
 
 		// BARREL - TEST 2
 	}
