@@ -1,9 +1,10 @@
 package com.edxmod.electrodynamics.common.block.item;
 
-import com.edxmod.electrodynamics.common.block.EDXBlocks;
 import com.edxmod.electrodynamics.common.block.prefab.item.EDXItemBlock;
 import com.edxmod.electrodynamics.common.lib.EDXProps;
+import com.edxmod.electrodynamics.common.tile.TileCoreMachine;
 import com.edxmod.electrodynamics.common.tile.TileHammerMill;
+import com.edxmod.electrodynamics.common.tile.TileKineticCrank;
 import com.edxmod.electrodynamics.common.tile.TileMetalShaft;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -53,21 +54,23 @@ public class ItemBlockMetalShaft extends EDXItemBlock {
 
 		ForgeDirection opposite = ForgeDirection.getOrientation(side).getOpposite();
 
-		if (world.getBlock(x + opposite.offsetX, y + opposite.offsetY, z + opposite.offsetZ) != EDXBlocks.hammerMill) {
-			return false;
-		}
-
 		TileEntity tile = world.getTileEntity(x + opposite.offsetX, y + opposite.offsetY, z + opposite.offsetZ);
 
-		if (!(tile instanceof TileHammerMill)) {
+		if (!(tile instanceof TileHammerMill) && !(tile instanceof TileKineticCrank) && !(tile instanceof TileMetalShaft)) {
 			return false;
 		}
 
-		TileHammerMill hammerMill = (TileHammerMill) tile;
+		TileCoreMachine machine = (TileCoreMachine) tile;
 
 		ForgeDirection orientation = ForgeDirection.getOrientation(side);
-		if (orientation != hammerMill.orientation.getRotation(ForgeDirection.UP) && orientation != hammerMill.orientation.getRotation(ForgeDirection.UP).getOpposite()) {
-			return false;
+		if (machine instanceof TileHammerMill || machine instanceof TileMetalShaft) {
+			if (orientation != machine.orientation.getRotation(ForgeDirection.UP) && orientation != machine.orientation.getRotation(ForgeDirection.UP).getOpposite()) {
+				return false;
+			}
+		} else if (machine instanceof TileKineticCrank) {
+			if (orientation != machine.orientation && orientation != machine.orientation.getOpposite()) {
+				return false;
+			}
 		}
 
 		boolean result = super.placeBlockAt(stack, player, world, x, y, z, side, hitX, hitY, hitZ, metadata);

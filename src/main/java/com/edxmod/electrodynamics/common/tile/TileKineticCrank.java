@@ -12,6 +12,8 @@ import java.util.List;
  */
 public class TileKineticCrank extends TileCoreMachine {
 
+	private static final int MAX_LENGTH = 8;
+
 	@SideOnly(Side.CLIENT)
 	public float angle = 0F;
 
@@ -47,9 +49,17 @@ public class TileKineticCrank extends TileCoreMachine {
 		int y = yCoord;
 		int z = zCoord;
 
+		int length = 0;
+
 		boolean foundEnd = false;
 
 		while (!foundEnd) {
+			if (length > MAX_LENGTH) {
+				foundEnd = true;
+				break;
+			}
+
+			length++;
 			x += orientation.getOpposite().offsetX;
 			y += orientation.getOpposite().offsetY;
 			z += orientation.getOpposite().offsetZ;
@@ -58,13 +68,17 @@ public class TileKineticCrank extends TileCoreMachine {
 			TileEntity beyond = worldObj.getTileEntity(x + orientation.getOpposite().offsetX, y + orientation.getOpposite().offsetY, z + orientation.getOpposite().offsetZ);
 
 			if (tile instanceof TileHammerMill) {
+				// Don't let hammer mills get strung together
+				if (list.get(list.size() - 1) instanceof TileHammerMill) {
+					foundEnd = true;
+					break;
+				}
+
 				if (beyond == null || !(beyond instanceof TileHandCrank) && !(beyond instanceof TileKineticCrank)) {
 					list.add(tile);
 				}
 			} else if (tile instanceof TileMetalShaft) {
-				if (beyond instanceof TileHammerMill) {
-					list.add(tile);
-				}
+				list.add(tile);
 			} else {
 				foundEnd = true;
 				break;
