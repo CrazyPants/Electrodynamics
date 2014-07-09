@@ -21,16 +21,22 @@ public class TileKineticCrank extends TileCoreMachine {
 
 	public boolean stopTick = false;
 
+	private List<TileEntity> connectedTilesCache;
+
 	@Override
 	public void updateEntity() {
+		if (connectedTilesCache == null || worldObj.getTotalWorldTime() % 20 == 0) {
+			connectedTilesCache = getConnectedTiles();
+		}
+
 		if (!worldObj.isRemote) {
-			for (TileEntity tile : getConnectedTiles()) {
+			for (TileEntity tile : connectedTilesCache) {
 				if (tile != null && tile instanceof TileHammerMill && worldObj.getTotalWorldTime() % (TileWaterMill.MAX_SPEED - speed) == 0) {
 					((TileHammerMill)tile).charge++;
 				}
 			}
 		} else {
-			for (TileEntity tile : getConnectedTiles()) {
+			for (TileEntity tile : connectedTilesCache) {
 				if (tile != null) {
 					if (tile instanceof TileHammerMill) {
 						((TileHammerMill) tile).angle = angle;
