@@ -68,7 +68,7 @@ public class BlockStorage extends EDXMultiBlock {
 
     @Override
     public int[] getSubtypes() {
-        return ArrayHelper.getArrayIndexes(NAMES.length);
+        return ArrayHelper.getArrayIndexes(NAMES);
     }
 
     @Override

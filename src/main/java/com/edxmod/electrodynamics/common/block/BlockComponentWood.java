@@ -29,7 +29,7 @@ public class BlockComponentWood extends EDXMultiBlock {
 
 	@Override
 	public int[] getSubtypes() {
-		return ArrayHelper.getArrayIndexes(NAMES.length); // Forces all aspects of this block to base themselves off the NAMES array
+		return ArrayHelper.getArrayIndexes(NAMES); // Forces all aspects of this block to base themselves off the NAMES array
 	}
 
 	@Override

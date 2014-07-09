@@ -48,7 +48,7 @@ public class BlockLimestone extends EDXMultiBlock {
 
     @Override
     public int[] getSubtypes() {
-        return ArrayHelper.getArrayIndexes(limestoneTypes.length);
+        return ArrayHelper.getArrayIndexes(limestoneTypes);
     }
 
     @Override

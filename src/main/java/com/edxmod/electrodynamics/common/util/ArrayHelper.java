@@ -6,14 +6,14 @@ package com.edxmod.electrodynamics.common.util;
 public class ArrayHelper {
 
     /**
-     * Takes an array size and returns an int array containing all the indexes contained in that array
+     * Takes an array and returns an int array containing all the indexes contained in that array
      */
-    public static int[] getArrayIndexes(int length) {
-        int[] array = new int[length];
-        for (int i = 0; i < length; i++) {
-            array[i] = i;
+    public static int[] getArrayIndexes(Object[] array) {
+        int[] returnArray = new int[array.length];
+        for (int i = 0; i < array.length; i++) {
+			returnArray[i] = i;
         }
-        return array;
+        return returnArray;
     }
 
 }
