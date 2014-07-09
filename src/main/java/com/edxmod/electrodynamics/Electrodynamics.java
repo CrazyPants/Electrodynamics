@@ -11,7 +11,7 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 /**
  * @author Royalixor.
  */
-@Mod(modid = EDXProps.ID, name = EDXProps.NAME, version = EDXProps.VERSION, dependencies = "required-after:Forge@[10.12.2.1121,)")
+@Mod(modid = EDXProps.ID, name = EDXProps.NAME, version = EDXProps.VERSION, dependencies = EDXProps.DEPENDENCIES)
 public class Electrodynamics {
 
     @Mod.Instance(EDXProps.ID)
