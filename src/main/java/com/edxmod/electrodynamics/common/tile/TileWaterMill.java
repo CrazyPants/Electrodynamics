@@ -61,6 +61,7 @@ public class TileWaterMill extends TileCoreMachine {
 
 			if (crank != null) {
 				crank.angle = angle;
+				crank.flowLeft = flowLeft;
 			}
 		}
 	}

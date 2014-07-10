@@ -18,7 +18,13 @@ public class RenderTileMetalShaft extends EDXTileRenderer<TileMetalShaft> {
 		GL11.glTranslated(x + 0.5, y + 0.5, z + 0.5);
 
 		GL11.glRotated(RenderHelper.getRotationAngle(tile.orientation), 0, 1, 0);
-		GL11.glRotated(tile.angle, 1, 0, 0);
+		float angle = tile.angle;
+
+		if (tile.flowLeft) {
+			angle = -angle;
+		}
+
+		GL11.glRotated(angle, 1, 0, 0);
 
 		Model.METAL_SHAFT.bindTexture();
 		Model.METAL_SHAFT.renderAll();
