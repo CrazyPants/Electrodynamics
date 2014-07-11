@@ -1,11 +1,11 @@
 package com.edxmod.electrodynamics.common.tile;
 
 import com.edxmod.electrodynamics.common.block.EDXBlocks;
+import com.edxmod.electrodynamics.common.tile.nbt.NBTHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.util.ForgeDirection;
 
 /**
@@ -17,6 +17,7 @@ public class TileWaterMill extends TileCoreMachine {
 
 	private float lastSpeed = 0F;
 
+	@NBTHandler.NBTData
 	public float speed = 0F;
 
 	@SideOnly(Side.CLIENT)
@@ -24,16 +25,6 @@ public class TileWaterMill extends TileCoreMachine {
 
 	@SideOnly(Side.CLIENT)
 	public float angle = 0F;
-
-	@Override
-	public void onClientUpdate(NBTTagCompound nbt) {
-		if (nbt.hasKey("speed")) {
-			speed = nbt.getFloat("speed");
-			if (nbt.getBoolean("force")) {
-				clientSpeed = speed;
-			}
-		}
-	}
 
 	@Override
 	public void updateEntity() {
@@ -115,10 +106,7 @@ public class TileWaterMill extends TileCoreMachine {
 			}
 			lastSpeed = speed;
 
-			NBTTagCompound nbt = new NBTTagCompound();
-			nbt.setBoolean("force", crank.stopTick);
-			nbt.setFloat("speed", speed);
-			sendClientUpdate(nbt);
+			markForUpdate();
 		}
 	}
 }

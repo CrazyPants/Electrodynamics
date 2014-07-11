@@ -13,13 +13,18 @@ import net.minecraft.tileentity.TileEntity;
  */
 public abstract class TileCore extends TileEntity {
 
+	private static final int DESCRIPTION_PACKET = 0;
+	private static final int POKE_PACKET = 1;
+
 	public void writeCustomNBT(NBTTagCompound nbt) {}
 
 	public void readCustomNBT(NBTTagCompound nbt) {}
 
-	public void onClientUpdate(NBTTagCompound nbt) {}
+	public void writeDescriptionPacketContents(NBTTagCompound nbt) {
+		writeToNBT(nbt);
+	}
 
-	public void onPokeReceived() {}
+	public void onPoked() {}
 
 	public void onBlockBroken() {}
 
@@ -72,29 +77,21 @@ public abstract class TileCore extends TileEntity {
 		}
 	}
 
-	public void sendNBTUpdate() {
-		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
-	}
-
-	public void sendClientUpdate(NBTTagCompound tag) {
-		VanillaPacketHelper.sendToAllWatchingTile(this, new S35PacketUpdateTileEntity(xCoord, yCoord, zCoord, 1, tag));
-	}
-
 	public void sendPoke() {
-		VanillaPacketHelper.sendToAllWatchingTile(this, new S35PacketUpdateTileEntity(xCoord, yCoord, zCoord, 2, new NBTTagCompound()));
+		VanillaPacketHelper.sendToAllWatchingTile(this, new S35PacketUpdateTileEntity(xCoord, yCoord, zCoord, POKE_PACKET, new NBTTagCompound()));
 	}
 
 	@Override
 	public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity pkt) {
 		switch(pkt.func_148853_f()) {
-			case 0: readFromNBT(pkt.func_148857_g()); break;
-			case 1: onClientUpdate(pkt.func_148857_g()); break;
-			case 2: onPokeReceived(); break;
-			case 3: {
-				// Special client update tag
-				handler.readFromNBT(pkt.func_148857_g());
-			}
-			default: break;
+			case DESCRIPTION_PACKET:
+				readFromNBT(pkt.func_148857_g());
+				break;
+			case POKE_PACKET:
+				onPoked();
+				break;
+			default:
+				break;
 		}
 		worldObj.markBlockRangeForRenderUpdate(xCoord, yCoord, zCoord, xCoord, yCoord, zCoord);
 	}

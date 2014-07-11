@@ -46,21 +46,9 @@ public class TileHammerMill extends TileCoreMachine implements ISidedInventory {
 	@SideOnly(Side.CLIENT)
 	public float angle = 0F;
 
-//	@Override
-//	public void writeCustomNBT(NBTTagCompound nbt) {
-//		nbt.setByte("stage", grindingStage);
-//	}
-//
-//	@Override
-//	public void readCustomNBT(NBTTagCompound nbt) {
-//		grindingStage = nbt.getByte("stage");
-//	}
-
 	@Override
-	public void onClientUpdate(NBTTagCompound nbt) {
-		if (nbt.hasKey("stage")) {
-			grindingStage = nbt.getByte("stage");
-		}
+	public void writeDescriptionPacketContents(NBTTagCompound nbt) {
+		handler.writeSelectedToNBT(new String[] {"grindingStage"}, nbt);
 	}
 
 	@Override
@@ -138,9 +126,7 @@ public class TileHammerMill extends TileCoreMachine implements ISidedInventory {
 			grindingStage = 0;
 		}
 
-		NBTTagCompound nbt = new NBTTagCompound();
-		nbt.setByte("stage", grindingStage);
-		sendClientUpdate(nbt);
+		markForUpdate();
 	}
 
 	private boolean canInput(ItemStack stack) {

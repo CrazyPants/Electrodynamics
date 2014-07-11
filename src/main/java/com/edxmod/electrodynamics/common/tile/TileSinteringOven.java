@@ -3,7 +3,6 @@ package com.edxmod.electrodynamics.common.tile;
 import com.edxmod.electrodynamics.common.tile.nbt.NBTHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.nbt.NBTTagCompound;
 
 /**
  * @author Royalixor
@@ -17,7 +16,7 @@ public class TileSinteringOven extends TileCoreMachine {
     public boolean open = false;
 
 	@Override
-	public void onPokeReceived() {
+	public void onPoked() {
 		open = !open;
 	}
 
