@@ -21,8 +21,6 @@ public class TileKineticCrank extends TileCoreMachine {
 
 	public boolean stopTick = false;
 
-	public boolean flowLeft;
-
 	private List<TileEntity> connectedTilesCache;
 
 	@Override
@@ -44,7 +42,6 @@ public class TileKineticCrank extends TileCoreMachine {
 						((TileHammerMill) tile).angle = angle;
 					} else if (tile instanceof TileMetalShaft) {
 						((TileMetalShaft) tile).angle = angle;
-						((TileMetalShaft) tile).flowLeft = flowLeft;
 					}
 				}
 			}
