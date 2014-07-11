@@ -4,8 +4,6 @@ import com.edxmod.electrodynamics.common.block.EDXBlocks;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockLiquid;
-import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.util.ForgeDirection;
@@ -27,13 +25,10 @@ public class TileWaterMill extends TileCoreMachine {
 	@SideOnly(Side.CLIENT)
 	public float angle = 0F;
 
-	public boolean flowLeft;
-
 	@Override
 	public void onClientUpdate(NBTTagCompound nbt) {
 		if (nbt.hasKey("speed")) {
 			speed = nbt.getFloat("speed");
-			flowLeft = nbt.getBoolean("flowLeft");
 			if (nbt.getBoolean("force")) {
 				clientSpeed = speed;
 			}
@@ -61,7 +56,6 @@ public class TileWaterMill extends TileCoreMachine {
 
 			if (crank != null) {
 				crank.angle = angle;
-				crank.flowLeft = flowLeft;
 			}
 		}
 	}
@@ -98,37 +92,6 @@ public class TileWaterMill extends TileCoreMachine {
 								// It's flowing on something solid
 								count++;
 							} else {
-								double flow = ((BlockLiquid)block).getFlowDirection(worldObj, sx, sy, sz, Material.water);
-								switch (orientation) {
-									case NORTH:
-										if (flow >= 0) {
-										   flowLeft = true;
-									   } else {
-										   flowLeft = false;
-									   }
-									   break;
-								   case SOUTH:
-									   if (flow >= 0) {
-										   flowLeft = false;
-									   } else {
-										   flowLeft = true;
-									   }
-									   break;
-								   case WEST:
-									   if (flow >= 0) {
-										   flowLeft = true;
-									   } else {
-										   flowLeft = false;
-									   }
-									   break;
-								   case EAST:
-									   if (flow >= 0) {
-										   flowLeft = false;
-									   } else {
-										   flowLeft = true;
-									   }
-									   break;
-								}
 								count += 2;
 							}
 						} else {
@@ -154,7 +117,6 @@ public class TileWaterMill extends TileCoreMachine {
 
 			NBTTagCompound nbt = new NBTTagCompound();
 			nbt.setBoolean("force", crank.stopTick);
-			nbt.setBoolean("flowLeft", flowLeft);
 			nbt.setFloat("speed", speed);
 			sendClientUpdate(nbt);
 		}
