@@ -70,7 +70,10 @@ public class NBTHandler {
 			nbt.setTag(name, tag);
 		} else if (type.isArray()) {
 			Object[] array = (Object[]) object;
+			NBTTagCompound arrayTag = new NBTTagCompound();
 			NBTTagList list = new NBTTagList();
+
+			arrayTag.setInteger("size", array.length);
 
 			for (int i=0; i<array.length; i++) {
 				if (array[i] != null) {
@@ -81,7 +84,8 @@ public class NBTHandler {
 				}
 			}
 
-			nbt.setTag(name, list);
+			arrayTag.setTag("contents", list);
+			nbt.setTag(name, arrayTag);
 		} else {
 			boolean serialized = false;
 			for (AbstractSerializer<?> serializer : AbstractSerializer.serializerList) {
@@ -130,8 +134,9 @@ public class NBTHandler {
 		} else if (type.isArray()) {
 			type = type.getComponentType();
 
-			NBTTagList list = (NBTTagList) nbt.getTag(name);
-			Object[] array = new Object[list.tagCount()];
+			NBTTagCompound arrayTag = nbt.getCompoundTag(name);
+			NBTTagList list = (NBTTagList) arrayTag.getTag("contents");
+			Object[] array = new Object[arrayTag.getInteger("size")];
 
 			for (int i=0; i<list.tagCount(); i++) {
 				NBTTagCompound tag = list.getCompoundTagAt(i);
