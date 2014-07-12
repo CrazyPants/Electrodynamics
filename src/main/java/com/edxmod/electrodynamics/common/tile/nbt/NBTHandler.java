@@ -2,6 +2,7 @@ package com.edxmod.electrodynamics.common.tile.nbt;
 
 import com.edxmod.electrodynamics.common.lib.EDXLogger;
 import com.edxmod.electrodynamics.common.tile.nbt.data.AbstractSerializer;
+import com.edxmod.electrodynamics.common.util.ArrayHelper;
 import com.google.common.collect.Maps;
 import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -23,7 +24,7 @@ import java.util.Map;
 public class NBTHandler {
 
 	private static boolean validField(Field field) {
-		if (Modifier.isPrivate(Modifier.fieldModifiers())) {
+		if (Modifier.isPrivate(field.getModifiers())) {
 			return false;
 		}
 
@@ -72,9 +73,12 @@ public class NBTHandler {
 			NBTTagList list = new NBTTagList();
 
 			for (int i=0; i<array.length; i++) {
-				NBTTagCompound tag = new NBTTagCompound();
-				NBTHandler.writeObject(name + "_" + i, array[i], tag);
-				list.appendTag(tag);
+				if (array[i] != null) {
+					NBTTagCompound tag = new NBTTagCompound();
+					tag.setInteger("index", i);
+					NBTHandler.writeObject(name + "_" + i, array[i], tag);
+					list.appendTag(tag);
+				}
 			}
 
 			nbt.setTag(name, list);
@@ -124,11 +128,14 @@ public class NBTHandler {
 			}
 			return object;
 		} else if (type.isArray()) {
+			type = type.getComponentType();
+
 			NBTTagList list = (NBTTagList) nbt.getTag(name);
 			Object[] array = new Object[list.tagCount()];
 
 			for (int i=0; i<list.tagCount(); i++) {
-				array[i] = NBTHandler.readObject(name + "_" + i, type, list.getCompoundTagAt(i));
+				NBTTagCompound tag = list.getCompoundTagAt(i);
+				array[tag.getInteger("index")] = NBTHandler.readObject(name + "_" + i, type, tag);
 			}
 
 			return array;
@@ -194,6 +201,10 @@ public class NBTHandler {
 		return this;
 	}
 
+	public String[] getFields() {
+		return fields.entrySet().toArray(new String[fields.size()]);
+	}
+
 	public void debugWrite() {
 		for (String str : fields.keySet()) {
 			FMLLog.info(str);
@@ -214,6 +225,12 @@ public class NBTHandler {
 
 	public void readFromNBT(NBTTagCompound nbt) {
 		for (String str : fields.keySet()) {
+			readField(str, nbt);
+		}
+	}
+
+	public void readSelectedFromNBT(String[] names, NBTTagCompound nbt) {
+		for (String str : names) {
 			readField(str, nbt);
 		}
 	}
@@ -245,17 +262,20 @@ public class NBTHandler {
 
 		try {
 			if (!nbt.hasKey(name)) {
-				// If it doesn't have a value, check to see if it's an array
-				ArrayDefault arrayDefault = field.getAnnotation(ArrayDefault.class);
-
-				if (field.getType().isArray() && arrayDefault != null) {
-					field.set(parent, Array.newInstance(field.getType(), arrayDefault.value()));
-				} else {
+				if (!field.getType().isArray()) {
 					field.set(parent, null);
 				}
 			}
 
-			field.set(parent, NBTHandler.readObject(name, field.getType(), nbt));
+			if (field.getType().isArray()) {
+				ArrayDefault arrayDefault = field.getAnnotation(ArrayDefault.class);
+				if (arrayDefault != null) {
+					field.set(parent, Array.newInstance(field.getType().getComponentType(), arrayDefault.value()));
+				}
+				field.set(parent, ArrayHelper.handleGenericArray(NBTHandler.readObject(name, field.getType(), nbt), field.getType().getComponentType()));
+			} else {
+				field.set(parent, NBTHandler.readObject(name, field.getType(), nbt));
+			}
 		} catch (IllegalAccessException ex) {
 			EDXLogger.error("Failed to access field " + name + " from " + parent.getClass());
 		}

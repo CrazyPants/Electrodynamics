@@ -13,15 +13,20 @@ import net.minecraft.tileentity.TileEntity;
  */
 public abstract class TileCore extends TileEntity {
 
-	private static final int DESCRIPTION_PACKET = 0;
-	private static final int POKE_PACKET = 1;
+	private static final int BLANKET_DESCRIPTION_PACKET = 0;
+	private static final int SPECIFIC_DESCRIPTION_PACKET = 1;
+	private static final int POKE_PACKET = 2;
 
 	public void writeCustomNBT(NBTTagCompound nbt) {}
 
 	public void readCustomNBT(NBTTagCompound nbt) {}
 
-	public void writeDescriptionPacketContents(NBTTagCompound nbt) {
-		writeToNBT(nbt);
+	public String[] descriptionPacketFields() {
+		return handler.getFields();
+	}
+
+	public boolean blanketDescriptionPacket() {
+		return true;
 	}
 
 	public void onPoked() {}
@@ -52,11 +57,27 @@ public abstract class TileCore extends TileEntity {
 		readCustomNBT(nbt);
 	}
 
+	private void writeDescriptionPacket(NBTTagCompound nbt) {
+		if (blanketDescriptionPacket()) {
+			writeToNBT(nbt);
+		} else {
+			super.writeToNBT(nbt);
+			handler.writeSelectedToNBT(descriptionPacketFields(), nbt);
+			writeCustomNBT(nbt);
+		}
+	}
+
+	private void readDescriptionPacket(NBTTagCompound nbt) {
+		super.readFromNBT(nbt);
+		handler.readSelectedFromNBT(descriptionPacketFields(), nbt);
+		readCustomNBT(nbt);
+	}
+
 	@Override
 	public Packet getDescriptionPacket() {
 		NBTTagCompound tag = new NBTTagCompound();
-		writeToNBT(tag);
-		return new S35PacketUpdateTileEntity(xCoord, yCoord, zCoord, 0, tag);
+		writeDescriptionPacket(tag);
+		return new S35PacketUpdateTileEntity(xCoord, yCoord, zCoord, blanketDescriptionPacket() ? BLANKET_DESCRIPTION_PACKET : SPECIFIC_DESCRIPTION_PACKET, tag);
 	}
 
 	public void markForUpdate() {
@@ -84,8 +105,11 @@ public abstract class TileCore extends TileEntity {
 	@Override
 	public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity pkt) {
 		switch(pkt.func_148853_f()) {
-			case DESCRIPTION_PACKET:
+			case BLANKET_DESCRIPTION_PACKET:
 				readFromNBT(pkt.func_148857_g());
+				break;
+			case SPECIFIC_DESCRIPTION_PACKET:
+				readDescriptionPacket(pkt.func_148857_g());
 				break;
 			case POKE_PACKET:
 				onPoked();

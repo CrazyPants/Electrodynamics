@@ -1,7 +1,7 @@
 package com.edxmod.electrodynamics.common.tile;
 
-import com.edxmod.electrodynamics.common.lib.tool.ToolDefinition;
 import com.edxmod.electrodynamics.common.lib.StackReference;
+import com.edxmod.electrodynamics.common.lib.tool.ToolDefinition;
 import com.edxmod.electrodynamics.common.recipe.EDXRecipes;
 import com.edxmod.electrodynamics.common.tile.nbt.NBTHandler;
 import com.edxmod.electrodynamics.common.util.StackHelper;
@@ -12,7 +12,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityHopper;
 import net.minecraft.util.AxisAlignedBB;
@@ -47,8 +46,13 @@ public class TileHammerMill extends TileCoreMachine implements ISidedInventory {
 	public float angle = 0F;
 
 	@Override
-	public void writeDescriptionPacketContents(NBTTagCompound nbt) {
-		handler.writeSelectedToNBT(new String[] {"grindingStage"}, nbt);
+	public boolean blanketDescriptionPacket() {
+		return false;
+	}
+
+	@Override
+	public String[] descriptionPacketFields() {
+		return new String[] {"orientation", "grindingStage"};
 	}
 
 	@Override

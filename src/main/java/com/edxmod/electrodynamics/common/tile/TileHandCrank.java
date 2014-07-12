@@ -15,11 +15,6 @@ public class TileHandCrank extends TileCoreMachine {
 	public float spin = 0F;
 
 	@Override
-	public void writeDescriptionPacketContents(NBTTagCompound nbt) {
-		handler.writeSelectedToNBT(new String[] {"spin"}, nbt);
-	}
-
-	@Override
 	public void updateEntity() {
 		if (spin > 0) {
 			spin -= 20F;
