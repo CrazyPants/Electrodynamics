@@ -8,7 +8,7 @@ import com.edxmod.electrodynamics.common.item.prefab.EDXMultiItem;
  */
 public class ItemCosmetic extends EDXMultiItem {
 
-	public static final String[] NAMES = new String[]{"corruption", "righteousness"};
+	public static final String[] NAMES = new String[] {"corruption", "righteousness"};
 
 	public ItemCosmetic() {
 		super(EDXCreativeTab.ITEMS);

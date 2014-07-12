@@ -17,7 +17,7 @@ import java.util.List;
  */
 public class BlockComponentWood extends EDXMultiBlock {
 
-	public static final String[] NAMES = new String[]{"sawdust", "sawdust_nether", "sawdust_nether_glow", "woodchips", "woodchips_nether", "woodchips_nether_glow"};
+	public static final String[] NAMES = new String[] {"sawdust", "sawdust_nether", "sawdust_nether_glow", "woodchips", "woodchips_nether", "woodchips_nether_glow"};
 	public IIcon[] icons;
 
 	public BlockComponentWood() {

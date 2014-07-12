@@ -34,7 +34,7 @@ public class BlockStorage extends EDXMultiBlock {
 		return null;
 	}
 
-	public static final String[] NAMES = new String[]{"copper", "lead", "nickel", "silver", "steel", "tin"};
+	public static final String[] NAMES = new String[] {"copper", "lead", "nickel", "silver", "steel", "tin"};
 	private IIcon[] textures;
 
 	public BlockStorage() {

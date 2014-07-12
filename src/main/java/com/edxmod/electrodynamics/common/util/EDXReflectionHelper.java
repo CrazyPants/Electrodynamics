@@ -14,7 +14,7 @@ import java.lang.reflect.Method;
  */
 public class EDXReflectionHelper {
 
-	private static String[] GET_FLOW_VECTOR = new String[]{"getFlowVector", "func_149800_f", "f"};
+	private static String[] GET_FLOW_VECTOR = new String[] {"getFlowVector", "func_149800_f", "f"};
 
 	private static Method getFlowVector;
 

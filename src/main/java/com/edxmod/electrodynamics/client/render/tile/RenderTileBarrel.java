@@ -14,7 +14,7 @@ import org.lwjgl.opengl.GL11;
  */
 public class RenderTileBarrel extends EDXTileRenderer<TileBarrel> {
 
-	public static final String[] LID_PARTS = new String[]{"lid", "lidHandle"};
+	public static final String[] LID_PARTS = new String[] {"lid", "lidHandle"};
 
 	@Override
 	public void renderTileAt(TileBarrel tile, double x, double y, double z, float delta) {

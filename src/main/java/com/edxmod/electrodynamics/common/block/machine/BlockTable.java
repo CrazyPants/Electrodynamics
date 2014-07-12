@@ -15,7 +15,7 @@ import net.minecraft.world.World;
  */
 public class BlockTable extends EDXTileMultiBlock {
 
-	private static final String[] NAMES = new String[]{"wood", "stone"};
+	private static final String[] NAMES = new String[] {"wood", "stone"};
 
 	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float fx, float fy, float fz) {

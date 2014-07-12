@@ -39,7 +39,7 @@ public class BlockInfernaLeaves extends BlockLeaves {
 
 	@Override
 	public String[] func_150125_e() {
-		return new String[]{getUnlocalizedName()};
+		return new String[] {getUnlocalizedName()};
 	}
 
 	@Override

@@ -8,7 +8,7 @@ import com.edxmod.electrodynamics.common.core.EDXCreativeTab;
  */
 public class ItemHammer extends EDXItem {
 
-	public static final float[] STRENGTH = new float[]{1F, 2F, 2.5F, 5F, 10F};
+	public static final float[] STRENGTH = new float[] {1F, 2F, 2.5F, 5F, 10F};
 
 	private final String type;
 

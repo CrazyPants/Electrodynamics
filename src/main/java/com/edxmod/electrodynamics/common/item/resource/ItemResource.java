@@ -17,7 +17,7 @@ import java.util.List;
  */
 public class ItemResource extends EDXItem {
 
-	public static final String[] NAMES = new String[]{"copper", "gold", "graphite", "iron", "lead", "nickel", "silver", "steel", "tin"};
+	public static final String[] NAMES = new String[] {"copper", "gold", "graphite", "iron", "lead", "nickel", "silver", "steel", "tin"};
 
 	protected IIcon[] icons;
 

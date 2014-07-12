@@ -22,7 +22,7 @@ public class BlockComponentGround extends EDXMultiBlock {
 	public static final int NETHER_RIND = 2;
 	public static final int SOUL_DUST = 3;
 
-	public static final String[] NAMES = new String[]{"fine_sand", "nether_grit", "nether_rind", "soul_dust"};
+	public static final String[] NAMES = new String[] {"fine_sand", "nether_grit", "nether_rind", "soul_dust"};
 	public IIcon[] icons;
 
 	public BlockComponentGround() {

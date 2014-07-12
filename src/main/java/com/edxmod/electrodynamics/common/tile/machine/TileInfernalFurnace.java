@@ -16,10 +16,10 @@ import net.minecraft.tileentity.TileEntityFurnace;
  */
 public class TileInfernalFurnace extends TileCoreMachine implements ISidedInventory {
 
-	public static final int[] SLOTS_TOP = new int[]{0};
+	public static final int[] SLOTS_TOP = new int[] {0};
 	// Two comes before one to give slot 2 priority
-	public static final int[] SLOTS_BOTTOM = new int[]{2, 1};
-	public static final int[] SLOTS_SIDE = new int[]{1};
+	public static final int[] SLOTS_BOTTOM = new int[] {2, 1};
+	public static final int[] SLOTS_SIDE = new int[] {1};
 
 	public static final int SIZE = 3;
 	public static final int COOK_TIME = 200;
