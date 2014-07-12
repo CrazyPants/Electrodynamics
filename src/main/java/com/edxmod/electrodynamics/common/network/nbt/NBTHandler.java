@@ -48,13 +48,13 @@ public class NBTHandler {
 	}
 
 	@Retention(RetentionPolicy.RUNTIME)
-	@Target( {ElementType.FIELD})
+	@Target({ElementType.FIELD})
 	public static @interface NBTData {
 
 	}
 
 	@Retention(RetentionPolicy.RUNTIME)
-	@Target( {ElementType.FIELD})
+	@Target({ElementType.FIELD})
 	public static @interface ArrayDefault {
 		int value() default 0;
 	}
@@ -75,7 +75,7 @@ public class NBTHandler {
 
 			arrayTag.setInteger("size", array.length);
 
-			for (int i=0; i<array.length; i++) {
+			for (int i = 0; i < array.length; i++) {
 				if (array[i] != null) {
 					NBTTagCompound tag = new NBTTagCompound();
 					tag.setInteger("index", i);
@@ -119,7 +119,7 @@ public class NBTHandler {
 			}
 		}
 	}
-	
+
 	public static Object readObject(String name, Class<?> type, NBTTagCompound nbt) {
 		if (type.isEnum()) {
 			Enum<?> object = null;
@@ -138,7 +138,7 @@ public class NBTHandler {
 			NBTTagList list = (NBTTagList) arrayTag.getTag("contents");
 			Object[] array = new Object[arrayTag.getInteger("size")];
 
-			for (int i=0; i<list.tagCount(); i++) {
+			for (int i = 0; i < list.tagCount(); i++) {
 				NBTTagCompound tag = list.getCompoundTagAt(i);
 				array[tag.getInteger("index")] = NBTHandler.readObject(name + "_" + i, type, tag);
 			}
@@ -173,7 +173,7 @@ public class NBTHandler {
 
 		return null;
 	}
-	
+
 	private Object parent;
 
 	private Map<String, Field> fields = Maps.newHashMap();

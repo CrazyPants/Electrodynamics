@@ -78,5 +78,4 @@ public class BlockInfernalSapling extends BlockBush implements IGrowable {
 			grow(world, x, y, z, random);
 		}
 	}
-
 }

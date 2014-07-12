@@ -12,22 +12,22 @@ import net.minecraft.world.World;
  */
 public class BlockSieveTable extends EDXTileBlock {
 
-    public BlockSieveTable() {
-        super(Material.iron);
-    }
+	public BlockSieveTable() {
+		super(Material.iron);
+	}
 
-    @Override
-    public TileEntity createNewTileEntity(World world, int meta) {
-        return new TileSieveTable();
-    }
+	@Override
+	public TileEntity createNewTileEntity(World world, int meta) {
+		return new TileSieveTable();
+	}
 
-    @Override
-    public boolean useCustomRender() {
-        return true;
-    }
+	@Override
+	public boolean useCustomRender() {
+		return true;
+	}
 
-    @Override
-    public void registerBlockIcons(IIconRegister iconRegister) {
+	@Override
+	public void registerBlockIcons(IIconRegister iconRegister) {
 
-    }
+	}
 }

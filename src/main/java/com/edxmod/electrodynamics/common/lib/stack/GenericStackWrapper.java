@@ -17,11 +17,11 @@ public abstract class GenericStackWrapper<T> {
 			return false;
 		}
 
-		if (!(contents.getClass().isInstance(((GenericStackWrapper)obj).contents))) {
+		if (!(contents.getClass().isInstance(((GenericStackWrapper) obj).contents))) {
 			return false;
 		}
 
-		return ((GenericStackWrapper<T>)obj).equals(this);
+		return ((GenericStackWrapper<T>) obj).equals(this);
 	}
 
 	public abstract GenericStackWrapper<T> copy();

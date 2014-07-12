@@ -24,7 +24,7 @@ import java.util.Random;
 public class TileTable extends TileCore {
 
 	@NBTHandler.NBTData
-    public ItemStack stack;
+	public ItemStack stack;
 
 	@NBTHandler.NBTData
 	public float durability;
@@ -46,29 +46,29 @@ public class TileTable extends TileCore {
 		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 	}
 
-    public boolean smash(EntityPlayer player) {
-        int meta = worldObj.getBlockMetadata(xCoord, yCoord, zCoord);
+	public boolean smash(EntityPlayer player) {
+		int meta = worldObj.getBlockMetadata(xCoord, yCoord, zCoord);
 		ItemStack tool = player.getCurrentEquippedItem();
-        Random random = new Random();
+		Random random = new Random();
 
-        if (meta == 0) {
-            if (stack != null && ItemHelper.isBlock(stack, Blocks.stone_slab) && stack.getItemDamage() == 0 && ToolDefinition.isType(tool, ToolDefinition.HAMMER)) {
-                PacketFX.breakFX(worldObj, xCoord, yCoord, zCoord, new ItemStack(Blocks.stone_slab));
-                getWorldObj().playSoundEffect(xCoord, yCoord, zCoord, "edx:oreCrumble", 1.0F, (random.nextFloat() - random.nextFloat()) * 0.2F + 1.0F);
+		if (meta == 0) {
+			if (stack != null && ItemHelper.isBlock(stack, Blocks.stone_slab) && stack.getItemDamage() == 0 && ToolDefinition.isType(tool, ToolDefinition.HAMMER)) {
+				PacketFX.breakFX(worldObj, xCoord, yCoord, zCoord, new ItemStack(Blocks.stone_slab));
+				getWorldObj().playSoundEffect(xCoord, yCoord, zCoord, "edx:oreCrumble", 1.0F, (random.nextFloat() - random.nextFloat()) * 0.2F + 1.0F);
 
-                stack = null;
-                worldObj.setBlock(xCoord, yCoord, zCoord, EDXBlocks.table, 1, 3);
+				stack = null;
+				worldObj.setBlock(xCoord, yCoord, zCoord, EDXBlocks.table, 1, 3);
 
 				return true;
-            }
-        } else if (meta == 1) {
-            if (stack != null) {
-                TableRecipe output = EDXRecipes.TABLE.get(stack, tool);
+			}
+		} else if (meta == 1) {
+			if (stack != null) {
+				TableRecipe output = EDXRecipes.TABLE.get(stack, tool);
 
 				if (output != null) {
 					durability -= ToolDefinition.getStrength(tool);
 
-                    if (durability <= 0F) {
+					if (durability <= 0F) {
 						if (stack.getItem() instanceof ItemBlock) {
 							PacketFX.breakFX(worldObj, xCoord, yCoord, zCoord, stack);
 						}
@@ -82,11 +82,10 @@ public class TileTable extends TileCore {
 
 						return true;
 					}
-                }
-            }
-        }
+				}
+			}
+		}
 
 		return false;
-    }
-
+	}
 }

@@ -28,7 +28,7 @@ public class BlockSpawnMarker extends BlockContainer {
 		if (world.perWorldStorage.loadData(WorldDataSpawnPosition.class, "edx:spawn_position") == null) {
 			world.perWorldStorage.setData("edx:spawn_position", new WorldDataSpawnPosition());
 		}
-		return ((WorldDataSpawnPosition)world.perWorldStorage.loadData(WorldDataSpawnPosition.class, "edx:spawn_position")).spawn;
+		return ((WorldDataSpawnPosition) world.perWorldStorage.loadData(WorldDataSpawnPosition.class, "edx:spawn_position")).spawn;
 	}
 
 	public static void setSpawnPosition(World world, ChunkCoordinates chunkCoordinates) {
@@ -82,9 +82,9 @@ public class BlockSpawnMarker extends BlockContainer {
 
 	@SideOnly(Side.CLIENT)
 	public void randomDisplayTick(World world, int x, int y, int z, Random random) {
-		double d0 = (double)((float)x + 0.5F);
-		double d1 = (double)((float)y + 0.3F);
-		double d2 = (double)((float)z + 0.5F);
+		double d0 = (double) ((float) x + 0.5F);
+		double d1 = (double) ((float) y + 0.3F);
+		double d2 = (double) ((float) z + 0.5F);
 
 		world.spawnParticle("smoke", d0, d1, d2, 0.0D, 0.0D, 0.0D);
 		world.spawnParticle("flame", d0, d1, d2, 0.0D, 0.0D, 0.0D);

@@ -26,7 +26,7 @@ public class BlockStorage extends EDXMultiBlock {
 			return new ItemStack(Blocks.iron_block);
 		}
 
-		for (int i=0; i<NAMES.length; i++) {
+		for (int i = 0; i < NAMES.length; i++) {
 			if (name.equalsIgnoreCase(NAMES[i])) {
 				return new ItemStack(EDXBlocks.storage, 1, i);
 			}
@@ -34,50 +34,50 @@ public class BlockStorage extends EDXMultiBlock {
 		return null;
 	}
 
-    public static final String[] NAMES = new String[]{"copper", "lead", "nickel", "silver", "steel", "tin"};
-    private IIcon[] textures;
+	public static final String[] NAMES = new String[]{"copper", "lead", "nickel", "silver", "steel", "tin"};
+	private IIcon[] textures;
 
-    public BlockStorage() {
-        super(Material.iron);
-        setCreativeTab(EDXCreativeTab.BLOCKS.get());
-        setStepSound(Block.soundTypeMetal);
-        setHardness(4F);
-        setHarvestLevel("pickaxe", 2);
-    }
+	public BlockStorage() {
+		super(Material.iron);
+		setCreativeTab(EDXCreativeTab.BLOCKS.get());
+		setStepSound(Block.soundTypeMetal);
+		setHardness(4F);
+		setHarvestLevel("pickaxe", 2);
+	}
 
-    @Override
-    public boolean useCustomRender() {
-        return false;
-    }
+	@Override
+	public boolean useCustomRender() {
+		return false;
+	}
 
-    @Override
-    public void registerBlockIcons(IIconRegister iconRegister) {
-        textures = new IIcon[NAMES.length];
-        for (int i = 0; i < NAMES.length; i++) {
-            textures[i] = iconRegister.registerIcon(EDXProps.RESOURCE_PREFIX + "ore/storage/" + NAMES[i]);
-        }
-    }
+	@Override
+	public void registerBlockIcons(IIconRegister iconRegister) {
+		textures = new IIcon[NAMES.length];
+		for (int i = 0; i < NAMES.length; i++) {
+			textures[i] = iconRegister.registerIcon(EDXProps.RESOURCE_PREFIX + "ore/storage/" + NAMES[i]);
+		}
+	}
 
-    @Override
-    public IIcon getIcon(int side, int meta) {
-        if (meta < 0 || meta >= textures.length) {
-            meta = 0;
-        }
-        return textures[meta];
-    }
+	@Override
+	public IIcon getIcon(int side, int meta) {
+		if (meta < 0 || meta >= textures.length) {
+			meta = 0;
+		}
+		return textures[meta];
+	}
 
-    @Override
-    public int[] getSubtypes() {
-        return ArrayHelper.getArrayIndexes(NAMES);
-    }
+	@Override
+	public int[] getSubtypes() {
+		return ArrayHelper.getArrayIndexes(NAMES);
+	}
 
-    @Override
-    public String getNameForType(int type) {
-        return NAMES[type];
-    }
+	@Override
+	public String getNameForType(int type) {
+		return NAMES[type];
+	}
 
-    @Override
-    public int damageDropped(int meta) {
-        return meta;
-    }
+	@Override
+	public int damageDropped(int meta) {
+		return meta;
+	}
 }

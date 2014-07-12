@@ -28,22 +28,22 @@ public class EDXRecipes {
 
 	public static BarrelManager BARREL = new BarrelManager();
 
-    public static void initialize() {
+	public static void initialize() {
 		// TABLE - STONE
-		TABLE.registerHammerRecipe(StackReference.STONE,       StackReference.COBBLESTONE, 1F);
-		TABLE.registerHammerRecipe(StackReference.COBBLESTONE, StackReference.GRAVEL,      1F);
-		TABLE.registerHammerRecipe(StackReference.GRAVEL,      StackReference.SAND,        1F);
-		TABLE.registerHammerRecipe(StackReference.SAND,        StackReference.FINE_SAND,   1F);
+		TABLE.registerHammerRecipe(StackReference.STONE, StackReference.COBBLESTONE, 1F);
+		TABLE.registerHammerRecipe(StackReference.COBBLESTONE, StackReference.GRAVEL, 1F);
+		TABLE.registerHammerRecipe(StackReference.GRAVEL, StackReference.SAND, 1F);
+		TABLE.registerHammerRecipe(StackReference.SAND, StackReference.FINE_SAND, 1F);
 
 		// TABLE - NETHERRACK
-		TABLE.registerHammerRecipe(StackReference.NETHER_RIND, StackReference.NETHERRACK,  1F);
-		TABLE.registerHammerRecipe(StackReference.NETHERRACK,  StackReference.NETHER_GRIT, 1F);
-		TABLE.registerHammerRecipe(StackReference.NETHER_GRIT, StackReference.SOUL_SAND,   1F);
-		TABLE.registerHammerRecipe(StackReference.SOUL_SAND,   StackReference.SOUL_DUST,   1F);
+		TABLE.registerHammerRecipe(StackReference.NETHER_RIND, StackReference.NETHERRACK, 1F);
+		TABLE.registerHammerRecipe(StackReference.NETHERRACK, StackReference.NETHER_GRIT, 1F);
+		TABLE.registerHammerRecipe(StackReference.NETHER_GRIT, StackReference.SOUL_SAND, 1F);
+		TABLE.registerHammerRecipe(StackReference.SOUL_SAND, StackReference.SOUL_DUST, 1F);
 
 		// TABLE - WOOD
-		for (int i=0; i<4; i++) {
-			TABLE.registerRecipe(new ItemStack(Blocks.log, 1, i), new ItemStack(Blocks.planks, 6, i),  ToolDefinition.AXE, 1F);
+		for (int i = 0; i < 4; i++) {
+			TABLE.registerRecipe(new ItemStack(Blocks.log, 1, i), new ItemStack(Blocks.planks, 6, i), ToolDefinition.AXE, 1F);
 		}
 
 		// BARREL - TEST
@@ -53,8 +53,8 @@ public class EDXRecipes {
 		// BARREL - TEST 2
 	}
 
-    private static void addCraftingRecipes() {
-		for (int i=0; i<ItemResource.NAMES.length; i++) {
+	private static void addCraftingRecipes() {
+		for (int i = 0; i < ItemResource.NAMES.length; i++) {
 			ItemStack ingot = new ItemStack(EDXItems.resourceIngot, 1, i);
 			ItemStack storage = BlockStorage.getStorageFromResource(ingot);
 
@@ -63,5 +63,5 @@ public class EDXRecipes {
 				GameRegistry.addShapelessRecipe(StackHelper.copyAndResize(ingot, 9), storage);
 			}
 		}
-    }
+	}
 }

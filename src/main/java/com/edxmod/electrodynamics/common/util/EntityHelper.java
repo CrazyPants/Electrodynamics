@@ -24,5 +24,4 @@ public class EntityHelper {
 			return ForgeDirection.UNKNOWN;
 		}
 	}
-
 }

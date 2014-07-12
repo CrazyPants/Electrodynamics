@@ -23,5 +23,4 @@ public class RandomStack {
 	public ItemStack get() {
 		return random.nextFloat() <= chance ? stack.copy() : null;
 	}
-
 }

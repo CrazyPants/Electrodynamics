@@ -31,7 +31,7 @@ public class VanillaPacketHelper {
 		World world = chunk.worldObj;
 
 		if (world instanceof WorldServer) {
-			PlayerManager playerManager = ((WorldServer)world).getPlayerManager();
+			PlayerManager playerManager = ((WorldServer) world).getPlayerManager();
 			for (Object obj : manager.playerEntityList) {
 				EntityPlayerMP player = (EntityPlayerMP) obj;
 
@@ -67,5 +67,4 @@ public class VanillaPacketHelper {
 			}
 		}
 	}
-
 }

@@ -34,7 +34,7 @@ public class TileKineticCrank extends TileCoreMachine {
 		if (!worldObj.isRemote) {
 			for (TileEntity tile : connectedTilesCache) {
 				if (tile != null && tile instanceof TileHammerMill && worldObj.getTotalWorldTime() % (TileWaterMill.MAX_SPEED - speed) == 0) {
-					((TileHammerMill)tile).charge++;
+					((TileHammerMill) tile).charge++;
 				}
 			}
 		} else {
@@ -50,7 +50,9 @@ public class TileKineticCrank extends TileCoreMachine {
 		}
 	}
 
-	/** Updates orientation so "forward" is facing away from the water mill */
+	/**
+	 * Updates orientation so "forward" is facing away from the water mill
+	 */
 	public void updateOrientation() {
 		ForgeDirection forward = orientation;
 		ForgeDirection back = forward.getOpposite();
@@ -101,9 +103,9 @@ public class TileKineticCrank extends TileCoreMachine {
 					list.add(tile);
 				}
 			} else if (tile instanceof TileMetalShaft) {
-				if (((TileMetalShaft)tile).orientation != orientation.getOpposite().getRotation(ForgeDirection.UP)) {
-					((TileMetalShaft)tile).orientation = orientation.getOpposite().getRotation(ForgeDirection.UP);
-					((TileMetalShaft)tile).markForUpdate();
+				if (((TileMetalShaft) tile).orientation != orientation.getOpposite().getRotation(ForgeDirection.UP)) {
+					((TileMetalShaft) tile).orientation = orientation.getOpposite().getRotation(ForgeDirection.UP);
+					((TileMetalShaft) tile).markForUpdate();
 				}
 
 				list.add(tile);

@@ -53,7 +53,7 @@ public class TileHammerMill extends TileCoreMachine implements ISidedInventory {
 
 	@Override
 	public String[] descriptionPacketFields() {
-		return new String[] {"orientation", "grindingStage"};
+		return new String[]{"orientation", "grindingStage"};
 	}
 
 	@Override
@@ -146,18 +146,18 @@ public class TileHammerMill extends TileCoreMachine implements ISidedInventory {
 		}
 
 		if (
-			stack.isItemEqual(StackReference.STONE) ||
-			stack.isItemEqual(StackReference.COBBLESTONE) ||
-			stack.isItemEqual(StackReference.GRAVEL) ||
-			stack.isItemEqual(StackReference.SAND) ||
-			stack.isItemEqual(StackReference.FINE_SAND)) {
+				stack.isItemEqual(StackReference.STONE) ||
+						stack.isItemEqual(StackReference.COBBLESTONE) ||
+						stack.isItemEqual(StackReference.GRAVEL) ||
+						stack.isItemEqual(StackReference.SAND) ||
+						stack.isItemEqual(StackReference.FINE_SAND)) {
 			type = 0;
 		} else if (
-			stack.isItemEqual(StackReference.NETHER_RIND) ||
-			stack.isItemEqual(StackReference.NETHERRACK) ||
-			stack.isItemEqual(StackReference.NETHER_GRIT) ||
-			stack.isItemEqual(StackReference.SOUL_SAND) ||
-			stack.isItemEqual(StackReference.SOUL_DUST)) {
+				stack.isItemEqual(StackReference.NETHER_RIND) ||
+						stack.isItemEqual(StackReference.NETHERRACK) ||
+						stack.isItemEqual(StackReference.NETHER_GRIT) ||
+						stack.isItemEqual(StackReference.SOUL_SAND) ||
+						stack.isItemEqual(StackReference.SOUL_DUST)) {
 			type = 1;
 		}
 
@@ -170,32 +170,48 @@ public class TileHammerMill extends TileCoreMachine implements ISidedInventory {
 		switch (grindingStage) {
 			case 0: {
 				switch (type) {
-					case 1: output = StackReference.NETHERRACK.copy(); break;
-					default: output = StackReference.COBBLESTONE.copy(); break;
+					case 1:
+						output = StackReference.NETHERRACK.copy();
+						break;
+					default:
+						output = StackReference.COBBLESTONE.copy();
+						break;
 				}
 				break;
 			}
 
 			case 1: {
 				switch (type) {
-					case 1: output = StackReference.NETHER_GRIT.copy(); break;
-					default: output = StackReference.GRAVEL.copy(); break;
+					case 1:
+						output = StackReference.NETHER_GRIT.copy();
+						break;
+					default:
+						output = StackReference.GRAVEL.copy();
+						break;
 				}
 				break;
 			}
 
 			case 2: {
 				switch (type) {
-					case 1: output = StackReference.SOUL_SAND.copy(); break;
-					default: output = StackReference.SAND.copy(); break;
+					case 1:
+						output = StackReference.SOUL_SAND.copy();
+						break;
+					default:
+						output = StackReference.SAND.copy();
+						break;
 				}
 				break;
 			}
 
 			case 3: {
 				switch (type) {
-					case 1: output = StackReference.SOUL_DUST.copy(); break;
-					default: output = StackReference.FINE_SAND.copy(); break;
+					case 1:
+						output = StackReference.SOUL_DUST.copy();
+						break;
+					default:
+						output = StackReference.FINE_SAND.copy();
+						break;
 				}
 				break;
 			}
@@ -302,7 +318,7 @@ public class TileHammerMill extends TileCoreMachine implements ISidedInventory {
 
 	@Override
 	public int[] getAccessibleSlotsFromSide(int side) {
-		return side == 1 ? new int[] {0, 1, 2, 3, 4, 5, 6, 7, 8} : new int[0];
+		return side == 1 ? new int[]{0, 1, 2, 3, 4, 5, 6, 7, 8} : new int[0];
 	}
 
 	@Override

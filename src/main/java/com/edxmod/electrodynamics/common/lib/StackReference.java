@@ -21,5 +21,4 @@ public class StackReference {
 	public static final ItemStack NETHER_GRIT = new ItemStack(EDXBlocks.componentGround, 1, BlockComponentGround.NETHER_GRIT);
 	public static final ItemStack SOUL_SAND = new ItemStack(Blocks.soul_sand);
 	public static final ItemStack SOUL_DUST = new ItemStack(EDXBlocks.componentGround, 1, BlockComponentGround.SOUL_DUST);
-
 }

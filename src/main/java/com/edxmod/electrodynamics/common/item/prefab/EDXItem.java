@@ -34,5 +34,4 @@ public class EDXItem extends Item {
 	public String getIcon() {
 		return "";
 	}
-
 }

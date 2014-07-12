@@ -34,11 +34,11 @@ public class SpiderTracker {
 					EntitySpider spider = (EntitySpider) obj;
 
 					if (spider.getAttackTarget() == null && world.rand.nextFloat() <= WEB_CHANCE) {
-						float brightness = world.getLightBrightness((int)spider.posX, (int)spider.posY, (int)spider.posZ);
+						float brightness = world.getLightBrightness((int) spider.posX, (int) spider.posY, (int) spider.posZ);
 
 						if (brightness * 16 <= MOB_SPAWN_LIGHT) {
-							if (world.isAirBlock((int)spider.posX, (int)spider.posY, (int)spider.posZ) && !world.canBlockSeeTheSky((int)spider.posX, (int)spider.posY, (int)spider.posZ)) {
-								world.setBlock((int)spider.posX, (int)spider.posY, (int)spider.posZ, Blocks.web);
+							if (world.isAirBlock((int) spider.posX, (int) spider.posY, (int) spider.posZ) && !world.canBlockSeeTheSky((int) spider.posX, (int) spider.posY, (int) spider.posZ)) {
+								world.setBlock((int) spider.posX, (int) spider.posY, (int) spider.posZ, Blocks.web);
 							}
 						}
 					}
@@ -46,5 +46,4 @@ public class SpiderTracker {
 			}
 		}
 	}
-
 }

@@ -71,7 +71,7 @@ public class TileSieveTable extends TileCore implements ISidedInventory {
 
 			// Set timing if need be
 			if (currentProcessingTime == 0 && maxProcessingTime == 0) {
-				for (int i=0; i<processing.length; i++) {
+				for (int i = 0; i < processing.length; i++) {
 					ItemStack processed = processing[i];
 
 					if (processed != null) {
@@ -87,7 +87,7 @@ public class TileSieveTable extends TileCore implements ISidedInventory {
 
 			// Process items
 			if (currentProcessingTime == maxProcessingTime && maxProcessingTime != 0) {
-				for (int i=0; i<processing.length; i++) {
+				for (int i = 0; i < processing.length; i++) {
 					ItemStack processed = processing[i];
 
 					if (processed != null && processed.stackSize > 0) {
@@ -205,7 +205,7 @@ public class TileSieveTable extends TileCore implements ISidedInventory {
 
 	@Override
 	public int[] getAccessibleSlotsFromSide(int side) {
-		return side == 1 ? new int[] {0, 1, 2, 3, 4, 5, 6, 7, 8} : new int[0];
+		return side == 1 ? new int[]{0, 1, 2, 3, 4, 5, 6, 7, 8} : new int[0];
 	}
 
 	@Override
@@ -217,5 +217,4 @@ public class TileSieveTable extends TileCore implements ISidedInventory {
 	public boolean canExtractItem(int slot, ItemStack var2, int side) {
 		return false;
 	}
-
 }

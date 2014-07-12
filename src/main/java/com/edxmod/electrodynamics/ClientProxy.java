@@ -16,10 +16,10 @@ import net.minecraftforge.client.model.AdvancedModelLoader;
  */
 public class ClientProxy extends CommonProxy {
 
-    public static int renderPass;
+	public static int renderPass;
 
-    @Override
-    public void preInit() {
+	@Override
+	public void preInit() {
 		super.preInit();
 
 		AdvancedModelLoader.registerModelHandler(new FixedTechneModelLoader());
@@ -50,6 +50,5 @@ public class ClientProxy extends CommonProxy {
 		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(EDXBlocks.metalPress), new RenderItemMetalPress());
 		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(EDXBlocks.barrel), new RenderItemBarrel());
 		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(EDXBlocks.spawnMarker), new RenderItemSpawnMarker());
-    }
-
+	}
 }

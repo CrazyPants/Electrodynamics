@@ -14,7 +14,7 @@ import net.minecraft.world.World;
  */
 public class ItemSeeds extends EDXMultiItem {
 
-	public static final String[] NAMES = new String[] {"grass", "nether_grass"};
+	public static final String[] NAMES = new String[]{"grass", "nether_grass"};
 
 	public ItemSeeds() {
 		super(EDXCreativeTab.ITEMS);
@@ -48,5 +48,4 @@ public class ItemSeeds extends EDXMultiItem {
 	public String getIconPrefix() {
 		return "world/seed";
 	}
-
 }

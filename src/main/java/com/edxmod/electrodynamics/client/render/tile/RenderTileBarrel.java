@@ -14,7 +14,7 @@ import org.lwjgl.opengl.GL11;
  */
 public class RenderTileBarrel extends EDXTileRenderer<TileBarrel> {
 
-	public static final String[] LID_PARTS = new String[] {"lid", "lidHandle"};
+	public static final String[] LID_PARTS = new String[]{"lid", "lidHandle"};
 
 	@Override
 	public void renderTileAt(TileBarrel tile, double x, double y, double z, float delta) {
@@ -30,7 +30,7 @@ public class RenderTileBarrel extends EDXTileRenderer<TileBarrel> {
 
 		if (tile.contents != null) {
 			float level = TileBarrel.DIMENSION_MIN;
-			level += (TileBarrel.DIMENSION_FILL * ((float)tile.contents.stackSize / (float)tile.maxStackSize));
+			level += (TileBarrel.DIMENSION_FILL * ((float) tile.contents.stackSize / (float) tile.maxStackSize));
 			renderContents(Block.getBlockFromItem(tile.contents.getItem()), tile.contents.getItemDamage(), level);
 		}
 
@@ -40,7 +40,7 @@ public class RenderTileBarrel extends EDXTileRenderer<TileBarrel> {
 	private void renderContents(Block block, int meta, float level) {
 		IIcon top = block.getIcon(1, meta);
 		float min = -0.5F + 0.125F;
-		float max =  0.5F - 0.125F;
+		float max = 0.5F - 0.125F;
 
 		bindTexture(TextureMap.locationBlocksTexture);
 

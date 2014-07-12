@@ -25,5 +25,4 @@ public class DurabilityMapping {
 		}
 		return 1F;
 	}
-
 }

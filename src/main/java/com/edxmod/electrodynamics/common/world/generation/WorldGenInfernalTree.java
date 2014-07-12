@@ -83,7 +83,7 @@ public class WorldGenInfernalTree extends WorldGenAbstractTree {
 
 								if (block1.isLeaves(par1World, i2, k1, k2)) {
 									if (par2Random.nextInt(100) <= 60) {
-										for (int i=2; i<6; i++) {
+										for (int i = 2; i < 6; i++) {
 											ForgeDirection side = ForgeDirection.getOrientation(i);
 
 											if (par1World.getBlock(i2 + side.offsetX, k1 + side.offsetY, k2 + side.offsetZ) == Blocks.air) {
@@ -114,5 +114,4 @@ public class WorldGenInfernalTree extends WorldGenAbstractTree {
 			return false;
 		}
 	}
-
 }

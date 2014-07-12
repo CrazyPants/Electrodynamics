@@ -16,7 +16,7 @@ public class FluidStackSerializer extends AbstractSerializer<FluidStack> {
 	@Override
 	public void serialize(String name, Object object, NBTTagCompound nbt) {
 		NBTTagCompound tag = new NBTTagCompound();
-		((FluidStack)object).writeToNBT(tag);
+		((FluidStack) object).writeToNBT(tag);
 		nbt.setTag(name, tag);
 	}
 

@@ -14,45 +14,44 @@ import net.minecraft.util.IIcon;
  */
 public abstract class EDXBasicBlock extends Block {
 
-    public EDXBasicBlock(Material material) {
-        super(material);
+	public EDXBasicBlock(Material material) {
+		super(material);
 
 		setCreativeTab(EDXCreativeTab.BLOCKS.get());
-    }
+	}
 
-    public EDXBasicBlock(Material material, float hardness, float resistance) {
-        this(material);
-        this.setHardness(hardness);
-        this.setResistance(resistance);
-    }
+	public EDXBasicBlock(Material material, float hardness, float resistance) {
+		this(material);
+		this.setHardness(hardness);
+		this.setResistance(resistance);
+	}
 
-    @SideOnly(Side.CLIENT)
-    public abstract boolean useCustomRender();
+	@SideOnly(Side.CLIENT)
+	public abstract boolean useCustomRender();
 
-    @SideOnly(Side.CLIENT)
-    public abstract void registerBlockIcons(IIconRegister iconRegister);
+	@SideOnly(Side.CLIENT)
+	public abstract void registerBlockIcons(IIconRegister iconRegister);
 
-    @SideOnly(Side.CLIENT)
-    public IIcon getIcon(int side, int meta) {
-        return Blocks.stone.getIcon(0, 0);
-    }
+	@SideOnly(Side.CLIENT)
+	public IIcon getIcon(int side, int meta) {
+		return Blocks.stone.getIcon(0, 0);
+	}
 
-    @SideOnly(Side.CLIENT)
-    @Override
-    public boolean isOpaqueCube() {
-        return !this.useCustomRender();
-    }
+	@SideOnly(Side.CLIENT)
+	@Override
+	public boolean isOpaqueCube() {
+		return !this.useCustomRender();
+	}
 
-    @SideOnly(Side.CLIENT)
-    @Override
-    public boolean renderAsNormalBlock() {
-        return !this.useCustomRender();
-    }
+	@SideOnly(Side.CLIENT)
+	@Override
+	public boolean renderAsNormalBlock() {
+		return !this.useCustomRender();
+	}
 
-    @SideOnly(Side.CLIENT)
-    @Override
-    public int getRenderType() {
-        return this.useCustomRender() ? -1 : 0;
-    }
-
+	@SideOnly(Side.CLIENT)
+	@Override
+	public int getRenderType() {
+		return this.useCustomRender() ? -1 : 0;
+	}
 }

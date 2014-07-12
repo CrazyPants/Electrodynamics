@@ -17,7 +17,7 @@ import java.util.List;
  */
 public class BlockComponentWood extends EDXMultiBlock {
 
-	public static final String[] NAMES = new String[] {"sawdust", "sawdust_nether", "sawdust_nether_glow", "woodchips", "woodchips_nether", "woodchips_nether_glow"};
+	public static final String[] NAMES = new String[]{"sawdust", "sawdust_nether", "sawdust_nether_glow", "woodchips", "woodchips_nether", "woodchips_nether_glow"};
 	public IIcon[] icons;
 
 	public BlockComponentWood() {
@@ -54,7 +54,7 @@ public class BlockComponentWood extends EDXMultiBlock {
 	@Override
 	public void registerBlockIcons(IIconRegister register) {
 		icons = new IIcon[NAMES.length];
-		for (int i=0; i<NAMES.length; i++) {
+		for (int i = 0; i < NAMES.length; i++) {
 			icons[i] = register.registerIcon(EDXProps.RESOURCE_PREFIX + "component/" + NAMES[i]);
 		}
 	}

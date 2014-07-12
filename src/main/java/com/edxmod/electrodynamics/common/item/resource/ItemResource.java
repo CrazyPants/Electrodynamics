@@ -17,7 +17,7 @@ import java.util.List;
  */
 public class ItemResource extends EDXItem {
 
-	public static final String[] NAMES = new String[] {"copper", "gold", "graphite", "iron", "lead", "nickel", "silver", "steel", "tin"};
+	public static final String[] NAMES = new String[]{"copper", "gold", "graphite", "iron", "lead", "nickel", "silver", "steel", "tin"};
 
 	protected IIcon[] icons;
 
@@ -47,7 +47,7 @@ public class ItemResource extends EDXItem {
 	public void registerIcons(IIconRegister register) {
 		icons = new IIcon[NAMES.length];
 		if (!getIconPrefix().isEmpty()) {
-			for (int i=0; i<NAMES.length; i++) {
+			for (int i = 0; i < NAMES.length; i++) {
 				icons[i] = register.registerIcon(EDXProps.RESOURCE_PREFIX + getIconPrefix() + "/" + NAMES[i] + type);
 			}
 		}
@@ -63,5 +63,4 @@ public class ItemResource extends EDXItem {
 	public String getIconPrefix() {
 		return "resource";
 	}
-
 }

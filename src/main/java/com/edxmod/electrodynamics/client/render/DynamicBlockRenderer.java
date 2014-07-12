@@ -62,9 +62,9 @@ public class DynamicBlockRenderer {
 			throw new IllegalStateException("Already initialized!");
 		}
 
-		offsetX = (double)tile.xCoord - TileEntityRendererDispatcher.staticPlayerX;
-		offsetY = (double)tile.yCoord - TileEntityRendererDispatcher.staticPlayerY;
-		offsetZ = (double)tile.zCoord - TileEntityRendererDispatcher.staticPlayerZ;
+		offsetX = (double) tile.xCoord - TileEntityRendererDispatcher.staticPlayerX;
+		offsetY = (double) tile.yCoord - TileEntityRendererDispatcher.staticPlayerY;
+		offsetZ = (double) tile.zCoord - TileEntityRendererDispatcher.staticPlayerZ;
 
 		initialized = true;
 	}
@@ -128,7 +128,7 @@ public class DynamicBlockRenderer {
 		float light = -1F;
 		if (realDoLight) {
 			light = block.getMixedBrightnessForBlock(world, x, y, z);
-			tessellator.setBrightness((int)light);
+			tessellator.setBrightness((int) light);
 			light = light + ((1.0f - light) * 0.4f);
 			tessellator.setColorOpaque_F(LIGHT_BOTTOM * light, LIGHT_BOTTOM * light, LIGHT_BOTTOM * light);
 		}

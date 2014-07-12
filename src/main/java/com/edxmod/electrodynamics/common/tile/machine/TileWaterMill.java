@@ -65,9 +65,9 @@ public class TileWaterMill extends TileCoreMachine {
 
 		int count = 0;
 		crank.stopTick = false;
-		for (int ix=-1; ix<2; ix++) {
-			for (int iy=-1; iy<2; iy++) {
-				for (int iz=-1; iz<2; iz++) {
+		for (int ix = -1; ix < 2; ix++) {
+			for (int iy = -1; iy < 2; iy++) {
+				for (int iz = -1; iz < 2; iz++) {
 					int sx = xAxis ? xCoord + ix : xCoord;
 					int sy = yCoord + iy;
 					int sz = xAxis ? zCoord : zCoord + iz;
@@ -98,7 +98,7 @@ public class TileWaterMill extends TileCoreMachine {
 			}
 		}
 
-		speed = MAX_SPEED * ((float)count / (float)8);
+		speed = MAX_SPEED * ((float) count / (float) 8);
 		crank.speed = speed;
 
 		if (lastSpeed != speed) {

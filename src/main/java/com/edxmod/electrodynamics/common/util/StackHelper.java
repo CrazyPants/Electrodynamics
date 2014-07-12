@@ -18,15 +18,15 @@ public class StackHelper {
 			if (stack.getItemDamage() < 0) {
 				stack.setItemDamage(0);
 			}
-			return new ItemStack[] {stack};
+			return new ItemStack[]{stack};
 		}
 
 		if (object instanceof Block) {
-			return new ItemStack[] {new ItemStack((Block)object)};
+			return new ItemStack[]{new ItemStack((Block) object)};
 		}
 
 		if (object instanceof Item) {
-			return new ItemStack[] {new ItemStack((Item)object)};
+			return new ItemStack[]{new ItemStack((Item) object)};
 		}
 
 		if (object instanceof String) {
@@ -50,5 +50,4 @@ public class StackHelper {
 		copy.stackSize = size;
 		return copy;
 	}
-
 }

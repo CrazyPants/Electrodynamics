@@ -37,5 +37,4 @@ public class RenderItemBarrel implements IItemRenderer {
 
 		GL11.glPopMatrix();
 	}
-
 }

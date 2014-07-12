@@ -13,51 +13,51 @@ import java.util.Locale;
  */
 public enum EDXCreativeTab {
 
-    BLOCKS,
-    ITEMS,
-    TOOLS;
+	BLOCKS,
+	ITEMS,
+	TOOLS;
 
-    private final CreativeTabs tab;
+	private final CreativeTabs tab;
 
-    private EDXCreativeTab() {
-        tab = new Tab();
-    }
+	private EDXCreativeTab() {
+		tab = new Tab();
+	}
 
-    public CreativeTabs get() {
-        return tab;
-    }
+	public CreativeTabs get() {
+		return tab;
+	}
 
-    private String getLabel() {
-        return "edx." + name().toLowerCase(Locale.ENGLISH);
-    }
+	private String getLabel() {
+		return "edx." + name().toLowerCase(Locale.ENGLISH);
+	}
 
-    private ItemStack getItem() {
-        switch (this) {
-            case BLOCKS:
-                return new ItemStack(EDXBlocks.table, 1, 0);
-            case ITEMS:
-                return new ItemStack(EDXItems.resourcePebble, 1, 0);
-            case TOOLS:
-                return new ItemStack(EDXItems.hammerWood, 1, 0);
-            default:
-                return null;
-        }
-    }
+	private ItemStack getItem() {
+		switch (this) {
+			case BLOCKS:
+				return new ItemStack(EDXBlocks.table, 1, 0);
+			case ITEMS:
+				return new ItemStack(EDXItems.resourcePebble, 1, 0);
+			case TOOLS:
+				return new ItemStack(EDXItems.hammerWood, 1, 0);
+			default:
+				return null;
+		}
+	}
 
-    public final class Tab extends CreativeTabs {
+	public final class Tab extends CreativeTabs {
 
-        private Tab() {
-            super(getLabel());
-        }
+		private Tab() {
+			super(getLabel());
+		}
 
-        @Override
-        public ItemStack getIconItemStack() {
-            return getItem();
-        }
+		@Override
+		public ItemStack getIconItemStack() {
+			return getItem();
+		}
 
-        @Override
-        public Item getTabIconItem() {
-            return getItem().getItem();
-        }
-    }
+		@Override
+		public Item getTabIconItem() {
+			return getItem().getItem();
+		}
+	}
 }

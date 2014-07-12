@@ -22,6 +22,7 @@ public class SieveRecipe implements IGenericRecipe<ItemStack[]> {
 		this.duration = duration;
 		this.ignoreNBT = ignoreNBT;
 	}
+
 	public int getDuration() {
 		return duration;
 	}

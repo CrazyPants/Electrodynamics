@@ -5,27 +5,22 @@ import net.minecraftforge.client.model.IModelCustom;
 import net.minecraftforge.client.model.IModelCustomLoader;
 import net.minecraftforge.client.model.ModelFormatException;
 
-public class FixedTechneModelLoader implements IModelCustomLoader
-{
+public class FixedTechneModelLoader implements IModelCustomLoader {
 
 	@Override
-	public String getType()
-	{
+	public String getType() {
 		return "Techne model";
 	}
 
-	private static final String[] types = { "tcn" };
+	private static final String[] types = {"tcn"};
 
 	@Override
-	public String[] getSuffixes()
-	{
+	public String[] getSuffixes() {
 		return types;
 	}
 
 	@Override
-	public IModelCustom loadInstance(ResourceLocation resource) throws ModelFormatException
-	{
+	public IModelCustom loadInstance(ResourceLocation resource) throws ModelFormatException {
 		return new FixedTechneModel(resource);
 	}
-
 }

@@ -18,133 +18,136 @@ import org.lwjgl.opengl.GL11;
  */
 public class RenderHelper {
 
-    public static boolean graphicsCache;
+	public static boolean graphicsCache;
 
-    public static int lightingCache;
+	public static int lightingCache;
 
-    public static void forceGraphics(boolean fancy) {
-        graphicsCache = Minecraft.getMinecraft().gameSettings.fancyGraphics;
-        Minecraft.getMinecraft().gameSettings.fancyGraphics = fancy;
-    }
+	public static void forceGraphics(boolean fancy) {
+		graphicsCache = Minecraft.getMinecraft().gameSettings.fancyGraphics;
+		Minecraft.getMinecraft().gameSettings.fancyGraphics = fancy;
+	}
 
-    public static void resetGraphics() {
-        Minecraft.getMinecraft().gameSettings.fancyGraphics = graphicsCache;
-    }
+	public static void resetGraphics() {
+		Minecraft.getMinecraft().gameSettings.fancyGraphics = graphicsCache;
+	}
 
-    public static void forceLighting(int lighting) {
-        lightingCache = Minecraft.getMinecraft().gameSettings.ambientOcclusion;
-        Minecraft.getMinecraft().gameSettings.ambientOcclusion = lighting;
-    }
+	public static void forceLighting(int lighting) {
+		lightingCache = Minecraft.getMinecraft().gameSettings.ambientOcclusion;
+		Minecraft.getMinecraft().gameSettings.ambientOcclusion = lighting;
+	}
 
-    public static void resetLighting() {
-        Minecraft.getMinecraft().gameSettings.ambientOcclusion = lightingCache;
-    }
+	public static void resetLighting() {
+		Minecraft.getMinecraft().gameSettings.ambientOcclusion = lightingCache;
+	}
 
-    public static void renderItemStack(ItemStack stack, boolean force3D) {
-        if (force3D) {
-            forceGraphics(true);
-        }
+	public static void renderItemStack(ItemStack stack, boolean force3D) {
+		if (force3D) {
+			forceGraphics(true);
+		}
 
-        EntityItem item = new EntityItem(Minecraft.getMinecraft().theWorld, 0, 0, 0, stack);
+		EntityItem item = new EntityItem(Minecraft.getMinecraft().theWorld, 0, 0, 0, stack);
 		item.getEntityItem().stackSize = 1;
-        item.hoverStart = 0;
+		item.hoverStart = 0;
 
-        RenderManager.instance.renderEntityWithPosYaw(item, 0, 0, 0, 0, 0);
+		RenderManager.instance.renderEntityWithPosYaw(item, 0, 0, 0, 0, 0);
 
-        if (force3D) {
-            resetGraphics();
-        }
-    }
+		if (force3D) {
+			resetGraphics();
+		}
+	}
 
-    public static void setGLColor(int color) {
-        float r = (float) (color >> 16 & 255) / 255.0F;
-        float g = (float) (color >> 8 & 255) / 255.0F;
-        float b = (float) (color & 255) / 255.0F;
-        GL11.glColor4f(r, g, b, 1.0F);
-    }
+	public static void setGLColor(int color) {
+		float r = (float) (color >> 16 & 255) / 255.0F;
+		float g = (float) (color >> 8 & 255) / 255.0F;
+		float b = (float) (color & 255) / 255.0F;
+		GL11.glColor4f(r, g, b, 1.0F);
+	}
 
 	public static double getRotationAngle(ForgeDirection direction) {
 		switch (direction) {
-			case NORTH: return 180D;
-			case SOUTH: return 0D;
-			case EAST: return 90D;
-			case WEST: return 270D;
-
+			case NORTH:
+				return 180D;
+			case SOUTH:
+				return 0D;
+			case EAST:
+				return 90D;
+			case WEST:
+				return 270D;
 		}
 		return 0D;
 	}
 
-    public static void renderAllSides(RenderBlocks renderer, Block block) {
-        renderAllSides(renderer, block, renderer.overrideBlockTexture);
-    }
+	public static void renderAllSides(RenderBlocks renderer, Block block) {
+		renderAllSides(renderer, block, renderer.overrideBlockTexture);
+	}
 
-    public static void renderAllSides(RenderBlocks renderblocks, Block block, IIcon icon) {
-        Tessellator tessellator = Tessellator.instance;
-        GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
-        tessellator.startDrawingQuads();
-        tessellator.setNormal(0.0F, 1.0F, 0.0F);
-        if (icon != null) {
-            renderblocks.renderFaceYPos(block, 0.0D, 0.0D, 0.0D, icon);
-        }
-        tessellator.draw();
-        tessellator.startDrawingQuads();
-        tessellator.setNormal(0.0F, -1.0F, 0.0F);
-        if (icon != null) {
-            renderblocks.renderFaceYNeg(block, 0.0D, 0.0D, 0.0D, icon);
-        }
-        tessellator.draw();
-        tessellator.startDrawingQuads();
-        tessellator.setNormal(1.0F, 0.0F, 0.0F);
-        if (icon != null) {
-            renderblocks.renderFaceXPos(block, 0.0D, 0.0D, 0.0D, icon);
-        }
-        tessellator.draw();
-        tessellator.startDrawingQuads();
-        tessellator.setNormal(-1.0F, 0.0F, 0.0F);
-        if (icon != null) {
-            renderblocks.renderFaceXNeg(block, 0.0D, 0.0D, 0.0D, icon);
-        }
-        tessellator.draw();
-        tessellator.startDrawingQuads();
-        tessellator.setNormal(0.0F, 0.0F, 1.0F);
-        if (icon != null) {
-            renderblocks.renderFaceZPos(block, 0.0D, 0.0D, 0.0D, icon);
-        }
-        tessellator.draw();
-        tessellator.startDrawingQuads();
-        tessellator.setNormal(0.0F, 0.0F, -1.0F);
-        if (icon != null) {
-            renderblocks.renderFaceZNeg(block, 0.0D, 0.0D, 0.0D, icon);
-        }
-        tessellator.draw();
-        GL11.glTranslatef(0.5F, 0.5F, 0.5F);
-    }
+	public static void renderAllSides(RenderBlocks renderblocks, Block block, IIcon icon) {
+		Tessellator tessellator = Tessellator.instance;
+		GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
+		tessellator.startDrawingQuads();
+		tessellator.setNormal(0.0F, 1.0F, 0.0F);
+		if (icon != null) {
+			renderblocks.renderFaceYPos(block, 0.0D, 0.0D, 0.0D, icon);
+		}
+		tessellator.draw();
+		tessellator.startDrawingQuads();
+		tessellator.setNormal(0.0F, -1.0F, 0.0F);
+		if (icon != null) {
+			renderblocks.renderFaceYNeg(block, 0.0D, 0.0D, 0.0D, icon);
+		}
+		tessellator.draw();
+		tessellator.startDrawingQuads();
+		tessellator.setNormal(1.0F, 0.0F, 0.0F);
+		if (icon != null) {
+			renderblocks.renderFaceXPos(block, 0.0D, 0.0D, 0.0D, icon);
+		}
+		tessellator.draw();
+		tessellator.startDrawingQuads();
+		tessellator.setNormal(-1.0F, 0.0F, 0.0F);
+		if (icon != null) {
+			renderblocks.renderFaceXNeg(block, 0.0D, 0.0D, 0.0D, icon);
+		}
+		tessellator.draw();
+		tessellator.startDrawingQuads();
+		tessellator.setNormal(0.0F, 0.0F, 1.0F);
+		if (icon != null) {
+			renderblocks.renderFaceZPos(block, 0.0D, 0.0D, 0.0D, icon);
+		}
+		tessellator.draw();
+		tessellator.startDrawingQuads();
+		tessellator.setNormal(0.0F, 0.0F, -1.0F);
+		if (icon != null) {
+			renderblocks.renderFaceZNeg(block, 0.0D, 0.0D, 0.0D, icon);
+		}
+		tessellator.draw();
+		GL11.glTranslatef(0.5F, 0.5F, 0.5F);
+	}
 
-    public static void renderAllSides(int x, int y, int z, Block block, RenderBlocks renderer, IIcon tex) {
+	public static void renderAllSides(int x, int y, int z, Block block, RenderBlocks renderer, IIcon tex) {
 		Tessellator tessellator = Tessellator.instance;
 
 		tessellator.setNormal(-1, 0, 0);
-        renderer.renderFaceXNeg(block, x, y, z, tex);
+		renderer.renderFaceXNeg(block, x, y, z, tex);
 		tessellator.setNormal(1, 0, 0);
-        renderer.renderFaceXPos(block, x, y, z, tex);
+		renderer.renderFaceXPos(block, x, y, z, tex);
 		tessellator.setNormal(0, 0, -1);
-        renderer.renderFaceZNeg(block, x, y, z, tex);
+		renderer.renderFaceZNeg(block, x, y, z, tex);
 		tessellator.setNormal(0, 0, 1);
-        renderer.renderFaceZPos(block, x, y, z, tex);
+		renderer.renderFaceZPos(block, x, y, z, tex);
 		tessellator.setNormal(0, -1, 0);
-        renderer.renderFaceYNeg(block, x, y, z, tex);
+		renderer.renderFaceYNeg(block, x, y, z, tex);
 		tessellator.setNormal(0, 1, 0);
-        renderer.renderFaceYPos(block, x, y, z, tex);
-    }
+		renderer.renderFaceYPos(block, x, y, z, tex);
+	}
 
-    public static void renderAllSidesInverted(int x, int y, int z, Block block, RenderBlocks renderer, IIcon tex) {
-        renderer.renderFaceXNeg(block, x + 1, y, z, tex);
-        renderer.renderFaceXPos(block, x - 1, y, z, tex);
-        renderer.renderFaceZNeg(block, x, y, z + 1, tex);
-        renderer.renderFaceZPos(block, x, y, z - 1, tex);
-        renderer.renderFaceYNeg(block, x, y + 1, z, tex);
-        renderer.renderFaceYPos(block, x, y - 1, z, tex);
-    }
+	public static void renderAllSidesInverted(int x, int y, int z, Block block, RenderBlocks renderer, IIcon tex) {
+		renderer.renderFaceXNeg(block, x + 1, y, z, tex);
+		renderer.renderFaceXPos(block, x - 1, y, z, tex);
+		renderer.renderFaceZNeg(block, x, y, z + 1, tex);
+		renderer.renderFaceZPos(block, x, y, z - 1, tex);
+		renderer.renderFaceYNeg(block, x, y + 1, z, tex);
+		renderer.renderFaceYPos(block, x, y - 1, z, tex);
+	}
 
 	public static void setBrightness(IBlockAccess blockAccess, int i, int j, int k, Block block) {
 		Tessellator tessellator = Tessellator.instance;
@@ -167,5 +170,4 @@ public class RenderHelper {
 		}
 		tessellator.setColorOpaque_F(f * f1, f * f2, f * f3);
 	}
-
 }

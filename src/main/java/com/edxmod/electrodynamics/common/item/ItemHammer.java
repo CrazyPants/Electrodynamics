@@ -8,13 +8,13 @@ import com.edxmod.electrodynamics.common.core.EDXCreativeTab;
  */
 public class ItemHammer extends EDXItem {
 
-	public static final float[] STRENGTH = new float[] {1F, 2F, 2.5F, 5F, 10F};
+	public static final float[] STRENGTH = new float[]{1F, 2F, 2.5F, 5F, 10F};
 
 	private final String type;
 
 	private final Object component;
 
-    public ItemHammer(int damage, String type, Object component) {
+	public ItemHammer(int damage, String type, Object component) {
 		super(EDXCreativeTab.TOOLS);
 
 		setMaxStackSize(1);
@@ -24,11 +24,10 @@ public class ItemHammer extends EDXItem {
 
 		this.type = type;
 		this.component = component;
-    }
+	}
 
 	@Override
 	public String getIcon() {
 		return "tools/" + type + "Hammer";
 	}
-
 }

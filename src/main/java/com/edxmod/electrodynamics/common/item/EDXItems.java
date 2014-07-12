@@ -35,7 +35,7 @@ public class EDXItems {
 	public static Item seeds;
 	public static Item cosmetic;
 
-    public static void initialize() {
+	public static void initialize() {
 		hammerWood = new ItemHammer(64, "wood", "plankWood");
 		hammerStone = new ItemHammer(128, "stone", "cobblestone");
 		hammerIron = new ItemHammer(160, "iron", "ingotIron");
@@ -73,9 +73,9 @@ public class EDXItems {
 		cosmetic = new ItemCosmetic().setUnlocalizedName("cosmetic");
 		registerItem(seeds);
 		registerItem(cosmetic);
-    }
+	}
 
-    public static void registerItem(Item item) {
-        GameRegistry.registerItem(item, item.getUnlocalizedName().replace("item.", ""));
-    }
+	public static void registerItem(Item item) {
+		GameRegistry.registerItem(item, item.getUnlocalizedName().replace("item.", ""));
+	}
 }

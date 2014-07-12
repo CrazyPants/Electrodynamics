@@ -19,5 +19,4 @@ public class WorldProviderSkyblockHell extends WorldProviderHell {
 	public boolean canRespawnHere() {
 		return true;
 	}
-
 }

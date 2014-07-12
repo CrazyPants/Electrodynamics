@@ -40,7 +40,7 @@ public class BlockInfernalFurnace extends EDXTileBlock {
 				if (tile != null && !tile.lit) {
 					tile.lit = true;
 
-					world.playSoundEffect((double)x + 0.5D, (double)y + 0.5D, (double)z + 0.5D, "fire.ignite", 1.0F, new Random().nextFloat() * 0.4F + 0.8F);
+					world.playSoundEffect((double) x + 0.5D, (double) y + 0.5D, (double) z + 0.5D, "fire.ignite", 1.0F, new Random().nextFloat() * 0.4F + 0.8F);
 					player.getHeldItem().damageItem(1, player);
 
 					tile.markForUpdate();
@@ -57,7 +57,7 @@ public class BlockInfernalFurnace extends EDXTileBlock {
 		TileInfernalFurnace tile = (TileInfernalFurnace) world.getTileEntity(x, y, z);
 
 		if (tile != null) {
-			for (int i=0; i<tile.getSizeInventory(); i++) {
+			for (int i = 0; i < tile.getSizeInventory(); i++) {
 				ItemStack stack = tile.getStackInSlot(i);
 
 				if (stack != null) {
@@ -71,7 +71,7 @@ public class BlockInfernalFurnace extends EDXTileBlock {
 
 	@Override
 	public int getLightValue(IBlockAccess world, int x, int y, int z) {
-		return world.getBlockMetadata(x, y, z) == 1 ? (int)(0.875F * 16) : 0;
+		return world.getBlockMetadata(x, y, z) == 1 ? (int) (0.875F * 16) : 0;
 	}
 
 	@Override

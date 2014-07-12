@@ -40,8 +40,8 @@ public class RenderTileHammerMill extends EDXTileRenderer<TileHammerMill> {
 		GL11.glPopMatrix();
 
 		if (TileHammerMill.MAX_STAGE % 2 == 0) {
-			int min = (int) Math.floor(((float)TileHammerMill.MAX_STAGE / (float)2) - 0.5F);
-			int max = (int) Math.ceil(((float)TileHammerMill.MAX_STAGE / (float)2) - 0.5F);
+			int min = (int) Math.floor(((float) TileHammerMill.MAX_STAGE / (float) 2) - 0.5F);
+			int max = (int) Math.ceil(((float) TileHammerMill.MAX_STAGE / (float) 2) - 0.5F);
 
 			if (tile.grindingStage <= min) {
 				float offset = -0.0625F;

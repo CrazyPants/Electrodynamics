@@ -71,11 +71,21 @@ public class BlockCrank extends EDXTileBlock {
 		TileCoreMachine tile = (TileCoreMachine) world.getTileEntity(x, y, z);
 
 		switch (tile.orientation) {
-			case SOUTH: setBlockBounds(0.28125F, 0.28125F, 0.625F, 0.71875F, 0.71875F, 1); break;
-			case NORTH: setBlockBounds(0.28125F, 0.28125F, 0, 0.71875F, 0.71875F, 0.375F); break;
-			case WEST: setBlockBounds(0, 0.28125F, 0.28125F, 0.375F, 0.71875F, 0.71875F); break;
-			case EAST: setBlockBounds(0.625F, 0.28125F, 0.28125F, 1, 0.71875F, 0.71875F); break;
-			default: setBlockBounds(0, 0, 0, 1, 1, 1); break;
+			case SOUTH:
+				setBlockBounds(0.28125F, 0.28125F, 0.625F, 0.71875F, 0.71875F, 1);
+				break;
+			case NORTH:
+				setBlockBounds(0.28125F, 0.28125F, 0, 0.71875F, 0.71875F, 0.375F);
+				break;
+			case WEST:
+				setBlockBounds(0, 0.28125F, 0.28125F, 0.375F, 0.71875F, 0.71875F);
+				break;
+			case EAST:
+				setBlockBounds(0.625F, 0.28125F, 0.28125F, 1, 0.71875F, 0.71875F);
+				break;
+			default:
+				setBlockBounds(0, 0, 0, 1, 1, 1);
+				break;
 		}
 
 		return super.collisionRayTrace(world, x, y, z, start, end);

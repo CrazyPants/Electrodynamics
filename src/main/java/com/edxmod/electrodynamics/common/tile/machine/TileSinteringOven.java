@@ -14,7 +14,7 @@ public class TileSinteringOven extends TileCoreMachine {
 	public float currentAngle = 0.0F;
 
 	@NBTHandler.NBTData
-    public boolean open = false;
+	public boolean open = false;
 
 	@Override
 	public void onPoked() {

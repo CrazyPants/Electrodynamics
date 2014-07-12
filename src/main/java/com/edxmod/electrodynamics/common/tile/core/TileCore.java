@@ -17,9 +17,11 @@ public abstract class TileCore extends TileEntity {
 	private static final int SPECIFIC_DESCRIPTION_PACKET = 1;
 	private static final int POKE_PACKET = 2;
 
-	public void writeCustomNBT(NBTTagCompound nbt) {}
+	public void writeCustomNBT(NBTTagCompound nbt) {
+	}
 
-	public void readCustomNBT(NBTTagCompound nbt) {}
+	public void readCustomNBT(NBTTagCompound nbt) {
+	}
 
 	public String[] descriptionPacketFields() {
 		return handler.getFields();
@@ -29,9 +31,11 @@ public abstract class TileCore extends TileEntity {
 		return true;
 	}
 
-	public void onPoked() {}
+	public void onPoked() {
+	}
 
-	public void onBlockBroken() {}
+	public void onBlockBroken() {
+	}
 
 	protected NBTHandler handler;
 
@@ -104,7 +108,7 @@ public abstract class TileCore extends TileEntity {
 
 	@Override
 	public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity pkt) {
-		switch(pkt.func_148853_f()) {
+		switch (pkt.func_148853_f()) {
 			case BLANKET_DESCRIPTION_PACKET:
 				readFromNBT(pkt.func_148857_g());
 				break;

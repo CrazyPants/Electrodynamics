@@ -12,32 +12,32 @@ import net.minecraft.item.ItemStack;
  */
 public class ContainerHandSieve extends ContainerItem {
 
-    private EntityPlayer player;
+	private EntityPlayer player;
 
-    public ContainerHandSieve(EntityPlayer player, InventoryItem inventory) {
-        super(inventory, player.inventory.currentItem + 27 + inventory.getSizeInventory());
+	public ContainerHandSieve(EntityPlayer player, InventoryItem inventory) {
+		super(inventory, player.inventory.currentItem + 27 + inventory.getSizeInventory());
 
-        this.player = player;
+		this.player = player;
 
-        // Init slots
-        addSlotToContainer(new Slot(inventory, 0, 80, 35) {
+		// Init slots
+		addSlotToContainer(new Slot(inventory, 0, 80, 35) {
 			@Override
 			public boolean isItemValid(ItemStack stack) {
 				return EDXRecipes.SIEVE.get(stack) != null;
 			}
 		});
 
-        // Init player slots
-        for (int i = 0; i < 3; ++i) {
-            for (int j = 0; j < 9; ++j) {
-                this.addSlotToContainer(new Slot(player.inventory, j + i * 9 + 9, 8 + j * 18, 84 + i * 18));
-            }
-        }
+		// Init player slots
+		for (int i = 0; i < 3; ++i) {
+			for (int j = 0; j < 9; ++j) {
+				this.addSlotToContainer(new Slot(player.inventory, j + i * 9 + 9, 8 + j * 18, 84 + i * 18));
+			}
+		}
 
-        for (int i = 0; i < 9; ++i) {
-            this.addSlotToContainer(new Slot(player.inventory, i, 8 + i * 18, 142));
-        }
-    }
+		for (int i = 0; i < 9; ++i) {
+			this.addSlotToContainer(new Slot(player.inventory, i, 8 + i * 18, 142));
+		}
+	}
 
 	@Override
 	public void onContainerClosed(EntityPlayer player) {
@@ -46,8 +46,7 @@ public class ContainerHandSieve extends ContainerItem {
 	}
 
 	@Override
-    public boolean canInteractWith(EntityPlayer player) {
-        return true;
-    }
-
+	public boolean canInteractWith(EntityPlayer player) {
+		return true;
+	}
 }

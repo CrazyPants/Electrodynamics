@@ -54,10 +54,10 @@ public class ItemHandSieve extends EDXItem {
 		// Sync
 		player.setCurrentItemOrArmor(0, stack);
 		if (player instanceof EntityPlayerMP) {
-			((EntityPlayerMP)player).updateHeldItem();
+			((EntityPlayerMP) player).updateHeldItem();
 		}
 	}
-	
+
 	public static int getCurrentDuration(ItemStack stack) {
 		if (!stack.hasTagCompound()) {
 			return 0;

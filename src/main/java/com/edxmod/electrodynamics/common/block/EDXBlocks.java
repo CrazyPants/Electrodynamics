@@ -45,7 +45,7 @@ public class EDXBlocks {
 	public static Block infernalLeaves;
 	public static Block infernalSapling;
 
-    public static void initialize() {
+	public static void initialize() {
 		table = new BlockTable().setBlockName("table");
 		tableSieve = new BlockSieveTable().setBlockName("table_sieve");
 		sinteringOven = new BlockSinteringOven().setBlockName("sintering_oven");
@@ -71,8 +71,8 @@ public class EDXBlocks {
 		infernalLeaves = new BlockInfernaLeaves().setBlockName("infernal_leaves");
 		infernalSapling = new BlockInfernalSapling().setBlockName("infernal_sapling");
 
-        registerBlock(table, EDXItemMultiBlock.class);
-        registerBlock(tableSieve, EDXItemBlock.class);
+		registerBlock(table, EDXItemMultiBlock.class);
+		registerBlock(tableSieve, EDXItemBlock.class);
 		registerBlock(sinteringOven, EDXMachineBlock.class);
 		registerBlock(hammerMill, EDXMachineBlock.class);
 		registerBlock(handCrank, ItemBlockCrank.class);
@@ -98,7 +98,7 @@ public class EDXBlocks {
 
 		GameRegistry.registerTileEntity(TileTable.class, "edx:table");
 		GameRegistry.registerTileEntity(TileSieveTable.class, "edx:table_sieve");
-    	GameRegistry.registerTileEntity(TileSinteringOven.class, "edx:sintering_oven");
+		GameRegistry.registerTileEntity(TileSinteringOven.class, "edx:sintering_oven");
 		GameRegistry.registerTileEntity(TileHammerMill.class, "edx:hammer_mill");
 		GameRegistry.registerTileEntity(TileHandCrank.class, "edx:crank");
 		GameRegistry.registerTileEntity(TileKineticCrank.class, "edx:kinetic_crank");
@@ -112,23 +112,23 @@ public class EDXBlocks {
 		GameRegistry.registerTileEntity(TileMetalShaft.class, "edx:metal_shaft");
 	}
 
-    public static void registerBlock(Block block) {
-        GameRegistry.registerBlock(block, block.getUnlocalizedName().replace("tile.", ""));
-    }
+	public static void registerBlock(Block block) {
+		GameRegistry.registerBlock(block, block.getUnlocalizedName().replace("tile.", ""));
+	}
 
 	public static void registerBlock(Block block, String override) {
 		GameRegistry.registerBlock(block, override);
 	}
 
-    public static void registerBlock(Block block, Class<? extends ItemBlock> itemBlockClass) {
-        GameRegistry.registerBlock(block, itemBlockClass, block.getUnlocalizedName().replace("tile.", ""));
-    }
+	public static void registerBlock(Block block, Class<? extends ItemBlock> itemBlockClass) {
+		GameRegistry.registerBlock(block, itemBlockClass, block.getUnlocalizedName().replace("tile.", ""));
+	}
 
 	public static void registerBlock(Block block, Class<? extends ItemBlock> itemBlockClass, String override) {
 		GameRegistry.registerBlock(block, itemBlockClass, override);
 	}
 
-    public static void registerBlock(Block block, Class<? extends ItemBlock> itemBlockClass, Object... constructorArgs) {
-        GameRegistry.registerBlock(block, itemBlockClass, block.getUnlocalizedName().replace("tile.", ""), null, constructorArgs);
-    }
+	public static void registerBlock(Block block, Class<? extends ItemBlock> itemBlockClass, Object... constructorArgs) {
+		GameRegistry.registerBlock(block, itemBlockClass, block.getUnlocalizedName().replace("tile.", ""), null, constructorArgs);
+	}
 }

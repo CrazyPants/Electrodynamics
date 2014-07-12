@@ -15,15 +15,15 @@ import net.minecraft.world.World;
  */
 public class BlockTable extends EDXTileMultiBlock {
 
-    private static final String[] NAMES = new String[]{"wood", "stone"};
+	private static final String[] NAMES = new String[]{"wood", "stone"};
 
 	@Override
-    public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float fx, float fy, float fz) {
-        if (!world.isRemote) {
-            TileTable tile = (TileTable) world.getTileEntity(x, y, z);
+	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float fx, float fy, float fz) {
+		if (!world.isRemote) {
+			TileTable tile = (TileTable) world.getTileEntity(x, y, z);
 
-            if (tile != null) {
-                if (!player.isSneaking() && side == 1) {
+			if (tile != null) {
+				if (!player.isSneaking() && side == 1) {
 					ItemStack held = player.getHeldItem();
 
 					if (held != null && tile.stack == null) {
@@ -60,34 +60,34 @@ public class BlockTable extends EDXTileMultiBlock {
 						}
 					}
 				}
-            }
-        }
+			}
+		}
 
-        return !player.isSneaking();
-    }
+		return !player.isSneaking();
+	}
 
-    @Override
-    public int[] getSubtypes() {
-        return ArrayHelper.getArrayIndexes(NAMES); // Forces all aspects of this block to base themselves off the NAMES array
-    }
+	@Override
+	public int[] getSubtypes() {
+		return ArrayHelper.getArrayIndexes(NAMES); // Forces all aspects of this block to base themselves off the NAMES array
+	}
 
-    @Override
-    public String getNameForType(int type) {
-        return NAMES[type];
-    }
+	@Override
+	public String getNameForType(int type) {
+		return NAMES[type];
+	}
 
-    @Override
-    public boolean useCustomRender() {
-        return true;
-    }
+	@Override
+	public boolean useCustomRender() {
+		return true;
+	}
 
-    @Override
-    public IIcon getIcon(int side, int meta) {
-        return Blocks.planks.getIcon(side, meta);
-    }
+	@Override
+	public IIcon getIcon(int side, int meta) {
+		return Blocks.planks.getIcon(side, meta);
+	}
 
-    @Override
-    public TileEntity createNewTileEntity(World world, int meta) {
-        return new TileTable();
-    }
+	@Override
+	public TileEntity createNewTileEntity(World world, int meta) {
+		return new TileTable();
+	}
 }

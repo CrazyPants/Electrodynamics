@@ -43,5 +43,4 @@ public class InventoryHelper {
 
 		world.spawnEntityInWorld(entity);
 	}
-
 }

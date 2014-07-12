@@ -31,7 +31,9 @@ public class TileBarrel extends TileCore {
 	@NBTHandler.NBTData
 	public int duration = 0;
 
-	/** For the benefit of the client... */
+	/**
+	 * For the benefit of the client...
+	 */
 	@NBTHandler.NBTData
 	public int maxStackSize = 1;
 

@@ -28,7 +28,7 @@ import java.io.IOException;
  */
 public class CommonProxy {
 
-    public void preInit() {
+	public void preInit() {
 		EDXBlocks.initialize();
 		EDXItems.initialize();
 		EDXRecipes.initialize();
@@ -39,11 +39,11 @@ public class CommonProxy {
 
 		EventUtil.register(new BlockEventHandler(), EventUtil.Type.FML);
 		EventUtil.register(new SpiderTracker(), EventUtil.Type.FORGE);
-    }
+	}
 
-    public void init() {
+	public void init() {
 
-    }
+	}
 
 	public void postInit() {
 		File recipes = new File(Electrodynamics.configPath, "recipes/");
@@ -82,8 +82,8 @@ public class CommonProxy {
 			Item axe = (Item) Item.itemRegistry.getObject(key.toString());
 
 			if (axe instanceof ItemAxe) {
-				ToolDefinition.register(new ItemStack(axe), ToolDefinition.AXE, ((ItemTool)axe).func_150913_i().getEfficiencyOnProperMaterial());
+				ToolDefinition.register(new ItemStack(axe), ToolDefinition.AXE, ((ItemTool) axe).func_150913_i().getEfficiencyOnProperMaterial());
 			}
 		}
-    }
+	}
 }

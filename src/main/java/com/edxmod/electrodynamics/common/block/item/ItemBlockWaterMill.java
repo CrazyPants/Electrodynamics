@@ -72,9 +72,9 @@ public class ItemBlockWaterMill extends EDXItemBlock {
 		}
 
 		boolean xAxis = ForgeDirection.getOrientation(side).getRotation(ForgeDirection.UP).getOpposite().offsetX != 0;
-		for (int ix=-1; ix<2; ix++) {
-			for (int iy=-1; iy<2; iy++) {
-				for (int iz=-1; iz<2; iz++) {
+		for (int ix = -1; ix < 2; ix++) {
+			for (int iy = -1; iy < 2; iy++) {
+				for (int iz = -1; iz < 2; iz++) {
 					int sx = xAxis ? x + ix : x;
 					int sy = y + iy;
 					int sz = xAxis ? z : z + iz;

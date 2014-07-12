@@ -16,7 +16,7 @@ public class ItemStackSerializer extends AbstractSerializer<ItemStack> {
 	@Override
 	public void serialize(String name, Object object, NBTTagCompound nbt) {
 		NBTTagCompound tag = new NBTTagCompound();
-		((ItemStack)object).writeToNBT(tag);
+		((ItemStack) object).writeToNBT(tag);
 		nbt.setTag(name, tag);
 	}
 

@@ -25,7 +25,7 @@ public class ContainerInfernalFurnace extends Container {
 
 	public ContainerInfernalFurnace(EntityPlayer player, TileInfernalFurnace tile) {
 		this.tile = tile;
-		
+
 		addSlotToContainer(new Slot(tile, 0, 56, 17));
 		addSlotToContainer(new Slot(tile, 1, 56, 53));
 		addSlotToContainer(new SlotFurnace(player, tile, 2, 116, 35));

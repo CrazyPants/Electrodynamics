@@ -48,7 +48,7 @@ public abstract class EDXMultiItem extends Item {
 	public void registerIcons(IIconRegister register) {
 		icons = new IIcon[getNames().length];
 		if (!getIconPrefix().isEmpty()) {
-			for (int i=0; i<getNames().length; i++) {
+			for (int i = 0; i < getNames().length; i++) {
 				icons[i] = register.registerIcon(EDXProps.RESOURCE_PREFIX + getIconPrefix() + "/" + getNames()[i]);
 			}
 		}
@@ -64,5 +64,4 @@ public abstract class EDXMultiItem extends Item {
 	public abstract String[] getNames();
 
 	public abstract String getIconPrefix();
-
 }

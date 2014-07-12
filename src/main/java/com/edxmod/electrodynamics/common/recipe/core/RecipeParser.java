@@ -19,7 +19,7 @@ import java.util.List;
 
 /**
  * @author dmillerw
- * Temporary class?
+ *         Temporary class?
  */
 public class RecipeParser {
 
@@ -57,7 +57,7 @@ public class RecipeParser {
 			StringBuilder sb = new StringBuilder();
 			sb.append("CRASH_ON_FAIL: ").append(crash_on_fail);
 			sb.append("RECIPES: [");
-			for (int i=0; i<recipes.length; i++) {
+			for (int i = 0; i < recipes.length; i++) {
 				Recipe output = recipes[i];
 				sb.append(output.toString());
 				if (i != recipes.length - 1) {
@@ -79,7 +79,7 @@ public class RecipeParser {
 			StringBuilder sb = new StringBuilder();
 			sb.append("INPUT: ").append(input);
 			sb.append("OUTPUT: [");
-			for (int i=0; i<outputs.length; i++) {
+			for (int i = 0; i < outputs.length; i++) {
 				Output output = outputs[i];
 				sb.append(output.toString());
 				if (i != outputs.length - 1) {
@@ -116,7 +116,7 @@ public class RecipeParser {
 			ItemStack input = getItem(recipe1.input);
 			RandomStack[] output = new RandomStack[recipe1.outputs.length];
 
-			for (int i=0; i<recipe1.outputs.length; i++) {
+			for (int i = 0; i < recipe1.outputs.length; i++) {
 				ItemStack item = getItem(recipe1.outputs[i].item);
 				float chance = recipe1.outputs[i].chance;
 				if (chance < 0F) {
@@ -132,7 +132,7 @@ public class RecipeParser {
 				if (input == null) {
 					throw new NullPointerException(recipe1.input + " is not a valid item!");
 				} else {
-					for (int i=0; i<output.length; i++) {
+					for (int i = 0; i < output.length; i++) {
 						if (output[i] == null || output[i].stack == null) {
 							throw new NullPointerException(recipe1.outputs[i].item + " is not a valid item!");
 						}
@@ -172,5 +172,4 @@ public class RecipeParser {
 
 		return stack;
 	}
-
 }
