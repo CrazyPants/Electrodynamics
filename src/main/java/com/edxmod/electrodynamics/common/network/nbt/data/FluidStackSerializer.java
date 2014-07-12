@@ -1,27 +1,27 @@
 package com.edxmod.electrodynamics.common.network.nbt.data;
 
-import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraftforge.fluids.FluidStack;
 
 /**
  * @author dmillerw
  */
-public class StackSerializer extends AbstractSerializer<ItemStack> {
+public class FluidStackSerializer extends AbstractSerializer<FluidStack> {
 
 	@Override
 	public boolean canHandle(Class<?> fieldType) {
-		return fieldType == ItemStack.class;
+		return fieldType == FluidStack.class;
 	}
 
 	@Override
 	public void serialize(String name, Object object, NBTTagCompound nbt) {
 		NBTTagCompound tag = new NBTTagCompound();
-		((ItemStack)object).writeToNBT(tag);
+		((FluidStack)object).writeToNBT(tag);
 		nbt.setTag(name, tag);
 	}
 
 	@Override
-	public ItemStack deserialize(String name, NBTTagCompound nbt) {
-		return ItemStack.loadItemStackFromNBT(nbt.getCompoundTag(name));
+	public FluidStack deserialize(String name, NBTTagCompound nbt) {
+		return FluidStack.loadFluidStackFromNBT(nbt.getCompoundTag(name));
 	}
 }
