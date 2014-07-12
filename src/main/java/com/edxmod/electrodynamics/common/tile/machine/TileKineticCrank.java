@@ -106,12 +106,7 @@ public class TileKineticCrank extends TileCoreMachine {
 					((TileMetalShaft)tile).markForUpdate();
 				}
 
-//				if (metalShaftDirection != orientation.getRotation(ForgeDirection.UP) && metalShaftDirection != orientation.getRotation(ForgeDirection.UP).getOpposite()) {
-					list.add(tile);
-//				} else {
-//					foundEnd = true;
-//					break;
-//				}
+				list.add(tile);
 			} else {
 				foundEnd = true;
 				break;
