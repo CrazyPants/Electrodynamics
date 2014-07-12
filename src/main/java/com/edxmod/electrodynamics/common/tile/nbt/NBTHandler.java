@@ -1,14 +1,18 @@
 package com.edxmod.electrodynamics.common.tile.nbt;
 
+import com.edxmod.electrodynamics.common.lib.EDXLogger;
 import com.edxmod.electrodynamics.common.tile.nbt.data.AbstractSerializer;
 import com.google.common.collect.Maps;
 import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
 
-import java.lang.annotation.Inherited;
+import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
+import java.lang.reflect.Array;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.util.Map;
@@ -19,7 +23,7 @@ import java.util.Map;
 public class NBTHandler {
 
 	private static boolean validField(Field field) {
-		if (Modifier.isPrivate(field.getModifiers())) {
+		if (Modifier.isPrivate(Modifier.fieldModifiers())) {
 			return false;
 		}
 
@@ -43,11 +47,121 @@ public class NBTHandler {
 	}
 
 	@Retention(RetentionPolicy.RUNTIME)
-	@Inherited
+	@Target( {ElementType.FIELD})
 	public static @interface NBTData {
 
 	}
 
+	@Retention(RetentionPolicy.RUNTIME)
+	@Target( {ElementType.FIELD})
+	public static @interface ArrayDefault {
+		int value() default 0;
+	}
+
+	public static void writeObject(String name, Object object, NBTTagCompound nbt) {
+		Class<?> type = object.getClass();
+
+		if (type.isEnum()) {
+			Enum<?> instance = (Enum<?>) object;
+			NBTTagCompound tag = new NBTTagCompound();
+			tag.setString("class", instance.getClass().getCanonicalName());
+			tag.setString("name", instance.name());
+			nbt.setTag(name, tag);
+		} else if (type.isArray()) {
+			Object[] array = (Object[]) object;
+			NBTTagList list = new NBTTagList();
+
+			for (int i=0; i<array.length; i++) {
+				NBTTagCompound tag = new NBTTagCompound();
+				NBTHandler.writeObject(name + "_" + i, array[i], tag);
+				list.appendTag(tag);
+			}
+
+			nbt.setTag(name, list);
+		} else {
+			boolean serialized = false;
+			for (AbstractSerializer<?> serializer : AbstractSerializer.serializerList) {
+				if (serializer.canHandle(type)) {
+					serializer.serialize(name, object, nbt);
+					serialized = true;
+					break;
+				}
+			}
+
+			if (!serialized) {
+				// We can check specifically for boxed data classes because
+				// Objects don't store unboxed primitives
+				if (type == byte.class || type == Byte.class) {
+					nbt.setByte(name, (Byte) object);
+				} else if (type == boolean.class || type == Boolean.class) {
+					nbt.setBoolean(name, (Boolean) object);
+				} else if (type == short.class || type == Short.class) {
+					nbt.setShort(name, (Short) object);
+				} else if (type == int.class || type == Integer.class) {
+					nbt.setInteger(name, (Integer) object);
+				} else if (type == long.class || type == Long.class) {
+					nbt.setLong(name, (Long) object);
+				} else if (type == float.class || type == Float.class) {
+					nbt.setFloat(name, (Float) object);
+				} else if (type == double.class || type == Double.class) {
+					nbt.setDouble(name, (Double) object);
+				} else if (type == String.class) {
+					nbt.setString(name, ((String) object));
+				}
+			}
+		}
+	}
+	
+	public static Object readObject(String name, Class<?> type, NBTTagCompound nbt) {
+		if (type.isEnum()) {
+			Enum<?> object = null;
+			try {
+				NBTTagCompound tag = nbt.getCompoundTag(name);
+				Class clazz = Class.forName(tag.getString("class"));
+				object = Enum.valueOf(clazz, tag.getString("name"));
+			} catch (ClassNotFoundException ex) {
+				ex.printStackTrace();
+			}
+			return object;
+		} else if (type.isArray()) {
+			NBTTagList list = (NBTTagList) nbt.getTag(name);
+			Object[] array = new Object[list.tagCount()];
+
+			for (int i=0; i<list.tagCount(); i++) {
+				array[i] = NBTHandler.readObject(name + "_" + i, type, list.getCompoundTagAt(i));
+			}
+
+			return array;
+		} else {
+			for (AbstractSerializer<?> serializer : AbstractSerializer.serializerList) {
+				if (serializer.canHandle(type)) {
+					return serializer.deserialize(name, nbt);
+				}
+			}
+
+			// It'll only get here if a deserializer doesn't return anything
+			if (type == byte.class || type == Byte.class) {
+				return nbt.getByte(name);
+			} else if (type == boolean.class || type == Boolean.class) {
+				return nbt.getBoolean(name);
+			} else if (type == short.class || type == Short.class) {
+				return nbt.getShort(name);
+			} else if (type == int.class || type == Integer.class) {
+				return nbt.getInteger(name);
+			} else if (type == long.class || type == Long.class) {
+				return nbt.getLong(name);
+			} else if (type == float.class || type == Float.class) {
+				return nbt.getFloat(name);
+			} else if (type == double.class || type == Double.class) {
+				return nbt.getDouble(name);
+			} else if (type == String.class) {
+				return nbt.getString(name);
+			}
+		}
+
+		return null;
+	}
+	
 	private Object parent;
 
 	private Map<String, Field> fields = Maps.newHashMap();
@@ -105,11 +219,9 @@ public class NBTHandler {
 	}
 
 	private void writeField(String name, NBTTagCompound nbt) {
-		// If the field is a primitive, it gets a proper NBTBase tag, otherwise the registered serializer handles things
-
 		Field field = fields.get(name);
 		if (field == null) {
-			// Throw error
+			EDXLogger.error("Tried to write field " + name + " from " + parent.getClass() + " but it doesn't exist!");
 			return;
 		}
 
@@ -118,85 +230,34 @@ public class NBTHandler {
 				return;
 			}
 
-			if (!field.getType().isEnum() && field.getType().getName().equalsIgnoreCase("String") || field.getType().isPrimitive()) {
-				String type = field.getType().getName();
-
-				if (type.equalsIgnoreCase("byte")) {
-					nbt.setByte(name, field.getByte(parent));
-				} else if (type.equalsIgnoreCase("boolean")) {
-					nbt.setBoolean(name, field.getBoolean(parent));
-				} else if (type.equalsIgnoreCase("short")) {
-					nbt.setShort(name, field.getShort(parent));
-				} else if (type.equalsIgnoreCase("int")) {
-					nbt.setInteger(name, field.getInt(parent));
-				} else if (type.equalsIgnoreCase("long")) {
-					nbt.setLong(name, field.getLong(parent));
-				} else if (type.equalsIgnoreCase("float")) {
-					nbt.setFloat(name, field.getFloat(parent));
-				} else if (type.equalsIgnoreCase("double")) {
-					nbt.setDouble(name, field.getDouble(parent));
-				} else if (type.equalsIgnoreCase("String")) {
-					nbt.setString(name, field.get(parent).toString());
-				}
-			} else {
-				// Not a primitive or a String, so we switch to defined serializers :D
-
-				for (AbstractSerializer<?> serializer : AbstractSerializer.serializerList) {
-					if (serializer.canHandle(field)) {
-						serializer.serialize(name, field.get(parent), nbt);
-						break;
-					}
-				}
-			}
+			NBTHandler.writeObject(name, field.get(parent), nbt);
 		} catch (IllegalAccessException ex) {
-			// Throw error
+			EDXLogger.error("Failed to access field " + name + " from " + parent.getClass());
 		}
 	}
 
 	private void readField(String name, NBTTagCompound nbt) {
 		Field field = fields.get(name);
 		if (field == null) {
-			// Throw error
+			EDXLogger.error("Tried to read field " + name + " from " + parent.getClass() + " but it doesn't exist!");
 			return;
 		}
 
 		try {
 			if (!nbt.hasKey(name)) {
-				field.set(parent, null);
-			}
+				// If it doesn't have a value, check to see if it's an array
+				ArrayDefault arrayDefault = field.getAnnotation(ArrayDefault.class);
 
-			if (!field.getType().isEnum() && field.getType().getName().equalsIgnoreCase("String") || field.getType().isPrimitive()) {
-				String type = field.getType().getName();
-
-				if (type.equalsIgnoreCase("byte")) {
-					field.setByte(parent, nbt.getByte(name));
-				} else if (type.equalsIgnoreCase("boolean")) {
-					field.setBoolean(parent, nbt.getBoolean(name));
-				} else if (type.equalsIgnoreCase("short")) {
-					field.setShort(parent, nbt.getShort(name));
-				} else if (type.equalsIgnoreCase("int")) {
-					field.setInt(parent, nbt.getInteger(name));
-				} else if (type.equalsIgnoreCase("long")) {
-					field.setLong(parent, nbt.getLong(name));
-				} else if (type.equalsIgnoreCase("float")) {
-					field.setFloat(parent, nbt.getFloat(name));
-				} else if (type.equalsIgnoreCase("double")) {
-					field.setDouble(parent, nbt.getDouble(name));
-				} else if (type.equalsIgnoreCase("String")) {
-					field.set(parent, nbt.getString(name));
-				}
-			} else {
-				// Not a primitive or a String, so we switch to defined serializers :D
-
-				for (AbstractSerializer<?> serializer : AbstractSerializer.serializerList) {
-					if (serializer.canHandle(field)) {
-						field.set(parent, serializer.deserialize(name, nbt));
-						break;
-					}
+				if (field.getType().isArray() && arrayDefault != null) {
+					field.set(parent, Array.newInstance(field.getType(), arrayDefault.value()));
+				} else {
+					field.set(parent, null);
 				}
 			}
+
+			field.set(parent, NBTHandler.readObject(name, field.getType(), nbt));
 		} catch (IllegalAccessException ex) {
-			// Throw error
+			EDXLogger.error("Failed to access field " + name + " from " + parent.getClass());
 		}
 	}
 }

@@ -28,28 +28,6 @@ public class TileTable extends TileCore {
 	@NBTHandler.NBTData
 	public float durability;
 
-//    @Override
-//    public void readCustomNBT(NBTTagCompound nbt) {
-//        if (nbt.hasKey("stack")) {
-//            stack = ItemStack.loadItemStackFromNBT(nbt.getCompoundTag("stack"));
-//        } else {
-//            stack = null;
-//        }
-//
-//		durability = nbt.getFloat("durability");
-//    }
-//
-//    @Override
-//    public void writeCustomNBT(NBTTagCompound nbt) {
-//        if (stack != null) {
-//            NBTTagCompound stackNBT = new NBTTagCompound();
-//            stack.writeToNBT(stackNBT);
-//            nbt.setTag("stack", stackNBT);
-//        }
-//
-//		nbt.setFloat("durability", durability);
-//    }
-
 	@Override
 	public void onBlockBroken() {
 		if (stack != null) {

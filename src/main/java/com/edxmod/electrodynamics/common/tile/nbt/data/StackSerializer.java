@@ -3,16 +3,14 @@ package com.edxmod.electrodynamics.common.tile.nbt.data;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 
-import java.lang.reflect.Field;
-
 /**
  * @author dmillerw
  */
 public class StackSerializer extends AbstractSerializer<ItemStack> {
 
 	@Override
-	public boolean canHandle(Field field) {
-		return field.getType() == ItemStack.class;
+	public boolean canHandle(Class<?> fieldType) {
+		return fieldType == ItemStack.class;
 	}
 
 	@Override

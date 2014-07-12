@@ -93,6 +93,6 @@ public abstract class TileCore extends TileEntity {
 			default:
 				break;
 		}
-		worldObj.markBlockRangeForRenderUpdate(xCoord, yCoord, zCoord, xCoord, yCoord, zCoord);
+		markForRenderUpdate();
 	}
 }
