@@ -2,7 +2,7 @@ package com.edxmod.electrodynamics.client.render.tile;
 
 import com.edxmod.electrodynamics.client.lib.Model;
 import com.edxmod.electrodynamics.client.render.EDXTileRenderer;
-import com.edxmod.electrodynamics.common.tile.TileBarrel;
+import com.edxmod.electrodynamics.common.tile.machine.TileBarrel;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.texture.TextureMap;

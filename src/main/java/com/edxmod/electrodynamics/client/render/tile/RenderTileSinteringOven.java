@@ -3,7 +3,7 @@ package com.edxmod.electrodynamics.client.render.tile;
 import com.edxmod.electrodynamics.client.lib.Model;
 import com.edxmod.electrodynamics.client.render.EDXTileRenderer;
 import com.edxmod.electrodynamics.common.lib.MathFX;
-import com.edxmod.electrodynamics.common.tile.TileSinteringOven;
+import com.edxmod.electrodynamics.common.tile.machine.TileSinteringOven;
 import com.edxmod.electrodynamics.common.util.RenderHelper;
 import net.minecraft.client.renderer.OpenGlHelper;
 import org.lwjgl.opengl.GL11;

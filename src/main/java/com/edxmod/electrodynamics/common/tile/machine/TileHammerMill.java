@@ -1,9 +1,10 @@
-package com.edxmod.electrodynamics.common.tile;
+package com.edxmod.electrodynamics.common.tile.machine;
 
 import com.edxmod.electrodynamics.common.lib.StackReference;
 import com.edxmod.electrodynamics.common.lib.tool.ToolDefinition;
 import com.edxmod.electrodynamics.common.recipe.EDXRecipes;
-import com.edxmod.electrodynamics.common.tile.nbt.NBTHandler;
+import com.edxmod.electrodynamics.common.tile.core.TileCoreMachine;
+import com.edxmod.electrodynamics.common.network.nbt.NBTHandler;
 import com.edxmod.electrodynamics.common.util.StackHelper;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;

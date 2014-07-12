@@ -1,4 +1,4 @@
-package com.edxmod.electrodynamics.common.tile;
+package com.edxmod.electrodynamics.common.tile.machine;
 
 import com.edxmod.electrodynamics.common.lib.tool.ToolDefinition;
 import com.edxmod.electrodynamics.common.lib.DurabilityMapping;
@@ -6,7 +6,8 @@ import com.edxmod.electrodynamics.common.block.EDXBlocks;
 import com.edxmod.electrodynamics.common.network.PacketFX;
 import com.edxmod.electrodynamics.common.recipe.EDXRecipes;
 import com.edxmod.electrodynamics.common.recipe.wrapper.TableRecipe;
-import com.edxmod.electrodynamics.common.tile.nbt.NBTHandler;
+import com.edxmod.electrodynamics.common.tile.core.TileCore;
+import com.edxmod.electrodynamics.common.network.nbt.NBTHandler;
 import com.edxmod.electrodynamics.common.util.InventoryHelper;
 import com.edxmod.electrodynamics.common.util.ItemHelper;
 import net.minecraft.entity.player.EntityPlayer;

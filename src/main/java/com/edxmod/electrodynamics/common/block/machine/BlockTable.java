@@ -1,7 +1,7 @@
 package com.edxmod.electrodynamics.common.block.machine;
 
 import com.edxmod.electrodynamics.common.block.prefab.EDXTileMultiBlock;
-import com.edxmod.electrodynamics.common.tile.TileTable;
+import com.edxmod.electrodynamics.common.tile.machine.TileTable;
 import com.edxmod.electrodynamics.common.util.ArrayHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;

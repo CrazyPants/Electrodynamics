@@ -1,7 +1,7 @@
 package com.edxmod.electrodynamics.common.block.machine;
 
 import com.edxmod.electrodynamics.common.block.prefab.EDXTileBlock;
-import com.edxmod.electrodynamics.common.tile.TileKiln;
+import com.edxmod.electrodynamics.common.tile.machine.TileKiln;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.tileentity.TileEntity;

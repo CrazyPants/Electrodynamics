@@ -1,8 +1,9 @@
-package com.edxmod.electrodynamics.common.tile;
+package com.edxmod.electrodynamics.common.tile.machine;
 
 import com.edxmod.electrodynamics.common.recipe.EDXRecipes;
 import com.edxmod.electrodynamics.common.recipe.wrapper.SieveRecipe;
-import com.edxmod.electrodynamics.common.tile.nbt.NBTHandler;
+import com.edxmod.electrodynamics.common.tile.core.TileCore;
+import com.edxmod.electrodynamics.common.network.nbt.NBTHandler;
 import com.edxmod.electrodynamics.common.util.InventoryHelper;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;

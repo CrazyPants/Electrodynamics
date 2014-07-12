@@ -1,4 +1,4 @@
-package com.edxmod.electrodynamics.common.tile;
+package com.edxmod.electrodynamics.common.tile.misc;
 
 import net.minecraft.tileentity.TileEntity;
 

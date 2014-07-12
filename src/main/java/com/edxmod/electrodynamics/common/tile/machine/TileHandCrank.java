@@ -1,6 +1,7 @@
-package com.edxmod.electrodynamics.common.tile;
+package com.edxmod.electrodynamics.common.tile.machine;
 
-import com.edxmod.electrodynamics.common.tile.nbt.NBTHandler;
+import com.edxmod.electrodynamics.common.tile.core.TileCoreMachine;
+import com.edxmod.electrodynamics.common.network.nbt.NBTHandler;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 

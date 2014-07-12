@@ -1,6 +1,6 @@
-package com.edxmod.electrodynamics.common.tile;
+package com.edxmod.electrodynamics.common.tile.core;
 
-import com.edxmod.electrodynamics.common.tile.nbt.NBTHandler;
+import com.edxmod.electrodynamics.common.network.nbt.NBTHandler;
 import net.minecraftforge.common.util.ForgeDirection;
 
 /**

@@ -1,8 +1,7 @@
 package com.edxmod.electrodynamics.common.block.prefab;
 
-import com.edxmod.electrodynamics.common.block.prefab.EDXBasicBlock;
 import com.edxmod.electrodynamics.common.core.EDXCreativeTab;
-import com.edxmod.electrodynamics.common.tile.TileCore;
+import com.edxmod.electrodynamics.common.tile.core.TileCore;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;

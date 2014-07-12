@@ -1,4 +1,4 @@
-package com.edxmod.electrodynamics.common.tile.nbt.data;
+package com.edxmod.electrodynamics.common.network.nbt.data;
 
 import com.google.common.collect.Lists;
 import net.minecraft.nbt.NBTTagCompound;

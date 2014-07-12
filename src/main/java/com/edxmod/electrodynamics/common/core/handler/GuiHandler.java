@@ -7,7 +7,7 @@ import com.edxmod.electrodynamics.common.inventory.InventoryItem;
 import com.edxmod.electrodynamics.common.inventory.container.ContainerHandSieve;
 import com.edxmod.electrodynamics.common.inventory.container.ContainerInfernalFurnace;
 import com.edxmod.electrodynamics.common.inventory.container.ContainerTray;
-import com.edxmod.electrodynamics.common.tile.TileInfernalFurnace;
+import com.edxmod.electrodynamics.common.tile.machine.TileInfernalFurnace;
 import cpw.mods.fml.common.network.IGuiHandler;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;

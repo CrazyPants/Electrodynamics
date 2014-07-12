@@ -1,6 +1,6 @@
 package com.edxmod.electrodynamics.common.block.prefab.item;
 
-import com.edxmod.electrodynamics.common.tile.TileCoreMachine;
+import com.edxmod.electrodynamics.common.tile.core.TileCoreMachine;
 import com.edxmod.electrodynamics.common.util.EntityHelper;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;

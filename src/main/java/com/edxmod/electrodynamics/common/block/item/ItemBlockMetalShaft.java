@@ -2,10 +2,10 @@ package com.edxmod.electrodynamics.common.block.item;
 
 import com.edxmod.electrodynamics.common.block.prefab.item.EDXItemBlock;
 import com.edxmod.electrodynamics.common.lib.EDXProps;
-import com.edxmod.electrodynamics.common.tile.TileCoreMachine;
-import com.edxmod.electrodynamics.common.tile.TileHammerMill;
-import com.edxmod.electrodynamics.common.tile.TileKineticCrank;
-import com.edxmod.electrodynamics.common.tile.TileMetalShaft;
+import com.edxmod.electrodynamics.common.tile.core.TileCoreMachine;
+import com.edxmod.electrodynamics.common.tile.machine.TileHammerMill;
+import com.edxmod.electrodynamics.common.tile.machine.TileKineticCrank;
+import com.edxmod.electrodynamics.common.tile.machine.TileMetalShaft;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;

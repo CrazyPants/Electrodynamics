@@ -9,7 +9,7 @@ import com.edxmod.electrodynamics.common.item.ItemHammer;
 import com.edxmod.electrodynamics.common.lib.tool.ToolDefinition;
 import com.edxmod.electrodynamics.common.recipe.EDXRecipes;
 import com.edxmod.electrodynamics.common.recipe.core.RecipeParser;
-import com.edxmod.electrodynamics.common.tile.nbt.data.AbstractSerializer;
+import com.edxmod.electrodynamics.common.network.nbt.data.AbstractSerializer;
 import com.edxmod.electrodynamics.common.util.EventUtil;
 import com.edxmod.electrodynamics.common.world.WorldProviderSkyblockHell;
 import cpw.mods.fml.common.network.NetworkRegistry;

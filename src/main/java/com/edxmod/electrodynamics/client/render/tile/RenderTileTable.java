@@ -4,7 +4,7 @@ import com.edxmod.electrodynamics.client.lib.Model;
 import com.edxmod.electrodynamics.client.render.EDXTileRenderer;
 import com.edxmod.electrodynamics.common.block.prefab.EDXTileBlock;
 import com.edxmod.electrodynamics.common.block.prefab.EDXTileMultiBlock;
-import com.edxmod.electrodynamics.common.tile.TileTable;
+import com.edxmod.electrodynamics.common.tile.machine.TileTable;
 import com.edxmod.electrodynamics.common.util.RenderHelper;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;

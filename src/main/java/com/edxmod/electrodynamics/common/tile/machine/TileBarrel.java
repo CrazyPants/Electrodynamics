@@ -1,9 +1,10 @@
-package com.edxmod.electrodynamics.common.tile;
+package com.edxmod.electrodynamics.common.tile.machine;
 
 import com.edxmod.electrodynamics.common.recipe.EDXRecipes;
 import com.edxmod.electrodynamics.common.recipe.wrapper.BarrelDurationRecipe;
 import com.edxmod.electrodynamics.common.recipe.wrapper.BarrelInteractionRecipe;
-import com.edxmod.electrodynamics.common.tile.nbt.NBTHandler;
+import com.edxmod.electrodynamics.common.tile.core.TileCore;
+import com.edxmod.electrodynamics.common.network.nbt.NBTHandler;
 import com.edxmod.electrodynamics.common.util.StackHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;

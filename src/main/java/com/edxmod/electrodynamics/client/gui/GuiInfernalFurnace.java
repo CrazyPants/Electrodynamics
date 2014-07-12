@@ -1,15 +1,12 @@
 package com.edxmod.electrodynamics.client.gui;
 
 import com.edxmod.electrodynamics.common.inventory.container.ContainerInfernalFurnace;
-import com.edxmod.electrodynamics.common.tile.TileInfernalFurnace;
+import com.edxmod.electrodynamics.common.tile.machine.TileInfernalFurnace;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.ContainerFurnace;
-import net.minecraft.tileentity.TileEntityFurnace;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 

@@ -1,7 +1,7 @@
-package com.edxmod.electrodynamics.common.tile.nbt;
+package com.edxmod.electrodynamics.common.network.nbt;
 
 import com.edxmod.electrodynamics.common.lib.EDXLogger;
-import com.edxmod.electrodynamics.common.tile.nbt.data.AbstractSerializer;
+import com.edxmod.electrodynamics.common.network.nbt.data.AbstractSerializer;
 import com.edxmod.electrodynamics.common.util.ArrayHelper;
 import com.google.common.collect.Maps;
 import cpw.mods.fml.common.FMLLog;

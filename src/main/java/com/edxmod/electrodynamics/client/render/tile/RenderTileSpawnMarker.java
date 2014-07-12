@@ -2,7 +2,7 @@ package com.edxmod.electrodynamics.client.render.tile;
 
 import com.edxmod.electrodynamics.client.lib.Model;
 import com.edxmod.electrodynamics.client.render.EDXTileRenderer;
-import com.edxmod.electrodynamics.common.tile.TileSpawnMarker;
+import com.edxmod.electrodynamics.common.tile.misc.TileSpawnMarker;
 import com.edxmod.electrodynamics.common.util.RenderHelper;
 import net.minecraftforge.common.util.ForgeDirection;
 import org.lwjgl.opengl.GL11;

@@ -2,11 +2,10 @@ package com.edxmod.electrodynamics.common.block.core;
 
 import com.edxmod.electrodynamics.common.core.EDXCreativeTab;
 import com.edxmod.electrodynamics.common.core.data.WorldDataSpawnPosition;
-import com.edxmod.electrodynamics.common.tile.TileSpawnMarker;
+import com.edxmod.electrodynamics.common.tile.misc.TileSpawnMarker;
 import com.edxmod.electrodynamics.common.util.EntityHelper;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockBed;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
