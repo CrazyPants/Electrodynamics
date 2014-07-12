@@ -19,43 +19,43 @@ import net.minecraft.world.World;
  */
 public class PacketFX implements IMessage, IMessageHandler<PacketFX, IMessage> {
 
-    public static void breakFX(World world, int x, int y, int z, ItemStack stack) {
-        PacketFX packet = new PacketFX(x, y, z, stack);
+	public static void breakFX(World world, int x, int y, int z, ItemStack stack) {
+		PacketFX packet = new PacketFX(x, y, z, stack);
 		PacketHandler.INSTANCE.sendToAllAround(packet, new NetworkRegistry.TargetPoint(world.provider.dimensionId, x, y, z, MAX_PARTICLE_RANGE));
-    }
+	}
 
-    public static final int MAX_PARTICLE_RANGE = 64;
+	public static final int MAX_PARTICLE_RANGE = 64;
 
-    public static final int FX_PARTICLE = 0;
-    public static final int FX_BLOCK_BREAK = 1;
+	public static final int FX_PARTICLE = 0;
+	public static final int FX_BLOCK_BREAK = 1;
 
-    public double x;
-    public double y;
-    public double z;
+	public double x;
+	public double y;
+	public double z;
 
-    public int fxType;
+	public int fxType;
 
-    public int[] extraData;
+	public int[] extraData;
 
-    public PacketFX() {
+	public PacketFX() {
 
-    }
+	}
 
-    public PacketFX(double x, double y, double z, int fxType, int... extraData) {
-        this.x = x;
-        this.y = y;
-        this.z = z;
-        this.fxType = fxType;
-        this.extraData = extraData;
-    }
+	public PacketFX(double x, double y, double z, int fxType, int... extraData) {
+		this.x = x;
+		this.y = y;
+		this.z = z;
+		this.fxType = fxType;
+		this.extraData = extraData;
+	}
 
-    public PacketFX(double x, double y, double z, EnumParticle particle) {
-        this(x, y, z, FX_PARTICLE, new int[]{particle.ordinal()});
-    }
+	public PacketFX(double x, double y, double z, EnumParticle particle) {
+		this(x, y, z, FX_PARTICLE, particle.ordinal());
+	}
 
-    public PacketFX(double x, double y, double z, ItemStack stack) {
-        this(x, y, z, FX_BLOCK_BREAK, new int[]{ItemHelper.getID(stack), stack.getItemDamage()});
-    }
+	public PacketFX(double x, double y, double z, ItemStack stack) {
+		this(x, y, z, FX_BLOCK_BREAK, ItemHelper.getID(stack), stack.getItemDamage());
+	}
 
 	@Override
 	public void toBytes(ByteBuf buffer) {

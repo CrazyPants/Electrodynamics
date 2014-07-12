@@ -55,7 +55,7 @@ public class RecipeParser {
 		@Override
 		public String toString() {
 			StringBuilder sb = new StringBuilder();
-			sb.append("CRASH_ON_FAIL: " + crash_on_fail);
+			sb.append("CRASH_ON_FAIL: ").append(crash_on_fail);
 			sb.append("RECIPES: [");
 			for (int i=0; i<recipes.length; i++) {
 				Recipe output = recipes[i];
@@ -77,7 +77,7 @@ public class RecipeParser {
 		@Override
 		public String toString() {
 			StringBuilder sb = new StringBuilder();
-			sb.append("INPUT: " + input);
+			sb.append("INPUT: ").append(input);
 			sb.append("OUTPUT: [");
 			for (int i=0; i<outputs.length; i++) {
 				Output output = outputs[i];
@@ -125,7 +125,7 @@ public class RecipeParser {
 					chance = 1F;
 				}
 
-				output[i] = new RandomStack(item, recipe1.outputs[i].chance);
+				output[i] = new RandomStack(item, chance);
 			}
 
 			if (recipe.crash_on_fail) {
@@ -148,7 +148,7 @@ public class RecipeParser {
 	}
 
 	public static ItemStack getItem(String item) {
-		ItemStack stack = null;
+		ItemStack stack;
 		String mod_id = "minecraft";
 		String input_str = item;
 		int meta = 0;

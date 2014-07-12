@@ -2,7 +2,6 @@ package com.edxmod.electrodynamics.common.world;
 
 import com.edxmod.electrodynamics.common.block.core.BlockSpawnMarker;
 import net.minecraft.util.ChunkCoordinates;
-import net.minecraft.world.ChunkPosition;
 import net.minecraft.world.WorldProviderHell;
 
 /**

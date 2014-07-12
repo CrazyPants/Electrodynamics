@@ -1,7 +1,6 @@
 package com.edxmod.electrodynamics.client.render.item;
 
 import com.edxmod.electrodynamics.client.lib.Model;
-import com.edxmod.electrodynamics.client.model.WrappedModel;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.IItemRenderer;
 import org.lwjgl.opengl.GL11;

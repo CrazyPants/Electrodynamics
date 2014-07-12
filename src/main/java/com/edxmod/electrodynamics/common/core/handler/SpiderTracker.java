@@ -2,7 +2,6 @@ package com.edxmod.electrodynamics.common.core.handler;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.TickEvent;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.monster.EntitySpider;
 import net.minecraft.init.Blocks;
 import net.minecraft.world.WorldServer;

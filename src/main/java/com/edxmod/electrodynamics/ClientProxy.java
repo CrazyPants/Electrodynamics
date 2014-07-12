@@ -1,7 +1,6 @@
 package com.edxmod.electrodynamics;
 
 import com.edxmod.electrodynamics.client.model.FixedTechneModelLoader;
-import com.edxmod.electrodynamics.client.render.tile.RenderTileSpawnMarker;
 import com.edxmod.electrodynamics.client.render.item.*;
 import com.edxmod.electrodynamics.client.render.tile.*;
 import com.edxmod.electrodynamics.common.block.EDXBlocks;

@@ -1,9 +1,7 @@
 package com.edxmod.electrodynamics.common.item;
 
 import com.edxmod.electrodynamics.common.core.EDXCreativeTab;
-import com.edxmod.electrodynamics.common.item.prefab.EDXItem;
 import com.edxmod.electrodynamics.common.item.prefab.EDXMultiItem;
-import net.minecraft.util.IIcon;
 
 /**
  * @author dmillerw

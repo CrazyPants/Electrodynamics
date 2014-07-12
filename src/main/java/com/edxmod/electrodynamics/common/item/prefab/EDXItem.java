@@ -5,7 +5,6 @@ import com.edxmod.electrodynamics.common.lib.EDXProps;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.item.Item;
 import net.minecraft.util.IIcon;
-import scala.annotation.varargs;
 
 /**
  * @author dmillerw

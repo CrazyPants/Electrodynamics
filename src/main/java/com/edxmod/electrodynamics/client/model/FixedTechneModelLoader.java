@@ -1,7 +1,5 @@
 package com.edxmod.electrodynamics.client.model;
 
-import java.net.URL;
-
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.model.IModelCustom;
 import net.minecraftforge.client.model.IModelCustomLoader;

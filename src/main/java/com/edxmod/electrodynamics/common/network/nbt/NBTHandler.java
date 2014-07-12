@@ -207,7 +207,7 @@ public class NBTHandler {
 	}
 
 	public String[] getFields() {
-		return fields.entrySet().toArray(new String[fields.size()]);
+		return fields.keySet().toArray(new String[fields.size()]);
 	}
 
 	public void debugWrite() {

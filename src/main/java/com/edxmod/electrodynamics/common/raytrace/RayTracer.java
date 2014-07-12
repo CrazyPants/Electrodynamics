@@ -116,7 +116,7 @@ public class RayTracer {
         }
 
         // Reset block bounds
-        ((Block) block).setBlockBounds(0, 0, 0, 1, 1, 1);
+        block.setBlockBounds(0, 0, 0, 1, 1, 1);
 
         if (index == -1) {
             return null;

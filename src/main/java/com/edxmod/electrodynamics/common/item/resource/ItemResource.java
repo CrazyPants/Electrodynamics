@@ -2,7 +2,6 @@ package com.edxmod.electrodynamics.common.item.resource;
 
 import com.edxmod.electrodynamics.common.core.EDXCreativeTab;
 import com.edxmod.electrodynamics.common.item.prefab.EDXItem;
-import com.edxmod.electrodynamics.common.item.prefab.EDXMultiItem;
 import com.edxmod.electrodynamics.common.lib.EDXProps;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
@@ -10,7 +9,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.StatCollector;
-import net.minecraft.util.StringUtils;
 
 import java.util.List;
 

@@ -1,22 +1,13 @@
 package com.edxmod.electrodynamics.common.world.generation;
 
 import com.edxmod.electrodynamics.common.block.EDXBlocks;
-import cpw.mods.fml.common.IWorldGenerator;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockFire;
-import net.minecraft.block.BlockSapling;
 import net.minecraft.init.Blocks;
-import net.minecraft.util.Direction;
 import net.minecraft.world.World;
-import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.feature.WorldGenAbstractTree;
 import net.minecraftforge.common.util.ForgeDirection;
-import net.minecraftforge.event.terraingen.DecorateBiomeEvent;
 
-import java.util.Arrays;
 import java.util.Random;
-
-import static net.minecraftforge.common.util.ForgeDirection.WEST;
 
 /**
  * @author dmillerw

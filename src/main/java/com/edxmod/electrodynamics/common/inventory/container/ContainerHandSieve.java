@@ -42,7 +42,7 @@ public class ContainerHandSieve extends ContainerItem {
 	@Override
 	public void onContainerClosed(EntityPlayer player) {
 		super.onContainerClosed(player);
-		ItemHandSieve.recalculate(((InventoryItem) inventory).getStack(), player);
+		ItemHandSieve.recalculate(inventory.getStack(), player);
 	}
 
 	@Override
