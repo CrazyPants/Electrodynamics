@@ -49,6 +49,7 @@ public class RecipeParser {
 	}
 
 	public static class ParsedRecipe {
+
 		public boolean crash_on_fail;
 		public Recipe[] recipes;
 
@@ -70,6 +71,7 @@ public class RecipeParser {
 	}
 
 	public static class Recipe {
+
 		public String input;
 		public int duration = 100;
 		public Output[] outputs;
@@ -92,6 +94,7 @@ public class RecipeParser {
 	}
 
 	public static class Output {
+
 		public String item;
 		public float chance;
 

@@ -56,6 +56,7 @@ public class NBTHandler {
 	@Retention(RetentionPolicy.RUNTIME)
 	@Target({ElementType.FIELD})
 	public static @interface ArrayDefault {
+
 		int value() default 0;
 	}
 
