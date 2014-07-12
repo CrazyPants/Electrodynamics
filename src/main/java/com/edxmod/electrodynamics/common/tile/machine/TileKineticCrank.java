@@ -4,6 +4,7 @@ import com.edxmod.electrodynamics.common.tile.core.TileCoreMachine;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraftforge.common.util.ForgeDirection;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,6 +50,21 @@ public class TileKineticCrank extends TileCoreMachine {
 		}
 	}
 
+	/** Updates orientation so "forward" is facing away from the water mill */
+	public void updateOrientation() {
+		ForgeDirection forward = orientation;
+		ForgeDirection back = forward.getOpposite();
+
+		TileEntity forwardTile = worldObj.getTileEntity(xCoord + forward.offsetX, yCoord + forward.offsetY, zCoord + forward.offsetZ);
+		TileEntity backwardTile = worldObj.getTileEntity(xCoord + back.offsetX, yCoord + back.offsetY, zCoord + back.offsetZ);
+
+		if (forwardTile != null && forwardTile instanceof TileWaterMill) {
+			orientation = forward;
+		} else if (backwardTile != null && backwardTile instanceof TileWaterMill) {
+			orientation = back;
+		}
+	}
+
 	private List<TileEntity> getConnectedTiles() {
 		List<TileEntity> list = new ArrayList<TileEntity>();
 
@@ -76,7 +92,7 @@ public class TileKineticCrank extends TileCoreMachine {
 
 			if (tile instanceof TileHammerMill) {
 				// Don't let hammer mills get strung together
-				if (list.get(list.size() - 1) instanceof TileHammerMill) {
+				if (list.size() > 0 && list.get(list.size() - 1) instanceof TileHammerMill) {
 					foundEnd = true;
 					break;
 				}
@@ -85,7 +101,17 @@ public class TileKineticCrank extends TileCoreMachine {
 					list.add(tile);
 				}
 			} else if (tile instanceof TileMetalShaft) {
-				list.add(tile);
+				if (((TileMetalShaft)tile).orientation != orientation.getOpposite().getRotation(ForgeDirection.UP)) {
+					((TileMetalShaft)tile).orientation = orientation.getOpposite().getRotation(ForgeDirection.UP);
+					((TileMetalShaft)tile).markForUpdate();
+				}
+
+//				if (metalShaftDirection != orientation.getRotation(ForgeDirection.UP) && metalShaftDirection != orientation.getRotation(ForgeDirection.UP).getOpposite()) {
+					list.add(tile);
+//				} else {
+//					foundEnd = true;
+//					break;
+//				}
 			} else {
 				foundEnd = true;
 				break;

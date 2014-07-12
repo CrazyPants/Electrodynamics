@@ -10,6 +10,7 @@ import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
@@ -64,6 +65,12 @@ public class ItemBlockWaterMill extends EDXItemBlock {
 			return false;
 		}
 
+		TileEntity otherTile = world.getTileEntity(tile.xCoord + opposite.offsetX, tile.yCoord + opposite.offsetY, tile.zCoord + opposite.offsetZ);
+
+		if (otherTile != null && otherTile instanceof TileWaterMill) {
+			return false;
+		}
+
 		boolean xAxis = ForgeDirection.getOrientation(side).getRotation(ForgeDirection.UP).getOpposite().offsetX != 0;
 		for (int ix=-1; ix<2; ix++) {
 			for (int iy=-1; iy<2; iy++) {
@@ -74,7 +81,7 @@ public class ItemBlockWaterMill extends EDXItemBlock {
 
 					if (sy != 0 && (xAxis ? (iz == -1) : (ix == -1))) {
 						Block block = world.getBlock(sx, sy, sz);
-						if (!world.isAirBlock(sx, sy, sz) || block == Blocks.water || block == Blocks.flowing_water) {
+						if (block != Blocks.water && block != Blocks.flowing_water && !world.isAirBlock(sx, sy, sz)) {
 							return false;
 						}
 					}
