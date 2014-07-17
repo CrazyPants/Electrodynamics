@@ -86,18 +86,20 @@ public class PacketFX implements IMessage, IMessageHandler<PacketFX, IMessage> {
 	@Override
 	public IMessage onMessage(PacketFX message, MessageContext ctx) {
 		Minecraft mc = FMLClientHandler.instance().getClient();
-		switch (fxType) {
+		switch (message.fxType) {
 			case FX_PARTICLE: {
-				EnumParticle particle = EnumParticle.values()[extraData[0]];
-				particle.display(mc.theWorld, x, y, z, 0, 0, 0);
+				EnumParticle particle = EnumParticle.values()[message.extraData[0]];
+				particle.display(mc.theWorld, message.x, message.y, message.z, 0, 0, 0);
+				break;
 			}
 
 			case FX_BLOCK_BREAK: {
-				if (extraData[0] > 0 && extraData[0] < 4096) {
-					mc.effectRenderer.addBlockDestroyEffects((int) Math.floor(x), (int) Math.floor(y), (int) Math.floor(z), Block.getBlockById(extraData[0]), extraData[1]);
+				if (message.extraData[0] > 0 && message.extraData[0] < 4096) {
+					mc.effectRenderer.addBlockDestroyEffects((int) Math.floor(message.x), (int) Math.floor(message.y), (int) Math.floor(message.z), Block.getBlockById(message.extraData[0]), message.extraData[1]);
 				} else {
-					EnumParticle.ITEM_BREAK(new ItemStack(Item.getItemById(extraData[0]), extraData[1]), FMLClientHandler.instance().getWorldClient(), x, y, z);
+					EnumParticle.ITEM_BREAK(new ItemStack(Item.getItemById(message.extraData[0]), message.extraData[1]), mc.theWorld, message.x, message.y, message.z);
 				}
+				break;
 			}
 		}
 		return null;
