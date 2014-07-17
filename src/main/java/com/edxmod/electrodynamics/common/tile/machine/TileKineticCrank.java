@@ -61,9 +61,9 @@ public class TileKineticCrank extends TileCoreMachine {
 		TileEntity backwardTile = worldObj.getTileEntity(xCoord + back.offsetX, yCoord + back.offsetY, zCoord + back.offsetZ);
 
 		if (forwardTile != null && forwardTile instanceof TileWaterMill) {
-			orientation = forward;
+			orientation = forward.getOpposite();
 		} else if (backwardTile != null && backwardTile instanceof TileWaterMill) {
-			orientation = back;
+			orientation = back.getOpposite();
 		}
 	}
 

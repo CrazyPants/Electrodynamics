@@ -80,7 +80,7 @@ public class EDXBlocks {
 		registerBlock(waterMill, ItemBlockWaterMill.class);
 		registerBlock(kiln, EDXMachineBlock.class);
 		registerBlock(metalPress, EDXMachineBlock.class);
-		registerBlock(barrel, EDXItemBlock.class);
+		registerBlock(barrel, EDXItemMultiBlock.class);
 		registerBlock(crucible, EDXItemBlock.class);
 		registerBlock(infernalFurnace, EDXMachineBlock.class);
 		registerBlock(metalShaft, ItemBlockMetalShaft.class);

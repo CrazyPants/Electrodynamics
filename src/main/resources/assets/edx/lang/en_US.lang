@@ -49,7 +49,8 @@ tile.hammer_mill.name=Hammer Mill
 tile.water_mill.name=Water Mill
 tile.kiln.name=Kiln
 tile.metal_press.name=Metal Press
-tile.barrel.name=Barrel
+tile.barrel.wood.name=Wooden Barrel
+tile.barrel.stone.name=Stone Barrel
 tile.crucible.name=Crucible
 tile.infernal_furnace.name=Hellfire Furnace
 

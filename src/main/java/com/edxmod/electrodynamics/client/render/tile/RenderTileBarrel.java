@@ -22,10 +22,23 @@ public class RenderTileBarrel extends EDXTileRenderer<TileBarrel> {
 
 		GL11.glTranslated(x + 0.5, y + 0.5, z + 0.5);
 
-		Model.BARREL_WOOD.bindTexture();
-		Model.BARREL_WOOD.renderAllExcept(LID_PARTS);
-		if (tile.hasLid) {
-			Model.BARREL_WOOD.renderOnly(LID_PARTS);
+		switch (tile.getBlockMetadata()) {
+			case 1:
+				Model.BARREL_STONE.bindTexture();
+				Model.BARREL_STONE.renderAllExcept(LID_PARTS);
+				GL11.glPushMatrix();
+				GL11.glRotated(tile.hasLid ? -16 : 74, 1, 0, 0);
+				Model.BARREL_STONE.renderOnly(LID_PARTS);
+				GL11.glPopMatrix();
+				break;
+			case 0:
+			default:
+				Model.BARREL_WOOD.bindTexture();
+				Model.BARREL_WOOD.renderAllExcept(LID_PARTS);
+				if (tile.hasLid) {
+					Model.BARREL_WOOD.renderOnly(LID_PARTS);
+				}
+				break;
 		}
 
 		if (tile.contents != null) {

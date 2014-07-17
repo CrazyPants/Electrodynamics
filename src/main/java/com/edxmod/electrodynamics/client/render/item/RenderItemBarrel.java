@@ -24,16 +24,22 @@ public class RenderItemBarrel implements IItemRenderer {
 	public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
 		GL11.glPushMatrix();
 
-		if (type == ItemRenderType.ENTITY) {
-			GL11.glTranslated(-0.5, 0, -0.5);
-		}
-
 		if (type == ItemRenderType.INVENTORY) {
+			GL11.glRotated(180, 0, 1, 0);
 			GL11.glTranslated(0.1, 0, 0.1);
 		}
 
-		Model.BARREL_WOOD.bindTexture();
-		Model.BARREL_WOOD.renderAll();
+		switch (item.getItemDamage()) {
+			case 1:
+				Model.BARREL_STONE.bindTexture();
+				Model.BARREL_STONE.renderAll();
+				break;
+			case 0:
+			default:
+				Model.BARREL_WOOD.bindTexture();
+				Model.BARREL_WOOD.renderAll();
+				break;
+		}
 
 		GL11.glPopMatrix();
 	}

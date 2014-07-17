@@ -47,6 +47,11 @@ public class TileWaterMill extends TileCoreMachine {
 			TileKineticCrank crank = (TileKineticCrank) worldObj.getTileEntity(xCoord + orientation.offsetX, yCoord, zCoord + orientation.offsetZ);
 
 			if (crank != null) {
+//				if (crank.orientation != orientation) {
+//					crank.orientation = orientation;
+//					crank.markForUpdate();
+//				}
+
 				crank.angle = angle;
 			}
 		}
