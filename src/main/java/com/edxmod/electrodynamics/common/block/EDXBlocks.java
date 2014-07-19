@@ -53,7 +53,7 @@ public class EDXBlocks {
 
 	public static void initialize() {
 
-		table = new BlockTable().setBlockName("table");
+        table = new BlockTable().setBlockName("table");
 		tableSieve = new BlockSieveTable().setBlockName("table_sieve");
 		sinteringOven = new BlockSinteringOven().setBlockName("sintering_oven");
 		hammerMill = new BlockHammerMill().setBlockName("hammer_mill");

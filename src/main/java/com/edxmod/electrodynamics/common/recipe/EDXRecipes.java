@@ -3,7 +3,7 @@ package com.edxmod.electrodynamics.common.recipe;
 import com.edxmod.electrodynamics.common.block.BlockStorage;
 import com.edxmod.electrodynamics.common.block.EDXBlocks;
 import com.edxmod.electrodynamics.common.item.EDXItems;
-import com.edxmod.electrodynamics.common.item.ItemResource;
+import com.edxmod.electrodynamics.common.item.resource.ItemResource;
 import com.edxmod.electrodynamics.common.lib.StackReference;
 import com.edxmod.electrodynamics.common.lib.tool.ToolDefinition;
 import com.edxmod.electrodynamics.common.recipe.manager.BarrelManager;
