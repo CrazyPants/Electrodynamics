@@ -2,8 +2,10 @@ package com.edxmod.electrodynamics;
 
 import com.edxmod.electrodynamics.common.block.EDXBlocks;
 import com.edxmod.electrodynamics.common.core.handler.BlockEventHandler;
+import com.edxmod.electrodynamics.common.core.handler.BucketHandler;
 import com.edxmod.electrodynamics.common.core.handler.GuiHandler;
 import com.edxmod.electrodynamics.common.core.handler.SpiderTracker;
+import com.edxmod.electrodynamics.common.fluid.EDXFluids;
 import com.edxmod.electrodynamics.common.item.EDXItems;
 import com.edxmod.electrodynamics.common.item.ItemHammer;
 import com.edxmod.electrodynamics.common.lib.tool.ToolDefinition;
@@ -29,8 +31,10 @@ import java.io.IOException;
 public class CommonProxy {
 
 	public void preInit() {
+        EDXFluids.initializeFluids();
 		EDXBlocks.initialize();
 		EDXItems.initialize();
+        EDXFluids.initializeFluidContainers();
 		EDXRecipes.initialize();
 
 		AbstractSerializer.initialize();
@@ -39,6 +43,7 @@ public class CommonProxy {
 
 		EventUtil.register(new BlockEventHandler(), EventUtil.Type.FML);
 		EventUtil.register(new SpiderTracker(), EventUtil.Type.FORGE);
+        EventUtil.register(BucketHandler.INSTANCE,EventUtil.Type.FORGE);
 	}
 
 	public void init() {

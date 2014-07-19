@@ -1,8 +1,9 @@
 package com.edxmod.electrodynamics.common.recipe;
 
 import com.edxmod.electrodynamics.common.block.BlockStorage;
+import com.edxmod.electrodynamics.common.block.EDXBlocks;
 import com.edxmod.electrodynamics.common.item.EDXItems;
-import com.edxmod.electrodynamics.common.item.resource.ItemResource;
+import com.edxmod.electrodynamics.common.item.ItemResource;
 import com.edxmod.electrodynamics.common.lib.StackReference;
 import com.edxmod.electrodynamics.common.lib.tool.ToolDefinition;
 import com.edxmod.electrodynamics.common.recipe.manager.BarrelManager;
@@ -51,6 +52,7 @@ public class EDXRecipes {
 		BARREL.registerDurationRecipe(new BarrelDurationRecipe(new ItemStack(Blocks.grass, 8), new ItemStack(Blocks.mycelium, 1), 20, 20, true));
 
 		// BARREL - TEST 2
+        addCraftingRecipes();
 	}
 
 	private static void addCraftingRecipes() {
@@ -63,5 +65,13 @@ public class EDXRecipes {
 				GameRegistry.addShapelessRecipe(StackHelper.copyAndResize(ingot, 9), storage);
 			}
 		}
+
+        //Tools
+        GameRegistry.addShapedRecipe(new ItemStack(EDXItems.component,1,1),"II", "II",'I',new ItemStack(EDXItems.component,1,0));
+
+        //Machines
+        GameRegistry.addShapedRecipe(new ItemStack(EDXBlocks.tableSieve), "IXI", "SXS", "WWW", 'I', Blocks.wooden_slab, 'X', new ItemStack(EDXItems.component, 1, 1), 'S', new ItemStack(Items.stick)
+                , 'W', Blocks.planks);
+
 	}
 }

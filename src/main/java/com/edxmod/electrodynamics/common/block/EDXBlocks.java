@@ -1,6 +1,7 @@
 package com.edxmod.electrodynamics.common.block;
 
 import com.edxmod.electrodynamics.common.block.core.BlockSpawnMarker;
+import com.edxmod.electrodynamics.common.block.fluid.BlockFluidBoiling;
 import com.edxmod.electrodynamics.common.block.item.ItemBlockCrank;
 import com.edxmod.electrodynamics.common.block.item.ItemBlockMetalShaft;
 import com.edxmod.electrodynamics.common.block.item.ItemBlockWaterMill;
@@ -8,10 +9,12 @@ import com.edxmod.electrodynamics.common.block.machine.*;
 import com.edxmod.electrodynamics.common.block.prefab.item.EDXItemBlock;
 import com.edxmod.electrodynamics.common.block.prefab.item.EDXItemMultiBlock;
 import com.edxmod.electrodynamics.common.block.prefab.item.EDXMachineBlock;
+import com.edxmod.electrodynamics.common.fluid.EDXFluids;
 import com.edxmod.electrodynamics.common.tile.machine.*;
 import com.edxmod.electrodynamics.common.tile.misc.TileSpawnMarker;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
 import net.minecraft.item.ItemBlock;
 
 /**
@@ -45,7 +48,11 @@ public class EDXBlocks {
 	public static Block infernalLeaves;
 	public static Block infernalSapling;
 
+    public static Block boilingWater;
+
+
 	public static void initialize() {
+
 		table = new BlockTable().setBlockName("table");
 		tableSieve = new BlockSieveTable().setBlockName("table_sieve");
 		sinteringOven = new BlockSinteringOven().setBlockName("sintering_oven");
@@ -71,6 +78,9 @@ public class EDXBlocks {
 		infernalLeaves = new BlockInfernaLeaves().setBlockName("infernal_leaves");
 		infernalSapling = new BlockInfernalSapling().setBlockName("infernal_sapling");
 
+        boilingWater = new BlockFluidBoiling(EDXFluids.boilingWaterFluid, Material.water).setBlockName("boiling_water");
+
+
 		registerBlock(table, EDXItemMultiBlock.class);
 		registerBlock(tableSieve, EDXItemBlock.class);
 		registerBlock(sinteringOven, EDXMachineBlock.class);
@@ -80,7 +90,7 @@ public class EDXBlocks {
 		registerBlock(waterMill, ItemBlockWaterMill.class);
 		registerBlock(kiln, EDXMachineBlock.class);
 		registerBlock(metalPress, EDXMachineBlock.class);
-		registerBlock(barrel, EDXItemMultiBlock.class);
+        registerBlock(barrel, EDXItemMultiBlock.class);
 		registerBlock(crucible, EDXItemBlock.class);
 		registerBlock(infernalFurnace, EDXMachineBlock.class);
 		registerBlock(metalShaft, ItemBlockMetalShaft.class);
@@ -95,6 +105,8 @@ public class EDXBlocks {
 		registerBlock(richInfernalLog, "rich_infernal_log");
 		registerBlock(infernalLeaves);
 		registerBlock(infernalSapling);
+
+        registerBlock(boilingWater, EDXItemBlock.class);
 
 		GameRegistry.registerTileEntity(TileTable.class, "edx:table");
 		GameRegistry.registerTileEntity(TileSieveTable.class, "edx:table_sieve");

@@ -1,4 +1,4 @@
-package com.edxmod.electrodynamics.common.item.resource;
+package com.edxmod.electrodynamics.common.item;
 
 import com.edxmod.electrodynamics.common.core.EDXCreativeTab;
 import com.edxmod.electrodynamics.common.item.prefab.EDXItem;

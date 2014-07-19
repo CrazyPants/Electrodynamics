@@ -1,7 +1,7 @@
 package com.edxmod.electrodynamics.common.block;
 
 import com.edxmod.electrodynamics.common.block.prefab.EDXMultiBlock;
-import com.edxmod.electrodynamics.common.item.resource.ItemResource;
+import com.edxmod.electrodynamics.common.item.ItemResource;
 import com.edxmod.electrodynamics.common.lib.EDXProps;
 import com.edxmod.electrodynamics.common.core.EDXCreativeTab;
 import com.edxmod.electrodynamics.common.util.ArrayHelper;

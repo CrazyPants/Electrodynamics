@@ -1,9 +1,12 @@
 package com.edxmod.electrodynamics.common.item;
 
-import com.edxmod.electrodynamics.common.item.resource.ItemResource;
+import com.edxmod.electrodynamics.common.block.EDXBlocks;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.fluids.FluidContainerRegistry;
+import net.minecraftforge.fluids.FluidRegistry;
 
 /**
  * @author Royalixor
@@ -34,6 +37,7 @@ public class EDXItems {
 	// OTHER
 	public static Item seeds;
 	public static Item cosmetic;
+    public static Item boilingBucket;
 
 	public static void initialize() {
 		hammerWood = new ItemHammer(64, "wood", "plankWood");
@@ -71,8 +75,12 @@ public class EDXItems {
 
 		seeds = new ItemSeeds().setUnlocalizedName("seeds");
 		cosmetic = new ItemCosmetic().setUnlocalizedName("cosmetic");
+        boilingBucket = new ItemBoilingBucket(EDXBlocks.boilingWater).setUnlocalizedName("boiling_bucket").setContainerItem(Items.bucket);
 		registerItem(seeds);
 		registerItem(cosmetic);
+        registerItem(boilingBucket);
+
+
 	}
 
 	public static void registerItem(Item item) {
