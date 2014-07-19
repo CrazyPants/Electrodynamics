@@ -8,20 +8,20 @@ import net.minecraft.nbt.NBTTagCompound;
  */
 public class ItemStackSerializer extends AbstractSerializer<ItemStack> {
 
-	@Override
-	public boolean canHandle(Class<?> fieldType) {
-		return fieldType == ItemStack.class;
-	}
+    @Override
+    public boolean canHandle(Class<?> fieldType) {
+        return fieldType == ItemStack.class;
+    }
 
-	@Override
-	public void serialize(String name, Object object, NBTTagCompound nbt) {
-		NBTTagCompound tag = new NBTTagCompound();
-		((ItemStack) object).writeToNBT(tag);
-		nbt.setTag(name, tag);
-	}
+    @Override
+    public void serialize(String name, Object object, NBTTagCompound nbt) {
+        NBTTagCompound tag = new NBTTagCompound();
+        ((ItemStack) object).writeToNBT(tag);
+        nbt.setTag(name, tag);
+    }
 
-	@Override
-	public ItemStack deserialize(String name, NBTTagCompound nbt) {
-		return ItemStack.loadItemStackFromNBT(nbt.getCompoundTag(name));
-	}
+    @Override
+    public ItemStack deserialize(String name, NBTTagCompound nbt) {
+        return ItemStack.loadItemStackFromNBT(nbt.getCompoundTag(name));
+    }
 }

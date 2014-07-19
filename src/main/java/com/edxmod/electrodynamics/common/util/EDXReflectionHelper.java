@@ -14,21 +14,21 @@ import java.lang.reflect.Method;
  */
 public class EDXReflectionHelper {
 
-	private static String[] GET_FLOW_VECTOR = new String[] {"getFlowVector", "func_149800_f", "f"};
+    private static String[] GET_FLOW_VECTOR = new String[]{"getFlowVector", "func_149800_f", "f"};
 
-	private static Method getFlowVector;
+    private static Method getFlowVector;
 
-	public static Vec3 getFlowVector(IBlockAccess world, int x, int y, int z) {
-		try {
-			if (getFlowVector == null) {
-				getFlowVector = ReflectionHelper.findMethod(BlockLiquid.class, Blocks.flowing_water, GET_FLOW_VECTOR, IBlockAccess.class, int.class, int.class, int.class);
-			}
-			return (Vec3) getFlowVector.invoke(Blocks.flowing_water, world, x, y, z);
-		} catch (IllegalAccessException ex) {
-			ex.printStackTrace();
-		} catch (InvocationTargetException e) {
-			e.printStackTrace();
-		}
-		return Vec3.createVectorHelper(0, 0, 0);
-	}
+    public static Vec3 getFlowVector(IBlockAccess world, int x, int y, int z) {
+        try {
+            if (getFlowVector == null) {
+                getFlowVector = ReflectionHelper.findMethod(BlockLiquid.class, Blocks.flowing_water, GET_FLOW_VECTOR, IBlockAccess.class, int.class, int.class, int.class);
+            }
+            return (Vec3) getFlowVector.invoke(Blocks.flowing_water, world, x, y, z);
+        } catch (IllegalAccessException ex) {
+            ex.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        }
+        return Vec3.createVectorHelper(0, 0, 0);
+    }
 }

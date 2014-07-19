@@ -15,53 +15,53 @@ import java.util.List;
  */
 public abstract class EDXMultiItem extends Item {
 
-	protected IIcon[] icons;
+    protected IIcon[] icons;
 
-	public EDXMultiItem(EDXCreativeTab tab) {
-		super();
+    public EDXMultiItem(EDXCreativeTab tab) {
+        super();
 
-		setCreativeTab(tab.get());
-		setHasSubtypes(true);
-		setMaxDamage(0);
-	}
+        setCreativeTab(tab.get());
+        setHasSubtypes(true);
+        setMaxDamage(0);
+    }
 
-	@Override
-	public String getUnlocalizedName(ItemStack itemStack) {
-		int meta = itemStack.getItemDamage();
+    @Override
+    public String getUnlocalizedName(ItemStack itemStack) {
+        int meta = itemStack.getItemDamage();
 
-		if (meta < 0 || meta >= getNames().length) {
-			meta = 0;
-		}
-		return super.getUnlocalizedName() + "." + getNames()[meta];
-	}
+        if (meta < 0 || meta >= getNames().length) {
+            meta = 0;
+        }
+        return super.getUnlocalizedName() + "." + getNames()[meta];
+    }
 
-	@Override
-	public IIcon getIconFromDamage(int damage) {
-		if (damage < 0 || damage >= getNames().length) {
-			damage = 0;
-		}
+    @Override
+    public IIcon getIconFromDamage(int damage) {
+        if (damage < 0 || damage >= getNames().length) {
+            damage = 0;
+        }
 
-		return icons[damage];
-	}
+        return icons[damage];
+    }
 
-	@Override
-	public void registerIcons(IIconRegister register) {
-		icons = new IIcon[getNames().length];
-		if (!getIconPrefix().isEmpty()) {
-			for (int i = 0; i < getNames().length; i++) {
-				icons[i] = register.registerIcon(EDXProps.RESOURCE_PREFIX + getIconPrefix() + "/" + getNames()[i]);
-			}
-		}
-	}
+    @Override
+    public void registerIcons(IIconRegister register) {
+        icons = new IIcon[getNames().length];
+        if (!getIconPrefix().isEmpty()) {
+            for (int i = 0; i < getNames().length; i++) {
+                icons[i] = register.registerIcon(EDXProps.RESOURCE_PREFIX + getIconPrefix() + "/" + getNames()[i]);
+            }
+        }
+    }
 
-	@Override
-	public void getSubItems(Item item, CreativeTabs creativeTabs, List list) {
-		for (int meta = 0; meta < getNames().length; ++meta) {
-			list.add(new ItemStack(item, 1, meta));
-		}
-	}
+    @Override
+    public void getSubItems(Item item, CreativeTabs creativeTabs, List list) {
+        for (int meta = 0; meta < getNames().length; ++meta) {
+            list.add(new ItemStack(item, 1, meta));
+        }
+    }
 
-	public abstract String[] getNames();
+    public abstract String[] getNames();
 
-	public abstract String getIconPrefix();
+    public abstract String getIconPrefix();
 }

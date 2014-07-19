@@ -9,6 +9,6 @@ import cpw.mods.fml.relauncher.SideOnly;
  */
 public class TileMetalShaft extends TileCoreMachine {
 
-	@SideOnly(Side.CLIENT)
-	public float angle = 0F;
+    @SideOnly(Side.CLIENT)
+    public float angle = 0F;
 }

@@ -8,19 +8,19 @@ import net.minecraftforge.common.MinecraftForge;
  */
 public class EventUtil {
 
-	public static enum Type {
-		FML,
-		FORGE,
-		BOTH
-	}
+    public static enum Type {
+        FML,
+        FORGE,
+        BOTH
+    }
 
-	public static void register(Object instance, Type type) {
-		if (type == Type.FML || type == Type.BOTH) {
-			FMLCommonHandler.instance().bus().register(instance);
-		}
+    public static void register(Object instance, Type type) {
+        if (type == Type.FML || type == Type.BOTH) {
+            FMLCommonHandler.instance().bus().register(instance);
+        }
 
-		if (type == Type.FORGE || type == Type.BOTH) {
-			MinecraftForge.EVENT_BUS.register(instance);
-		}
-	}
+        if (type == Type.FORGE || type == Type.BOTH) {
+            MinecraftForge.EVENT_BUS.register(instance);
+        }
+    }
 }

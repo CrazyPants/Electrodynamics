@@ -17,50 +17,50 @@ import java.util.List;
  */
 public class ItemResource extends EDXItem {
 
-	public static final String[] NAMES = new String[] {"copper", "gold", "graphite", "iron", "lead", "nickel", "silver", "steel", "tin"};
+    public static final String[] NAMES = new String[]{"copper", "gold", "graphite", "iron", "lead", "nickel", "silver", "steel", "tin"};
 
-	protected IIcon[] icons;
+    protected IIcon[] icons;
 
-	private String type;
+    private String type;
 
-	public ItemResource setType(String type) {
-		setUnlocalizedName("resource." + type.toLowerCase());
-		this.type = type;
-		return this;
-	}
+    public ItemResource setType(String type) {
+        setUnlocalizedName("resource." + type.toLowerCase());
+        this.type = type;
+        return this;
+    }
 
-	public ItemResource() {
-		super(EDXCreativeTab.ITEMS);
-	}
+    public ItemResource() {
+        super(EDXCreativeTab.ITEMS);
+    }
 
-	@Override
-	public String getItemStackDisplayName(ItemStack stack) {
-		return String.format(super.getItemStackDisplayName(stack), StatCollector.translateToLocal("ore." + NAMES[stack.getItemDamage()]));
-	}
+    @Override
+    public String getItemStackDisplayName(ItemStack stack) {
+        return String.format(super.getItemStackDisplayName(stack), StatCollector.translateToLocal("ore." + NAMES[stack.getItemDamage()]));
+    }
 
-	@Override
-	public IIcon getIconFromDamage(int damage) {
-		return icons[damage];
-	}
+    @Override
+    public IIcon getIconFromDamage(int damage) {
+        return icons[damage];
+    }
 
-	@Override
-	public void registerIcons(IIconRegister register) {
-		icons = new IIcon[NAMES.length];
-		if (!getIconPrefix().isEmpty()) {
-			for (int i = 0; i < NAMES.length; i++) {
-				icons[i] = register.registerIcon(EDXProps.RESOURCE_PREFIX + getIconPrefix() + "/" + NAMES[i] + type);
-			}
-		}
-	}
+    @Override
+    public void registerIcons(IIconRegister register) {
+        icons = new IIcon[NAMES.length];
+        if (!getIconPrefix().isEmpty()) {
+            for (int i = 0; i < NAMES.length; i++) {
+                icons[i] = register.registerIcon(EDXProps.RESOURCE_PREFIX + getIconPrefix() + "/" + NAMES[i] + type);
+            }
+        }
+    }
 
-	@Override
-	public void getSubItems(Item item, CreativeTabs creativeTabs, List list) {
-		for (int meta = 0; meta < NAMES.length; ++meta) {
-			list.add(new ItemStack(item, 1, meta));
-		}
-	}
+    @Override
+    public void getSubItems(Item item, CreativeTabs creativeTabs, List list) {
+        for (int meta = 0; meta < NAMES.length; ++meta) {
+            list.add(new ItemStack(item, 1, meta));
+        }
+    }
 
-	public String getIconPrefix() {
-		return "resource";
-	}
+    public String getIconPrefix() {
+        return "resource";
+    }
 }

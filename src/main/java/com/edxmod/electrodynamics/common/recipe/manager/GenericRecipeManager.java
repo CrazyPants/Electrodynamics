@@ -11,18 +11,18 @@ import java.util.List;
  */
 public class GenericRecipeManager<T extends IGenericRecipe> {
 
-	private List<T> recipes = new ArrayList<T>();
+    private List<T> recipes = new ArrayList<T>();
 
-	public void register(T recipe) {
-		recipes.add(recipe);
-	}
+    public void register(T recipe) {
+        recipes.add(recipe);
+    }
 
-	public T get(ItemStack stack) {
-		for (IGenericRecipe recipe : recipes) {
-			if (recipe.valid(stack)) {
-				return (T) recipe;
-			}
-		}
-		return null;
-	}
+    public T get(ItemStack stack) {
+        for (IGenericRecipe recipe : recipes) {
+            if (recipe.valid(stack)) {
+                return (T) recipe;
+            }
+        }
+        return null;
+    }
 }

@@ -8,12 +8,12 @@ import net.minecraftforge.common.util.ForgeDirection;
  */
 public abstract class TileCoreMachine extends TileCore {
 
-	@NBTHandler.NBTData
-	public ForgeDirection orientation = ForgeDirection.UNKNOWN;
+    @NBTHandler.NBTData
+    public ForgeDirection orientation = ForgeDirection.UNKNOWN;
 
-	public TileCoreMachine() {
-		super();
+    public TileCoreMachine() {
+        super();
 
-		this.handler.addField(TileCoreMachine.class, "orientation");
-	}
+        this.handler.addField(TileCoreMachine.class, "orientation");
+    }
 }

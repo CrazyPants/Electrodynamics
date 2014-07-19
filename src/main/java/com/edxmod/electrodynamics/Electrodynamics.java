@@ -14,28 +14,28 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 @Mod(modid = EDXProps.ID, name = EDXProps.NAME, version = EDXProps.VERSION, dependencies = EDXProps.DEPENDENCIES)
 public class Electrodynamics {
 
-	@Mod.Instance(EDXProps.ID)
-	public static Electrodynamics instance;
+    @Mod.Instance(EDXProps.ID)
+    public static Electrodynamics instance;
 
-	@SidedProxy(clientSide = EDXProps.CLIENT, serverSide = EDXProps.SERVER)
-	public static CommonProxy proxy;
+    @SidedProxy(clientSide = EDXProps.CLIENT, serverSide = EDXProps.SERVER)
+    public static CommonProxy proxy;
 
-	public static String configPath;
+    public static String configPath;
 
-	@Mod.EventHandler
-	public void preInit(FMLPreInitializationEvent event) {
-		configPath = event.getModConfigurationDirectory() + "/EDX/";
-		proxy.preInit();
-	}
+    @Mod.EventHandler
+    public void preInit(FMLPreInitializationEvent event) {
+        configPath = event.getModConfigurationDirectory() + "/EDX/";
+        proxy.preInit();
+    }
 
-	@Mod.EventHandler
-	public void init(FMLInitializationEvent event) {
-		PacketHandler.initialize();
-		proxy.init();
-	}
+    @Mod.EventHandler
+    public void init(FMLInitializationEvent event) {
+        PacketHandler.initialize();
+        proxy.init();
+    }
 
-	@Mod.EventHandler
-	public void postInit(FMLPostInitializationEvent event) {
-		proxy.postInit();
-	}
+    @Mod.EventHandler
+    public void postInit(FMLPostInitializationEvent event) {
+        proxy.postInit();
+    }
 }

@@ -15,35 +15,35 @@ import net.minecraft.world.World;
  */
 public class BlockHammerMill extends EDXTileBlock {
 
-	public BlockHammerMill() {
-		super(Material.iron);
-	}
+    public BlockHammerMill() {
+        super(Material.iron);
+    }
 
-	@Override
-	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float fx, float fy, float fz) {
-		TileHammerMill tile = (TileHammerMill) world.getTileEntity(x, y, z);
-		if (side == tile.orientation.ordinal()) {
-			if (!world.isRemote) {
-				tile.updateStage();
-				player.addChatComponentMessage(new ChatComponentText(String.format(StatCollector.translateToLocal("chat.hammer_mill.stage"), tile.grindingStage + 1)));
-			}
-			return true;
-		}
-		return false;
-	}
+    @Override
+    public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float fx, float fy, float fz) {
+        TileHammerMill tile = (TileHammerMill) world.getTileEntity(x, y, z);
+        if (side == tile.orientation.ordinal()) {
+            if (!world.isRemote) {
+                tile.updateStage();
+                player.addChatComponentMessage(new ChatComponentText(String.format(StatCollector.translateToLocal("chat.hammer_mill.stage"), tile.grindingStage + 1)));
+            }
+            return true;
+        }
+        return false;
+    }
 
-	@Override
-	public TileEntity createNewTileEntity(World world, int meta) {
-		return new TileHammerMill();
-	}
+    @Override
+    public TileEntity createNewTileEntity(World world, int meta) {
+        return new TileHammerMill();
+    }
 
-	@Override
-	public boolean useCustomRender() {
-		return true;
-	}
+    @Override
+    public boolean useCustomRender() {
+        return true;
+    }
 
-	@Override
-	public void registerBlockIcons(IIconRegister iconRegister) {
+    @Override
+    public void registerBlockIcons(IIconRegister iconRegister) {
 
-	}
+    }
 }

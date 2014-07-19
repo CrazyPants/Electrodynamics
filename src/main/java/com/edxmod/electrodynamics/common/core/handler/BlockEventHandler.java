@@ -12,18 +12,18 @@ import net.minecraftforge.event.world.BlockEvent;
  */
 public class BlockEventHandler {
 
-	@SubscribeEvent
-	public void onBlockHarvested(BlockEvent.HarvestDropsEvent event) {
-		if (event.block == Blocks.web) {
-			if (event.harvester != null) {
-				EntityPlayer player = event.harvester;
+    @SubscribeEvent
+    public void onBlockHarvested(BlockEvent.HarvestDropsEvent event) {
+        if (event.block == Blocks.web) {
+            if (event.harvester != null) {
+                EntityPlayer player = event.harvester;
 
-				if (player.getCurrentEquippedItem() != null && player.getCurrentEquippedItem().getItem() == EDXItems.net) {
-					event.drops.clear();
-					event.drops.add(new ItemStack(Blocks.web));
-					event.dropChance = 1F;
-				}
-			}
-		}
-	}
+                if (player.getCurrentEquippedItem() != null && player.getCurrentEquippedItem().getItem() == EDXItems.net) {
+                    event.drops.clear();
+                    event.drops.add(new ItemStack(Blocks.web));
+                    event.dropChance = 1F;
+                }
+            }
+        }
+    }
 }

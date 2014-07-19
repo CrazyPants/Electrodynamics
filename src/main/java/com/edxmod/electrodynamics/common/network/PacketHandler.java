@@ -9,9 +9,9 @@ import cpw.mods.fml.relauncher.Side;
  */
 public class PacketHandler {
 
-	public static final SimpleNetworkWrapper INSTANCE = NetworkRegistry.INSTANCE.newSimpleChannel("edx");
+    public static final SimpleNetworkWrapper INSTANCE = NetworkRegistry.INSTANCE.newSimpleChannel("edx");
 
-	public static void initialize() {
-		INSTANCE.registerMessage(PacketFX.class, PacketFX.class, 0, Side.CLIENT);
-	}
+    public static void initialize() {
+        INSTANCE.registerMessage(PacketFX.class, PacketFX.class, 0, Side.CLIENT);
+    }
 }

@@ -10,16 +10,16 @@ import java.util.List;
  */
 public abstract class AbstractSerializer<T> {
 
-	public static List<AbstractSerializer<?>> serializerList = Lists.newArrayList();
+    public static List<AbstractSerializer<?>> serializerList = Lists.newArrayList();
 
-	public static void initialize() {
-		serializerList.add(new FluidStackSerializer());
-		serializerList.add(new ItemStackSerializer());
-	}
+    public static void initialize() {
+        serializerList.add(new FluidStackSerializer());
+        serializerList.add(new ItemStackSerializer());
+    }
 
-	public abstract boolean canHandle(Class<?> fieldType);
+    public abstract boolean canHandle(Class<?> fieldType);
 
-	public abstract void serialize(String name, Object object, NBTTagCompound nbt);
+    public abstract void serialize(String name, Object object, NBTTagCompound nbt);
 
-	public abstract T deserialize(String name, NBTTagCompound nbt);
+    public abstract T deserialize(String name, NBTTagCompound nbt);
 }

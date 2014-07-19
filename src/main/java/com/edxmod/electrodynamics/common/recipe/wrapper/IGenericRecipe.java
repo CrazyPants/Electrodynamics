@@ -7,7 +7,7 @@ import net.minecraft.item.ItemStack;
  */
 public interface IGenericRecipe<T> {
 
-	public boolean valid(ItemStack stack);
+    public boolean valid(ItemStack stack);
 
-	public T get(ItemStack stack);
+    public T get(ItemStack stack);
 }

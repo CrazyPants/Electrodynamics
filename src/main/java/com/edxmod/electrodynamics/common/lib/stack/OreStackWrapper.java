@@ -7,26 +7,26 @@ import net.minecraftforge.oredict.OreDictionary;
  */
 public class OreStackWrapper extends GenericStackWrapper<String> {
 
-	public OreStackWrapper(String contents) {
-		super(contents);
-	}
+    public OreStackWrapper(String contents) {
+        super(contents);
+    }
 
-	@Override
-	public GenericStackWrapper<String> copy() {
-		return new OreStackWrapper(contents);
-	}
+    @Override
+    public GenericStackWrapper<String> copy() {
+        return new OreStackWrapper(contents);
+    }
 
-	@Override
-	public boolean equals(GenericStackWrapper<String> wrapper) {
-		if (wrapper.contents.isEmpty() || OreDictionary.getOres(wrapper.contents).isEmpty()) {
-			return false;
-		}
+    @Override
+    public boolean equals(GenericStackWrapper<String> wrapper) {
+        if (wrapper.contents.isEmpty() || OreDictionary.getOres(wrapper.contents).isEmpty()) {
+            return false;
+        }
 
-		return wrapper.contents.equals(contents);
-	}
+        return wrapper.contents.equals(contents);
+    }
 
-	@Override
-	public int hashCode() {
-		return contents.hashCode();
-	}
+    @Override
+    public int hashCode() {
+        return contents.hashCode();
+    }
 }

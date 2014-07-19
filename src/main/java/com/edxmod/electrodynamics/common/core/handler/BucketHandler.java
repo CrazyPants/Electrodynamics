@@ -47,7 +47,5 @@ public class BucketHandler {
             return new ItemStack(bucket);
         } else
             return null;
-
     }
-
 }

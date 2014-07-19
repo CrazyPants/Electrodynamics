@@ -15,79 +15,79 @@ import net.minecraft.world.World;
  */
 public class BlockTable extends EDXTileMultiBlock {
 
-	private static final String[] NAMES = new String[] {"wood", "stone"};
+    private static final String[] NAMES = new String[]{"wood", "stone"};
 
-	@Override
-	public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float fx, float fy, float fz) {
-		if (!world.isRemote) {
-			TileTable tile = (TileTable) world.getTileEntity(x, y, z);
+    @Override
+    public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float fx, float fy, float fz) {
+        if (!world.isRemote) {
+            TileTable tile = (TileTable) world.getTileEntity(x, y, z);
 
-			if (tile != null) {
-				if (!player.isSneaking() && side == 1) {
-					ItemStack held = player.getHeldItem();
+            if (tile != null) {
+                if (!player.isSneaking() && side == 1) {
+                    ItemStack held = player.getHeldItem();
 
-					if (held != null && tile.stack == null) {
-						ItemStack stack = held.copy();
-						stack.stackSize = 1;
+                    if (held != null && tile.stack == null) {
+                        ItemStack stack = held.copy();
+                        stack.stackSize = 1;
 
-						tile.setStack(stack);
+                        tile.setStack(stack);
 
-						held.stackSize--;
-						if (held.stackSize <= 0) {
-							player.setCurrentItemOrArmor(0, null);
-						}
-					} else {
-						if (!tile.smash(player)) {
-							if (tile.stack != null && held == null) {
-								player.setCurrentItemOrArmor(0, tile.stack.copy());
-								tile.setStack(null);
-								return true;
-							} else if (tile.stack != null && held != null) {
-								if (tile.stack.isItemEqual(held) && (held.stackSize + 1 <= held.getItem().getItemStackLimit(held))) {
-									held.stackSize += tile.stack.stackSize;
+                        held.stackSize--;
+                        if (held.stackSize <= 0) {
+                            player.setCurrentItemOrArmor(0, null);
+                        }
+                    } else {
+                        if (!tile.smash(player)) {
+                            if (tile.stack != null && held == null) {
+                                player.setCurrentItemOrArmor(0, tile.stack.copy());
+                                tile.setStack(null);
+                                return true;
+                            } else if (tile.stack != null && held != null) {
+                                if (tile.stack.isItemEqual(held) && (held.stackSize + 1 <= held.getItem().getItemStackLimit(held))) {
+                                    held.stackSize += tile.stack.stackSize;
 
-									if (held.stackSize > held.getMaxStackSize()) {
-										held.stackSize = held.getMaxStackSize();
-										tile.stack.stackSize = held.stackSize - held.getMaxStackSize();
-										world.markBlockForUpdate(x, y, z);
-									} else {
-										tile.setStack(null);
-									}
+                                    if (held.stackSize > held.getMaxStackSize()) {
+                                        held.stackSize = held.getMaxStackSize();
+                                        tile.stack.stackSize = held.stackSize - held.getMaxStackSize();
+                                        world.markBlockForUpdate(x, y, z);
+                                    } else {
+                                        tile.setStack(null);
+                                    }
 
-									return true;
-								}
-							}
-						}
-					}
-				}
-			}
-		}
+                                    return true;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
 
-		return !player.isSneaking();
-	}
+        return !player.isSneaking();
+    }
 
-	@Override
-	public int[] getSubtypes() {
-		return ArrayHelper.getArrayIndexes(NAMES); // Forces all aspects of this block to base themselves off the NAMES array
-	}
+    @Override
+    public int[] getSubtypes() {
+        return ArrayHelper.getArrayIndexes(NAMES); // Forces all aspects of this block to base themselves off the NAMES array
+    }
 
-	@Override
-	public String getNameForType(int type) {
-		return NAMES[type];
-	}
+    @Override
+    public String getNameForType(int type) {
+        return NAMES[type];
+    }
 
-	@Override
-	public boolean useCustomRender() {
-		return true;
-	}
+    @Override
+    public boolean useCustomRender() {
+        return true;
+    }
 
-	@Override
-	public IIcon getIcon(int side, int meta) {
-		return Blocks.planks.getIcon(side, meta);
-	}
+    @Override
+    public IIcon getIcon(int side, int meta) {
+        return Blocks.planks.getIcon(side, meta);
+    }
 
-	@Override
-	public TileEntity createNewTileEntity(World world, int meta) {
-		return new TileTable();
-	}
+    @Override
+    public TileEntity createNewTileEntity(World world, int meta) {
+        return new TileTable();
+    }
 }

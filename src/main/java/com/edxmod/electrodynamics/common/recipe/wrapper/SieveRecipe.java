@@ -9,37 +9,37 @@ import java.util.List;
 
 public class SieveRecipe implements IGenericRecipe<ItemStack[]> {
 
-	private final ItemStack input;
-	private final RandomStack[] output;
+    private final ItemStack input;
+    private final RandomStack[] output;
 
-	private final int duration;
+    private final int duration;
 
-	private final boolean ignoreNBT;
+    private final boolean ignoreNBT;
 
-	public SieveRecipe(ItemStack input, RandomStack[] output, int duration, boolean ignoreNBT) {
-		this.input = input;
-		this.output = output;
-		this.duration = duration;
-		this.ignoreNBT = ignoreNBT;
-	}
+    public SieveRecipe(ItemStack input, RandomStack[] output, int duration, boolean ignoreNBT) {
+        this.input = input;
+        this.output = output;
+        this.duration = duration;
+        this.ignoreNBT = ignoreNBT;
+    }
 
-	public int getDuration() {
-		return duration;
-	}
+    public int getDuration() {
+        return duration;
+    }
 
-	@Override
-	public boolean valid(ItemStack stack) {
-		return StackHelper.areStacksSimilar(stack, input, ignoreNBT);
-	}
+    @Override
+    public boolean valid(ItemStack stack) {
+        return StackHelper.areStacksSimilar(stack, input, ignoreNBT);
+    }
 
-	@Override
-	public ItemStack[] get(ItemStack input) {
-		List<ItemStack> out = new ArrayList<ItemStack>();
+    @Override
+    public ItemStack[] get(ItemStack input) {
+        List<ItemStack> out = new ArrayList<ItemStack>();
 
-		for (RandomStack stack : output) {
-			out.add(stack.get());
-		}
+        for (RandomStack stack : output) {
+            out.add(stack.get());
+        }
 
-		return out.toArray(new ItemStack[out.size()]);
-	}
+        return out.toArray(new ItemStack[out.size()]);
+    }
 }

@@ -10,19 +10,19 @@ import net.minecraft.item.ItemStack;
  */
 public class ItemHelper {
 
-	public static int getID(ItemStack stack) {
-		return getID(stack.getItem());
-	}
+    public static int getID(ItemStack stack) {
+        return getID(stack.getItem());
+    }
 
-	public static int getID(Block block) {
-		return GameData.getBlockRegistry().getId(block);
-	}
+    public static int getID(Block block) {
+        return GameData.getBlockRegistry().getId(block);
+    }
 
-	public static int getID(Item item) {
-		return GameData.getItemRegistry().getId(item);
-	}
+    public static int getID(Item item) {
+        return GameData.getItemRegistry().getId(item);
+    }
 
-	public static boolean isBlock(ItemStack stack, Block block) {
-		return getID(stack) == getID(block);
-	}
+    public static boolean isBlock(ItemStack stack, Block block) {
+        return getID(stack) == getID(block);
+    }
 }

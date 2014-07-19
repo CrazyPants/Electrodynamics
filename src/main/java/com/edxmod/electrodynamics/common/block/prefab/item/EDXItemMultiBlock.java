@@ -10,19 +10,19 @@ import net.minecraft.item.ItemStack;
  */
 public class EDXItemMultiBlock extends ItemBlock {
 
-	public EDXItemMultiBlock(Block block) {
-		super(block);
+    public EDXItemMultiBlock(Block block) {
+        super(block);
 
-		setHasSubtypes(true);
-	}
+        setHasSubtypes(true);
+    }
 
-	@Override
-	public int getMetadata(int damage) {
-		return damage;
-	}
+    @Override
+    public int getMetadata(int damage) {
+        return damage;
+    }
 
-	@Override
-	public String getUnlocalizedName(ItemStack stack) {
-		return super.getUnlocalizedName(stack) + "." + ((EDXMultiBlock) this.field_150939_a).getNameForType(stack.getItemDamage());
-	}
+    @Override
+    public String getUnlocalizedName(ItemStack stack) {
+        return super.getUnlocalizedName(stack) + "." + ((EDXMultiBlock) this.field_150939_a).getNameForType(stack.getItemDamage());
+    }
 }

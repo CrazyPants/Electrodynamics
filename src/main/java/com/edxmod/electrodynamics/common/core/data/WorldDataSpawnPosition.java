@@ -9,28 +9,28 @@ import net.minecraft.world.WorldSavedData;
  */
 public class WorldDataSpawnPosition extends WorldSavedData {
 
-	public ChunkCoordinates spawn;
+    public ChunkCoordinates spawn;
 
-	public WorldDataSpawnPosition() {
-		super("edx:spawn_position");
-	}
+    public WorldDataSpawnPosition() {
+        super("edx:spawn_position");
+    }
 
-	@Override
-	public void readFromNBT(NBTTagCompound nbt) {
-		if (nbt.hasKey("spawn")) {
-			NBTTagCompound tag = nbt.getCompoundTag("spawn");
-			spawn = new ChunkCoordinates(tag.getInteger("x"), tag.getInteger("y"), tag.getInteger("z"));
-		}
-	}
+    @Override
+    public void readFromNBT(NBTTagCompound nbt) {
+        if (nbt.hasKey("spawn")) {
+            NBTTagCompound tag = nbt.getCompoundTag("spawn");
+            spawn = new ChunkCoordinates(tag.getInteger("x"), tag.getInteger("y"), tag.getInteger("z"));
+        }
+    }
 
-	@Override
-	public void writeToNBT(NBTTagCompound nbt) {
-		if (spawn != null) {
-			NBTTagCompound tag = new NBTTagCompound();
-			tag.setInteger("x", spawn.posX);
-			tag.setInteger("y", spawn.posY);
-			tag.setInteger("z", spawn.posZ);
-			nbt.setTag("spawn", tag);
-		}
-	}
+    @Override
+    public void writeToNBT(NBTTagCompound nbt) {
+        if (spawn != null) {
+            NBTTagCompound tag = new NBTTagCompound();
+            tag.setInteger("x", spawn.posX);
+            tag.setInteger("y", spawn.posY);
+            tag.setInteger("z", spawn.posZ);
+            nbt.setTag("spawn", tag);
+        }
+    }
 }

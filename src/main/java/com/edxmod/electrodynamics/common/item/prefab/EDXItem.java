@@ -11,27 +11,27 @@ import net.minecraft.util.IIcon;
  */
 public class EDXItem extends Item {
 
-	private IIcon icon;
+    private IIcon icon;
 
-	public EDXItem(EDXCreativeTab tab) {
-		super();
+    public EDXItem(EDXCreativeTab tab) {
+        super();
 
-		setCreativeTab(tab.get());
-	}
+        setCreativeTab(tab.get());
+    }
 
-	@Override
-	public IIcon getIconFromDamage(int damage) {
-		return icon;
-	}
+    @Override
+    public IIcon getIconFromDamage(int damage) {
+        return icon;
+    }
 
-	@Override
-	public void registerIcons(IIconRegister register) {
-		if (!getIcon().isEmpty()) {
-			icon = register.registerIcon(EDXProps.RESOURCE_PREFIX + getIcon());
-		}
-	}
+    @Override
+    public void registerIcons(IIconRegister register) {
+        if (!getIcon().isEmpty()) {
+            icon = register.registerIcon(EDXProps.RESOURCE_PREFIX + getIcon());
+        }
+    }
 
-	public String getIcon() {
-		return "";
-	}
+    public String getIcon() {
+        return "";
+    }
 }

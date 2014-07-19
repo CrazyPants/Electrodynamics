@@ -11,43 +11,43 @@ import net.minecraftforge.client.model.IModelCustom;
  */
 public class WrappedModel {
 
-	private IModelCustom model;
+    private IModelCustom model;
 
-	private ResourceLocation texture;
+    private ResourceLocation texture;
 
-	public WrappedModel(String path) {
-		this(path + ".obj", path + ".png");
-	}
+    public WrappedModel(String path) {
+        this(path + ".obj", path + ".png");
+    }
 
-	public WrappedModel(String model, String texture) {
-		this(
-				new ResourceLocation(EDXProps.RESOURCE_PREFIX + "models/" + model),
-				new ResourceLocation(EDXProps.RESOURCE_PREFIX + "textures/models/" + texture)
-		);
-	}
+    public WrappedModel(String model, String texture) {
+        this(
+                new ResourceLocation(EDXProps.RESOURCE_PREFIX + "models/" + model),
+                new ResourceLocation(EDXProps.RESOURCE_PREFIX + "textures/models/" + texture)
+        );
+    }
 
-	public WrappedModel(ResourceLocation model, ResourceLocation texture) {
-		this.model = AdvancedModelLoader.loadModel(model);
-		this.texture = texture;
-	}
+    public WrappedModel(ResourceLocation model, ResourceLocation texture) {
+        this.model = AdvancedModelLoader.loadModel(model);
+        this.texture = texture;
+    }
 
-	public void bindTexture() {
-		Minecraft.getMinecraft().renderEngine.bindTexture(texture);
-	}
+    public void bindTexture() {
+        Minecraft.getMinecraft().renderEngine.bindTexture(texture);
+    }
 
-	public void renderAll() {
-		model.renderAll();
-	}
+    public void renderAll() {
+        model.renderAll();
+    }
 
-	public void renderOnly(String... groupNames) {
-		model.renderOnly(groupNames);
-	}
+    public void renderOnly(String... groupNames) {
+        model.renderOnly(groupNames);
+    }
 
-	public void renderPart(String partName) {
-		model.renderPart(partName);
-	}
+    public void renderPart(String partName) {
+        model.renderPart(partName);
+    }
 
-	public void renderAllExcept(String... excludedGroupNames) {
-		model.renderAllExcept(excludedGroupNames);
-	}
+    public void renderAllExcept(String... excludedGroupNames) {
+        model.renderAllExcept(excludedGroupNames);
+    }
 }

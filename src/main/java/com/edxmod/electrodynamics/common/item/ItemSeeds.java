@@ -14,38 +14,38 @@ import net.minecraft.world.World;
  */
 public class ItemSeeds extends EDXMultiItem {
 
-	public static final String[] NAMES = new String[] {"grass", "nether_grass"};
+    public static final String[] NAMES = new String[]{"grass", "nether_grass"};
 
-	public ItemSeeds() {
-		super(EDXCreativeTab.ITEMS);
-	}
+    public ItemSeeds() {
+        super(EDXCreativeTab.ITEMS);
+    }
 
-	@Override
-	public boolean onItemUseFirst(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ) {
-		if (!world.isRemote) {
-			Block block = world.getBlock(x, y, z);
+    @Override
+    public boolean onItemUseFirst(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ) {
+        if (!world.isRemote) {
+            Block block = world.getBlock(x, y, z);
 
-			if (block == Blocks.dirt && stack.getItemDamage() == 0) {
-				world.setBlock(x, y, z, Blocks.grass, 0, 3);
-				stack.stackSize--;
-				return true;
-			} else if (block == Blocks.soul_sand && stack.getItemDamage() == 1) {
-				world.setBlock(x, y, z, EDXBlocks.netherGrass, 0, 3);
-				stack.stackSize--;
-				return true;
-			}
-		}
+            if (block == Blocks.dirt && stack.getItemDamage() == 0) {
+                world.setBlock(x, y, z, Blocks.grass, 0, 3);
+                stack.stackSize--;
+                return true;
+            } else if (block == Blocks.soul_sand && stack.getItemDamage() == 1) {
+                world.setBlock(x, y, z, EDXBlocks.netherGrass, 0, 3);
+                stack.stackSize--;
+                return true;
+            }
+        }
 
-		return false;
-	}
+        return false;
+    }
 
-	@Override
-	public String[] getNames() {
-		return NAMES;
-	}
+    @Override
+    public String[] getNames() {
+        return NAMES;
+    }
 
-	@Override
-	public String getIconPrefix() {
-		return "world/seed";
-	}
+    @Override
+    public String getIconPrefix() {
+        return "world/seed";
+    }
 }

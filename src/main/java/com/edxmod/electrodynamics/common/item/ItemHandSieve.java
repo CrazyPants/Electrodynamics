@@ -19,154 +19,154 @@ import net.minecraft.world.World;
  */
 public class ItemHandSieve extends EDXItem {
 
-	public static void process(ItemStack stack, EntityPlayer player) {
-		InventoryItem inventoryItem = new InventoryItem(stack, 1);
-		ItemStack stack1 = inventoryItem.getStackInSlot(0);
+    public static void process(ItemStack stack, EntityPlayer player) {
+        InventoryItem inventoryItem = new InventoryItem(stack, 1);
+        ItemStack stack1 = inventoryItem.getStackInSlot(0);
 
-		if (stack1 != null) {
-			SieveRecipe recipe = EDXRecipes.SIEVE.get(stack1);
+        if (stack1 != null) {
+            SieveRecipe recipe = EDXRecipes.SIEVE.get(stack1);
 
-			for (ItemStack stack2 : recipe.get(null)) {
-				player.dropPlayerItemWithRandomChoice(stack2, false);
-			}
+            for (ItemStack stack2 : recipe.get(null)) {
+                player.dropPlayerItemWithRandomChoice(stack2, false);
+            }
 
-			stack1.stackSize--;
-			if (stack1.stackSize <= 0) {
-				inventoryItem.setInventorySlotContents(0, null);
-			}
-			inventoryItem.markDirty();
-		}
-	}
+            stack1.stackSize--;
+            if (stack1.stackSize <= 0) {
+                inventoryItem.setInventorySlotContents(0, null);
+            }
+            inventoryItem.markDirty();
+        }
+    }
 
-	public static void recalculate(ItemStack stack, EntityPlayer player) {
-		ItemStack stack1 = new InventoryItem(stack, 1).getStackInSlot(0);
+    public static void recalculate(ItemStack stack, EntityPlayer player) {
+        ItemStack stack1 = new InventoryItem(stack, 1).getStackInSlot(0);
 
-		if (stack1 != null) {
-			SieveRecipe recipe = EDXRecipes.SIEVE.get(stack1);
+        if (stack1 != null) {
+            SieveRecipe recipe = EDXRecipes.SIEVE.get(stack1);
 
-			ItemHandSieve.setCurrentDuration(stack, 0);
-			ItemHandSieve.setMaxDuration(stack, recipe.getDuration());
-		} else {
-			ItemHandSieve.setCurrentDuration(stack, 0);
-			ItemHandSieve.setMaxDuration(stack, 0);
-		}
+            ItemHandSieve.setCurrentDuration(stack, 0);
+            ItemHandSieve.setMaxDuration(stack, recipe.getDuration());
+        } else {
+            ItemHandSieve.setCurrentDuration(stack, 0);
+            ItemHandSieve.setMaxDuration(stack, 0);
+        }
 
-		// Sync
-		player.setCurrentItemOrArmor(0, stack);
-		if (player instanceof EntityPlayerMP) {
-			((EntityPlayerMP) player).updateHeldItem();
-		}
-	}
+        // Sync
+        player.setCurrentItemOrArmor(0, stack);
+        if (player instanceof EntityPlayerMP) {
+            ((EntityPlayerMP) player).updateHeldItem();
+        }
+    }
 
-	public static int getCurrentDuration(ItemStack stack) {
-		if (!stack.hasTagCompound()) {
-			return 0;
-		}
+    public static int getCurrentDuration(ItemStack stack) {
+        if (!stack.hasTagCompound()) {
+            return 0;
+        }
 
-		NBTTagCompound nbt = stack.getTagCompound();
+        NBTTagCompound nbt = stack.getTagCompound();
 
-		if (!nbt.hasKey("current")) {
-			return 0;
-		}
+        if (!nbt.hasKey("current")) {
+            return 0;
+        }
 
-		return nbt.getInteger("current");
-	}
+        return nbt.getInteger("current");
+    }
 
-	public static int getMaxDuration(ItemStack stack) {
-		if (!stack.hasTagCompound()) {
-			return 0;
-		}
+    public static int getMaxDuration(ItemStack stack) {
+        if (!stack.hasTagCompound()) {
+            return 0;
+        }
 
-		NBTTagCompound nbt = stack.getTagCompound();
+        NBTTagCompound nbt = stack.getTagCompound();
 
-		if (!nbt.hasKey("max")) {
-			return 0;
-		}
+        if (!nbt.hasKey("max")) {
+            return 0;
+        }
 
-		return nbt.getInteger("max");
-	}
+        return nbt.getInteger("max");
+    }
 
-	public static void setCurrentDuration(ItemStack stack, int duration) {
-		if (!stack.hasTagCompound()) {
-			stack.setTagCompound(new NBTTagCompound());
-		}
+    public static void setCurrentDuration(ItemStack stack, int duration) {
+        if (!stack.hasTagCompound()) {
+            stack.setTagCompound(new NBTTagCompound());
+        }
 
-		NBTTagCompound nbt = stack.getTagCompound();
+        NBTTagCompound nbt = stack.getTagCompound();
 
-		nbt.setInteger("current", duration);
+        nbt.setInteger("current", duration);
 
-		stack.setTagCompound(nbt);
-	}
+        stack.setTagCompound(nbt);
+    }
 
-	public static void setMaxDuration(ItemStack stack, int duration) {
-		if (!stack.hasTagCompound()) {
-			stack.setTagCompound(new NBTTagCompound());
-		}
+    public static void setMaxDuration(ItemStack stack, int duration) {
+        if (!stack.hasTagCompound()) {
+            stack.setTagCompound(new NBTTagCompound());
+        }
 
-		NBTTagCompound nbt = stack.getTagCompound();
+        NBTTagCompound nbt = stack.getTagCompound();
 
-		nbt.setInteger("max", duration);
+        nbt.setInteger("max", duration);
 
-		stack.setTagCompound(nbt);
-	}
+        stack.setTagCompound(nbt);
+    }
 
-	public ItemHandSieve() {
-		super(EDXCreativeTab.TOOLS);
+    public ItemHandSieve() {
+        super(EDXCreativeTab.TOOLS);
 
-		setMaxDamage(0);
-		setMaxStackSize(1);
-	}
+        setMaxDamage(0);
+        setMaxStackSize(1);
+    }
 
-	@Override
-	public boolean onItemUseFirst(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ) {
-		return false;
-	}
+    @Override
+    public boolean onItemUseFirst(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ) {
+        return false;
+    }
 
-	@Override
-	public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
-		if (!world.isRemote) {
-			if (player.isSneaking()) {
-				player.openGui(Electrodynamics.instance, GuiHandler.GUI_HAND_SIEVE, world, 0, 0, 0);
-				return stack;
-			}
-		}
+    @Override
+    public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player) {
+        if (!world.isRemote) {
+            if (player.isSneaking()) {
+                player.openGui(Electrodynamics.instance, GuiHandler.GUI_HAND_SIEVE, world, 0, 0, 0);
+                return stack;
+            }
+        }
 
-		player.setItemInUse(stack, getMaxItemUseDuration(stack));
+        player.setItemInUse(stack, getMaxItemUseDuration(stack));
 
-		return stack;
-	}
+        return stack;
+    }
 
-	@Override
-	public void onUsingTick(ItemStack stack, EntityPlayer player, int count) {
-		int current = getCurrentDuration(stack);
-		int max = getMaxDuration(stack);
+    @Override
+    public void onUsingTick(ItemStack stack, EntityPlayer player, int count) {
+        int current = getCurrentDuration(stack);
+        int max = getMaxDuration(stack);
 
-		player.swingItem();
+        player.swingItem();
 
-		if (max != 0) {
-			if (current < max) {
-				setCurrentDuration(stack, current + 1);
-			} else {
-				process(stack, player);
-				recalculate(stack, player);
-			}
-		} else {
-			recalculate(stack, player);
-		}
-	}
+        if (max != 0) {
+            if (current < max) {
+                setCurrentDuration(stack, current + 1);
+            } else {
+                process(stack, player);
+                recalculate(stack, player);
+            }
+        } else {
+            recalculate(stack, player);
+        }
+    }
 
-	@Override
-	public int getMaxItemUseDuration(ItemStack stack) {
-		return getMaxDuration(stack);
-	}
+    @Override
+    public int getMaxItemUseDuration(ItemStack stack) {
+        return getMaxDuration(stack);
+    }
 
-	@Override
-	public EnumAction getItemUseAction(ItemStack stack) {
-		return EnumAction.none;
-	}
+    @Override
+    public EnumAction getItemUseAction(ItemStack stack) {
+        return EnumAction.none;
+    }
 
-	@Override
-	public String getIcon() {
-		return "tools/handSieve";
-	}
+    @Override
+    public String getIcon() {
+        return "tools/handSieve";
+    }
 }

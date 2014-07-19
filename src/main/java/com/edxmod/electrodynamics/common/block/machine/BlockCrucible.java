@@ -12,22 +12,22 @@ import net.minecraft.world.World;
  */
 public class BlockCrucible extends EDXTileBlock {
 
-	public BlockCrucible() {
-		super(Material.rock);
-	}
+    public BlockCrucible() {
+        super(Material.rock);
+    }
 
-	@Override
-	public TileEntity createNewTileEntity(World world, int meta) {
-		return new TileCrucible();
-	}
+    @Override
+    public TileEntity createNewTileEntity(World world, int meta) {
+        return new TileCrucible();
+    }
 
-	@Override
-	public boolean useCustomRender() {
-		return true;
-	}
+    @Override
+    public boolean useCustomRender() {
+        return true;
+    }
 
-	@Override
-	public void registerBlockIcons(IIconRegister iconRegister) {
+    @Override
+    public void registerBlockIcons(IIconRegister iconRegister) {
 
-	}
+    }
 }

@@ -12,20 +12,20 @@ import net.minecraft.world.World;
  */
 public class EDXMachineBlock extends EDXItemBlock {
 
-	public EDXMachineBlock(Block block) {
-		super(block);
-	}
+    public EDXMachineBlock(Block block) {
+        super(block);
+    }
 
-	@Override
-	public boolean placeBlockAt(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ, int metadata) {
-		boolean result = super.placeBlockAt(stack, player, world, x, y, z, side, hitX, hitY, hitZ, metadata);
+    @Override
+    public boolean placeBlockAt(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ, int metadata) {
+        boolean result = super.placeBlockAt(stack, player, world, x, y, z, side, hitX, hitY, hitZ, metadata);
 
-		if (result) {
-			TileCoreMachine tile = (TileCoreMachine) world.getTileEntity(x, y, z);
+        if (result) {
+            TileCoreMachine tile = (TileCoreMachine) world.getTileEntity(x, y, z);
 
-			tile.orientation = EntityHelper.get2DRotation(player).getOpposite();
-		}
+            tile.orientation = EntityHelper.get2DRotation(player).getOpposite();
+        }
 
-		return result;
-	}
+        return result;
+    }
 }

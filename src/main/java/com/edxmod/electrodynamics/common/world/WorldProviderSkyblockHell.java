@@ -9,14 +9,14 @@ import net.minecraft.world.WorldProviderHell;
  */
 public class WorldProviderSkyblockHell extends WorldProviderHell {
 
-	@Override
-	public ChunkCoordinates getSpawnPoint() {
-		ChunkCoordinates spawn = BlockSpawnMarker.getSpawnPosition(this.worldObj);
-		return spawn != null ? spawn : super.getSpawnPoint();
-	}
+    @Override
+    public ChunkCoordinates getSpawnPoint() {
+        ChunkCoordinates spawn = BlockSpawnMarker.getSpawnPosition(this.worldObj);
+        return spawn != null ? spawn : super.getSpawnPoint();
+    }
 
-	@Override
-	public boolean canRespawnHere() {
-		return true;
-	}
+    @Override
+    public boolean canRespawnHere() {
+        return true;
+    }
 }

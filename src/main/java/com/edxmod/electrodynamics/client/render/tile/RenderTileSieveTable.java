@@ -10,13 +10,13 @@ import org.lwjgl.opengl.GL11;
  */
 public class RenderTileSieveTable extends EDXTileRenderer<TileSieveTable> {
 
-	public void renderTileAt(TileSieveTable tile, double x, double y, double z, float delta) {
-		GL11.glPushMatrix();
-		GL11.glTranslated(x, y, z);
+    public void renderTileAt(TileSieveTable tile, double x, double y, double z, float delta) {
+        GL11.glPushMatrix();
+        GL11.glTranslated(x, y, z);
 
-		Model.TABLE_SIEVE.bindTexture();
-		Model.TABLE_SIEVE.renderAll();
+        Model.TABLE_SIEVE.bindTexture();
+        Model.TABLE_SIEVE.renderAll();
 
-		GL11.glPopMatrix();
-	}
+        GL11.glPopMatrix();
+    }
 }

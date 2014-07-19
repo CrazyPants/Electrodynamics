@@ -13,33 +13,33 @@ import net.minecraft.world.World;
  */
 public class BlockKineticCrank extends EDXTileBlock {
 
-	public BlockKineticCrank() {
-		super(Material.iron);
-	}
+    public BlockKineticCrank() {
+        super(Material.iron);
+    }
 
-	@Override
-	public void onNeighborBlockChange(World world, int x, int y, int z, Block block) {
-		if (!world.isRemote) {
-			TileKineticCrank tile = (TileKineticCrank) world.getTileEntity(x, y, z);
+    @Override
+    public void onNeighborBlockChange(World world, int x, int y, int z, Block block) {
+        if (!world.isRemote) {
+            TileKineticCrank tile = (TileKineticCrank) world.getTileEntity(x, y, z);
 
-			if (tile != null) {
-				tile.updateOrientation();
-			}
-		}
-	}
+            if (tile != null) {
+                tile.updateOrientation();
+            }
+        }
+    }
 
-	@Override
-	public TileEntity createNewTileEntity(World world, int meta) {
-		return new TileKineticCrank();
-	}
+    @Override
+    public TileEntity createNewTileEntity(World world, int meta) {
+        return new TileKineticCrank();
+    }
 
-	@Override
-	public boolean useCustomRender() {
-		return true;
-	}
+    @Override
+    public boolean useCustomRender() {
+        return true;
+    }
 
-	@Override
-	public void registerBlockIcons(IIconRegister iconRegister) {
+    @Override
+    public void registerBlockIcons(IIconRegister iconRegister) {
 
-	}
+    }
 }

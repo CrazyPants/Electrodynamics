@@ -12,22 +12,22 @@ import net.minecraft.world.World;
  */
 public class BlockMetalPress extends EDXTileBlock {
 
-	public BlockMetalPress() {
-		super(Material.iron);
-	}
+    public BlockMetalPress() {
+        super(Material.iron);
+    }
 
-	@Override
-	public TileEntity createNewTileEntity(World world, int meta) {
-		return new TileMetalPress();
-	}
+    @Override
+    public TileEntity createNewTileEntity(World world, int meta) {
+        return new TileMetalPress();
+    }
 
-	@Override
-	public boolean useCustomRender() {
-		return true;
-	}
+    @Override
+    public boolean useCustomRender() {
+        return true;
+    }
 
-	@Override
-	public void registerBlockIcons(IIconRegister iconRegister) {
+    @Override
+    public void registerBlockIcons(IIconRegister iconRegister) {
 
-	}
+    }
 }

@@ -8,8 +8,6 @@ import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.IIcon;
-import net.minecraft.world.IBlockAccess;
-import net.minecraft.world.World;
 import net.minecraftforge.fluids.Fluid;
 
 /**
@@ -25,9 +23,10 @@ public class BlockFluidBoiling extends EDXBasicFluid {
         setQuantaPerBlock(2);
     }
 
+    @SideOnly(Side.CLIENT)
     @Override
     public void registerBlockIcons(IIconRegister register) {
-        stillIcon = Blocks.water.getIcon(0,0);
+        stillIcon = Blocks.water.getIcon(0, 0);
     }
 
     @SideOnly(Side.CLIENT)
@@ -35,5 +34,4 @@ public class BlockFluidBoiling extends EDXBasicFluid {
     public IIcon getIcon(int side, int meta) {
         return stillIcon;
     }
-
 }

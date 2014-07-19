@@ -12,22 +12,22 @@ import net.minecraft.world.World;
  */
 public class BlockKiln extends EDXTileBlock {
 
-	public BlockKiln() {
-		super(Material.iron);
-	}
+    public BlockKiln() {
+        super(Material.iron);
+    }
 
-	@Override
-	public TileEntity createNewTileEntity(World world, int meta) {
-		return new TileKiln();
-	}
+    @Override
+    public TileEntity createNewTileEntity(World world, int meta) {
+        return new TileKiln();
+    }
 
-	@Override
-	public boolean useCustomRender() {
-		return true;
-	}
+    @Override
+    public boolean useCustomRender() {
+        return true;
+    }
 
-	@Override
-	public void registerBlockIcons(IIconRegister iconRegister) {
+    @Override
+    public void registerBlockIcons(IIconRegister iconRegister) {
 
-	}
+    }
 }

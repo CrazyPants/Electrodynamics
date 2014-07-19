@@ -7,26 +7,26 @@ import net.minecraftforge.fluids.FluidStack;
  */
 public class FluidStackWrapper extends GenericStackWrapper<FluidStack> {
 
-	public FluidStackWrapper(FluidStack contents) {
-		super(contents);
-	}
+    public FluidStackWrapper(FluidStack contents) {
+        super(contents);
+    }
 
-	@Override
-	public GenericStackWrapper<FluidStack> copy() {
-		return new FluidStackWrapper(contents.copy());
-	}
+    @Override
+    public GenericStackWrapper<FluidStack> copy() {
+        return new FluidStackWrapper(contents.copy());
+    }
 
-	@Override
-	public boolean equals(GenericStackWrapper<FluidStack> wrapper) {
-		if (wrapper.contents == null || wrapper.contents.getFluid() == null) {
-			return false;
-		}
+    @Override
+    public boolean equals(GenericStackWrapper<FluidStack> wrapper) {
+        if (wrapper.contents == null || wrapper.contents.getFluid() == null) {
+            return false;
+        }
 
-		return (wrapper.contents.isFluidEqual(this.contents));
-	}
+        return (wrapper.contents.isFluidEqual(this.contents));
+    }
 
-	@Override
-	public int hashCode() {
-		return contents.fluidID;
-	}
+    @Override
+    public int hashCode() {
+        return contents.fluidID;
+    }
 }

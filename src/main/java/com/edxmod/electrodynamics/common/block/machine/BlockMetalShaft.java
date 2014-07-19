@@ -13,40 +13,40 @@ import net.minecraft.world.World;
  */
 public class BlockMetalShaft extends EDXTileBlock {
 
-	public BlockMetalShaft() {
-		super(Material.iron);
-	}
+    public BlockMetalShaft() {
+        super(Material.iron);
+    }
 
-	@Override
-	public void setBlockBoundsBasedOnState(IBlockAccess world, int x, int y, int z) {
-		TileMetalShaft tile = (TileMetalShaft) world.getTileEntity(x, y, z);
+    @Override
+    public void setBlockBoundsBasedOnState(IBlockAccess world, int x, int y, int z) {
+        TileMetalShaft tile = (TileMetalShaft) world.getTileEntity(x, y, z);
 
-		if (tile != null) {
-			switch (tile.orientation) {
-				case NORTH:
-				case SOUTH:
-					setBlockBounds(0, 0.4F, 0.4F, 1, 0.6F, 0.6F);
-					break;
-				case EAST:
-				case WEST:
-					setBlockBounds(0.4F, 0.4F, 0, 0.6F, 0.6F, 1);
-					break;
-			}
-		}
-	}
+        if (tile != null) {
+            switch (tile.orientation) {
+                case NORTH:
+                case SOUTH:
+                    setBlockBounds(0, 0.4F, 0.4F, 1, 0.6F, 0.6F);
+                    break;
+                case EAST:
+                case WEST:
+                    setBlockBounds(0.4F, 0.4F, 0, 0.6F, 0.6F, 1);
+                    break;
+            }
+        }
+    }
 
-	@Override
-	public TileEntity createNewTileEntity(World world, int meta) {
-		return new TileMetalShaft();
-	}
+    @Override
+    public TileEntity createNewTileEntity(World world, int meta) {
+        return new TileMetalShaft();
+    }
 
-	@Override
-	public boolean useCustomRender() {
-		return true;
-	}
+    @Override
+    public boolean useCustomRender() {
+        return true;
+    }
 
-	@Override
-	public void registerBlockIcons(IIconRegister iconRegister) {
+    @Override
+    public void registerBlockIcons(IIconRegister iconRegister) {
 
-	}
+    }
 }

@@ -1,7 +1,5 @@
 package com.edxmod.electrodynamics.common.block.prefab;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.util.IIcon;
@@ -22,7 +20,7 @@ public abstract class EDXBasicFluid extends BlockFluidClassic {
         super(fluid, material);
     }
 
-    public void setDisplace(boolean canDisplace){
+    public void setDisplace(boolean canDisplace) {
         this.canDisplace = canDisplace;
     }
 
@@ -32,19 +30,18 @@ public abstract class EDXBasicFluid extends BlockFluidClassic {
     }
 
     @Override
-    public boolean canDisplace(IBlockAccess world, int x, int y, int z){
-        if (!canDisplace && world.getBlock(x,y,z).getMaterial().isLiquid())
+    public boolean canDisplace(IBlockAccess world, int x, int y, int z) {
+        if (!canDisplace && world.getBlock(x, y, z).getMaterial().isLiquid())
             return false;
         return super.canDisplace(world, x, y, z);
     }
 
     @Override
-    public boolean displaceIfPossible(World world, int x, int y, int z){
-        if (!canDisplace && world.getBlock(x,y,z).getMaterial().isLiquid())
+    public boolean displaceIfPossible(World world, int x, int y, int z) {
+        if (!canDisplace && world.getBlock(x, y, z).getMaterial().isLiquid())
             return false;
         return super.displaceIfPossible(world, x, y, z);
     }
 
     public abstract void registerBlockIcons(IIconRegister register);
-
 }

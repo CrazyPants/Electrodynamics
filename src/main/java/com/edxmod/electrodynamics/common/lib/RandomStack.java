@@ -9,18 +9,18 @@ import java.util.Random;
  */
 public class RandomStack {
 
-	private static final Random random = new Random();
+    private static final Random random = new Random();
 
-	public final ItemStack stack;
+    public final ItemStack stack;
 
-	private final float chance;
+    private final float chance;
 
-	public RandomStack(ItemStack stack, float chance) {
-		this.stack = stack;
-		this.chance = chance;
-	}
+    public RandomStack(ItemStack stack, float chance) {
+        this.stack = stack;
+        this.chance = chance;
+    }
 
-	public ItemStack get() {
-		return random.nextFloat() <= chance ? stack.copy() : null;
-	}
+    public ItemStack get() {
+        return random.nextFloat() <= chance ? stack.copy() : null;
+    }
 }

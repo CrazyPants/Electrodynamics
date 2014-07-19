@@ -8,21 +8,21 @@ import com.edxmod.electrodynamics.common.item.prefab.EDXMultiItem;
  */
 public class ItemComponent extends EDXMultiItem {
 
-	private static final String[] NAMES = {"twine", "twine_mesh"};
+    private static final String[] NAMES = {"twine", "twine_mesh"};
 
-	public ItemComponent() {
-		super(EDXCreativeTab.ITEMS);
+    public ItemComponent() {
+        super(EDXCreativeTab.ITEMS);
 
-		setHasSubtypes(true);
-	}
+        setHasSubtypes(true);
+    }
 
-	@Override
-	public String[] getNames() {
-		return NAMES;
-	}
+    @Override
+    public String[] getNames() {
+        return NAMES;
+    }
 
-	@Override
-	public String getIconPrefix() {
-		return "component";
-	}
+    @Override
+    public String getIconPrefix() {
+        return "component";
+    }
 }

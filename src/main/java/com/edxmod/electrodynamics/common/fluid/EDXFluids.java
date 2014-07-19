@@ -16,13 +16,13 @@ public class EDXFluids {
 
     public static Fluid boilingWaterFluid;
 
-    public static void initializeFluids(){
+    public static void initializeFluids() {
         boilingWaterFluid = new Fluid("boiling");
         FluidRegistry.registerFluid(boilingWaterFluid);
     }
 
-    public static void initializeFluidContainers(){
+    public static void initializeFluidContainers() {
         FluidContainerRegistry.registerFluidContainer(FluidRegistry.getFluidStack("boiling", FluidContainerRegistry.BUCKET_VOLUME), new ItemStack(EDXItems.boilingBucket), new ItemStack(Items.bucket));
-        BucketHandler.INSTANCE.buckets.put(EDXBlocks.boilingWater,EDXItems.boilingBucket);
+        BucketHandler.INSTANCE.buckets.put(EDXBlocks.boilingWater, EDXItems.boilingBucket);
     }
 }

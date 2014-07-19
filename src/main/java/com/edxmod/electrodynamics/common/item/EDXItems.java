@@ -11,77 +11,75 @@ import net.minecraft.item.Item;
  */
 public class EDXItems {
 
-	// HAMMERS
-	public static ItemHammer hammerWood;
-	public static ItemHammer hammerStone;
-	public static ItemHammer hammerIron;
-	public static ItemHammer hammerSteel;
-	public static ItemHammer hammerDiamond;
+    // HAMMERS
+    public static ItemHammer hammerWood;
+    public static ItemHammer hammerStone;
+    public static ItemHammer hammerIron;
+    public static ItemHammer hammerSteel;
+    public static ItemHammer hammerDiamond;
 
-	// TOOLS
-	public static Item net;
-	public static Item handSieve;
-	public static Item component;
+    // TOOLS
+    public static Item net;
+    public static Item handSieve;
+    public static Item component;
 
-	// RESOURCES
-	public static Item resourceChunk;
-	public static Item resourceClump;
-	public static Item resourceDust;
-	public static Item resourceFlake;
-	public static Item resourceIngot;
-	public static Item resourceNugget;
-	public static Item resourcePebble;
+    // RESOURCES
+    public static Item resourceChunk;
+    public static Item resourceClump;
+    public static Item resourceDust;
+    public static Item resourceFlake;
+    public static Item resourceIngot;
+    public static Item resourceNugget;
+    public static Item resourcePebble;
 
-	// OTHER
-	public static Item seeds;
-	public static Item cosmetic;
+    // OTHER
+    public static Item seeds;
+    public static Item cosmetic;
     public static Item boilingBucket;
 
-	public static void initialize() {
-		hammerWood = new ItemHammer(64, "wood", "plankWood");
-		hammerStone = new ItemHammer(128, "stone", "cobblestone");
-		hammerIron = new ItemHammer(160, "iron", "ingotIron");
-		hammerSteel = new ItemHammer(320, "steel", "ingotSteel");
-		hammerDiamond = new ItemHammer(640, "diamond", Items.diamond);
-		registerItem(hammerWood);
-		registerItem(hammerStone);
-		registerItem(hammerIron);
-		registerItem(hammerSteel);
-		registerItem(hammerDiamond);
+    public static void initialize() {
+        hammerWood = new ItemHammer(64, "wood", "plankWood");
+        hammerStone = new ItemHammer(128, "stone", "cobblestone");
+        hammerIron = new ItemHammer(160, "iron", "ingotIron");
+        hammerSteel = new ItemHammer(320, "steel", "ingotSteel");
+        hammerDiamond = new ItemHammer(640, "diamond", Items.diamond);
+        registerItem(hammerWood);
+        registerItem(hammerStone);
+        registerItem(hammerIron);
+        registerItem(hammerSteel);
+        registerItem(hammerDiamond);
 
-		net = new ItemNet().setUnlocalizedName("net");
-		registerItem(net);
-		handSieve = new ItemHandSieve().setUnlocalizedName("hand_sieve");
-		registerItem(handSieve);
-		component = new ItemComponent().setUnlocalizedName("component_item");
-		registerItem(component);
+        net = new ItemNet().setUnlocalizedName("net");
+        registerItem(net);
+        handSieve = new ItemHandSieve().setUnlocalizedName("hand_sieve");
+        registerItem(handSieve);
+        component = new ItemComponent().setUnlocalizedName("component_item");
+        registerItem(component);
 
-		resourceChunk = new ItemResource().setType("Chunk");
-		resourceClump = new ItemResource().setType("Clump");
-		resourceDust = new ItemResource().setType("Dust");
-		resourceFlake = new ItemResource().setType("Flakes");
-		resourceIngot = new ItemResource().setType("Ingot");
-		resourceNugget = new ItemResource().setType("Nugget");
-		resourcePebble = new ItemResource().setType("Pebbles");
-		registerItem(resourceChunk);
-		registerItem(resourceClump);
-		registerItem(resourceDust);
-		registerItem(resourceFlake);
-		registerItem(resourceIngot);
-		registerItem(resourceNugget);
-		registerItem(resourcePebble);
+        resourceChunk = new ItemResource().setType("Chunk");
+        resourceClump = new ItemResource().setType("Clump");
+        resourceDust = new ItemResource().setType("Dust");
+        resourceFlake = new ItemResource().setType("Flakes");
+        resourceIngot = new ItemResource().setType("Ingot");
+        resourceNugget = new ItemResource().setType("Nugget");
+        resourcePebble = new ItemResource().setType("Pebbles");
+        registerItem(resourceChunk);
+        registerItem(resourceClump);
+        registerItem(resourceDust);
+        registerItem(resourceFlake);
+        registerItem(resourceIngot);
+        registerItem(resourceNugget);
+        registerItem(resourcePebble);
 
-		seeds = new ItemSeeds().setUnlocalizedName("seeds");
-		cosmetic = new ItemCosmetic().setUnlocalizedName("cosmetic");
+        seeds = new ItemSeeds().setUnlocalizedName("seeds");
+        cosmetic = new ItemCosmetic().setUnlocalizedName("cosmetic");
         boilingBucket = new ItemBoilingBucket(EDXBlocks.boilingWater).setUnlocalizedName("boiling_bucket").setContainerItem(Items.bucket);
-		registerItem(seeds);
-		registerItem(cosmetic);
+        registerItem(seeds);
+        registerItem(cosmetic);
         registerItem(boilingBucket);
+    }
 
-
-	}
-
-	public static void registerItem(Item item) {
-		GameRegistry.registerItem(item, item.getUnlocalizedName().replace("item.", ""));
-	}
+    public static void registerItem(Item item) {
+        GameRegistry.registerItem(item, item.getUnlocalizedName().replace("item.", ""));
+    }
 }
