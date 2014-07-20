@@ -19,6 +19,7 @@ public class EDXFluids {
     public static void initializeFluids() {
         boilingWaterFluid = new Fluid("boiling");
         FluidRegistry.registerFluid(boilingWaterFluid);
+        boilingWaterFluid.setTemperature(373); // Boiling point of water in Kelvins
     }
 
     public static void initializeFluidContainers() {

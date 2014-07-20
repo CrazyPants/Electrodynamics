@@ -13,12 +13,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Created by Thlayli on 16/07/2014.
+ * @author Thlayli
  */
 public class BucketHandler {
 
-
     public static BucketHandler INSTANCE = new BucketHandler();
+
     public Map<Block, Item> buckets = new HashMap<Block, Item>();
 
     private BucketHandler() {
@@ -27,7 +27,6 @@ public class BucketHandler {
 
     @SubscribeEvent
     public void onBucketFill(FillBucketEvent event) {
-
         ItemStack result = fillCustomBucket(event.world, event.target);
 
         if (result == null)
@@ -38,10 +37,9 @@ public class BucketHandler {
     }
 
     private ItemStack fillCustomBucket(World world, MovingObjectPosition pos) {
-
         Block block = world.getBlock(pos.blockX, pos.blockY, pos.blockZ);
-
         Item bucket = buckets.get(block);
+
         if (bucket != null && world.getBlockMetadata(pos.blockX, pos.blockY, pos.blockZ) == 0) {
             world.setBlockToAir(pos.blockX, pos.blockY, pos.blockZ);
             return new ItemStack(bucket);

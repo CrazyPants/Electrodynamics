@@ -1,7 +1,6 @@
 package com.edxmod.electrodynamics.common.block.fluid;
 
 import com.edxmod.electrodynamics.common.block.prefab.EDXBasicFluid;
-import com.edxmod.electrodynamics.common.core.EDXCreativeTab;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.material.Material;
@@ -19,19 +18,17 @@ public class BlockFluidBoiling extends EDXBasicFluid {
 
     public BlockFluidBoiling(Fluid fluid, Material material) {
         super(fluid, material);
-        setCreativeTab(EDXCreativeTab.BLOCKS.get());
         setQuantaPerBlock(2);
     }
 
     @SideOnly(Side.CLIENT)
     @Override
-    public void registerBlockIcons(IIconRegister register) {
-        stillIcon = Blocks.water.getIcon(0, 0);
+    public IIcon getIcon(int side, int meta) {
+        return Blocks.flowing_water.getIcon(side, meta);
     }
 
-    @SideOnly(Side.CLIENT)
     @Override
-    public IIcon getIcon(int side, int meta) {
-        return stillIcon;
+    public void registerBlockIcons(IIconRegister register) {
+
     }
 }
