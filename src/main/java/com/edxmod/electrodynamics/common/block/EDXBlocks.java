@@ -32,7 +32,6 @@ public class EDXBlocks {
     public static Block waterMill;
     public static Block kiln;
     public static Block metalPress;
-    public static Block barrel;
     public static Block crucible;
     public static Block infernalFurnace;
     public static Block metalShaft;
@@ -62,7 +61,6 @@ public class EDXBlocks {
         waterMill = new BlockWaterMill().setBlockName("water_mill");
         kiln = new BlockKiln().setBlockName("kiln");
         metalPress = new BlockMetalPress().setBlockName("metal_press");
-        barrel = new BlockBarrel().setBlockName("barrel");
         crucible = new BlockCrucible().setBlockName("crucible");
         infernalFurnace = new BlockInfernalFurnace().setBlockName("infernal_furnace");
         metalShaft = new BlockMetalShaft().setBlockName("metal_shaft");
@@ -90,7 +88,6 @@ public class EDXBlocks {
         registerBlock(waterMill, ItemBlockWaterMill.class);
         registerBlock(kiln, EDXMachineBlock.class);
         registerBlock(metalPress, EDXMachineBlock.class);
-        registerBlock(barrel, EDXItemMultiBlock.class);
         registerBlock(crucible, EDXItemBlock.class);
         registerBlock(infernalFurnace, EDXMachineBlock.class);
         registerBlock(metalShaft, ItemBlockMetalShaft.class);
@@ -117,7 +114,6 @@ public class EDXBlocks {
         GameRegistry.registerTileEntity(TileWaterMill.class, "edx:water_mill");
         GameRegistry.registerTileEntity(TileKiln.class, "edx:kiln");
         GameRegistry.registerTileEntity(TileMetalPress.class, "edx:metal_press");
-        GameRegistry.registerTileEntity(TileBarrel.class, "edx:barrel");
         GameRegistry.registerTileEntity(TileCrucible.class, "edx:crucible");
         GameRegistry.registerTileEntity(TileInfernalFurnace.class, "edx:infernal_furnace");
         GameRegistry.registerTileEntity(TileSpawnMarker.class, "edx:spawn_marker");
