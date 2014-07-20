@@ -33,6 +33,16 @@ public class BlockHammerMill extends EDXTileBlock {
     }
 
     @Override
+    public boolean onBlockEventReceived(World world, int x, int y, int z, int id, int param) {
+        TileHammerMill tile = (TileHammerMill) world.getTileEntity(x, y, z);
+        if (tile != null) {
+            tile.receiveClientEvent(id, param);
+            return true;
+        }
+        return false;
+    }
+
+    @Override
     public TileEntity createNewTileEntity(World world, int meta) {
         return new TileHammerMill();
     }

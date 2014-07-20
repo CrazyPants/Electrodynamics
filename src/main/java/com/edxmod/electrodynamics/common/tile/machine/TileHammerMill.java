@@ -1,10 +1,12 @@
 package com.edxmod.electrodynamics.common.tile.machine;
 
+import com.edxmod.electrodynamics.common.block.EDXBlocks;
 import com.edxmod.electrodynamics.common.lib.StackReference;
+import com.edxmod.electrodynamics.common.lib.client.EnumParticle;
 import com.edxmod.electrodynamics.common.lib.tool.ToolDefinition;
+import com.edxmod.electrodynamics.common.network.nbt.NBTHandler;
 import com.edxmod.electrodynamics.common.recipe.EDXRecipes;
 import com.edxmod.electrodynamics.common.tile.core.TileCoreMachine;
-import com.edxmod.electrodynamics.common.network.nbt.NBTHandler;
 import com.edxmod.electrodynamics.common.util.StackHelper;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -12,6 +14,7 @@ import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.ISidedInventory;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityHopper;
@@ -84,6 +87,8 @@ public class TileHammerMill extends TileCoreMachine implements ISidedInventory {
             // Processing
             if (charge >= 4 && canFunction()) {
                 ItemStack output = getOutput(processing);
+
+                worldObj.addBlockEvent(xCoord, yCoord, zCoord, EDXBlocks.hammerMill, Item.getIdFromItem(output.getItem()), output.getItemDamage());
 
                 if (output != null) {
                     IInventory below = getBelowInventory();
@@ -229,6 +234,14 @@ public class TileHammerMill extends TileCoreMachine implements ISidedInventory {
 
     private boolean canFunction() {
         return processing != null && processing.stackSize > 0 && (buffer == null || (StackHelper.areStacksSimilar(getOutput(processing), buffer, true) && buffer.stackSize < buffer.getMaxStackSize()));
+    }
+
+    @Override
+    public boolean receiveClientEvent(int id, int param) {
+        for (int i=0; i<10; i++) {
+            EnumParticle.ITEM_BREAK(new ItemStack(Item.getItemById(id), 1, param), worldObj, xCoord, yCoord, zCoord);
+        }
+        return true;
     }
 
     /* IINVENTORY / ISIDEDINVENTORY */
