@@ -65,6 +65,8 @@ public class TileSieveTable extends TileCore implements ISidedInventory {
                                 item.setDead();
                             }
                         }
+                    } else {
+                        InventoryHelper.ejectItem(worldObj, xCoord, yCoord, zCoord, ForgeDirection.DOWN, item.getEntityItem(), new Random());
                     }
                 }
             }
