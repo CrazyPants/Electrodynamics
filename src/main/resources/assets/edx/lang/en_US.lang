@@ -73,6 +73,7 @@ tile.storage.tin.name=Tin Block
 # MISC TOOLS
 item.net.name=Net
 item.hand_sieve.name=Hand Sieve
+item.boiling_bucket.name=Boiling Water Bucket
 
 # MISC ITEMS
 item.component_item.twine.name=Twine
