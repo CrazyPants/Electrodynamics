@@ -46,7 +46,6 @@ public class RecipeParser {
 
         fileWriter.flush();
         fileWriter.close();
-
     }
 
     public static class ParsedRecipe {
