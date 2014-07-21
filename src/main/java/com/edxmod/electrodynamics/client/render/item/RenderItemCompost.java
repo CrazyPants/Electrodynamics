@@ -38,6 +38,9 @@ public class RenderItemCompost implements IItemRenderer{
                 Model.COMPOST_WOOD.bindTexture();
                 Model.COMPOST_WOOD.renderAll();
                 break;
+            case 1:
+                Model.COMPOST_STONE.bindTexture();
+                Model.COMPOST_STONE.renderAll();
         }
 
         GL11.glPopMatrix();

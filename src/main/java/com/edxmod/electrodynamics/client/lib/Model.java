@@ -21,7 +21,8 @@ public enum Model {
     TABLE_STONE("blocks/smashingTable", ".obj"),
     WATER_MILL("blocks/mill", ".obj"),
     METAL_SHAFT("blocks/shaft", ".tcn"),
-    COMPOST_WOOD("blocks/compostWood", ".tcn");
+    COMPOST_WOOD("blocks/compostWood", ".tcn"),
+    COMPOST_STONE("blocks/compostStone", ".tcn");
 
     private WrappedModel model;
 
