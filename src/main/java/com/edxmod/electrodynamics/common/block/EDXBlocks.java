@@ -9,6 +9,7 @@ import com.edxmod.electrodynamics.common.block.machine.*;
 import com.edxmod.electrodynamics.common.block.prefab.item.EDXItemBlock;
 import com.edxmod.electrodynamics.common.block.prefab.item.EDXItemMultiBlock;
 import com.edxmod.electrodynamics.common.block.prefab.item.EDXMachineBlock;
+import com.edxmod.electrodynamics.common.block.prefab.item.EDXMultiMachineBlock;
 import com.edxmod.electrodynamics.common.fluid.EDXFluids;
 import com.edxmod.electrodynamics.common.tile.machine.*;
 import com.edxmod.electrodynamics.common.tile.misc.TileSpawnMarker;
@@ -35,6 +36,7 @@ public class EDXBlocks {
     public static Block crucible;
     public static Block infernalFurnace;
     public static Block metalShaft;
+    public static Block compost;
 
     public static Block componentGround;
     public static Block componentWood;
@@ -64,6 +66,8 @@ public class EDXBlocks {
         crucible = new BlockCrucible().setBlockName("crucible");
         infernalFurnace = new BlockInfernalFurnace().setBlockName("infernal_furnace");
         metalShaft = new BlockMetalShaft().setBlockName("metal_shaft");
+        compost = new BlockCompost().setBlockName("compost");
+
 
         componentGround = new BlockComponentGround().setBlockName("component_ground");
         componentWood = new BlockComponentWood().setBlockName("component_wood");
@@ -91,6 +95,7 @@ public class EDXBlocks {
         registerBlock(crucible, EDXItemBlock.class);
         registerBlock(infernalFurnace, EDXMachineBlock.class);
         registerBlock(metalShaft, ItemBlockMetalShaft.class);
+        registerBlock(compost, EDXMultiMachineBlock.class);
 
         registerBlock(componentGround, EDXItemMultiBlock.class);
         registerBlock(componentWood, EDXItemMultiBlock.class);
@@ -118,6 +123,7 @@ public class EDXBlocks {
         GameRegistry.registerTileEntity(TileInfernalFurnace.class, "edx:infernal_furnace");
         GameRegistry.registerTileEntity(TileSpawnMarker.class, "edx:spawn_marker");
         GameRegistry.registerTileEntity(TileMetalShaft.class, "edx:metal_shaft");
+        GameRegistry.registerTileEntity(TileCompost.class,"edx:compost");
     }
 
     public static void registerBlock(Block block) {

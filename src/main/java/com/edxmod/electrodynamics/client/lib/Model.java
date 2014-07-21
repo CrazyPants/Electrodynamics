@@ -20,7 +20,8 @@ public enum Model {
     TABLE_WOOD("blocks/basicTable", ".obj"),
     TABLE_STONE("blocks/smashingTable", ".obj"),
     WATER_MILL("blocks/mill", ".obj"),
-    METAL_SHAFT("blocks/shaft", ".tcn");
+    METAL_SHAFT("blocks/shaft", ".tcn"),
+    COMPOST_WOOD("blocks/compostWood", ".tcn");
 
     private WrappedModel model;
 
