@@ -36,9 +36,9 @@ public class BlockFluidBoiling extends EDXBasicFluid {
 
     @SideOnly(Side.CLIENT)
     @Override
-    public void randomDisplayTick(World world, int x, int y, int z, Random rand){
+    public void randomDisplayTick(World world, int x, int y, int z, Random rand) {
         super.randomDisplayTick(world, x, y, z, rand);
         particleBubble.display(world, x + rand.nextDouble(), y, z + rand.nextDouble(), 0, 0.5, 0);
-        FMLClientHandler.instance().getClient().effectRenderer.addEffect(new SteamFX(world,x + rand.nextDouble(),y + 1, z + rand.nextDouble(),rand.nextInt(2),0));
+        FMLClientHandler.instance().getClient().effectRenderer.addEffect(new SteamFX(world, x + rand.nextDouble(), y + 1, z + rand.nextDouble(), rand.nextInt(2), 0));
     }
 }

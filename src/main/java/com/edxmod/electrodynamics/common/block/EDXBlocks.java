@@ -123,7 +123,7 @@ public class EDXBlocks {
         GameRegistry.registerTileEntity(TileInfernalFurnace.class, "edx:infernal_furnace");
         GameRegistry.registerTileEntity(TileSpawnMarker.class, "edx:spawn_marker");
         GameRegistry.registerTileEntity(TileMetalShaft.class, "edx:metal_shaft");
-        GameRegistry.registerTileEntity(TileCompost.class,"edx:compost");
+        GameRegistry.registerTileEntity(TileCompost.class, "edx:compost");
     }
 
     public static void registerBlock(Block block) {

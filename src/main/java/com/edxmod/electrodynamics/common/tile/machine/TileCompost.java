@@ -20,18 +20,18 @@ public class TileCompost extends TileCoreMachine {
     public final float minAngle = 14f;
 
     @Override
-    public void onPoked(){
+    public void onPoked() {
         lidOpen = !lidOpen;
     }
 
     @Override
-    public void updateEntity(){
-        if(worldObj.isRemote){
+    public void updateEntity() {
+        if (worldObj.isRemote) {
             currentAngle += lidOpen ? 4f : -4f;
-            if(currentAngle <= maxAngle){
+            if (currentAngle <= maxAngle) {
                 currentAngle = maxAngle;
             }
-            if(currentAngle >= minAngle){
+            if (currentAngle >= minAngle) {
                 currentAngle = minAngle;
             }
         }

@@ -12,11 +12,11 @@ import net.minecraft.world.World;
 /**
  * Created by Thlayli
  */
-public class BlockCompost extends EDXTileMultiBlock{
+public class BlockCompost extends EDXTileMultiBlock {
 
     private static final String[] NAMES = new String[]{"Wood", "Stone"};
 
-    public BlockCompost(){
+    public BlockCompost() {
         super(Material.wood);
     }
 
@@ -27,7 +27,7 @@ public class BlockCompost extends EDXTileMultiBlock{
 
     @Override
     public String getNameForType(int type) {
-        return ArrayHelper.safeGetArrayIndex(NAMES,type);
+        return ArrayHelper.safeGetArrayIndex(NAMES, type);
     }
 
     @Override
@@ -46,11 +46,11 @@ public class BlockCompost extends EDXTileMultiBlock{
     }
 
     @Override
-    public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float fx, float fy, float fz){
-        if(!world.isRemote){
-            if(player.isSneaking()){
-                TileCompost tileCompost = (TileCompost)world.getTileEntity(x,y,z);
-                if(tileCompost != null){
+    public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float fx, float fy, float fz) {
+        if (!world.isRemote) {
+            if (player.isSneaking()) {
+                TileCompost tileCompost = (TileCompost) world.getTileEntity(x, y, z);
+                if (tileCompost != null) {
                     tileCompost.lidOpen = !tileCompost.lidOpen;
                     tileCompost.sendPoke();
                 }

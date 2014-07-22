@@ -238,7 +238,7 @@ public class TileHammerMill extends TileCoreMachine implements ISidedInventory {
 
     @Override
     public boolean receiveClientEvent(int id, int param) {
-        for (int i=0; i<10; i++) {
+        for (int i = 0; i < 10; i++) {
             EnumParticle.ITEM_BREAK(new ItemStack(Item.getItemById(id), 1, param), worldObj, xCoord, yCoord, zCoord);
         }
         return true;

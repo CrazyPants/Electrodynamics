@@ -8,7 +8,7 @@ import org.lwjgl.opengl.GL11;
 /**
  * Created by Thlayli
  */
-public class RenderItemCompost implements IItemRenderer{
+public class RenderItemCompost implements IItemRenderer {
 
     @Override
     public boolean handleRenderType(ItemStack item, ItemRenderType type) {
@@ -33,7 +33,7 @@ public class RenderItemCompost implements IItemRenderer{
             GL11.glRotated(180D, 0, 1, 0);
         }
 
-        switch (item.getItemDamage()){
+        switch (item.getItemDamage()) {
             case 0:
                 Model.COMPOST_WOOD.bindTexture();
                 Model.COMPOST_WOOD.renderAll();

@@ -10,7 +10,7 @@ import org.lwjgl.opengl.GL11;
 /**
  * Created by Thlayli
  */
-public class RenderTileCompost extends EDXTileRenderer<TileCompost>{
+public class RenderTileCompost extends EDXTileRenderer<TileCompost> {
 
     public final String lid = "lid";
 
@@ -19,9 +19,9 @@ public class RenderTileCompost extends EDXTileRenderer<TileCompost>{
 
         GL11.glPushMatrix();
         GL11.glTranslated(x + 0.5, y + 0.5, z + 0.5);
-        GL11.glRotated(RenderHelper.getRotationAngle(tile.orientation.getOpposite()),0,1,0);
+        GL11.glRotated(RenderHelper.getRotationAngle(tile.orientation.getOpposite()), 0, 1, 0);
 
-        switch(tile.getBlockMetadata()){
+        switch (tile.getBlockMetadata()) {
             case 0:
                 Model.COMPOST_WOOD.bindTexture();
                 Model.COMPOST_WOOD.renderAllExcept(lid);
@@ -42,14 +42,14 @@ public class RenderTileCompost extends EDXTileRenderer<TileCompost>{
         GL11.glPopMatrix();
     }
 
-    private void swingLid(TileCompost tile){
+    private void swingLid(TileCompost tile) {
         float percentage;
         float sinerp;
 
         GL11.glTranslated(0, 0.37, 0.29);
         percentage = tile.currentAngle / tile.maxAngle;
-        sinerp = MathFX.sinerp(0,1,percentage);
-        GL11.glRotated((-sinerp)* tile.maxAngle, 1,0,0);
+        sinerp = MathFX.sinerp(0, 1, percentage);
+        GL11.glRotated((-sinerp) * tile.maxAngle, 1, 0, 0);
         GL11.glTranslated(0, -0.37, -0.29);
     }
 }

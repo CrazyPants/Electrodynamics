@@ -7,7 +7,7 @@ import net.minecraft.item.ItemStack;
 /**
  * Created by Thlayli
  */
-public class EDXMultiMachineBlock extends EDXMachineBlock{
+public class EDXMultiMachineBlock extends EDXMachineBlock {
 
     public EDXMultiMachineBlock(Block block) {
         super(block);
