@@ -8,7 +8,6 @@ import com.edxmod.electrodynamics.client.model.WrappedModel;
 public enum Model {
 
     BARREL_WOOD("blocks/barrelWood", ".tcn"),
-    BARREL_STONE("blocks/barrelStone", ".tcn"),
     HAND_CRANK("blocks/handCrank", ".obj"),
     HAMMER_MILL("blocks/hammerMill", ".obj"),
     KILN("blocks/kiln", ".obj"),

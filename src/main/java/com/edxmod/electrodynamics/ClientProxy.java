@@ -4,6 +4,7 @@ import com.edxmod.electrodynamics.client.model.FixedTechneModelLoader;
 import com.edxmod.electrodynamics.client.render.item.*;
 import com.edxmod.electrodynamics.client.render.tile.*;
 import com.edxmod.electrodynamics.common.block.EDXBlocks;
+import com.edxmod.electrodynamics.common.tile.TileBarrel;
 import com.edxmod.electrodynamics.common.tile.machine.*;
 import com.edxmod.electrodynamics.common.tile.misc.TileSpawnMarker;
 import cpw.mods.fml.client.registry.ClientRegistry;
@@ -39,6 +40,7 @@ public class ClientProxy extends CommonProxy {
         ClientRegistry.bindTileEntitySpecialRenderer(TileSpawnMarker.class, new RenderTileSpawnMarker());
         ClientRegistry.bindTileEntitySpecialRenderer(TileMetalShaft.class, new RenderTileMetalShaft());
         ClientRegistry.bindTileEntitySpecialRenderer(TileCompost.class, new RenderTileCompost());
+        ClientRegistry.bindTileEntitySpecialRenderer(TileBarrel.class, new RenderTileBarrel());
 
         // ITEM
         MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(EDXBlocks.table), new RenderItemTable());
@@ -50,5 +52,6 @@ public class ClientProxy extends CommonProxy {
         MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(EDXBlocks.metalPress), new RenderItemMetalPress());
         MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(EDXBlocks.spawnMarker), new RenderItemSpawnMarker());
         MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(EDXBlocks.compost), new RenderItemCompost());
+        MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(EDXBlocks.barrel), new RenderItemBarrel());
     }
 }
